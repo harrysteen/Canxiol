@@ -1577,16 +1577,20 @@ button {
 .cx-hero-h1 {
   font-family: var(--font-outfit), 'Outfit', sans-serif;
   font-weight: 400;
-  font-size: clamp(30px, 4vw, 58px);
-  line-height: 1.12;
-  letter-spacing: -2px;
+  font-size: clamp(38px, 5.6vw, 80.6px);
+  line-height: clamp(42px, 5.8vw, 82.25px);
+  letter-spacing: -0.045em;
   color: #1A1918;
-  vertical-align: middle;
   margin-bottom: clamp(1rem, 2.2vh, 1.75rem);
 }
 
 .cx-hero-h1 .cx-hl {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-weight: 500;
   color: #471D41;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: inline;
+  vertical-align: baseline;
 }
 
 .cx-hero-p {
@@ -1842,13 +1846,84 @@ button {
   background-color: #FAF4FB;
   border-top: 1px solid #EFE6F2;
   border-bottom: 1px solid #EFE6F2;
-  box-shadow: 0 4px 20px rgba(59, 26, 74, 0.08);
-  height: 72px;
-  min-height: 72px;
+  box-shadow: 0 4px 20px rgba(59, 26, 74, 0.05);
+  min-height: 80px;
   display: flex;
   align-items: center;
-  padding: 0;
+  padding: 6px 0;
   transition: top 0.2s ease;
+}
+
+.cx-infobar-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1.35fr 1.35fr 1fr;
+  align-items: center;
+  width: 100%;
+}
+
+.cx-feat-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px 32px;
+  position: relative;
+  min-height: 56px;
+}
+
+.cx-feat-col-1 {
+  padding-left: 8px;
+  padding-right: 32px;
+}
+
+.cx-feat-col-2 {
+  padding-left: 36px;
+  padding-right: 36px;
+}
+
+.cx-feat-col-3 {
+  padding-left: 36px;
+  padding-right: 36px;
+}
+
+.cx-feat-col-4 {
+  padding-left: 36px;
+  padding-right: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Dividing lines between columns */
+.cx-feat-col:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 50px;
+  width: 1px;
+  background-color: #D6C2DA;
+}
+
+@media (max-width: 1199.98px) {
+  .cx-feat-col {
+    padding: 8px 18px;
+  }
+  
+  .cx-feat-col-1 {
+    padding-left: 0;
+    padding-right: 18px;
+  }
+  
+  .cx-feat-col-2,
+  .cx-feat-col-3 {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  .cx-feat-col-4 {
+    padding-left: 20px;
+    padding-right: 0;
+  }
 }
 
 @media (max-width: 991.98px) {
@@ -1858,70 +1933,54 @@ button {
     min-height: auto;
     padding: 0;
   }
-}
 
-.cx-feat-col {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 6px 20px;
-  position: relative;
-  min-height: 60px;
-}
-
-@media (min-width: 992px) {
-  .cx-feat-col:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: 10%;
-    height: 80%;
-    width: 1px;
-    background-color: #E7DBEC;
+  .cx-infobar-grid {
+    grid-template-columns: 1fr;
   }
-}
 
-@media (max-width: 991.98px) {
   .cx-feat-col {
-    padding: 16px 12px;
+    padding: 14px 16px;
     border-bottom: 1px solid #EFE6F2;
+  }
+
+  .cx-feat-col:not(:last-child)::after {
+    display: none;
   }
 
   .cx-feat-col:last-child {
     border-bottom: none;
+    justify-content: flex-start;
+    align-items: flex-start;
   }
 }
 
 .cx-prescribe-tag {
   font-family: var(--font-outfit), 'Outfit', sans-serif;
   font-weight: 700;
-  font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0.35px;
-  vertical-align: middle;
+  font-size: 13.5px;
+  line-height: 18px;
+  letter-spacing: 0.2px;
   text-transform: uppercase;
-  color: #2B0826;
+  color: #471D41;
 }
 
 .cx-feat-title {
   font-family: var(--font-outfit), 'Outfit', sans-serif;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 14px;
-  line-height: 20px;
-  letter-spacing: 0px;
-  vertical-align: middle;
-  color: #2B0826;
-  margin-bottom: 4px;
+  line-height: 18px;
+  letter-spacing: -0.2px;
+  color: #381534;
+  margin-bottom: 3px;
 }
 
 .cx-feat-desc {
   font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
   font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
+  font-size: 11.5px;
+  line-height: 15px;
   letter-spacing: 0px;
-  vertical-align: middle;
-  color: #635761;
+  color: #6C5E6A;
   margin: 0;
 }
 
@@ -1931,12 +1990,11 @@ button {
   font-size: 12px;
   line-height: 16px;
   letter-spacing: 0px;
-  vertical-align: middle;
   color: #5E1B56;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   transition: color 0.2s ease, opacity 0.2s ease;
 }
 
@@ -1948,7 +2006,7 @@ button {
 .cx-feat-logo-wrap {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .cx-feat-logo {
@@ -2161,7 +2219,7 @@ button {
    13. Section 4: Getting Help is Easier Section
    -------------------------------------------------------------------------- */
 .cx-getting-help-section {
-  background-color: #FFFFFF;
+  background-color: #FAF9F7;
   padding: clamp(60px, 8vh, 100px) 0;
   position: relative;
   width: 100%;
@@ -2408,19 +2466,32 @@ button {
 
 .cx-meet-flow-brand {
   font-family: var(--font-outfit), 'Outfit', sans-serif;
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cx-meet-flow-brand .cx-brand-title {
   font-weight: 700;
   font-size: 22px;
   letter-spacing: 1px;
   color: #471D41;
-  margin-top: 8px;
   display: inline-flex;
   align-items: baseline;
   gap: 2px;
 }
 
-.cx-meet-flow-brand sup {
+.cx-meet-flow-brand .cx-brand-title sup {
   font-size: 12px;
   top: -0.6em;
+}
+
+.cx-meet-flow-brand .cx-brand-sub {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  color: #4A4441;
+  margin-top: 2px;
 }
 
 .cx-meet-divider {
@@ -2502,19 +2573,30 @@ button {
 .cx-portal-card {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   height: 100%;
-  padding: clamp(28px, 4vw, 44px);
+  min-height: 480px;
+  padding: 0;
   position: relative;
+  overflow: hidden;
   transition: background 0.3s ease;
 }
 
 .cx-portal-patient {
-  background: #EBE1EC;
+  background: #D6C1D3;
   border-right: 1px solid rgba(71, 29, 65, 0.08);
 }
 
 .cx-portal-doctor {
-  background: #E6DAE7;
+  background: #E3D3E1;
+}
+
+.cx-portal-content {
+  padding: clamp(28px, 3.8vw, 44px);
+  position: relative;
+  z-index: 2;
+  max-width: 480px;
+  pointer-events: auto;
 }
 
 .cx-portal-eyebrow {
@@ -2541,9 +2623,9 @@ button {
   font-weight: 400;
   font-size: 14.5px;
   line-height: 1.6;
-  color: #635762;
+  color: #584C57;
   margin-bottom: 24px;
-  max-width: 400px;
+  max-width: 380px;
 }
 
 .cx-btn-portal-outline {
@@ -2562,7 +2644,6 @@ button {
   text-decoration: none;
   transition: all 0.3s ease;
   align-self: flex-start;
-  margin-bottom: 28px;
 }
 
 .cx-btn-portal-outline:hover {
@@ -2586,7 +2667,6 @@ button {
   text-decoration: none;
   transition: all 0.3s ease;
   align-self: flex-start;
-  margin-bottom: 28px;
 }
 
 .cx-btn-portal-solid:hover {
@@ -2595,22 +2675,51 @@ button {
 }
 
 .cx-portal-img-wrap {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 10;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: clamp(280px, 32vw, 420px);
+  height: clamp(230px, 28vw, 350px);
   overflow: hidden;
-  border-radius: 0px;
-  margin-top: auto;
+  z-index: 1;
+  pointer-events: none;
 }
 
 .cx-portal-img {
-  object-fit: cover;
-  object-position: center 20%;
+  object-fit: contain;
+  object-position: right bottom;
   transition: transform 0.5s ease;
 }
 
 .cx-portal-card:hover .cx-portal-img {
-  transform: scale(1.03);
+  transform: scale(1.02);
+}
+
+@media (max-width: 991.98px) {
+  .cx-portal-card {
+    min-height: 440px;
+  }
+
+  .cx-portal-patient {
+    border-right: none;
+    border-bottom: 1px solid rgba(71, 29, 65, 0.08);
+  }
+
+  .cx-portal-img-wrap {
+    width: 280px;
+    height: 230px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .cx-portal-card {
+    min-height: 480px;
+  }
+
+  .cx-portal-img-wrap {
+    width: 240px;
+    height: 200px;
+  }
 }
 
 .cx-perspective-header {
@@ -2673,7 +2782,7 @@ button {
    16. Footer Section
    -------------------------------------------------------------------------- */
 .cx-footer {
-  background-color: #3D1B37;
+  background-color: #471D41;
   color: #D8CAD6;
   padding: clamp(60px, 8vh, 90px) 0 32px;
   position: relative;
@@ -2778,7 +2887,6 @@ button {
 .cx-footer-bottom {
   margin-top: 24px;
   padding-top: 18px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .cx-footer-copy {
@@ -2793,16 +2901,382 @@ button {
   font-size: 12.5px;
   color: #8C7B8A;
   margin: 0;
+  text-align: right;
 }
 
 .cx-dezu-link {
-  color: #00D4C5;
+  color: #FFFFFF;
   font-weight: 600;
   text-decoration: none;
   transition: color 0.2s ease, text-decoration 0.2s ease;
 }
 
 .cx-dezu-link:hover {
-  color: #52FFF2;
+  color: #D8CAD6;
   text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   13a. Perspective Section
+   -------------------------------------------------------------------------- */
+.cx-perspective-section {
+  padding-top: clamp(60px, 8vh, 100px);
+  padding-bottom: clamp(60px, 8vh, 100px);
+  background-color: #FAF9F7;
+}
+
+.cx-perspective-header {
+  margin-bottom: clamp(40px, 6vh, 64px);
+}
+
+.cx-perspective-h2 {
+  font-family: 'Outfit', var(--font-heading), sans-serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: #1A1A1A;
+  margin-bottom: 0;
+}
+
+.cx-perspective-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cx-perspective-img {
+  object-fit: contain;
+}
+
+.cx-bottles-row {
+  row-gap: 8px;
+}
+
+.cx-bottle-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cx-bottle-img-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  aspect-ratio: 3 / 2;
+  margin: 0 auto;
+}
+
+.cx-bottle-img {
+  object-fit: contain;
+}
+
+.cx-bottle-label {
+  font-family: 'Outfit', var(--font-heading), sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 26.13px;
+  line-height: 34.84px;
+  letter-spacing: 0px;
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+
+.cx-config-title {
+  font-family: 'Outfit', var(--font-heading), sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 26.13px;
+  line-height: 34.84px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  /* color is applied inline per card */
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+.cx-config-num {
+  display: block;
+  font-family: 'Outfit', var(--font-heading), sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cx-text-muted);
+  margin-top: 16px;
+}
+
+
+.cx-blog-section {
+  padding-top: clamp(60px, 8vh, 100px);
+  padding-bottom: clamp(60px, 8vh, 100px);
+  background-color: #FFFFFF;
+}
+
+.cx-blog-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: clamp(32px, 5vh, 48px);
+}
+
+.cx-blog-section-title {
+  font-family: 'Outfit', var(--font-heading), sans-serif;
+  font-size: 32.76px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 42.13px;
+  letter-spacing: -0.49px;
+  color: #471D41;
+  vertical-align: middle;
+  margin-bottom: 0;
+}
+
+.cx-blog-view-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: 184.75px;
+  height: 50.21px;
+  background-color: #3F173B;
+  color: #FAF9F7 !important;
+  font-family: 'Plus Jakarta Sans', var(--font-body), sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 14.74px;
+  line-height: 22.67px;
+  letter-spacing: 0px;
+  vertical-align: middle;
+  padding: 0 20px;
+  border-radius: 0;
+  text-decoration: none;
+  box-shadow: 0px 1.13px 2.27px 0px #0000000D;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
+  justify-content: center;
+}
+
+.cx-blog-view-more:hover {
+  background-color: #2e1029;
+}
+
+.cx-blog-grid {
+  row-gap: 32px;
+}
+
+.cx-blog-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.cx-blog-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  margin-bottom: 24px;
+  background-color: #EFEFEF;
+  overflow: hidden;
+}
+
+.cx-blog-title {
+  font-family: var(--font-heading), 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #4A284D;
+  margin-bottom: 24px;
+  flex-grow: 1; /* Pushes the meta to the bottom if titles vary in lines */
+}
+
+.cx-blog-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cx-blog-avatar {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.cx-blog-meta-text {
+  font-family: var(--font-body), 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: #7A6A8A;
+}
+
+/* ==========================================================================
+   RESPONSIVE OVERRIDES — Full page mobile & tablet pass
+   ========================================================================== */
+
+/* ── TABLET (≤991px) ── */
+@media (max-width: 991.98px) {
+
+  /* Navbar */
+  .cx-nav-inner { height: 64px; }
+
+  /* Hero */
+  .cx-hero-h1 { font-size: clamp(32px, 7vw, 52px); line-height: 1.1; }
+  .cx-hero-p  { font-size: 14px; max-width: 100%; }
+  .cx-hero-left { transform: none; padding-bottom: 0; }
+  .cx-hero-img-col { justify-content: center !important; }
+  .cx-img-wrapper { min-height: 260px; max-height: 340px; }
+
+  /* Infobar — already handled above; ensure top offset matches smaller nav */
+  .cx-sticky-infobar { top: 64px; }
+
+  /* Anxiety */
+  .cx-anxiety-left { padding-right: 0; margin-bottom: 2rem; }
+  .cx-anxiety-h2  { font-size: clamp(28px, 6vw, 44px); }
+
+  /* Stats */
+  .cx-stat-num  { font-size: clamp(34px, 6vw, 48px); }
+  .cx-stat-item { padding: 16px 12px; }
+
+  /* Getting Help */
+  .cx-help-h2  { font-size: clamp(28px, 5.5vw, 44px); letter-spacing: -0.8px; }
+  .cx-help-desc { max-width: 100%; }
+
+  /* Meet Canxiol */
+  .cx-meet-h2   { font-size: clamp(34px, 5.5vw, 52px); letter-spacing: -1.2px; }
+  .cx-meet-desc { font-size: 14px; }
+  .cx-meet-img-wrap { max-width: 100%; }
+  .cx-meet-flow { padding-left: 0; border-left: none; margin-top: 20px; }
+
+  /* Know More portals */
+  .cx-know-h2  { font-size: clamp(30px, 5.5vw, 48px); letter-spacing: -1px; }
+
+  /* Perspective */
+  .cx-perspective-h2 { font-size: clamp(30px, 6vw, 52px); letter-spacing: -1px; }
+  .cx-bottle-img-wrap { max-width: 100%; aspect-ratio: 4 / 3; }
+
+  /* Blog */
+  .cx-blog-section-title { font-size: 26px; line-height: 36px; }
+  .cx-blog-header-row { flex-wrap: wrap; gap: 16px; }
+
+  /* Footer */
+  .cx-footer-top .col-12.col-lg-4 { margin-bottom: 16px; }
+  .cx-footer-brand { gap: 16px; }
+}
+
+/* ── MOBILE (≤767px) ── */
+@media (max-width: 767.98px) {
+
+  /* Navbar */
+  .cx-nav-inner { height: 58px; }
+
+  /* Hero */
+  .cx-hero-wrapper { min-height: auto; }
+  .cx-hero-h1 { font-size: clamp(28px, 8vw, 44px); }
+  .cx-hero-btns { flex-direction: column; align-items: stretch; gap: 10px; }
+  .cx-btn-discover, .cx-btn-hero-psychiatrists { width: 100%; justify-content: center; }
+
+  /* Infobar — collapse to stacked list */
+  .cx-sticky-infobar {
+    top: 58px;
+    position: relative; /* prevent overlapping content on small screens */
+  }
+
+  /* Anxiety */
+  .cx-anxiety-img-box { height: clamp(220px, 60vw, 320px); }
+  .cx-anxiety-desc { font-size: 14px; }
+
+  /* Stats — stacked, left-aligned */
+  .cx-stats-section { padding: 16px 0; }
+  .cx-stat-item { flex-direction: row; align-items: center; padding: 16px; }
+  .cx-stat-label { max-width: none; }
+
+  /* Getting Help */
+  .cx-help-header-row { margin-bottom: 24px; }
+  .cx-help-h2 { font-size: clamp(26px, 7vw, 38px); }
+  .cx-help-cards-row .col-12:not(:last-child) { margin-bottom: 8px; }
+
+  /* Meet Canxiol */
+  .cx-meet-section { padding: clamp(40px, 6vh, 60px) 0; }
+  .cx-meet-h2  { font-size: clamp(28px, 7vw, 44px); letter-spacing: -0.8px; }
+  .cx-meet-divider { margin: clamp(24px, 4vh, 40px) 0; }
+  .cx-meet-feature-card { margin-bottom: 16px; }
+
+  /* Know More */
+  .cx-know-section { padding: clamp(40px, 6vh, 60px) 0; }
+  .cx-know-h2 { font-size: clamp(26px, 7vw, 40px); margin-bottom: 24px; }
+  .cx-portal-card { min-height: 400px; }
+  .cx-portal-content { padding: 24px 20px; }
+  .cx-portal-img-wrap { width: 200px; height: 180px; }
+
+  /* Perspective */
+  .cx-perspective-section { padding: clamp(40px, 6vh, 60px) 0; }
+  .cx-perspective-h2 { font-size: clamp(26px, 7vw, 40px); }
+  .cx-bottles-row .col-12 { margin-bottom: 16px; }
+  .cx-bottle-label { font-size: 20px; line-height: 28px; margin-top: 12px; }
+
+  /* Blog */
+  .cx-blog-section { padding: clamp(40px, 6vh, 60px) 0; }
+  .cx-blog-section-title { font-size: 22px; line-height: 30px; }
+  .cx-blog-view-more { width: auto; padding: 0 16px; }
+  .cx-blog-title { font-size: 1.05rem; }
+  .cx-blog-grid .col-12 { margin-bottom: 32px; }
+  .cx-blog-grid .col-12:last-child { margin-bottom: 0; }
+
+  /* Footer */
+  .cx-footer { padding: clamp(40px, 6vh, 64px) 0 24px; }
+  .cx-footer-top { gap: 24px; }
+  .cx-footer-links { gap: 10px; }
+  .cx-footer-compliance .col-12:last-child { margin-top: 8px; }
+  .cx-footer-legal-links { justify-content: flex-start; }
+  .cx-footer-attribution { text-align: left; }
+}
+
+/* ── SMALL MOBILE (≤575px) ── */
+@media (max-width: 575.98px) {
+
+  /* Teal banner wraps to two lines */
+  .cx-teal-banner p { font-size: 12px; }
+  .cx-teal-banner .cx-teal-highlight { font-size: 14px; }
+
+  /* Hero */
+  .cx-hero-h1 { font-size: clamp(26px, 9vw, 36px); }
+  .cx-hero-p  { font-size: 13px; }
+
+  /* Infobar */
+  .cx-prescribe-tag { font-size: 12px; }
+  .cx-feat-title    { font-size: 13px; }
+  .cx-feat-desc     { font-size: 11px; }
+
+  /* Stats */
+  .cx-stat-num  { font-size: clamp(30px, 8vw, 42px); }
+  .cx-stat-label { font-size: 12px; }
+
+  /* Getting Help */
+  .cx-help-h2 { font-size: clamp(22px, 8vw, 32px); letter-spacing: -0.5px; }
+  .cx-help-card-title { font-size: 14px; }
+
+  /* Meet Canxiol */
+  .cx-meet-h2  { font-size: clamp(24px, 8vw, 36px); }
+  .cx-meet-desc { font-size: 13.5px; }
+
+  /* Know More portals */
+  .cx-portal-title { font-size: 22px; }
+  .cx-portal-desc  { font-size: 13px; }
+  .cx-portal-img-wrap { width: 180px; height: 160px; }
+  .cx-portal-card  { min-height: 360px; }
+
+  /* Perspective */
+  .cx-perspective-h2  { font-size: clamp(22px, 8vw, 34px); letter-spacing: -0.5px; }
+  .cx-bottle-label    { font-size: 18px; }
+
+  /* Blog */
+  .cx-blog-section-title { font-size: 20px; line-height: 28px; }
+  .cx-blog-header-row { flex-direction: column; align-items: flex-start; }
+  .cx-blog-view-more  { width: 100%; justify-content: center; }
+
+  /* Footer */
+  .cx-footer-h4 { font-size: 11px; letter-spacing: 1px; }
+  .cx-footer-links a { font-size: 13px; }
+  .cx-footer-disclaimer { font-size: 12px; }
+  .cx-footer-copy, .cx-footer-attribution { font-size: 11.5px; }
 }

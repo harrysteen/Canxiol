@@ -10,7 +10,7 @@ export default function CanxiolMeetSection({
   gradientScale      = 1.5,
 }) {
   const steps = [
-    'Cannabidiol',
+    'Cannabidiol (Synthetic)',
     'Proprietary nanodispersion',
     'Fine dispersed formulation in water',
     'Milky white Oral solution',
@@ -20,17 +20,17 @@ export default function CanxiolMeetSection({
     {
       num: '01',
       title: 'Pharmaceutical Grade Cannabidiol',
-      desc: 'Inhouse Synthetic Cannabidiol (API- Manufactured at a USFDA approved facility.',
+      desc: 'Inhouse Synthetic Cannabidiol (API-Manufactured at a USFDA approved facility)',
     },
     {
       num: '02',
       title: 'Formulation with proprietary nanodispersion technology',
-      desc: 'Easy to titrate with no pill burden',
+      desc: 'Easy to use and titrate with no pill burden',
     },
     {
       num: '03',
-      title: 'Clinically Tested',
-      desc: 'Evaluated in RCT-PHASE III study in adults with mild to moderate anxiety',
+      title: 'Manufactured in GMP certified plant',
+      desc: 'Certified by USFDA, EU, MHRA, Turkey, Russia & WHO – GMP certified',
     },
   ];
 
@@ -57,11 +57,11 @@ export default function CanxiolMeetSection({
             <div className="cx-meet-left">
               <h2 className="cx-meet-h2">
                 Meet<br />
-                Canxiol.
+                Canxiol
               </h2>
 
               <p className="cx-meet-desc">
-                A prescription cannabidiol oral solution developed for the management of mild to moderate anxiety disorders. Canxiol brings together pharmaceutical grade cannabidiol with proprietary nanodispersion tech in an oral solution designed for measured administration.
+                A prescription cannabidiol oral solution research for the management of mild to moderate anxiety disorders. Canxiol brings together pharmaceutical grade cannabidiol formulated with proprietary nanodispersion technology in an oral solution designed for measured administration.
               </p>
 
               <Link href="#what-is-canxiol" className="cx-btn-meet">
@@ -78,7 +78,7 @@ export default function CanxiolMeetSection({
             <div className="cx-meet-img-wrap">
               <div className="cx-meet-img-box">
                 <Image
-                  src="/images/canxiol_bottle_hand.png"
+                  src="/images/home page meet conxial.png"
                   alt="Canxiol medicine bottle held in hand with dropper dispensing solution"
                   fill
                   sizes="(max-width: 991px) 100vw, 40vw"
@@ -103,8 +103,11 @@ export default function CanxiolMeetSection({
                 </div>
               ))}
               <div className="cx-meet-flow-brand">
-                <span>CANXIOL</span>
-                <sup>®</sup>
+                <div className="cx-brand-title">
+                  <span>CANXIOL</span>
+                  <sup>®</sup>
+                </div>
+                <span className="cx-brand-sub">Oral solution</span>
               </div>
             </div>
           </div>

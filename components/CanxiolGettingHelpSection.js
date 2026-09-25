@@ -1,13 +1,7 @@
 'use client';
 import Image from 'next/image';
-import AnimatedGradientBg from './AnimatedGradientBg';
 
-export default function CanxiolGettingHelpSection({
-  gradientSpeed      = 0.5,
-  gradientDirection  = 0,
-  gradientDistortion = 0.15,
-  gradientScale      = 1.5,
-}) {
+export default function CanxiolGettingHelpSection() {
   const cards = [
     {
       image: '/images/lifestyle-goals.jpg',
@@ -28,17 +22,6 @@ export default function CanxiolGettingHelpSection({
 
   return (
     <section id="getting-help" className="cx-getting-help-section">
-      {/* Animated WebGL / WebGPU gradient background */}
-      <AnimatedGradientBg
-        speed={gradientSpeed}
-        direction={gradientDirection}
-        distortion={gradientDistortion}
-        scale={gradientScale}
-      />
-
-      {/* Soft ambient vignette overlay */}
-      <div className="cx-hero-vignette" />
-
       <div className="container cx-help-content">
 
         {/* Header Row: Heading on left, Description on right */}
