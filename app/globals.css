@@ -1517,7 +1517,8 @@ button {
   flex-direction: column;
   justify-content: space-between;
   background: #F5EEF8;
-  height: calc(100vh - 80px - 72px);
+  /* Viewport minus navbar and the bottom-pinned info bar (height set by CanxiolInfoBar) */
+  height: calc(100vh - 80px - var(--cx-infobar-h, 92px));
   min-height: 440px;
 }
 
@@ -1730,7 +1731,7 @@ button {
   max-width: 680px;
   height: 100%;
   min-height: 380px;
-  max-height: calc(100vh - 80px - 72px - 58px);
+  max-height: calc(100vh - 80px - var(--cx-infobar-h, 92px) - 58px);
   margin-left: 0;
   margin-right: auto;
   margin-bottom: 0;
@@ -1840,18 +1841,18 @@ button {
 /* Sticky 4-Column Feature Bar */
 .cx-sticky-infobar {
   width: 100%;
+  /* Pinned to the bottom of the viewport; comes to rest above the footer */
   position: sticky;
-  top: 80px;
+  bottom: 0;
   z-index: 1030;
   background-color: #FAF4FB;
   border-top: 1px solid #EFE6F2;
   border-bottom: 1px solid #EFE6F2;
-  box-shadow: 0 4px 20px rgba(59, 26, 74, 0.05);
+  box-shadow: 0 -4px 20px rgba(59, 26, 74, 0.06);
   min-height: 80px;
   display: flex;
   align-items: center;
   padding: 6px 0;
-  transition: top 0.2s ease;
 }
 
 .cx-infobar-grid {
@@ -1928,7 +1929,6 @@ button {
 
 @media (max-width: 991.98px) {
   .cx-sticky-infobar {
-    top: 70px;
     height: auto;
     min-height: auto;
     padding: 0;
@@ -3127,7 +3127,6 @@ button {
   .cx-img-wrapper { min-height: 260px; max-height: 340px; }
 
   /* Infobar — already handled above; ensure top offset matches smaller nav */
-  .cx-sticky-infobar { top: 64px; }
 
   /* Anxiety */
   .cx-anxiety-left { padding-right: 0; margin-bottom: 2rem; }
@@ -3177,7 +3176,6 @@ button {
 
   /* Infobar — collapse to stacked list */
   .cx-sticky-infobar {
-    top: 58px;
     position: relative; /* prevent overlapping content on small screens */
   }
 
@@ -3279,4 +3277,1353 @@ button {
   .cx-footer-links a { font-size: 13px; }
   .cx-footer-disclaimer { font-size: 12px; }
   .cx-footer-copy, .cx-footer-attribution { font-size: 11.5px; }
+}
+/* --------------------------------------------------------------------------
+   Psychiatrist Scientific Inquiry Modal
+   -------------------------------------------------------------------------- */
+.cx-btn-portal-solid {
+  cursor: pointer;
+}
+
+.cx-inq-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background: rgba(42, 13, 58, 0.45);
+  backdrop-filter: blur(4px);
+  overflow-y: auto;
+  animation: cx-inq-fade 0.25s ease;
+}
+
+.cx-inq-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 1080px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  padding: clamp(28px, 4vw, 48px);
+  border: 1px solid #b89fbf;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #f7f1f6 0%, #f3edf4 100%);
+  box-shadow: var(--shadow-lg);
+  animation: cx-inq-rise 0.3s ease;
+}
+
+.cx-inq-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #471D41;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.cx-inq-close:hover {
+  background: rgba(71, 29, 65, 0.08);
+}
+
+.cx-inq-intro {
+  padding-right: clamp(0px, 3vw, 48px);
+}
+
+.cx-inq-h2 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(36px, 4.2vw, 56px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: #2a0d3a;
+  margin-bottom: 28px;
+}
+
+.cx-inq-lead {
+  font-size: 15px;
+  line-height: 1.65;
+  color: #5a4a66;
+  padding-bottom: 24px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #e3d9e6;
+}
+
+.cx-inq-facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.cx-inq-fact-title {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  color: #1c8a8f;
+  margin-bottom: 4px;
+}
+
+.cx-inq-fact-desc {
+  font-size: 11px;
+  line-height: 1.5;
+  color: #5a4a66;
+}
+
+.cx-inq-card {
+  padding: clamp(20px, 2.4vw, 28px);
+  border: 1px solid #ece6ee;
+  border-radius: 4px;
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(59, 26, 74, 0.05);
+}
+
+.cx-inq-card-title {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: #2a0d3a;
+  margin-bottom: 6px;
+}
+
+.cx-inq-card-sub {
+  font-size: 11.5px;
+  color: #5a4a66;
+  margin-bottom: 24px;
+}
+
+.cx-inq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 12px;
+  margin-bottom: 18px;
+}
+
+.cx-inq-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cx-inq-field-full {
+  grid-column: 1 / -1;
+}
+
+.cx-inq-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  color: #2a0d3a;
+}
+
+.cx-inq-field input,
+.cx-inq-field textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e3dde6;
+  border-radius: 2px;
+  background: #f6f4f7;
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 12px;
+  color: #2a0d3a;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.cx-inq-field textarea {
+  resize: vertical;
+  min-height: 52px;
+}
+
+.cx-inq-field input::placeholder,
+.cx-inq-field textarea::placeholder {
+  color: #8f8497;
+}
+
+.cx-inq-field input:focus,
+.cx-inq-field textarea:focus {
+  border-color: #471D41;
+  background: #ffffff;
+}
+
+.cx-inq-submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  padding: 13px 20px;
+  border: none;
+  border-radius: 2px;
+  background: #3f1238;
+  color: #ffffff;
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.cx-inq-submit:hover {
+  background: #2a0c25;
+}
+
+@keyframes cx-inq-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes cx-inq-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 991.98px) {
+  .cx-inq-intro {
+    padding-right: 0;
+    margin-bottom: 28px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .cx-inq-overlay {
+    padding: 12px;
+  }
+
+  .cx-inq-dialog {
+    max-height: calc(100vh - 24px);
+  }
+
+  .cx-inq-facts,
+  .cx-inq-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   For Psychiatrists Page (/psychiatrists)
+   ========================================================================== */
+.cx-psy-teal-label {
+  display: block;
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  line-height: 1.5;
+  color: #1c8a8f;
+}
+
+.cx-psy-h1 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(36px, 4vw, 52px);
+  font-weight: 400;
+  line-height: 1.1;
+  color: #2a0d3a;
+  margin-bottom: 24px;
+}
+
+.cx-psy-h2 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(28px, 3vw, 38px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: #2a0d3a;
+  margin: 6px 0 24px;
+}
+
+.cx-psy-h2-sm {
+  font-size: clamp(24px, 2.4vw, 30px);
+}
+
+.cx-psy-body {
+  font-size: 15px;
+  line-height: 1.65;
+  color: #3d2f47;
+}
+
+/* --- What is Canxiol --- */
+.cx-psy-whatis {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f7eef6 0%, #efe3ef 100%);
+  padding: clamp(48px, 8vw, 96px) 0 clamp(40px, 5vw, 64px);
+}
+
+.cx-psy-whatis-img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 55%;
+}
+
+.cx-psy-whatis-img img {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Fade the photo into the section background on its left edge */
+.cx-psy-whatis-img::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #f5ecf4 0%, rgba(245, 236, 244, 0) 35%);
+}
+
+.cx-psy-whatis-content {
+  position: relative;
+  z-index: 2;
+}
+
+.cx-psy-whatis-text {
+  max-width: 520px;
+}
+
+.cx-psy-whatis-lead {
+  font-size: clamp(16px, 1.4vw, 19px);
+  line-height: 1.55;
+  color: #3d2f47;
+  margin-bottom: 28px;
+}
+
+.cx-psy-whatis-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  max-width: 720px;
+}
+
+.cx-psy-whatis-card {
+  padding: 16px 18px 20px;
+  border: 1px solid #ece4ee;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.96);
+}
+
+.cx-psy-whatis-card .cx-psy-teal-label {
+  margin-bottom: 14px;
+}
+
+.cx-psy-whatis-card p {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #3d2f47;
+}
+
+/* --- Configuration & Storage --- */
+.cx-psy-config {
+  background: #faf8f7;
+  padding: clamp(48px, 6vw, 80px) 0;
+}
+
+.cx-psy-config-options {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 20px;
+}
+
+.cx-psy-config-size {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(18px, 1.6vw, 22px);
+  color: #2a0d3a;
+  margin-top: 4px;
+}
+
+.cx-psy-config-check {
+  font-size: 13px;
+  color: #5a4a66;
+  margin-top: 12px;
+}
+
+.cx-psy-config-packs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.cx-psy-config-pack {
+  position: relative;
+  aspect-ratio: 3 / 2;
+}
+
+.cx-psy-config-pack img {
+  object-fit: contain;
+}
+
+.cx-psy-divider {
+  border: none;
+  border-top: 1px solid #e3dde6;
+  margin: clamp(32px, 4vw, 48px) 0 clamp(24px, 3vw, 32px);
+}
+
+.cx-psy-storage-text {
+  max-width: 460px;
+  margin-top: 12px;
+}
+
+/* --- How Canxiol stands out --- */
+.cx-psy-standout {
+  background: #f3e8f2;
+  padding: clamp(48px, 6vw, 80px) 0;
+}
+
+.cx-psy-standout-row {
+  margin-top: 8px;
+}
+
+.cx-psy-partners-label {
+  margin-bottom: 14px;
+}
+
+.cx-psy-partners {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 240px;
+}
+
+.cx-psy-partner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 16px;
+  border: 1px solid #e3d6e2;
+  background: rgba(255, 255, 255, 0.55);
+  text-align: center;
+}
+
+.cx-psy-partner-name {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 4px;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.cx-psy-partner-leiutis { color: #4a1a5c; }
+.cx-psy-partner-biophore { color: #2c3e8f; font-weight: 500; font-family: Georgia, serif; }
+.cx-psy-partner-zenara { color: #c0392b; font-style: italic; }
+
+.cx-psy-partner-desc {
+  font-size: 11px;
+  line-height: 1.45;
+  color: #5a4a66;
+}
+
+.cx-psy-partner-tag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  color: #1c8a8f;
+  margin-top: 4px;
+}
+
+.cx-psy-standout-bottle {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+}
+
+.cx-psy-standout-bottle img {
+  object-fit: contain;
+}
+
+.cx-psy-points {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.cx-psy-points li {
+  display: flex;
+  gap: 14px;
+}
+
+.cx-psy-point-num {
+  flex-shrink: 0;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #1c8a8f;
+}
+
+.cx-psy-points p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: #3d2f47;
+}
+
+/* --- How to Administer --- */
+.cx-psy-admin {
+  background: #faf8f7;
+  padding: clamp(48px, 6vw, 80px) 0;
+}
+
+.cx-psy-admin-text p {
+  font-size: 14px;
+  line-height: 1.65;
+  color: #3d2f47;
+  margin-bottom: 14px;
+}
+
+.cx-psy-admin-figure {
+  margin: 0;
+}
+
+.cx-psy-admin-img {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  overflow: hidden;
+}
+
+.cx-psy-admin-img img {
+  object-fit: cover;
+}
+
+.cx-psy-admin-figure figcaption {
+  font-size: 11px;
+  color: #3d2f47;
+  margin-top: 10px;
+}
+
+.cx-psy-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(16px, 3vw, 44px);
+  margin-top: clamp(40px, 5vw, 56px);
+}
+
+.cx-psy-step {
+  padding: 22px 18px 28px;
+  border: 1px solid #e8d6e6;
+  background: #f8edf5;
+}
+
+.cx-psy-step .cx-psy-teal-label {
+  font-size: 10px;
+  margin-bottom: 12px;
+}
+
+.cx-psy-step-title {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.45;
+  color: #2a0d3a;
+  margin-bottom: 12px;
+}
+
+.cx-psy-step p {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #3d2f47;
+}
+
+.cx-psy-video {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 6;
+  min-height: 200px;
+  margin-top: clamp(48px, 6vw, 72px);
+  background: #f8edf5;
+  text-align: center;
+  padding: 16px;
+}
+
+.cx-psy-video span {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(18px, 2vw, 24px);
+  color: #2a0d3a;
+}
+
+.cx-psy-important {
+  margin-top: 32px;
+  padding: 18px 24px 20px;
+  border-left: 3px solid #471D41;
+  background: #f8edf5;
+}
+
+.cx-psy-important-title {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  color: #2a0d3a;
+  margin-bottom: 14px;
+}
+
+.cx-psy-important p {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: #3d2f47;
+  margin-bottom: 10px;
+}
+
+.cx-psy-important p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 991.98px) {
+  .cx-psy-whatis-img {
+    position: relative;
+    width: 100%;
+    height: clamp(240px, 55vw, 420px);
+    margin-top: 32px;
+  }
+
+  .cx-psy-whatis-img::after {
+    display: none;
+  }
+
+  .cx-psy-whatis {
+    display: flex;
+    flex-direction: column-reverse;
+    padding-top: 0;
+  }
+
+  .cx-psy-whatis-content {
+    padding-top: 32px;
+  }
+
+  .cx-psy-whatis-cards {
+    max-width: none;
+  }
+
+  .cx-psy-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cx-psy-standout-bottle {
+    max-width: 280px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .cx-psy-whatis-cards,
+  .cx-psy-steps,
+  .cx-psy-config-packs {
+    grid-template-columns: 1fr;
+  }
+
+  .cx-psy-partners {
+    max-width: none;
+  }
+
+  .cx-psy-video {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* --- Shared: section intro, dark button, tables --- */
+.cx-psy-h2-tight {
+  margin-bottom: 10px;
+}
+
+.cx-psy-section-lead {
+  max-width: 720px;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: #3d2f47;
+  margin-bottom: 14px;
+}
+
+.cx-psy-btn-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 22px;
+  border-radius: 2px;
+  background: #3f1238;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.cx-psy-btn-dark:hover {
+  background: #2a0c25;
+  color: #ffffff;
+}
+
+.cx-psy-table-card {
+  margin-top: 24px;
+  border: 1px solid #ecdcea;
+  background: #f8edf5;
+}
+
+.cx-psy-table-caption {
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2a0d3a;
+  padding: 16px 16px 14px;
+  border-bottom: 1px solid #ecdcea;
+}
+
+.cx-psy-table-scroll {
+  overflow-x: auto;
+}
+
+.cx-psy-table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  background: #ffffff;
+  font-size: 12px;
+  color: #2a0d3a;
+}
+
+.cx-psy-table th {
+  padding: 14px 20px;
+  background: #f8edf5;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-align: left;
+}
+
+.cx-psy-table td {
+  padding: 10px 20px;
+  border-top: 1px solid #f0e8ef;
+}
+
+.cx-psy-table th:not(:first-child),
+.cx-psy-table td:not(:first-child) {
+  width: 22%;
+  text-align: center;
+}
+
+.cx-psy-table-category td {
+  font-weight: 600;
+  color: #4a1a45;
+}
+
+.cx-psy-table-sub td:first-child {
+  padding-left: 32px;
+  font-size: 11px;
+  color: #3d2f47;
+}
+
+.cx-psy-table-sub td:not(:first-child) {
+  font-size: 11px;
+}
+
+.cx-psy-table-emph {
+  font-weight: 600;
+  color: #4a1a45;
+}
+
+.cx-psy-table-note {
+  padding: 10px 16px;
+  font-size: 10px;
+  color: #7a6a8a;
+}
+
+.cx-psy-table-note-strong {
+  font-size: 11px;
+  font-weight: 600;
+  color: #2a0d3a;
+  padding: 14px 16px;
+}
+
+/* --- Clinical Trial Data --- */
+.cx-psy-trial {
+  background: #faf8f7;
+  padding: clamp(48px, 6vw, 80px) 0;
+}
+
+.cx-psy-trial-intro {
+  max-width: 480px;
+  margin-top: -8px;
+}
+
+.cx-psy-trial-design {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.6;
+  color: #3f1238;
+  margin-bottom: 10px;
+}
+
+.cx-psy-trial-meta {
+  font-size: 12px;
+  line-height: 1.65;
+  color: #3d2f47;
+}
+
+.cx-psy-trial-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 32px;
+  padding: 22px 16px;
+  border: 1px solid #efeaf0;
+  background: #ffffff;
+}
+
+.cx-psy-trial-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cx-psy-trial-stat-value {
+  font-family: var(--font-outfit), "Outfit", sans-serif;
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.2;
+  color: #2a0d3a;
+}
+
+.cx-psy-trial-stat-label {
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  color: #5a4a66;
+}
+
+.cx-psy-evidence {
+  margin-top: clamp(40px, 5vw, 64px);
+  padding: clamp(20px, 2.5vw, 32px);
+  border: 1px solid #cfc6d2;
+  background: #ffffff;
+}
+
+.cx-psy-evidence-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cx-psy-evidence-head .cx-psy-h2 {
+  margin: 0;
+}
+
+.cx-psy-evidence-badge {
+  padding: 5px 12px;
+  border: 1px solid #b9dcdd;
+  border-radius: 20px;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  color: #1c8a8f;
+}
+
+.cx-psy-evidence-lead {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #2a0d3a;
+  padding: 10px 0 20px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #e6e0e8;
+}
+
+.cx-psy-evidence-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  align-items: start;
+}
+
+.cx-psy-evidence-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cx-psy-ev-box {
+  padding: 14px;
+  border: 1px solid #e6e0e8;
+  background: #ffffff;
+}
+
+.cx-psy-ev-box p {
+  font-size: 11px;
+  line-height: 1.6;
+  color: #3d2f47;
+}
+
+.cx-psy-ev-banner {
+  padding: 14px 18px;
+  background: #4a1a45;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.cx-psy-ev-mini-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.cx-psy-ev-mini {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.cx-psy-ev-mini strong {
+  font-family: var(--font-outfit), "Outfit", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #2a0d3a;
+}
+
+.cx-psy-ev-mini span {
+  font-size: 9px;
+  color: #5a4a66;
+}
+
+.cx-psy-ev-title {
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #2a0d3a;
+  margin-bottom: 8px;
+}
+
+.cx-psy-ev-label {
+  display: block;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  line-height: 1.5;
+  color: #2a0d3a;
+  margin-bottom: 12px;
+}
+
+.cx-psy-ev-endpoints {
+  font-size: 11px;
+  color: #3d2f47;
+}
+
+.cx-psy-ev-endpoints div {
+  display: flex;
+  gap: 6px;
+  padding: 3px 0;
+}
+
+.cx-psy-ev-endpoints dt {
+  font-weight: 600;
+  color: #2a0d3a;
+}
+
+.cx-psy-ev-endpoints dd {
+  margin: 0;
+}
+
+.cx-psy-ev-endpoints .cx-psy-ev-endpoints-last {
+  border-top: 1px solid #e6e0e8;
+  margin-top: 4px;
+  padding-top: 6px;
+}
+
+.cx-psy-ev-highlight {
+  padding: 16px;
+  background: #4a1a45;
+  color: #ffffff;
+}
+
+.cx-psy-ev-highlight h3 {
+  font-family: var(--font-outfit), "Outfit", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.cx-psy-ev-highlight p {
+  font-size: 10px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.cx-psy-evidence-cite {
+  margin-top: 28px;
+  padding-top: 14px;
+  border-top: 1px solid #e6e0e8;
+  font-size: 9.5px;
+  color: #5a4a66;
+}
+
+.cx-psy-evidence-cite a {
+  color: #1c8a8f;
+  word-break: break-all;
+}
+
+.cx-psy-trial-download {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+/* Bar charts */
+.cx-psy-chart-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.cx-psy-chart {
+  margin: 0;
+}
+
+.cx-psy-chart-title {
+  font-size: 10px;
+  font-weight: 600;
+  color: #2a0d3a;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.cx-psy-chart-body {
+  display: flex;
+  gap: 4px;
+  height: 110px;
+  padding-bottom: 14px;
+  position: relative;
+}
+
+.cx-psy-chart-axis {
+  position: relative;
+  width: 14px;
+  flex-shrink: 0;
+}
+
+.cx-psy-chart-axis span {
+  position: absolute;
+  right: 0;
+  transform: translateY(50%);
+  font-size: 7px;
+  color: #7a6a8a;
+}
+
+.cx-psy-chart-plot {
+  position: relative;
+  flex: 1;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  border-left: 1px solid #d9d1dc;
+  border-bottom: 1px solid #d9d1dc;
+}
+
+.cx-psy-chart-grid {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #f1edf2;
+}
+
+.cx-psy-chart-group {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.cx-psy-chart-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 1px;
+  height: 100%;
+}
+
+.cx-psy-bar {
+  position: relative;
+  width: 14px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 4px;
+}
+
+.cx-psy-bar span {
+  font-size: 6.5px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.cx-psy-bar-base { background: #4a1a45; }
+.cx-psy-bar-visit { background: #1c8a8f; }
+
+.cx-psy-chart-label {
+  position: absolute;
+  top: calc(100% + 3px);
+  font-size: 7px;
+  color: #5a4a66;
+  white-space: nowrap;
+}
+
+.cx-psy-chart-legend {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 16px;
+  padding-top: 10px;
+  border-top: 1px solid #f1edf2;
+  font-size: 10px;
+  color: #3d2f47;
+}
+
+.cx-psy-chart-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cx-psy-chart-legend i {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+}
+
+/* --- Adverse Reactions --- */
+.cx-psy-ae {
+  background: #ffffff;
+  padding: clamp(48px, 6vw, 80px) 0;
+}
+
+.cx-psy-note-box {
+  margin-top: 28px;
+  padding: 16px 18px;
+  border: 1px solid #ece6ee;
+  background: #faf8f7;
+  font-size: 13px;
+  color: #2a0d3a;
+}
+
+/* --- Drug-drug Interactions --- */
+.cx-psy-ddi {
+  background: #f5e9f3;
+  padding: clamp(48px, 6vw, 80px) 0;
+}
+
+.cx-psy-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 32px;
+}
+
+.cx-psy-acc-item {
+  border: 1px solid #ecdcea;
+  background: #ffffff;
+}
+
+.cx-psy-acc-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 18px;
+  border: none;
+  background: transparent;
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
+  font-size: 13.5px;
+  color: #2a0d3a;
+  text-align: left;
+  cursor: pointer;
+}
+
+.cx-psy-acc-icon {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.cx-psy-acc-item.is-open .cx-psy-acc-icon {
+  transform: rotate(90deg);
+}
+
+.cx-psy-acc-body {
+  padding: 12px 18px 16px;
+  border-top: 1px solid #f0e8ef;
+}
+
+.cx-psy-acc-body p {
+  font-size: 12px;
+  line-height: 1.65;
+  color: #3d2f47;
+}
+
+/* --- Pharmacokinetics --- */
+.cx-psy-pk {
+  background: #ffffff;
+  padding: clamp(48px, 6vw, 80px) 0;
+}
+
+.cx-psy-pk-sub {
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #2a0d3a;
+  margin: 18px 0 8px;
+}
+
+.cx-psy-table-pk td {
+  padding: 14px 20px;
+}
+
+.cx-psy-adme {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(12px, 2.5vw, 28px);
+  margin-top: 20px;
+}
+
+.cx-psy-adme-card {
+  padding: 18px 16px 24px;
+  background: #f5e9f3;
+}
+
+.cx-psy-adme-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.cx-psy-adme-label {
+  color: #4a1a45;
+  font-size: 9.5px;
+}
+
+.cx-psy-adme-icon {
+  display: inline-flex;
+  color: #4a1a45;
+}
+
+.cx-psy-adme-title {
+  font-family: var(--font-dm-sans), "DM Sans", sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: #2a0d3a;
+  margin-bottom: 12px;
+}
+
+.cx-psy-adme-card p {
+  font-size: 11px;
+  line-height: 1.6;
+  color: #3d2f47;
+}
+
+/* --- Prescribing Information Leaflet --- */
+.cx-psy-pil {
+  background: #f5e9f3;
+  padding: clamp(40px, 5vw, 64px) 0;
+}
+
+.cx-psy-pil-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: clamp(24px, 3vw, 32px);
+  border: 1px solid #ecdcea;
+  background: #faf8f7;
+}
+
+.cx-psy-pil-title {
+  font-family: var(--font-outfit), "Outfit", sans-serif;
+  font-size: clamp(20px, 2vw, 24px);
+  font-weight: 400;
+  color: #2a0d3a;
+  margin: 22px 0 6px;
+}
+
+.cx-psy-pil-sub {
+  font-size: 12px;
+  color: #3d2f47;
+  margin-bottom: 20px;
+}
+
+.cx-psy-pil-langs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.cx-psy-pil-langs-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #2a0d3a;
+  margin-right: 4px;
+}
+
+.cx-psy-pil-lang {
+  padding: 2px 8px;
+  border: 1px solid #e6d3e3;
+  background: #f5e9f3;
+  font-size: 10px;
+  color: #3d2f47;
+  text-decoration: none;
+}
+
+.cx-psy-pil-lang:hover {
+  border-color: #4a1a45;
+  color: #2a0d3a;
+}
+
+@media (max-width: 1199.98px) {
+  .cx-psy-evidence-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cx-psy-evidence-col:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .cx-psy-trial-stats,
+  .cx-psy-adme {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 767.98px) {
+  .cx-psy-evidence-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cx-psy-trial-download .cx-psy-btn-dark,
+  .cx-psy-pil-card .cx-psy-btn-dark {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .cx-psy-adme {
+    grid-template-columns: 1fr;
+  }
 }

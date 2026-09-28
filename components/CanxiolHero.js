@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import AnimatedGradientBg from './AnimatedGradientBg';
+import { useOpenPsychiatristInquiry } from './PsychiatristInquiryProvider';
 
 export default function CanxiolHero({
   // Shader controls
@@ -10,6 +11,8 @@ export default function CanxiolHero({
   gradientDistortion = 0.15,
   gradientScale      = 1.5,
 }) {
+  const openInquiry = useOpenPsychiatristInquiry();
+
   return (
     <>
       <section id="hero" className="cx-hero-wrapper">
@@ -53,7 +56,7 @@ export default function CanxiolHero({
                       className="cx-btn-discover-arrow"
                     />
                   </Link>
-                  <Link href="#psychiatrists" className="cx-btn-hero-psychiatrists">
+                  <Link href="#psychiatrists" className="cx-btn-hero-psychiatrists" onClick={openInquiry}>
                     <span>FOR PSYCHIATRISTS</span>
                     <Image
                       src="/images/for-psychiatrists-arrow.png"

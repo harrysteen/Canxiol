@@ -2,9 +2,11 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useOpenPsychiatristInquiry } from './PsychiatristInquiryProvider';
 
 export default function CanxiolNavbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const openInquiry = useOpenPsychiatristInquiry();
   const [resourcesOpen, setResourcesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -75,7 +77,7 @@ export default function CanxiolNavbar() {
 
             {/* Desktop CTA Buttons */}
             <div className="cx-ctas">
-              <Link href="#psychiatrists" className="cx-btn-psychiatrists">
+              <Link href="#psychiatrists" className="cx-btn-psychiatrists" onClick={openInquiry}>
                 <span>FOR PSYCHIATRISTS</span>
                 <Image
                   src="/images/for-psychiatrists-arrow.png"
@@ -117,7 +119,7 @@ export default function CanxiolNavbar() {
             <Link href="#pharmacovigilance" onClick={() => setMobileMenuOpen(false)}>Pharmacovigilance</Link>
             <Link href="#about" onClick={() => setMobileMenuOpen(false)}>About Leiutis</Link>
             <div className="cx-drawer-ctas">
-              <Link href="#psychiatrists" className="cx-btn-psychiatrists" style={{ width: '100%' }} onClick={() => setMobileMenuOpen(false)}>
+              <Link href="#psychiatrists" className="cx-btn-psychiatrists" style={{ width: '100%' }} onClick={(e) => { setMobileMenuOpen(false); openInquiry(e); }}>
                 <span>FOR PSYCHIATRISTS</span>
                 <Image
                   src="/images/for-psychiatrists-arrow.png"

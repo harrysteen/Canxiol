@@ -1,14 +1,37 @@
 'use client';
+import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 export default function CanxiolInfoBar() {
+  const barRef = useRef(null);
+
+  // Publish the bar's rendered height so the hero can leave room for it
+  useEffect(() => {
+    const bar = barRef.current;
+    if (!bar) return;
+    const root = document.documentElement;
+    const update = () => {
+      const pinned = getComputedStyle(bar).position === 'sticky';
+      root.style.setProperty('--cx-infobar-h', pinned ? `${bar.offsetHeight}px` : '0px');
+    };
+    update();
+    const observer = new ResizeObserver(update);
+    observer.observe(bar);
+    window.addEventListener('resize', update);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', update);
+      root.style.removeProperty('--cx-infobar-h');
+    };
+  }, []);
+
   return (
     <>
-      <section className="cx-sticky-infobar">
+      <section ref={barRef} className="cx-sticky-infobar">
         <div className="container">
           <div className="cx-infobar-grid">
-            
+
             {/* Item 1 */}
             <div className="cx-feat-col cx-feat-col-1">
               <span className="cx-prescribe-tag">
