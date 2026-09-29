@@ -37,7 +37,7 @@ export default function CanxiolNavbar() {
 
             {/* Desktop Navigation Links */}
             <ul className="cx-links">
-              <li><Link href="#anxiety">Anxiety and its effects</Link></li>
+              <li><Link href="/anxiety">Anxiety and its effects</Link></li>
               <li><Link href="#canxiol">Canxiol</Link></li>
               <li>
                 <button
@@ -113,7 +113,7 @@ export default function CanxiolNavbar() {
         {/* Mobile Navigation Drawer */}
         <div className={`cx-drawer ${mobileMenuOpen ? 'open' : ''}`}>
           <div className="container">
-            <Link href="#anxiety" onClick={() => setMobileMenuOpen(false)}>Anxiety and its effects</Link>
+            <Link href="/anxiety" onClick={() => setMobileMenuOpen(false)}>Anxiety and its effects</Link>
             <Link href="#canxiol" onClick={() => setMobileMenuOpen(false)}>Canxiol</Link>
             <Link href="#patient-resources" onClick={() => setMobileMenuOpen(false)}>Resources</Link>
             <Link href="#pharmacovigilance" onClick={() => setMobileMenuOpen(false)}>Pharmacovigilance</Link>

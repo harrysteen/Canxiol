@@ -4627,3 +4627,699 @@ button {
     grid-template-columns: 1fr;
   }
 }
+
+/* ==========================================================================
+   Anxiety and its Effects Page (/anxiety)
+   ========================================================================== */
+
+/* --- Section sub-nav (sits under the main navbar) --- */
+.cx-anx-subnav {
+  position: sticky;
+  top: 80px;
+  z-index: 1035;
+  background: #F6F4F2;
+  border-bottom: 1px solid #ECE6EA;
+}
+
+.cx-anx-subnav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 48px;
+}
+
+.cx-anx-subnav-title {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #471D41;
+  white-space: nowrap;
+}
+
+.cx-anx-subnav-tabs {
+  display: flex;
+  align-items: stretch;
+  gap: clamp(16px, 2.4vw, 40px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  align-self: stretch;
+}
+
+.cx-anx-subnav-tabs li {
+  display: flex;
+}
+
+.cx-anx-subnav-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 4px;
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: #68635F;
+  text-decoration: none;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.cx-anx-subnav-tab:hover {
+  color: #471D41;
+}
+
+.cx-anx-subnav-tab.active {
+  color: #471D41;
+  font-weight: 500;
+  border-bottom-color: #471D41;
+}
+
+.cx-anx-subnav-num {
+  font-size: 12px;
+}
+
+/* --- Hero: What is anxiety? --- */
+.cx-anx-hero {
+  position: relative;
+  overflow: hidden;
+  background: #F5EEF8;
+  /* Viewport minus navbar, sub-nav and the bottom-pinned info bar */
+  height: calc(100vh - 80px - 48px - var(--cx-infobar-h, 92px));
+  min-height: 460px;
+  scroll-margin-top: 128px;
+}
+
+.cx-anx-hero-inner {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+}
+
+/* Horizontal gutter only: a vertical gutter's negative margin-top would
+   lift the row (and the image) off the section's bottom edge */
+.cx-anx-hero-row {
+  --cx-gutter-x: 2rem;
+  --cx-gutter-y: 0;
+  height: 100%;
+}
+
+.cx-anx-hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.cx-anx-hero-h1 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-weight: 400;
+  font-size: clamp(38px, 5.2vw, 76px);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  color: #1A1918;
+  margin-bottom: clamp(1rem, 2.2vh, 1.5rem);
+}
+
+.cx-anx-hero-p {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: clamp(0.88rem, 1.02vw, 1rem);
+  line-height: 1.65;
+  color: #68635F;
+  max-width: 500px;
+  margin: 0;
+}
+
+.cx-anx-hero-img-col {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.cx-anx-hero-img {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  height: calc(100% - clamp(24px, 4vh, 48px));
+}
+
+.cx-anx-hero-img img {
+  object-fit: contain;
+  object-position: bottom right;
+}
+
+@media (max-width: 991.98px) {
+  .cx-anx-subnav {
+    top: 0;
+    position: relative;
+  }
+
+  .cx-anx-subnav-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding-top: 10px;
+  }
+
+  .cx-anx-subnav-tabs {
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .cx-anx-subnav-tab {
+    padding: 10px 0;
+  }
+
+  .cx-anx-hero {
+    height: auto;
+    min-height: auto;
+    padding-top: 2.5rem;
+  }
+
+  .cx-anx-hero-img-col {
+    margin-top: 1.5rem;
+  }
+
+  .cx-anx-hero-img {
+    height: clamp(300px, 50vh, 440px);
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .cx-anx-hero-img img {
+    object-position: bottom center;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .cx-anx-hero-h1 {
+    font-size: clamp(32px, 10vw, 44px);
+  }
+
+  .cx-anx-hero-p {
+    font-size: 14px;
+  }
+}
+
+/* --- Shared section pieces --- */
+.cx-anx-eyebrow {
+  display: block;
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: #1c8a8f;
+  margin-bottom: clamp(28px, 4vw, 44px);
+}
+
+.cx-anx-section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: clamp(32px, 4vw, 48px);
+}
+
+.cx-anx-h2 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-weight: 400;
+  font-size: clamp(34px, 3.8vw, 48px);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: #1A1918;
+  margin: 0;
+}
+
+.cx-anx-section-lead {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.75;
+  color: #68635F;
+  max-width: 440px;
+  margin: 0;
+}
+
+.cx-anx-stat-title {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #1c8a8f;
+  margin: 0 0 16px;
+}
+
+.cx-anx-stat-desc {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 11px;
+  line-height: 1.6;
+  color: #3d2f47;
+  margin: 0;
+}
+
+/* --- Anxiety becomes a health concern --- */
+.cx-anx-concern {
+  background: #FAF8F7;
+  padding: clamp(40px, 6vw, 80px) 0;
+}
+
+.cx-anx-concern-row {
+  align-items: center;
+}
+
+.cx-anx-concern-img {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 494 / 268;
+  overflow: hidden;
+}
+
+.cx-anx-concern-img img {
+  object-fit: cover;
+}
+
+.cx-anx-concern-text {
+  padding-left: clamp(24px, 6vw, 84px) !important;
+}
+
+.cx-anx-concern-p {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 13px;
+  line-height: 1.75;
+  color: #68635F;
+  max-width: 400px;
+  margin: 0 0 24px;
+}
+
+.cx-anx-concern-quote {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(17px, 1.6vw, 19px);
+  font-weight: 400;
+  line-height: 1.5;
+  color: #471D41;
+  max-width: 380px;
+  margin: 0;
+  padding: 2px 0 2px 20px;
+  border-left: 1px solid #C9A9C4;
+}
+
+/* --- The scale of anxiety in India --- */
+.cx-anx-india {
+  background: #F5EAF1;
+  padding: clamp(28px, 3vw, 36px) 0 clamp(40px, 5vw, 64px);
+}
+
+.cx-anx-india-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid #D9C9D4;
+  border-left: 1px solid #D9C9D4;
+}
+
+.cx-anx-india-card {
+  padding: clamp(18px, 2vw, 22px) clamp(16px, 2vw, 22px) 28px;
+  border-right: 1px solid #D9C9D4;
+  border-bottom: 1px solid #D9C9D4;
+  min-height: 190px;
+}
+
+.cx-anx-india-value {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-weight: 400;
+  font-size: clamp(30px, 2.8vw, 36px);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #1A1918;
+  margin-bottom: 14px;
+}
+
+.cx-anx-india-value.is-small {
+  font-size: clamp(22px, 2vw, 26px);
+  line-height: 1.66;
+}
+
+/* --- A global perspective --- */
+.cx-anx-global {
+  background: #FAF8F7;
+  padding: clamp(28px, 3vw, 36px) 0 clamp(40px, 5vw, 64px);
+}
+
+.cx-anx-global .cx-anx-h2 {
+  color: #2A1A2A;
+}
+
+.cx-anx-global .cx-anx-section-head {
+  align-items: flex-start;
+  margin-bottom: clamp(40px, 6vw, 64px);
+}
+
+.cx-anx-global .cx-anx-section-lead {
+  max-width: 420px;
+  line-height: 2.1;
+  padding-top: 10px;
+}
+
+.cx-anx-global-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.cx-anx-global-card {
+  padding: 14px clamp(16px, 2vw, 22px) 6px;
+  border-left: 1px solid #E4E0E2;
+}
+
+.cx-anx-global-card:last-child {
+  border-right: 1px solid #E4E0E2;
+}
+
+.cx-anx-global-value {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 18px;
+  white-space: nowrap;
+}
+
+.cx-anx-global-num {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-weight: 400;
+  font-size: clamp(34px, 3.4vw, 46px);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  color: #2A1A2A;
+}
+
+.cx-anx-global-unit {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: #68635F;
+}
+
+.cx-anx-global-unit.is-large {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(22px, 2vw, 26px);
+  color: #2A1A2A;
+}
+
+.cx-anx-global .cx-anx-stat-desc {
+  color: #68635F;
+  max-width: 180px;
+}
+
+.cx-anx-global-source {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 9px;
+  color: #68635F;
+  margin: 14px 0 0;
+}
+
+.cx-anx-global-note {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 12px;
+  color: #3d2f47;
+  border-top: 1px solid #E4E0E2;
+  padding-top: 20px;
+  margin: 18px 0 0;
+}
+
+@media (max-width: 991.98px) {
+  .cx-anx-section-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .cx-anx-concern-text {
+    padding-left: calc(var(--cx-gutter-x) * 0.5) !important;
+    margin-top: 28px !important;
+  }
+
+  .cx-anx-concern-p,
+  .cx-anx-concern-quote {
+    max-width: 100%;
+  }
+
+  .cx-anx-india-grid,
+  .cx-anx-global-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cx-anx-global-grid {
+    row-gap: 28px;
+  }
+
+  .cx-anx-global-card:last-child {
+    border-right: none;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .cx-anx-india-grid,
+  .cx-anx-global-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cx-anx-india-card {
+    min-height: 0;
+  }
+
+  .cx-anx-global .cx-anx-stat-desc {
+    max-width: 100%;
+  }
+}
+
+/* --- Anxiety affects all walks of life --- */
+.cx-anx-who {
+  background: #FAF8F7;
+  padding: clamp(28px, 3vw, 36px) 0 clamp(40px, 5vw, 64px);
+}
+
+.cx-anx-who .cx-anx-h2 {
+  color: #2A1A2A;
+}
+
+.cx-anx-who-head {
+  align-items: center;
+}
+
+.cx-anx-who .cx-anx-section-lead {
+  max-width: 450px;
+  flex: 0 0 47%;
+}
+
+.cx-anx-who-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid #E4E0E2;
+}
+
+.cx-anx-who-item {
+  display: grid;
+  grid-template-columns: 70px minmax(0, 1fr) 47%;
+  align-items: center;
+  gap: 0 16px;
+  padding: 22px 0 24px;
+  border-bottom: 1px solid #E4E0E2;
+}
+
+.cx-anx-who-num {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  color: #1c8a8f;
+}
+
+.cx-anx-who-title {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(18px, 1.7vw, 21px);
+  font-weight: 400;
+  line-height: 1.3;
+  color: #2A1A2A;
+  margin: 0;
+}
+
+.cx-anx-who-desc {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 11px;
+  line-height: 1.65;
+  color: #68635F;
+  max-width: 300px;
+  margin: 0;
+}
+
+/* --- Teal quote band --- */
+.cx-anx-quote-band {
+  background: #03888A;
+  padding: clamp(48px, 6vw, 64px) 0 clamp(56px, 7vw, 80px);
+}
+
+.cx-anx-quote-band-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 3.5fr);
+}
+
+.cx-anx-quote-mark {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 0.6;
+  color: #FFFFFF;
+}
+
+.cx-anx-quote-text {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 400;
+  line-height: 1.3;
+  color: #FFFFFF;
+  max-width: 580px;
+  margin: 24px 0 0;
+}
+
+/* --- When anxiety becomes a concern --- */
+.cx-anx-when {
+  background: #FAF8F7;
+  padding: clamp(28px, 3vw, 44px) 0 clamp(32px, 4vw, 48px);
+}
+
+.cx-anx-when-row {
+  --cx-gutter-x: 2.5rem;
+  --cx-gutter-y: 0;
+}
+
+.cx-anx-when .cx-anx-eyebrow {
+  margin-bottom: clamp(24px, 3.5vw, 40px);
+}
+
+.cx-anx-when-h2 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(28px, 3.1vw, 38px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: #2A1A2A;
+  max-width: 470px;
+  margin: 0;
+}
+
+.cx-anx-when-img {
+  position: relative;
+  width: 100%;
+  max-width: 450px;
+  aspect-ratio: 448 / 278;
+  overflow: hidden;
+}
+
+.cx-anx-when-img img {
+  object-fit: cover;
+}
+
+.cx-anx-when-notes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: clamp(40px, 5vw, 52px);
+  padding: 0 clamp(0px, 3vw, 36px);
+}
+
+.cx-anx-when-note {
+  padding-right: clamp(20px, 4vw, 40px);
+}
+
+.cx-anx-when-note + .cx-anx-when-note {
+  padding: 0 0 0 clamp(20px, 4vw, 40px);
+  border-left: 1px solid #E4E0E2;
+}
+
+.cx-anx-when-note .cx-anx-eyebrow {
+  margin-bottom: 20px;
+}
+
+.cx-anx-when-note p {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 11px;
+  line-height: 1.6;
+  color: #68635F;
+  margin: 0;
+}
+
+.cx-anx-when-note + .cx-anx-when-note p {
+  color: #6B7A99;
+}
+
+.cx-anx-next-wrap {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 28px;
+}
+
+.cx-anx-next {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 17px;
+  letter-spacing: -0.02em;
+  color: #471D41;
+  text-decoration: none;
+}
+
+.cx-anx-next svg {
+  transition: transform 0.2s ease;
+}
+
+.cx-anx-next:hover {
+  color: #391734;
+}
+
+.cx-anx-next:hover svg {
+  transform: translateX(3px);
+}
+
+@media (max-width: 991.98px) {
+  .cx-anx-who .cx-anx-section-lead {
+    flex: none;
+  }
+
+  .cx-anx-who-item {
+    grid-template-columns: 48px minmax(0, 1fr);
+    row-gap: 8px;
+  }
+
+  .cx-anx-who-desc {
+    grid-column: 2;
+    max-width: 100%;
+  }
+
+  .cx-anx-quote-band-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .cx-anx-when-h2 {
+    max-width: 100%;
+  }
+
+  .cx-anx-when-img {
+    max-width: 100%;
+    margin-top: 28px !important;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .cx-anx-when-notes {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 0;
+  }
+
+  .cx-anx-when-note,
+  .cx-anx-when-note + .cx-anx-when-note {
+    padding: 0;
+    border-left: none;
+  }
+}
