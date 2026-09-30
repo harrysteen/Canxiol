@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import { PSY_IMAGES } from './psyImages';
 
+// Logo files already include the ↗ mark; width/height are each file's pixel size
 const partners = [
-  { name: 'Leiutis', className: 'cx-psy-partner-leiutis', desc: 'Trademark and IP owner' },
-  { name: 'Biophore', className: 'cx-psy-partner-biophore', desc: 'Synthetic cannabidiol API manufacturing', tag: 'USDMF #35992' },
-  { name: 'Zenara', className: 'cx-psy-partner-zenara', desc: 'GMP certified Foundation manufacturing' },
+  { name: 'Leiutis', logo: PSY_IMAGES.logoLeiutis, width: 412, height: 72, desc: 'Trademark and IP owner' },
+  { name: 'Biophore', logo: PSY_IMAGES.logoBiophore, width: 411, height: 116, desc: 'Synthetic cannabidiol API manufacturing', tag: 'USDMF #35992' },
+  { name: 'Zenara', logo: PSY_IMAGES.logoZenara, width: 424, height: 91, desc: 'GMP certified Foundation manufacturing' },
 ];
 
 const points = [
@@ -27,12 +28,13 @@ export default function PsyStandOutSection() {
             <div className="cx-psy-partners">
               {partners.map((p) => (
                 <div key={p.name} className="cx-psy-partner">
-                  <span className={`cx-psy-partner-name ${p.className}`}>
-                    {p.name}
-                    <svg width="10" height="10" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M4.08337 9.91666L9.91671 4.08333M9.91671 4.08333H4.66671M9.91671 4.08333V9.33333" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </span>
+                  <Image
+                    src={p.logo}
+                    alt={p.name}
+                    width={p.width}
+                    height={p.height}
+                    className={`cx-psy-partner-logo is-${p.name.toLowerCase()}`}
+                  />
                   <span className="cx-psy-partner-desc">{p.desc}</span>
                   {p.tag && <span className="cx-psy-partner-tag">{p.tag}</span>}
                 </div>
@@ -44,9 +46,9 @@ export default function PsyStandOutSection() {
             <div className="cx-psy-standout-bottle">
               <Image
                 src={PSY_IMAGES.standOutBottle}
-                alt="Canxiol 28 mL bottle"
+                alt="Canxiol 28 mL bottle with dropper cap"
                 fill
-                sizes="(max-width: 767px) 100vw, 25vw"
+                sizes="(max-width: 767px) 100vw, 340px"
               />
             </div>
           </div>

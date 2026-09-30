@@ -29,7 +29,6 @@ export default function AnxietyPage() {
         <AnxietyWhoSection />
         <AnxietyQuoteBand />
         <AnxietyWhenConcernSection />
-        {/* Next sections: #when-to-seek-help, #treatment */}
         {/* Sticky to the viewport bottom; rests above the footer at the end of the page */}
         <CanxiolInfoBar />
         <CanxiolFooter />

@@ -63,8 +63,8 @@ export default function CanxiolInfoBar() {
               <Image
                 src="/images/logo.png"
                 alt="Canxiol By Leiutis"
-                width={145}
-                height={40}
+                width={180}
+                height={90}
                 className="cx-feat-logo"
               />
             </div>

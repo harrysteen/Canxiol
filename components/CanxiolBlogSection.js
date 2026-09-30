@@ -5,27 +5,27 @@ export default function CanxiolBlogSection() {
   const blogPosts = [
     {
       id: 1,
-      image: '/images/blog_img_1.jpg',
+      image: '/images/blog_img_1.png',
       title: 'Student anxiety can hide behind a life that looks fine.',
-      author: 'Jana Smith',
+      author: 'Ms. Vrinda Singla',
       date: '18 September 2026',
       readTime: '4 min read',
       avatar: '/images/blog_avatar.jpg'
     },
     {
       id: 2,
-      image: '/images/blog_img_2.jpg',
-      title: 'The Anxiety remains unrecognised - Until It Gets Too Loud to Ignore',
-      author: 'Jana Smith',
+      image: '/images/blog_img_2.png',
+      title: 'The Anxiety remains unrecognised – Until It Gets Too Loud to Ignore',
+      author: 'Ms. Vrinda Singla',
       date: '18 September 2026',
       readTime: '4 min read',
       avatar: '/images/blog_avatar.jpg'
     },
     {
       id: 3,
-      image: '/images/blog_img_3.jpg',
+      image: '/images/blog_img_3.png',
       title: "Anxiety Isn't a Personality Flaw. It's a Medical Condition, Like Any Other",
-      author: 'Jana Smith',
+      author: 'Ms. Vrinda Singla',
       date: '18 September 2026',
       readTime: '4 min read',
       avatar: '/images/blog_avatar.jpg'
@@ -54,6 +54,7 @@ export default function CanxiolBlogSection() {
                     src={post.image}
                     alt={post.title}
                     fill
+                    sizes="(max-width: 767px) 100vw, 33vw"
                     style={{ objectFit: 'cover' }}
                   />
                 </div>
@@ -62,8 +63,8 @@ export default function CanxiolBlogSection() {
                   <Image 
                     src={post.avatar}
                     alt={post.author}
-                    width={32}
-                    height={32}
+                    width={40}
+                    height={40}
                     className="cx-blog-avatar"
                   />
                   <span className="cx-blog-meta-text">

@@ -13,7 +13,8 @@ export default function PsyAdministerSection() {
     <section className="cx-psy-admin">
       <div className="container">
         <div className="row g-4 g-lg-5">
-          <div className="col-12 col-lg-6">
+          {/* On desktop the copy spans exactly the photo's height (top and bottom aligned) */}
+          <div className="col-12 col-lg-6 cx-psy-admin-copy">
             <h2 className="cx-psy-h2">How to Administer Canxiol</h2>
             <div className="cx-psy-admin-text">
               <p>Canxiol® should be administered at the dose prescribed by your psychiatrist.</p>

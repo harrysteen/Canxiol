@@ -1,17 +1,19 @@
 import { DM_Sans, Outfit } from 'next/font/google';
 import './globals.css';
 
-const dmSans = DM_Sans({
+// Outfit variable font — full weight axis 100..900
+const outfit = Outfit({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-dm-sans',
+  weight: 'variable',
+  variable: '--font-outfit',
   display: 'swap',
 });
 
-const outfit = Outfit({
+// DM Sans — only used for small print (e.g. the hero prescription disclaimer)
+const dmSans = DM_Sans({
   subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800', '900'],
-  variable: '--font-outfit',
+  weight: ['400'],
+  variable: '--font-dm-sans',
   display: 'swap',
 });
 
@@ -28,7 +30,7 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${outfit.variable}`}>
+    <html lang="en" className={`${outfit.variable} ${dmSans.variable}`}>
       <body>{children}</body>
     </html>
   );

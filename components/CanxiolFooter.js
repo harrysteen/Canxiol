@@ -17,8 +17,8 @@ export default function CanxiolFooter() {
                 <Image
                   src="/images/logo.png"
                   alt="Canxiol By Leiutis"
-                  width={210}
-                  height={60}
+                  width={228}
+                  height={109}
                   className="cx-footer-logo-img"
                 />
               </Link>

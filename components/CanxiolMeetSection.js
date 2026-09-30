@@ -16,6 +16,15 @@ export default function CanxiolMeetSection({
     'Milky white Oral solution',
   ];
 
+  // Description broken into the same lines as the design (one block per line on desktop)
+  const descLines = [
+    'A prescription cannabidiol oral solution research for the',
+    'management of mild to moderate anxiety disorders.',
+    'Canxiol brings together pharmaceutical grade cannabidiol',
+    'formulated with proprietary nanodispersion technology in',
+    'an oral solution designed for measured administration.',
+  ];
+
   const features = [
     {
       num: '01',
@@ -53,6 +62,7 @@ export default function CanxiolMeetSection({
         <div className="row align-items-center g-4 g-lg-5 cx-meet-top-row">
           
           {/* Left Column: Heading, Description & CTA */}
+          {/* Three equal columns keep the image centred on the page */}
           <div className="col-12 col-lg-4">
             <div className="cx-meet-left">
               <h2 className="cx-meet-h2">
@@ -61,7 +71,9 @@ export default function CanxiolMeetSection({
               </h2>
 
               <p className="cx-meet-desc">
-                A prescription cannabidiol oral solution research for the management of mild to moderate anxiety disorders. Canxiol brings together pharmaceutical grade cannabidiol formulated with proprietary nanodispersion technology in an oral solution designed for measured administration.
+                {descLines.map((line) => (
+                  <span key={line} className="cx-meet-desc-line">{line} </span>
+                ))}
               </p>
 
               <Link href="#what-is-canxiol" className="cx-btn-meet">
@@ -74,7 +86,7 @@ export default function CanxiolMeetSection({
           </div>
 
           {/* Center Column: Product Showcase Image */}
-          <div className="col-12 col-lg-5 text-center">
+          <div className="col-12 col-lg-4 text-center">
             <div className="cx-meet-img-wrap">
               <div className="cx-meet-img-box">
                 <Image
@@ -90,7 +102,7 @@ export default function CanxiolMeetSection({
           </div>
 
           {/* Right Column: Process Flow Steps */}
-          <div className="col-12 col-lg-3">
+          <div className="col-12 col-lg-4 cx-meet-flow-col">
             <div className="cx-meet-flow">
               {steps.map((step, idx) => (
                 <div key={idx} className="cx-meet-flow-item">

@@ -4,18 +4,18 @@ import Image from 'next/image';
 export default function CanxiolGettingHelpSection() {
   const cards = [
     {
-      image: '/images/lifestyle-goals.jpg',
-      alt: 'Woman working calmly on laptop focusing on her goals',
+      image: '/images/lifestyle-goals.png',
+      alt: 'Young woman studying calmly at her desk with a laptop and notebook',
       title: 'Focus on your goals',
     },
     {
-      image: '/images/lifestyle-connections.jpg',
-      alt: 'Mother and daughter cooking together with smiles in kitchen',
+      image: '/images/lifestyle-connections.png',
+      alt: 'Family walking together along a leafy neighbourhood street',
       title: 'Stronger connections',
     },
     {
-      image: '/images/lifestyle-moments.jpg',
-      alt: 'Couple walking together happily outdoors in sunlight',
+      image: '/images/lifestyle-moments.png',
+      alt: 'Family enjoying a board game together at home',
       title: 'More moments that matter',
     },
   ];
@@ -35,9 +35,9 @@ export default function CanxiolGettingHelpSection() {
 
           <div className="col-12 col-lg-6">
             <p className="cx-help-desc">
-              People with anxiety are multitasking housewives, busy partners, ageing
-              parents, demanding friends working professionals. With the right support, a
-              more balanced everyday life is possible.
+              Anxiety affects people from all walks of life &ndash; working professionals,
+              caregivers, students &amp; busy partners. With the medical advice, a balanced
+              everyday life is possible.
             </p>
           </div>
         </div>

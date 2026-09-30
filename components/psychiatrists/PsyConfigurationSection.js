@@ -7,6 +7,10 @@ export default function PsyConfigurationSection() {
       <div className="container">
         <div className="row align-items-center g-4">
           <div className="col-12 col-lg-5">
+            <span className="cx-psy-teal-label cx-psy-eyebrow">PACKAGING SPECIFICATIONS</span>
+            <h2 className="cx-psy-h2 cx-psy-config-h2">Pack Presentation</h2>
+            <p className="cx-psy-config-lead">Canxiol is available in two pack configurations:</p>
+
             <div className="cx-psy-config-options">
               <div>
                 <span className="cx-psy-teal-label">CONFIGURATION 01</span>
@@ -26,23 +30,14 @@ export default function PsyConfigurationSection() {
           </div>
 
           <div className="col-12 col-lg-7">
-            <div className="cx-psy-config-packs">
-              <div className="cx-psy-config-pack">
-                <Image
-                  src={PSY_IMAGES.pack14}
-                  alt="Canxiol 14 mL pack and bottle"
-                  fill
-                  sizes="(max-width: 991px) 50vw, 30vw"
-                />
-              </div>
-              <div className="cx-psy-config-pack">
-                <Image
-                  src={PSY_IMAGES.pack28}
-                  alt="Canxiol 28 mL pack and bottle"
-                  fill
-                  sizes="(max-width: 991px) 50vw, 30vw"
-                />
-              </div>
+            {/* Both packs in one image: 14 mL in front, 28 mL behind */}
+            <div className="cx-psy-config-pack">
+              <Image
+                src={PSY_IMAGES.packs}
+                alt="Canxiol 14 mL and 28 mL packs with their bottles"
+                fill
+                sizes="(max-width: 991px) 100vw, 58vw"
+              />
             </div>
           </div>
         </div>

@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 const pkRows = [
   ['Cmax (ng/mL)', '229.338', '306.108'],
   ['Tmax (h)', '0.994', '2.738'],
@@ -5,43 +7,30 @@ const pkRows = [
   ['T1/2 (h)', '3.571', '6.938'],
 ];
 
-const iconProps = {
-  width: 20, height: 20, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor',
-  strokeWidth: 1.6, strokeLinecap: 'round', strokeLinejoin: 'round', xmlns: 'http://www.w3.org/2000/svg',
-};
-
 const adme = [
   {
     label: 'DISTRIBUTION',
     title: 'Volume Profile',
     desc: 'The volume of distribution of Canxiol® in healthy volunteers in fed and fasting conditions is about 1846 L and 2884 L respectively.',
-    icon: (
-      <svg {...iconProps}><rect x="3" y="5" width="6" height="14" rx="1" /><rect x="15" y="5" width="6" height="14" rx="1" /><path d="M9 12h6M12 9v6" /></svg>
-    ),
+    icon: { src: '/images/DISTRIBUTION.png', width: 116, height: 71 },
   },
   {
     label: 'METABOLISM',
     title: 'Hepatic Pathways',
     desc: 'Cannabidiol is metabolized in the liver and the intestine by CYP2C19 and CYP3A4 enzymes, and 5′-diphosphoglucuronosyltransferase (UGT) UGT1A7, UGT1A9, and UGT2B7 isoforms. Converted to major metabolites 7-Hydroxy Cannabidiol and 7-carboxy Cannabidiol.',
-    icon: (
-      <svg {...iconProps}><circle cx="12" cy="12" r="2.5" /><circle cx="5" cy="5" r="2" /><circle cx="19" cy="5" r="2" /><circle cx="5" cy="19" r="2" /><circle cx="19" cy="19" r="2" /><path d="M6.5 6.5l3.7 3.7M17.5 6.5l-3.7 3.7M6.5 17.5l3.7-3.7M17.5 17.5l-3.7-3.7" /></svg>
-    ),
+    icon: { src: '/images/METABOLISM.png', width: 100, height: 100 },
   },
   {
     label: 'ELIMINATION',
     title: 'Clearance & Half-life',
     desc: 'The single-dose half-life of Canxiol® in fasted condition is about 3.5h and in fed condition is about 7h.',
-    icon: (
-      <svg {...iconProps}><rect x="4" y="3" width="13" height="18" rx="1.5" /><path d="M8 3v2h5V3M7.5 10h6M7.5 14h4" /><circle cx="17.5" cy="17.5" r="3" /><path d="M17.5 16v1.5l1 1" /></svg>
-    ),
+    icon: { src: '/images/ELIMINATION.png', width: 104, height: 104 },
   },
   {
     label: 'EXCRETION',
     title: 'Renal Clearance',
     desc: 'Cannabidiol and its metabolites are mostly excreted via the kidneys.',
-    icon: (
-      <svg {...iconProps}><path d="M9 4C6 4 4 7 4 11s2 7 5 7c1.5 0 2-1.5 2-3v-2c0-1.5-2-2-2-4s1-3 1-3-0-2-1-2z" /><path d="M15 4c3 0 5 3 5 7s-2 7-5 7c-1.5 0-2-1.5-2-3v-2c0-1.5 2-2 2-4s-1-3-1-3 0-2 1-2z" /></svg>
-    ),
+    icon: { src: '/images/EXCRETION.png', width: 120, height: 120 },
   },
 ];
 
@@ -91,7 +80,14 @@ export default function PsyPharmacokineticsSection() {
             <div key={a.label} className="cx-psy-adme-card">
               <div className="cx-psy-adme-head">
                 <span className="cx-psy-teal-label cx-psy-adme-label">{a.label}</span>
-                <span className="cx-psy-adme-icon">{a.icon}</span>
+                <Image
+                  src={a.icon.src}
+                  alt=""
+                  aria-hidden="true"
+                  width={a.icon.width}
+                  height={a.icon.height}
+                  className="cx-psy-adme-icon"
+                />
               </div>
               <h4 className="cx-psy-adme-title">{a.title}</h4>
               <p>{a.desc}</p>

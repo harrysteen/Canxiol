@@ -20,7 +20,7 @@ export default function CanxiolAnxietySection() {
 
                 <p className="cx-anxiety-desc">
                   Anxiety can influence mood, sleep, concentration, relationships
-                  and everyday functioning. For millions living with anxiety, finding
+                  and day-to-day functioning. For millions living with anxiety, finding
                   an effective and well-tolerated approach to care remains an
                   important need.
                 </p>
@@ -43,8 +43,8 @@ export default function CanxiolAnxietySection() {
               <div className="cx-anxiety-right">
                 <div className="cx-anxiety-img-box">
                   <Image
-                    src="/images/anxiety-lifestyle.jpg"
-                    alt="Woman sitting comfortably looking thoughtfully out the window"
+                    src="/images/anxiety-lifestyle.png"
+                    alt="Woman smiling calmly while stretching her arm on a leafy city walkway"
                     fill
                     sizes="(max-width: 991px) 100vw, 50vw"
                     style={{ objectFit: 'cover', objectPosition: 'center 30%' }}

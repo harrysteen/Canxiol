@@ -3,6 +3,12 @@ import Image from 'next/image';
 import AnimatedGradientBg from '../AnimatedGradientBg';
 
 export default function AnxietyHero({
+  id       = 'what-is-anxiety',
+  title    = 'What is anxiety?',
+  subtitle = null,
+  text     = 'Anxiety disorders are common mental health conditions characterized by excessive fear and anxiety, along with related behavioral disturbances. While occasional anxiety is a normal part of life, anxiety disorders are more persistent, harder to control, and can affect relationships, work, and overall well-being.',
+  imageSrc = '/images/what is anxity.png',
+  imageAlt = 'Calm, smiling woman holding a bouquet of flowers',
   // Shader controls (same defaults as the home hero)
   gradientSpeed      = 0.5,
   gradientDirection  = 0,
@@ -10,7 +16,7 @@ export default function AnxietyHero({
   gradientScale      = 1.5,
 }) {
   return (
-    <section id="what-is-anxiety" className="cx-anx-hero">
+    <section id={id} className="cx-anx-hero">
       {/* Animated WebGL / WebGPU gradient background */}
       <AnimatedGradientBg
         speed={gradientSpeed}
@@ -26,21 +32,17 @@ export default function AnxietyHero({
         <div className="row cx-anx-hero-row">
           {/* Left Column: Headline and intro */}
           <div className="col-12 col-lg-6 cx-anx-hero-text">
-            <h1 className="cx-anx-hero-h1">What is anxiety?</h1>
-            <p className="cx-anx-hero-p">
-              Anxiety disorders are common mental health conditions characterized by excessive
-              fear and anxiety, along with related behavioral disturbances. While occasional
-              anxiety is a normal part of life, anxiety disorders are more persistent, harder to
-              control, and can affect relationships, work, and overall well-being.
-            </p>
+            <h1 className="cx-anx-hero-h1">{title}</h1>
+            {subtitle && <p className="cx-anx-hero-sub">{subtitle}</p>}
+            <p className="cx-anx-hero-p">{text}</p>
           </div>
 
-          {/* Right Column: Woman holding flowers */}
+          {/* Right Column: Hero photo */}
           <div className="col-12 col-lg-6 cx-anx-hero-img-col">
             <div className="cx-anx-hero-img">
               <Image
-                src="/images/what is anxity.png"
-                alt="Calm, smiling woman holding a bouquet of flowers"
+                src={imageSrc}
+                alt={imageAlt}
                 fill
                 priority
                 sizes="(max-width: 991px) 100vw, 50vw"

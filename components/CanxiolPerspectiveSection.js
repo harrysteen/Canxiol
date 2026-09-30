@@ -8,12 +8,14 @@ export default function CanxiolPerspectiveSection() {
       alt: 'Canxiol 14 mL bottle and packaging',
       label: '14 mL bottle',
       labelColor: '#EA6C04',
+      size: 'is-14ml',
     },
     {
       image: '/images/28ml-bottle.png',
       alt: 'Canxiol 28 mL bottle and packaging',
       label: '28 mL bottle',
       labelColor: '#E5045C',
+      size: 'is-28ml',
     },
   ];
 
@@ -28,17 +30,17 @@ export default function CanxiolPerspectiveSection() {
           </h2>
         </div>
 
-        {/* Two bottle images side by side */}
-        <div className="row justify-content-center cx-bottles-row">
+        {/* Two packs side by side, bottoms aligned; the 14 mL pack renders smaller than the 28 mL */}
+        <div className="cx-bottles-row">
           {bottles.map((bottle, idx) => (
-            <div key={idx} className="col-12 col-sm-6 text-center">
+            <div key={idx} className={`cx-bottle-col ${bottle.size}`}>
               <div className="cx-bottle-card">
                 <div className="cx-bottle-img-wrap">
                   <Image
                     src={bottle.image}
                     alt={bottle.alt}
                     fill
-                    sizes="(max-width: 576px) 100vw, 50vw"
+                    sizes="(max-width: 575px) 100vw, 45vw"
                     className="cx-bottle-img"
                     priority={idx === 0}
                   />

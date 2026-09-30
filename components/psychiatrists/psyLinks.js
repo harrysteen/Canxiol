@@ -3,12 +3,20 @@
 export const PSY_DOWNLOADS = {
   clinicalPoster: '#',
   pil: '#',
+  // Shown in this order on the page (alphabetical, as in the design)
   pilByLanguage: {
+    Assamese: '#',
     Bengali: '#',
     English: '#',
+    Gujarati: '#',
     Hindi: '#',
+    Kannada: '#',
+    Malayalam: '#',
     Marathi: '#',
-    Telugu: '#',
+    Odia: '#',
+    Punjabi: '#',
     Tamil: '#',
+    Telugu: '#',
+    Urdu: '#',
   },
 };

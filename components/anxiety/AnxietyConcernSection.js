@@ -1,12 +1,14 @@
 import Image from 'next/image';
 
-// TODO: swap for the walking-man photo once it is added to /public/images
-const CONCERN_IMAGE = '/images/anxiety-lifestyle.jpg';
+const CONCERN_IMAGE = '/images/image 1 in what is anxity page.png';
 
 export default function AnxietyConcernSection() {
   return (
     <section className="cx-anx-concern">
       <div className="container">
+        <span className="cx-anx-eyebrow cx-anx-concern-eyebrow">Understanding anxiety</span>
+        <h2 className="cx-anx-h2 cx-anx-concern-h2">More common than you<br />may think</h2>
+
         <div className="row cx-anx-concern-row">
           {/* Left Column: Photo */}
           <div className="col-12 col-lg-6">
