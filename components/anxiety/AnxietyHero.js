@@ -1,4 +1,5 @@
 'use client';
+import { useState } from 'react';
 import Image from 'next/image';
 import AnimatedGradientBg from '../AnimatedGradientBg';
 
@@ -15,6 +16,9 @@ export default function AnxietyHero({
   gradientDistortion = 0.15,
   gradientScale      = 1.5,
 }) {
+  // The photo's real proportions; on phones the frame takes this shape so it hugs the image
+  const [imgRatio, setImgRatio] = useState(null);
+
   return (
     <section id={id} className="cx-anx-hero">
       {/* Animated WebGL / WebGPU gradient background */}
@@ -39,12 +43,19 @@ export default function AnxietyHero({
 
           {/* Right Column: Hero photo */}
           <div className="col-12 col-lg-6 cx-anx-hero-img-col">
-            <div className="cx-anx-hero-img">
+            <div
+              className="cx-anx-hero-img"
+              style={imgRatio ? { '--cx-anx-img-ratio': imgRatio } : undefined}
+            >
               <Image
                 src={imageSrc}
                 alt={imageAlt}
                 fill
                 priority
+                onLoad={(e) => {
+                  const { naturalWidth: w, naturalHeight: h } = e.currentTarget;
+                  if (w && h) setImgRatio(`${w} / ${h}`);
+                }}
                 sizes="(max-width: 991px) 100vw, 50vw"
               />
             </div>

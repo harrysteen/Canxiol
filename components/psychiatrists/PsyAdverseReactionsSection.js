@@ -1,3 +1,5 @@
+import PsyTableScroll from './PsyTableScroll';
+
 // Rows: [label, canxiol, placebo]. Category rows have no leading bullet.
 const groups = [
   { category: ['Gastrointestinal disorders', '17 (19.1)', '6 (6.7)'], items: [
@@ -49,7 +51,7 @@ export default function PsyAdverseReactionsSection() {
 
         <div className="cx-psy-table-card">
           <h3 className="cx-psy-table-caption">Adverse Reactions in patients treated with Canxiol® in clinical trial</h3>
-          <div className="cx-psy-table-scroll">
+          <PsyTableScroll>
             <table className="cx-psy-table">
               <thead>
                 <tr>
@@ -69,7 +71,7 @@ export default function PsyAdverseReactionsSection() {
                 ))}
               </tbody>
             </table>
-          </div>
+          </PsyTableScroll>
           <p className="cx-psy-table-note">n: Number of patients, %: Percentage of patients</p>
         </div>
 

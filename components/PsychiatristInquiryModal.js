@@ -65,7 +65,7 @@ export default function PsychiatristInquiryModal({ open, onClose }) {
           <div className="col-12 col-lg-6">
             <div className="cx-inq-intro">
               <h2 id="cx-inq-title" className="cx-inq-h2">
-                For<br />Psychiatrist?
+                For{' '}<br />Psychiatrist?
               </h2>
               <p className="cx-inq-lead">
                 Enter the information on this portal (Name, Mail ID, City, Country) and leave the

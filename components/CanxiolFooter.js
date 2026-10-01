@@ -51,7 +51,7 @@ export default function CanxiolFooter() {
           </div>
 
           {/* Column 4: ABOUT LEIUTIS */}
-          <div className="col-12 col-md-4 col-lg-3">
+          <div className="col-6 col-md-4 col-lg-3">
             <h4 className="cx-footer-h4">ABOUT LEIUTIS</h4>
             <ul className="cx-footer-links">
               <li><Link href="#about-us">About us</Link></li>

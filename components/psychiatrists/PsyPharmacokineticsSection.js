@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import PsyTableScroll from './PsyTableScroll';
 
 const pkRows = [
   ['Cmax (ng/mL)', '229.338', '306.108'],
@@ -48,7 +49,7 @@ export default function PsyPharmacokineticsSection() {
 
         <div className="cx-psy-table-card">
           <h3 className="cx-psy-table-caption">Single Dose Pharmacokinetics of CANXIOL® (under fasting and fed conditions)</h3>
-          <div className="cx-psy-table-scroll">
+          <PsyTableScroll>
             <table className="cx-psy-table cx-psy-table-pk">
               <thead>
                 <tr>
@@ -68,7 +69,7 @@ export default function PsyPharmacokineticsSection() {
                 ))}
               </tbody>
             </table>
-          </div>
+          </PsyTableScroll>
           <p className="cx-psy-table-note cx-psy-table-note-strong">
             Meal Effect: Coadministration of Canxiol® with a high-fat/high-calorie meal increased Cmax
             by about 1.3 folds, AUC by about 3 folds compared with the fasted state in healthy volunteers.

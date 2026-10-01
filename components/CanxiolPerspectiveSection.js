@@ -1,23 +1,17 @@
 'use client';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useOpenPsychiatristInquiry } from './PsychiatristInquiryProvider';
 
-export default function CanxiolPerspectiveSection() {
-  const bottles = [
-    {
-      image: '/images/14ml-bottle.png',
-      alt: 'Canxiol 14 mL bottle and packaging',
-      label: '14 mL bottle',
-      labelColor: '#EA6C04',
-      size: 'is-14ml',
-    },
-    {
-      image: '/images/28ml-bottle.png',
-      alt: 'Canxiol 28 mL bottle and packaging',
-      label: '28 mL bottle',
-      labelColor: '#E5045C',
-      size: 'is-28ml',
-    },
-  ];
+// Both packs come from a single image; each label sits under its pack.
+// `left` is the pack's horizontal centre as a percentage of the image width.
+const labels = [
+  { text: '14 mL bottle', color: '#EA6C04', left: '25%' },
+  { text: '28 mL bottle', color: '#E5045C', left: '61%' },
+];
+
+export default function CanxiolPerspectiveSection({ showButtons = false }) {
+  const openInquiry = useOpenPsychiatristInquiry();
 
   return (
     <section className="cx-perspective-section">
@@ -28,29 +22,55 @@ export default function CanxiolPerspectiveSection() {
             A new perspective<br />
             on anxiety care.
           </h2>
+
+          {showButtons && (
+            <div className="cx-hero-btns cx-perspective-btns">
+              <Link href="/canxiol" className="cx-btn-discover">
+                <span>EXPLORE CANXIOL</span>
+                <Image
+                  src="/images/contact-us-arrow.png"
+                  alt=""
+                  width={14}
+                  height={14}
+                  className="cx-btn-discover-arrow"
+                />
+              </Link>
+              <Link href="#psychiatrists" className="cx-btn-hero-psychiatrists" onClick={openInquiry}>
+                <span>FOR PSYCHIATRISTS</span>
+                <Image
+                  src="/images/for-psychiatrists-arrow.png"
+                  alt=""
+                  width={14}
+                  height={14}
+                  className="cx-hero-arrow-icon"
+                />
+              </Link>
+            </div>
+          )}
         </div>
 
-        {/* Two packs side by side, bottoms aligned; the 14 mL pack renders smaller than the 28 mL */}
-        <div className="cx-bottles-row">
-          {bottles.map((bottle, idx) => (
-            <div key={idx} className={`cx-bottle-col ${bottle.size}`}>
-              <div className="cx-bottle-card">
-                <div className="cx-bottle-img-wrap">
-                  <Image
-                    src={bottle.image}
-                    alt={bottle.alt}
-                    fill
-                    sizes="(max-width: 575px) 100vw, 45vw"
-                    className="cx-bottle-img"
-                    priority={idx === 0}
-                  />
-                </div>
-                <p className="cx-bottle-label" style={{ color: bottle.labelColor }}>
-                  {bottle.label}
-                </p>
-              </div>
-            </div>
-          ))}
+        <div className="cx-perspective-packs">
+          <div className="cx-perspective-img-wrap">
+            <Image
+              src="/images/A-new-perspective-on-anxiety-care.png"
+              alt="Canxiol 14 mL and 28 mL bottles with their packaging"
+              fill
+              sizes="(max-width: 1100px) 100vw, 1040px"
+              className="cx-perspective-img"
+            />
+          </div>
+
+          <div className="cx-perspective-labels">
+            {labels.map((label) => (
+              <p
+                key={label.text}
+                className="cx-bottle-label"
+                style={{ color: label.color, left: label.left }}
+              >
+                {label.text}
+              </p>
+            ))}
+          </div>
         </div>
       </div>
     </section>

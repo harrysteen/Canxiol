@@ -8,6 +8,7 @@ export default function CanxiolNavbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const openInquiry = useOpenPsychiatristInquiry();
   const [resourcesOpen, setResourcesOpen] = useState(false);
+  const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -38,7 +39,7 @@ export default function CanxiolNavbar() {
             {/* Desktop Navigation Links */}
             <ul className="cx-links">
               <li><Link href="/anxiety">Anxiety and its effects</Link></li>
-              <li><Link href="#canxiol">Canxiol</Link></li>
+              <li><Link href="/canxiol">Canxiol</Link></li>
               <li>
                 <button
                   className="cx-link-btn"
@@ -72,7 +73,7 @@ export default function CanxiolNavbar() {
                 )}
               </li>
               <li><Link href="#pharmacovigilance">Pharmacovigilance</Link></li>
-              <li><Link href="#about">About Leiutis</Link></li>
+              <li><Link href="/about-leiutis">About Leiutis</Link></li>
             </ul>
 
             {/* Desktop CTA Buttons */}
@@ -114,10 +115,41 @@ export default function CanxiolNavbar() {
         <div className={`cx-drawer ${mobileMenuOpen ? 'open' : ''}`}>
           <div className="container">
             <Link href="/anxiety" onClick={() => setMobileMenuOpen(false)}>Anxiety and its effects</Link>
-            <Link href="#canxiol" onClick={() => setMobileMenuOpen(false)}>Canxiol</Link>
-            <Link href="#patient-resources" onClick={() => setMobileMenuOpen(false)}>Resources</Link>
+            <Link href="/canxiol" onClick={() => setMobileMenuOpen(false)}>Canxiol</Link>
+            {/* Resources expands in place to show its sub-links */}
+            <button
+              type="button"
+              className="cx-drawer-toggle"
+              aria-expanded={mobileResourcesOpen}
+              onClick={() => setMobileResourcesOpen(!mobileResourcesOpen)}
+            >
+              <span>Resources</span>
+              <svg
+                width="12"
+                height="7"
+                viewBox="0 0 10 6"
+                fill="none"
+                className={`cx-chevron ${mobileResourcesOpen ? 'open' : ''}`}
+              >
+                <path
+                  d="M1 1L5 5L9 1"
+                  stroke="currentColor"
+                  strokeWidth="1.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+            {mobileResourcesOpen && (
+              <div className="cx-drawer-sub">
+                <Link href="#patient-resources" onClick={() => setMobileMenuOpen(false)}>Patient Resources</Link>
+                <Link href="#clinical-guidelines" onClick={() => setMobileMenuOpen(false)}>Clinical Guidelines</Link>
+                <Link href="#faqs" onClick={() => setMobileMenuOpen(false)}>FAQs</Link>
+                <Link href="#brochure" onClick={() => setMobileMenuOpen(false)}>Download Brochure</Link>
+              </div>
+            )}
             <Link href="#pharmacovigilance" onClick={() => setMobileMenuOpen(false)}>Pharmacovigilance</Link>
-            <Link href="#about" onClick={() => setMobileMenuOpen(false)}>About Leiutis</Link>
+            <Link href="/about-leiutis" onClick={() => setMobileMenuOpen(false)}>About Leiutis</Link>
             <div className="cx-drawer-ctas">
               <Link href="#psychiatrists" className="cx-btn-psychiatrists" style={{ width: '100%' }} onClick={(e) => { setMobileMenuOpen(false); openInquiry(e); }}>
                 <span>FOR PSYCHIATRISTS</span>

@@ -51,7 +51,7 @@ export default function CanxiolInfoBar() {
             <div className="cx-feat-col cx-feat-col-3">
               <h4 className="cx-feat-title">Prescribing Information Leaflet</h4>
               <Link href="#download-leaflet" className="cx-download-link">
-                <span>Download Official Document</span>
+                <span>Download <span className="cx-dl-official">Official </span>Document</span>
                 <svg width="13" height="13" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M7 1.75V9.75M7 9.75L3.75 6.5M7 9.75L10.25 6.5M2 12.25H12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>

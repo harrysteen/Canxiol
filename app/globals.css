@@ -1440,7 +1440,8 @@ button {
   flex-direction: column;
   background: #ffffff;
   border-top: 1px solid var(--cx-border);
-  padding: 12px 20px 24px;
+  /* Side gutter comes from the inner .container */
+  padding: 12px 0 24px;
   animation: slideDown 0.25s ease;
 }
 
@@ -1458,6 +1459,12 @@ button {
 
 .cx-drawer.open {
   display: flex;
+}
+
+/* Links live inside .container, so that's the column that stacks them */
+.cx-drawer > .container {
+  display: flex;
+  flex-direction: column;
 }
 
 .cx-drawer a:not(.cx-btn-contact):not(.cx-btn-psychiatrists),
@@ -1481,6 +1488,34 @@ button {
   padding-left: 6px;
 }
 
+/* Resources row: chevron sits right beside the label */
+.cx-drawer .cx-drawer-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  width: 100%;
+}
+
+.cx-drawer-toggle .cx-chevron {
+  color: #68635F;
+}
+
+/* Resources sub-links, indented under their parent */
+.cx-drawer .cx-drawer-sub {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid var(--cx-border-light);
+  padding: 4px 0 8px 16px;
+}
+
+.cx-drawer .cx-drawer-sub a:not(.cx-btn-contact):not(.cx-btn-psychiatrists) {
+  font-size: 0.88rem;
+  color: #68635F;
+  border-bottom: none;
+  padding: 9px 0;
+}
+
 .cx-drawer-ctas {
   display: flex;
   flex-direction: column;
@@ -1501,6 +1536,30 @@ button {
 
   .cx-logo-img {
     height: 46px;
+  }
+}
+
+/* Small laptops: full nav still shows, so tighten spacing to keep both CTAs on screen */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .cx-nav-inner {
+    gap: 1rem;
+  }
+
+  .cx-links {
+    gap: 1.1rem;
+  }
+
+  .cx-logo-img {
+    height: 48px;
+  }
+
+  .cx-ctas {
+    gap: 8px;
+  }
+
+  .cx-btn-psychiatrists {
+    width: auto;
+    padding: 0 12px;
   }
 }
 
@@ -1668,7 +1727,7 @@ button {
 }
 
 .cx-btn-hero-psychiatrists {
-  width: 194px;
+  width: 186.02px;
   height: 44px;
   opacity: 1;
   border: 1.17px solid #471D41;
@@ -1676,7 +1735,7 @@ button {
   background: transparent;
   font-family: var(--font-outfit), 'Outfit', sans-serif;
   font-weight: 600;
-  font-size: 12.5px;
+  font-size: 11px;
   line-height: 100%;
   letter-spacing: 0.55px;
   text-align: center;
@@ -1751,13 +1810,15 @@ button {
 
 @media (max-width: 991.98px) {
   .cx-hero-main {
-    padding: 2rem 0 1rem;
+    padding: 2rem 0 0;
   }
 
+  /* No gap above the teal banner — the wrist tucks just behind it, as on desktop */
   .cx-img-wrapper {
     height: clamp(300px, 48vh, 440px);
     max-width: 100%;
     margin: 0 auto;
+    transform: translateY(12px);
   }
 
   .cx-img-wrapper img {
@@ -1931,6 +1992,9 @@ button {
   }
 }
 
+/* Tablet & mobile: all four items stay, in a tighter layout so the pinned bar stays short.
+   Tablet (768–991px): one row of four. Phones (<768px): a 2 × 2 grid —
+   notice | logo on top, tagline | leaflet below. */
 @media (max-width: 991.98px) {
   .cx-sticky-infobar {
     height: auto;
@@ -1938,24 +2002,120 @@ button {
     padding: 0;
   }
 
+  .cx-sticky-infobar .cx-feat-col {
+    min-height: 0;
+    padding: 8px 14px;
+  }
+
+  .cx-sticky-infobar .cx-feat-col-1 {
+    padding-left: 0;
+  }
+
+  .cx-sticky-infobar .cx-feat-col-4 {
+    padding-right: 0;
+  }
+
+  .cx-sticky-infobar .cx-feat-col:not(:last-child)::after {
+    height: 32px;
+  }
+
+  .cx-sticky-infobar .cx-prescribe-tag {
+    font-size: 11px;
+    line-height: 1.35;
+  }
+
+  .cx-sticky-infobar .cx-feat-title {
+    font-size: 12px;
+    line-height: 1.3;
+    margin-bottom: 2px;
+  }
+
+  .cx-sticky-infobar .cx-feat-desc {
+    font-size: 10.5px;
+    line-height: 1.35;
+    margin: 0;
+  }
+
+  .cx-sticky-infobar .cx-download-link {
+    font-size: 11px;
+    /* Don't stretch across the column — keeps the arrow next to the text */
+    align-self: flex-start;
+    white-space: nowrap;
+  }
+
+  /* The logo PNG has built-in whitespace; negative margins let it grow
+     without making the bar taller */
+  .cx-sticky-infobar .cx-feat-logo {
+    width: auto;
+    height: 58px;
+    aspect-ratio: auto;
+    margin: -10px 0;
+  }
+}
+
+/* Phones: one row — notice | leaflet | logo; the tagline is left to desktop & tablet */
+@media (max-width: 767.98px) {
+  /* Fixed logo column: an auto column lets the max-width:100% image collapse */
   .cx-infobar-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: auto 1fr 88px;
   }
 
-  .cx-feat-col {
-    padding: 14px 16px;
-    border-bottom: 1px solid #EFE6F2;
+  .cx-sticky-infobar .cx-feat-logo {
+    max-width: none;
   }
 
-  .cx-feat-col:not(:last-child)::after {
+  /* "Download Document" — drops "Official" so the link and arrow fit one line */
+  .cx-dl-official {
     display: none;
   }
 
-  .cx-feat-col:last-child {
-    border-bottom: none;
-    justify-content: flex-start;
-    align-items: flex-start;
+  .cx-sticky-infobar .cx-download-link {
+    white-space: nowrap;
   }
+
+  .cx-sticky-infobar .cx-feat-col-2 {
+    display: none;
+  }
+
+  .cx-sticky-infobar .cx-feat-col {
+    padding: 8px 10px;
+  }
+
+  .cx-sticky-infobar .cx-feat-col-1 {
+    padding-left: 0;
+  }
+
+  .cx-sticky-infobar .cx-feat-col-4 {
+    padding-right: 0;
+  }
+
+  .cx-sticky-infobar .cx-prescribe-tag {
+    font-size: 10px;
+  }
+
+  .cx-sticky-infobar .cx-feat-title {
+    font-size: 10.5px;
+  }
+
+  .cx-sticky-infobar .cx-download-link {
+    font-size: 9.5px;
+    gap: 4px;
+  }
+
+  .cx-sticky-infobar .cx-feat-logo {
+    height: 48px;
+    margin: -8px 0;
+  }
+}
+
+/* Very narrow phones (≤360px): a touch smaller so the items keep to their lines */
+@media (max-width: 359.98px) {
+  .cx-sticky-infobar .cx-prescribe-tag { font-size: 8.5px; }
+  .cx-sticky-infobar .cx-feat-title    { font-size: 9px; }
+  .cx-sticky-infobar .cx-download-link { font-size: 8.5px; }
+  .cx-sticky-infobar .cx-feat-col      { padding: 8px 7px; }
+  .cx-sticky-infobar .cx-feat-logo     { height: 40px; }
+  .cx-infobar-grid { grid-template-columns: auto 1fr 74px; }
 }
 
 .cx-prescribe-tag {
@@ -2788,9 +2948,23 @@ button {
     min-height: 440px;
   }
 
+  /* Stacked cards: separate them with a small gap instead of a shared backdrop */
+  .cx-know-portals {
+    background: transparent;
+  }
+
+  .cx-know-portals .row {
+    row-gap: 12px;
+  }
+
   .cx-portal-patient {
     border-right: none;
-    border-bottom: 1px solid rgba(71, 29, 65, 0.08);
+  }
+
+  /* Both portal buttons share one width so they read as a pair */
+  .cx-btn-portal-outline,
+  .cx-btn-portal-solid {
+    width: 210px;
   }
 
   .cx-portal-img-wrap {
@@ -3029,65 +3203,46 @@ button {
   margin-bottom: 0;
 }
 
+/* Optional CTA pair under the heading (About Leiutis) */
+.cx-perspective-btns {
+  justify-content: center;
+  margin: clamp(24px, 3.5vh, 36px) 0 0;
+}
+
+/* Both packs are one image; labels are absolutely placed under each pack */
+.cx-perspective-packs {
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
 .cx-perspective-img-wrap {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
-  max-width: 900px;
-  margin: 0 auto;
+  aspect-ratio: 4684 / 2032;
 }
 
 .cx-perspective-img {
   object-fit: contain;
 }
 
-.cx-bottles-row {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  gap: clamp(16px, 3vw, 48px);
-}
-
-/* 28 mL sets the size; 14 mL renders at ~88% so the pack variation reads as in the design */
-.cx-bottle-col {
-  flex: 0 1 auto;
-  text-align: center;
-}
-
-.cx-bottle-col.is-28ml {
-  width: clamp(280px, 38vw, 560px);
-}
-
-.cx-bottle-col.is-14ml {
-  width: clamp(246px, 33.4vw, 493px);
-}
-
-.cx-bottle-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.cx-bottle-img-wrap {
+.cx-perspective-labels {
   position: relative;
-  width: 100%;
-  aspect-ratio: 3 / 2;
-  margin: 0 auto;
-}
-
-.cx-bottle-img {
-  object-fit: contain;
+  height: clamp(28px, 3.4vw, 40px);
+  margin-top: clamp(4px, 1vw, 12px);
 }
 
 .cx-bottle-label {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  white-space: nowrap;
   font-family: 'Outfit', var(--font-heading), sans-serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 26.13px;
-  line-height: 34.84px;
+  font-size: clamp(15px, 1.9vw, 26px);
+  line-height: 1.33;
   letter-spacing: 0px;
-  margin-top: 20px;
-  margin-bottom: 0;
+  margin: 0;
 }
 
 
@@ -3242,7 +3397,13 @@ button {
 
   /* Stats */
   .cx-stat-num  { font-size: clamp(34px, 6vw, 48px); }
-  .cx-stat-item { padding: 16px 12px; }
+  .cx-stat-item { padding: 16px 12px; flex-direction: column; gap: 8px; text-align: center; }
+  .cx-stat-label { max-width: 190px; }
+
+  /* Know More → Blog are both white; drop the doubled gap between them */
+  .cx-know-portals { margin-bottom: 0; }
+  .cx-know-section:has(+ .cx-blog-section) { padding-bottom: 24px; }
+  .cx-know-section + .cx-blog-section { padding-top: 0; }
 
   /* Getting Help */
   .cx-help-h2  { font-size: clamp(28px, 5.5vw, 44px); letter-spacing: -0.8px; }
@@ -3259,7 +3420,6 @@ button {
 
   /* Perspective */
   .cx-perspective-h2 { font-size: clamp(30px, 6vw, 52px); letter-spacing: -1px; }
-  /* Bottles keep their 3:2 frame so the two packs stay bottom-aligned */
 
   /* Blog */
   .cx-blog-section-title { font-size: 26px; line-height: 36px; }
@@ -3268,6 +3428,12 @@ button {
   /* Footer */
   .cx-footer-top .col-12.col-lg-4 { margin-bottom: 16px; }
   .cx-footer-brand { gap: 16px; }
+  .cx-footer { padding: 48px 0 24px; }
+  .cx-footer-logo-img { width: 180px; }
+  .cx-footer-h4 { margin-bottom: 14px; }
+  .cx-footer-links { gap: 10px; }
+  .cx-footer-divider { margin: 32px 0 20px; }
+  .cx-footer-bottom { margin-top: 18px; padding-top: 0; }
 }
 
 /* ── MOBILE (≤767px) ── */
@@ -3279,21 +3445,19 @@ button {
   /* Hero */
   .cx-hero-wrapper { min-height: auto; }
   .cx-hero-h1 { font-size: clamp(28px, 8vw, 44px); }
-  .cx-hero-btns { flex-direction: column; align-items: stretch; gap: 10px; }
+  .cx-hero-btns { flex-direction: column; align-items: stretch; align-self: stretch; gap: 10px; }
   .cx-btn-discover, .cx-btn-hero-psychiatrists { width: 100%; justify-content: center; }
 
-  /* Infobar — collapse to stacked list */
-  .cx-sticky-infobar {
-    position: relative; /* prevent overlapping content on small screens */
-  }
-
-  /* Anxiety */
+  /* Anxiety — heading sits closer to the teal banner, image closer to the button */
+  .cx-anxiety-section { padding-top: 32px; }
+  .cx-anxiety-h2 { font-size: clamp(31px, 8.4vw, 44px); }
+  .cx-anxiety-left { margin-bottom: 0.5rem; }
   .cx-anxiety-img-box { height: clamp(220px, 60vw, 320px); }
   .cx-anxiety-desc { font-size: 14px; }
 
   /* Stats — stacked, left-aligned */
   .cx-stats-section { padding: 16px 0; }
-  .cx-stat-item { flex-direction: row; align-items: center; padding: 16px; }
+  .cx-stat-item { flex-direction: row; align-items: center; gap: 16px; padding: 16px; text-align: left; }
   .cx-stat-label { max-width: none; }
 
   /* Getting Help */
@@ -3313,18 +3477,15 @@ button {
   .cx-portal-card { min-height: 400px; }
   .cx-portal-content { padding: 24px 20px; }
   .cx-portal-img-wrap { width: 200px; height: 180px; }
+  .cx-portal-patient .cx-portal-img-wrap { width: 250px; height: 215px; }
 
   /* Perspective */
   .cx-perspective-section { padding: clamp(40px, 6vh, 60px) 0; }
   .cx-perspective-h2 { font-size: clamp(26px, 7vw, 40px); }
-  /* Stack the packs on phones; 14 mL stays a touch smaller than 28 mL */
-  .cx-bottles-row { flex-direction: column; align-items: center; gap: 28px; }
-  .cx-bottle-col.is-28ml { width: min(100%, 420px); }
-  .cx-bottle-col.is-14ml { width: min(88%, 370px); }
-  .cx-bottle-label { font-size: 20px; line-height: 28px; margin-top: 12px; }
 
   /* Blog */
   .cx-blog-section { padding: clamp(40px, 6vh, 60px) 0; }
+  .cx-know-section + .cx-blog-section { padding-top: 0; }
   .cx-blog-section-title { font-size: 22px; line-height: 30px; }
   .cx-blog-view-more { width: auto; padding: 0 16px; }
   .cx-blog-title { font-size: 1.05rem; }
@@ -3332,16 +3493,27 @@ button {
   .cx-blog-grid .col-12:last-child { margin-bottom: 0; }
 
   /* Footer */
-  .cx-footer { padding: clamp(40px, 6vh, 64px) 0 24px; }
-  .cx-footer-top { gap: 24px; }
-  .cx-footer-links { gap: 10px; }
-  .cx-footer-compliance .col-12:last-child { margin-top: 8px; }
-  .cx-footer-legal-links { justify-content: flex-start; }
+  /* Footer — compact: link groups sit two-up instead of stacking full width */
+  .cx-footer { padding: 36px 0 20px; }
+  .cx-footer-top { --cx-gutter-y: 1.75rem; }
+  .cx-footer-top .col-12.col-lg-4 { margin-bottom: 0; }
+  .cx-footer-brand { gap: 10px; }
+  .cx-footer-logo-img { width: 150px; }
+  .cx-footer-tagline { font-size: 13px; }
+  .cx-footer-h4 { margin-bottom: 12px; line-height: 1.4; }
+  .cx-footer-links { gap: 9px; }
+  .cx-footer-divider { margin: 28px 0 18px; }
+  .cx-footer-compliance { --cx-gutter-y: 0.75rem; }
+  .cx-footer-legal-links { justify-content: flex-start; gap: 8px; }
+  .cx-footer-bottom { margin-top: 16px; padding-top: 0; --cx-gutter-y: 0.25rem; }
   .cx-footer-attribution { text-align: left; }
 }
 
 /* ── SMALL MOBILE (≤575px) ── */
 @media (max-width: 575.98px) {
+
+  /* 16px side gutter — matches the .g-4 rows' -1rem margins so nothing pokes past the viewport */
+  .container { padding-left: 16px; padding-right: 16px; }
 
   /* Teal banner wraps to two lines */
   .cx-teal-banner p { font-size: 12px; }
@@ -3373,10 +3545,12 @@ button {
   .cx-portal-desc  { font-size: 13px; }
   .cx-portal-img-wrap { width: 180px; height: 160px; }
   .cx-portal-card  { min-height: 360px; }
+  /* Patient photo a little larger; its card grows to keep it clear of the button */
+  .cx-portal-patient { min-height: 400px; }
+  .cx-portal-patient .cx-portal-img-wrap { width: 235px; height: 205px; }
 
   /* Perspective */
   .cx-perspective-h2  { font-size: clamp(22px, 8vw, 34px); letter-spacing: -0.5px; }
-  .cx-bottle-label    { font-size: 18px; }
 
   /* Blog */
   .cx-blog-section-title { font-size: 20px; line-height: 28px; }
@@ -3604,18 +3778,110 @@ button {
   }
 }
 
-@media (max-width: 575.98px) {
+/* Phones: compact single-column popup — title on one line, the two facts side by side
+   between rules, and the form sitting flat on the dialog instead of in a white card */
+@media (max-width: 767.98px) {
   .cx-inq-overlay {
     padding: 12px;
   }
 
   .cx-inq-dialog {
     max-height: calc(100vh - 24px);
+    padding: 28px 22px 24px;
+    border-radius: 2px;
   }
 
-  .cx-inq-facts,
+  .cx-inq-close {
+    top: 8px;
+    right: 8px;
+  }
+
+  .cx-inq-intro {
+    margin-bottom: 0;
+  }
+
+  .cx-inq-h2 {
+    font-size: 24px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .cx-inq-h2 br {
+    display: none;
+  }
+
+  .cx-inq-lead {
+    font-size: 11.5px;
+    line-height: 1.6;
+    padding-bottom: 0;
+    margin-bottom: 12px;
+    border-bottom: none;
+  }
+
+  .cx-inq-facts {
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding: 12px 0;
+    border-top: 1px solid #e3d9e6;
+    border-bottom: 1px solid #e3d9e6;
+    margin-bottom: 18px;
+  }
+
+  .cx-inq-facts > div:first-child {
+    padding-right: 12px;
+    border-right: 1px solid #e3d9e6;
+  }
+
+  .cx-inq-facts > div:last-child {
+    padding-left: 12px;
+  }
+
+  .cx-inq-fact-title {
+    font-size: 9.5px;
+  }
+
+  .cx-inq-fact-desc {
+    font-size: 9.5px;
+    margin: 0;
+  }
+
+  .cx-inq-card {
+    padding: 0;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .cx-inq-card-title {
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+
+  .cx-inq-card-sub {
+    font-size: 11px;
+    margin-bottom: 16px;
+  }
+
   .cx-inq-grid {
     grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+
+  .cx-inq-label {
+    font-size: 9.5px;
+  }
+
+  .cx-inq-field input,
+  .cx-inq-field textarea {
+    background: rgba(255, 255, 255, 0.55);
+    border-color: #ebe2ec;
+    font-size: 12.5px;
+    padding: 10px 12px;
+  }
+
+  .cx-inq-submit {
+    padding: 14px 20px;
   }
 }
 
@@ -3993,24 +4259,6 @@ button {
   color: #3d2f47;
 }
 
-.cx-psy-video {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  aspect-ratio: 16 / 6;
-  min-height: 200px;
-  margin-top: clamp(48px, 6vw, 72px);
-  background: #f8edf5;
-  text-align: center;
-  padding: 16px;
-}
-
-.cx-psy-video span {
-  font-family: var(--font-outfit), 'Outfit', sans-serif;
-  font-size: clamp(18px, 2vw, 24px);
-  color: #2a0d3a;
-}
-
 .cx-psy-important {
   margin-top: 32px;
   padding: 18px 24px 20px;
@@ -4043,13 +4291,19 @@ button {
     position: relative;
     width: 100%;
     height: clamp(240px, 55vw, 420px);
-    margin-top: 32px;
+    margin-top: 24px;
   }
 
+  /* Photo sits on the section's bottom edge so Pack Presentation follows straight on */
   .cx-psy-whatis {
     display: flex;
     flex-direction: column-reverse;
     padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .cx-psy-whatis + .cx-psy-config {
+    padding-top: 28px;
   }
 
   .cx-psy-whatis-content {
@@ -4078,10 +4332,6 @@ button {
 
   .cx-psy-partners {
     max-width: none;
-  }
-
-  .cx-psy-video {
-    aspect-ratio: 16 / 9;
   }
 }
 
@@ -4135,6 +4385,71 @@ button {
 
 .cx-psy-table-scroll {
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Scroll cues for wide tables (PsyTableScroll) — only rendered while the table overflows */
+.cx-psy-table-scroller {
+  position: relative;
+}
+
+.cx-psy-table-hint {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  padding: 8px 16px 6px;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  color: #1c8a8f;
+  transition: opacity 0.25s ease;
+}
+
+.cx-psy-table-hint svg {
+  animation: cx-psy-nudge 1.4s ease-in-out infinite;
+}
+
+@keyframes cx-psy-nudge {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
+}
+
+/* Scroll line: the thumb's width/position mirror the visible slice of the table */
+.cx-psy-table-track {
+  position: relative;
+  height: 3px;
+  margin: 0 16px 8px;
+  background: #ecdcea;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.cx-psy-table-track span {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: #471D41;
+  border-radius: 2px;
+}
+
+/* Right-edge fade: more columns sit off-screen */
+.cx-psy-table-scroller.is-overflowing::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 36px;
+  height: calc(100% - 41px);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.95));
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.cx-psy-table-scroller.is-at-end::after,
+.cx-psy-table-scroller.is-at-end .cx-psy-table-hint {
+  opacity: 0;
 }
 
 .cx-psy-table {
@@ -4994,8 +5309,10 @@ button {
     margin-top: 1.5rem;
   }
 
+  /* Frame follows the photo's own shape, so there's no empty band above it */
   .cx-anx-hero-img {
-    height: clamp(300px, 50vh, 440px);
+    height: auto;
+    aspect-ratio: var(--cx-anx-img-ratio, 4 / 3);
     max-width: 100%;
     margin: 0 auto;
   }
@@ -5271,6 +5588,13 @@ button {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  /* Wider cards here, so the long "~2591 → ~5792" figure matches the other values */
+  .cx-anx-india-value.is-small {
+    font-size: clamp(30px, 2.8vw, 36px);
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
   .cx-anx-global-grid {
     row-gap: 28px;
   }
@@ -5399,8 +5723,14 @@ button {
 }
 
 .cx-anx-when-row {
-  --cx-gutter-x: 2.5rem;
   --cx-gutter-y: 0;
+}
+
+/* Wide gutter only once the columns sit side by side (on phones it would overflow) */
+@media (min-width: 992px) {
+  .cx-anx-when-row {
+    --cx-gutter-x: 2.5rem;
+  }
 }
 
 .cx-anx-when .cx-anx-eyebrow {
@@ -5492,6 +5822,11 @@ button {
 }
 
 @media (max-width: 991.98px) {
+  /* Stacked: centre alignment would push the heading to the middle */
+  .cx-anx-who-head {
+    align-items: flex-start;
+  }
+
   .cx-anx-who .cx-anx-section-lead {
     flex: none;
   }
@@ -5545,9 +5880,15 @@ button {
 }
 
 .cx-seek-intro-row {
-  --cx-gutter-x: 2.5rem;
   --cx-gutter-y: 0;
   align-items: center;
+}
+
+/* Wide gutter only once the columns sit side by side (on phones it would overflow) */
+@media (min-width: 992px) {
+  .cx-seek-intro-row {
+    --cx-gutter-x: 2.5rem;
+  }
 }
 
 .cx-seek-intro-img {
@@ -5694,9 +6035,15 @@ button {
 }
 
 .cx-seek-pro-row {
-  --cx-gutter-x: 3rem;
   --cx-gutter-y: 0;
   align-items: center;
+}
+
+/* Wide gutter only once the columns sit side by side (on phones it would overflow) */
+@media (min-width: 992px) {
+  .cx-seek-pro-row {
+    --cx-gutter-x: 3rem;
+  }
 }
 
 .cx-seek-pro .cx-anx-eyebrow {
@@ -5755,9 +6102,15 @@ button {
 }
 
 .cx-seek-untreated-row {
-  --cx-gutter-x: 2.5rem;
   --cx-gutter-y: 0;
   align-items: flex-start;
+}
+
+/* Wide gutter only once the columns sit side by side (on phones it would overflow) */
+@media (min-width: 992px) {
+  .cx-seek-untreated-row {
+    --cx-gutter-x: 2.5rem;
+  }
 }
 
 .cx-seek-untreated-img {
@@ -5977,9 +6330,15 @@ button {
 }
 
 .cx-treat-visit-row {
-  --cx-gutter-x: 2.5rem;
   --cx-gutter-y: 0;
   align-items: center;
+}
+
+/* Wide gutter only once the columns sit side by side (on phones it would overflow) */
+@media (min-width: 992px) {
+  .cx-treat-visit-row {
+    --cx-gutter-x: 2.5rem;
+  }
 }
 
 .cx-treat-visit-h2 {
@@ -6056,5 +6415,1476 @@ button {
   .cx-treat-support-pillar p,
   .cx-treat-visit-p {
     font-size: 13px;
+  }
+}
+
+/* ==========================================================================
+   About Leiutis page
+   ========================================================================== */
+
+/* --- Hero: Where science becomes care --- */
+.cx-about-hero {
+  position: relative;
+  overflow: hidden;
+  background: #F5EEF8;
+  /* Viewport minus navbar and the bottom-pinned info bar */
+  height: calc(100vh - 80px - var(--cx-infobar-h, 92px));
+  min-height: 460px;
+}
+
+.cx-about-hero-inner {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+}
+
+.cx-about-hero-row {
+  --cx-gutter-x: 2rem;
+  --cx-gutter-y: 0;
+  height: 100%;
+}
+
+.cx-about-hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.cx-about-hero-h1 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-weight: 400;
+  font-size: clamp(38px, 5.2vw, 76px);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  color: #1A1918;
+  margin-bottom: clamp(0.75rem, 1.6vh, 1rem);
+}
+
+.cx-about-hero-p {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(0.88rem, 1.02vw, 1rem);
+  line-height: 1.65;
+  color: #68635F;
+  max-width: 520px;
+  margin: 0 0 clamp(0.75rem, 1.6vh, 1rem);
+}
+
+.cx-about-hero-tag {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(0.88rem, 1.02vw, 1rem);
+  font-weight: 600;
+  color: #4A4542;
+  margin: 0 0 clamp(1.25rem, 2.6vh, 2rem);
+}
+
+.cx-about-hero-img-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cx-about-hero-img {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  height: 78%;
+}
+
+.cx-about-hero-img img {
+  object-fit: contain;
+  object-position: center;
+}
+
+@media (max-width: 991.98px) {
+  .cx-about-hero {
+    height: auto;
+    min-height: auto;
+    padding: 2.5rem 0;
+  }
+
+  .cx-about-hero-img-col {
+    margin-top: 1.5rem;
+  }
+
+  .cx-about-hero-img {
+    height: clamp(240px, 40vh, 360px);
+    max-width: 420px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .cx-about-hero-text .cx-hero-btns {
+    width: 100%;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .cx-about-hero-h1 {
+    font-size: clamp(32px, 10vw, 44px);
+  }
+
+  .cx-about-hero-p,
+  .cx-about-hero-tag {
+    font-size: 14px;
+  }
+}
+
+/* --- Shared About section pieces --- */
+.cx-about-research,
+.cx-about-decade {
+  background: #F9F7F5;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+}
+
+.cx-about-h2 {
+  font-weight: 400;
+  font-size: clamp(36px, 4.6vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: #2A0D2F;
+  margin: 0;
+}
+
+.cx-about-eyebrow {
+  display: block;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: #7A7470;
+  margin-bottom: clamp(20px, 3vw, 32px);
+}
+
+/* --- Our research areas --- */
+.cx-about-research {
+  padding: clamp(48px, 7vw, 88px) 0 clamp(40px, 6vw, 72px);
+  scroll-margin-top: 80px;
+}
+
+.cx-about-research-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: clamp(24px, 3vw, 36px);
+}
+
+.cx-about-research-intro {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #68635F;
+  max-width: 400px;
+  margin: clamp(12px, 2.2vw, 28px) 0 0;
+}
+
+.cx-about-research-label {
+  font-size: clamp(15px, 1.2vw, 17px);
+  font-weight: 500;
+  color: #1C8A8F;
+  margin: 0 0 16px;
+}
+
+.cx-about-research-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cx-about-research-card {
+  display: flex;
+  flex-direction: column;
+  min-height: clamp(160px, 15vw, 182px);
+  padding: 20px 18px;
+  background: #FFFFFF;
+  border: 1px solid #EEEAE6;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.cx-about-research-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(42, 13, 47, 0.06);
+}
+
+.cx-about-research-num {
+  font-size: clamp(26px, 2.4vw, 32px);
+  font-weight: 400;
+  line-height: 1;
+  color: #1C8A8F;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #ECE8E4;
+  margin-bottom: 24px;
+}
+
+.cx-about-research-name {
+  font-size: clamp(14px, 1.15vw, 16px);
+  font-weight: 400;
+  line-height: 1.35;
+  color: #2A0D2F;
+}
+
+@media (max-width: 991.98px) {
+  .cx-about-research-head {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .cx-about-research-intro {
+    margin-top: 0;
+    max-width: 560px;
+  }
+
+  .cx-about-research-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 479.98px) {
+  .cx-about-research-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cx-about-research-card {
+    min-height: 0;
+  }
+}
+
+/* --- A decade of science --- */
+.cx-about-decade {
+  padding: clamp(32px, 5vw, 56px) 0 clamp(48px, 7vw, 88px);
+}
+
+.cx-about-decade-row {
+  align-items: flex-start;
+}
+
+@media (min-width: 992px) {
+  .cx-about-decade-row {
+    --cx-gutter-x: 2.5rem;
+  }
+}
+
+.cx-about-decade-text {
+  max-width: 560px;
+}
+
+.cx-about-decade-h2 {
+  font-weight: 400;
+  font-size: clamp(32px, 3.6vw, 48px);
+  line-height: 1.32;
+  letter-spacing: -0.035em;
+  color: #2A0D2F;
+  margin: 0 0 clamp(20px, 2.6vw, 32px);
+}
+
+.cx-about-decade-h2 sup {
+  font-size: 0.55em;
+  top: -0.7em;
+}
+
+.cx-about-decade-p {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: clamp(12.5px, 0.95vw, 14px);
+  line-height: 1.75;
+  color: #4A4542;
+  margin: 0 0 14px;
+}
+
+.cx-about-decade-p:last-child {
+  margin-bottom: 0;
+}
+
+.cx-about-decade-img-col {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cx-about-decade-img {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  aspect-ratio: 2388 / 2744;
+  overflow: hidden;
+}
+
+.cx-about-decade-img img {
+  object-fit: cover;
+}
+
+@media (max-width: 991.98px) {
+  .cx-about-decade-text {
+    max-width: none;
+  }
+
+  .cx-about-decade-img-col {
+    justify-content: center;
+    margin-top: 2rem;
+  }
+}
+
+/* --- The Culture Behind Every SMILE --- */
+.cx-about-smile {
+  background: #F4E8F1;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  padding: clamp(40px, 6vw, 72px) 0 clamp(32px, 4.5vw, 56px);
+  scroll-margin-top: 80px;
+}
+
+.cx-about-smile-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: clamp(20px, 3vw, 32px);
+}
+
+.cx-about-smile-intro {
+  max-width: 560px;
+}
+
+.cx-about-smile-h2 {
+  font-weight: 400;
+  font-size: clamp(28px, 2.8vw, 38px);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #2A0D2F;
+  margin: 0 0 clamp(18px, 2.4vw, 28px);
+}
+
+.cx-about-smile-p {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #4A4542;
+  margin: 0 0 14px;
+}
+
+.cx-about-smile-p:last-child {
+  margin-bottom: 0;
+}
+
+.cx-about-smile-logo {
+  flex-shrink: 0;
+  width: clamp(200px, 23vw, 280px);
+  margin-top: clamp(16px, 3vw, 44px);
+}
+
+.cx-about-smile-logo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Bordered grid: 3 cards on the first row, 2 on the second.
+   The list draws the top/left edges, each card its right/bottom, so lines never double up. */
+.cx-about-smile-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid #CDBFC9;
+  border-left: 1px solid #CDBFC9;
+}
+
+.cx-about-smile-card {
+  grid-column: span 2;
+  min-height: clamp(150px, 15vw, 172px);
+  padding: clamp(18px, 1.8vw, 22px) clamp(16px, 1.4vw, 18px);
+  border-right: 1px solid #CDBFC9;
+  border-bottom: 1px solid #CDBFC9;
+}
+
+.cx-about-smile-card:nth-child(n + 4) {
+  grid-column: span 3;
+}
+
+.cx-about-smile-letter {
+  display: block;
+  font-size: clamp(24px, 2.2vw, 28px);
+  font-weight: 500;
+  line-height: 1;
+  color: #2A0D2F;
+  margin-bottom: clamp(16px, 2vw, 22px);
+}
+
+.cx-about-smile-name {
+  font-size: clamp(13px, 1.05vw, 14px);
+  font-weight: 600;
+  color: #1C8A8F;
+  margin: 0 0 6px;
+}
+
+.cx-about-smile-text {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: clamp(12px, 0.95vw, 13px);
+  line-height: 1.7;
+  color: #68635F;
+  max-width: 440px;
+  margin: 0;
+}
+
+.cx-about-smile-closing {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: clamp(12px, 0.95vw, 13px);
+  line-height: 1.6;
+  color: #4A4542;
+  margin: clamp(16px, 2vw, 22px) 0 0;
+}
+
+@media (max-width: 991.98px) {
+  .cx-about-smile-head {
+    flex-direction: column-reverse;
+    gap: 1.5rem;
+  }
+
+  .cx-about-smile-logo {
+    margin-top: 0;
+  }
+
+  .cx-about-smile-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cx-about-smile-card,
+  .cx-about-smile-card:nth-child(n + 4) {
+    grid-column: span 1;
+  }
+
+  .cx-about-smile-card:last-child {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .cx-about-smile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cx-about-smile-card:last-child {
+    grid-column: span 1;
+  }
+
+  .cx-about-smile-card {
+    min-height: 0;
+  }
+}
+
+/* --- Heal the way you Feel --- */
+.cx-about-heal {
+  background: #F9F7F5;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  padding: clamp(40px, 6vw, 72px) 0 clamp(48px, 7vw, 88px);
+}
+
+.cx-about-heal-row {
+  margin-bottom: clamp(24px, 3vw, 36px);
+}
+
+@media (min-width: 992px) {
+  .cx-about-heal-row {
+    --cx-gutter-x: 2.5rem;
+  }
+}
+
+.cx-about-heal-h2 {
+  font-weight: 400;
+  font-size: clamp(32px, 3.4vw, 44px);
+  line-height: 1.3;
+  letter-spacing: -0.03em;
+  color: #2A0D2F;
+  margin: 0 0 clamp(18px, 2.4vw, 28px);
+}
+
+.cx-about-heal-h2 strong {
+  font-weight: 600;
+}
+
+.cx-about-heal-note {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #68635F;
+  max-width: 340px;
+  margin: 0;
+}
+
+.cx-about-heal-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.cx-about-heal-lead {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: clamp(13px, 1.05vw, 14.5px);
+  font-weight: 700;
+  line-height: 1.6;
+  color: #471D41;
+  max-width: 600px;
+  margin: 0 0 16px;
+}
+
+.cx-about-heal-p {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #68635F;
+  max-width: 600px;
+  margin: 0 0 clamp(16px, 2vw, 22px);
+}
+
+.cx-about-heal-img {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 5120 / 1972;
+  overflow: hidden;
+}
+
+.cx-about-heal-img img {
+  object-fit: cover;
+}
+
+@media (max-width: 991.98px) {
+  .cx-about-heal-right {
+    margin-top: 1.5rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  /* A taller crop keeps the subject readable on narrow screens */
+  .cx-about-heal-img {
+    aspect-ratio: 4 / 3;
+  }
+
+  .cx-about-heal-img img {
+    object-position: 65% center;
+  }
+}
+
+/* ==========================================================================
+   Canxiol page
+   ========================================================================== */
+
+/* --- Hero: Heal The way You Feel --- */
+.cx-cxp-hero {
+  position: relative;
+  overflow: hidden;
+  background: #F5EEF8;
+  /* Viewport minus navbar and the bottom-pinned info bar */
+  height: calc(100vh - 80px - var(--cx-infobar-h, 92px));
+  min-height: 460px;
+}
+
+.cx-cxp-hero-inner {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+}
+
+.cx-cxp-hero-row {
+  --cx-gutter-x: 2rem;
+  --cx-gutter-y: 0;
+  height: 100%;
+}
+
+.cx-cxp-hero-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.cx-cxp-hero-p {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(0.88rem, 1.1vw, 1.05rem);
+  line-height: 1.6;
+  color: #68635F;
+  margin: 0 0 clamp(1.5rem, 3.4vh, 2.5rem);
+}
+
+/* Taller than the shared discover button to match the design */
+.cx-btn-discover.cx-cxp-hero-btn {
+  width: 172px;
+  height: 46px;
+}
+
+/* The shared arrow points up-right; this CTA scrolls down the page */
+.cx-cxp-arrow-down {
+  transform: rotate(90deg);
+}
+
+/* Hand image is pinned to the right edge so the palm bleeds off-screen */
+.cx-cxp-hero-img {
+  position: absolute;
+  z-index: 1;
+  top: 6%;
+  bottom: 4%;
+  right: 0;
+  width: 52%;
+}
+
+.cx-cxp-hero-img img {
+  object-fit: contain;
+  object-position: right center;
+}
+
+@media (max-width: 991.98px) {
+  .cx-cxp-hero {
+    height: auto;
+    min-height: auto;
+    display: flex;
+    flex-direction: column;
+    padding-top: 2.5rem;
+  }
+
+  .cx-cxp-hero-img {
+    position: relative;
+    order: 2;
+    top: auto;
+    bottom: auto;
+    width: 100%;
+    height: clamp(280px, 52vw, 460px);
+    margin-top: 1.5rem;
+  }
+
+  .cx-cxp-hero-img img {
+    object-position: right bottom;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .cx-btn-discover.cx-cxp-hero-btn {
+    width: 100%;
+  }
+}
+
+/* --- What is Canxiol®? --- */
+.cx-cxp-whatis {
+  background: #F9F7F5;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  padding: clamp(40px, 6vw, 72px) 0 clamp(48px, 7vw, 88px);
+  scroll-margin-top: 80px;
+}
+
+.cx-cxp-whatis-h2 {
+  font-weight: 400;
+  font-size: clamp(36px, 4.4vw, 60px);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  color: #1A1918;
+  margin: 0 0 clamp(28px, 4vw, 48px);
+}
+
+.cx-cxp-whatis-h2 sup {
+  font-size: 0.5em;
+  top: -0.85em;
+}
+
+.cx-cxp-whatis-row {
+  align-items: center;
+}
+
+@media (min-width: 992px) {
+  .cx-cxp-whatis-row {
+    --cx-gutter-x: 3.5rem;
+  }
+}
+
+.cx-cxp-whatis-img {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2264 / 1508;
+  overflow: hidden;
+}
+
+.cx-cxp-whatis-img img {
+  object-fit: cover;
+}
+
+.cx-cxp-whatis-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.cx-cxp-whatis-lead {
+  font-size: clamp(19px, 1.7vw, 22px);
+  font-weight: 400;
+  line-height: 1.4;
+  color: #1A1918;
+  max-width: 400px;
+  margin: 0 0 clamp(14px, 1.8vw, 20px);
+}
+
+.cx-cxp-whatis-p {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: clamp(13px, 1vw, 14px);
+  line-height: 1.75;
+  color: #4A4542;
+  max-width: 400px;
+  margin: 0 0 clamp(18px, 2.2vw, 24px);
+}
+
+.cx-cxp-whatis-lead sup,
+.cx-cxp-whatis-p sup {
+  font-size: 0.6em;
+  top: -0.55em;
+}
+
+.cx-btn-discover.cx-cxp-whatis-btn {
+  width: 172px;
+  height: 46px;
+}
+
+@media (max-width: 991.98px) {
+  .cx-cxp-whatis-text {
+    margin-top: 1.75rem;
+  }
+
+  .cx-cxp-whatis-lead,
+  .cx-cxp-whatis-p {
+    max-width: 560px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .cx-btn-discover.cx-cxp-whatis-btn {
+    width: 100%;
+  }
+}
+
+/* --- When should you take Canxiol®? --- */
+.cx-cxp-when {
+  background: #F9F7F5;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  padding: clamp(40px, 6vw, 72px) 0 clamp(56px, 8vw, 96px);
+}
+
+.cx-cxp-when-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: clamp(32px, 4.4vw, 52px);
+}
+
+.cx-cxp-when-h2 {
+  font-weight: 400;
+  font-size: clamp(34px, 3.8vw, 52px);
+  line-height: 1.22;
+  letter-spacing: -0.045em;
+  color: #1A1918;
+  margin: 0;
+}
+
+.cx-cxp-when-h2 sup {
+  font-size: 0.5em;
+  top: -0.85em;
+}
+
+.cx-cxp-when-intro {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 13px;
+  line-height: 1.75;
+  color: #68635F;
+  max-width: 440px;
+  margin: clamp(12px, 1.6vw, 20px) 0 0;
+}
+
+/* Areas of life row */
+.cx-cxp-when-areas {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 clamp(24px, 3vw, 36px);
+}
+
+.cx-cxp-when-area {
+  position: relative;
+  padding: 2px 0 2px 24px;
+  background: none;
+  border: 0;
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: #7A7470;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.cx-cxp-when-area::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 2px;
+  height: 18px;
+  background: #1A1918;
+  transform: translateY(-50%) scaleY(0);
+  transition: transform 0.2s ease;
+}
+
+.cx-cxp-when-area:hover,
+.cx-cxp-when-area.active {
+  color: #1A1918;
+}
+
+.cx-cxp-when-area.active::before {
+  transform: translateY(-50%) scaleY(1);
+}
+
+/* Care journey band — full-bleed rules above and below */
+.cx-cxp-when-journey {
+  border-top: 1px solid #E4E0DC;
+  border-bottom: 1px solid #E4E0DC;
+  padding: clamp(28px, 4vw, 48px) 0;
+}
+
+.cx-cxp-when-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cx-cxp-when-step {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 34px;
+  padding: 0 0 0 clamp(14px, 1.6vw, 22px);
+}
+
+.cx-cxp-when-step:first-child {
+  padding-left: 0;
+}
+
+/* Vertical divider before every step after the first */
+.cx-cxp-when-step + .cx-cxp-when-step {
+  border-left: 1px solid #DCD6D1;
+}
+
+.cx-cxp-when-icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+.cx-cxp-when-label {
+  font-size: clamp(14px, 1.15vw, 15px);
+  font-weight: 500;
+  color: #1A1918;
+}
+
+.cx-cxp-when-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-left: auto;
+  margin-right: 8px;
+  background: #EEEAE6;
+}
+
+@media (max-width: 991.98px) {
+  .cx-cxp-when-head {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .cx-cxp-when-intro {
+    margin-top: 0;
+    max-width: 560px;
+  }
+
+  .cx-cxp-when-areas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 14px;
+  }
+
+  .cx-cxp-when-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 24px;
+  }
+
+  /* Second row starts flush left without a divider */
+  .cx-cxp-when-step:nth-child(3) {
+    border-left: 0;
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .cx-cxp-when-steps {
+    grid-template-columns: 1fr;
+    row-gap: 18px;
+  }
+
+  .cx-cxp-when-step,
+  .cx-cxp-when-step + .cx-cxp-when-step {
+    border-left: 0;
+    padding-left: 0;
+  }
+
+  /* Stacked steps flow downward */
+  .cx-cxp-when-arrow {
+    transform: rotate(90deg);
+  }
+}
+
+/* --- How to take Canxiol®? --- */
+.cx-cxp-how {
+  background: #F4E8F1;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  padding: clamp(44px, 6.5vw, 72px) 0 clamp(36px, 5vw, 56px);
+}
+
+.cx-cxp-how-eyebrow {
+  display: block;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: #1C8A8F;
+  margin-bottom: clamp(16px, 2.2vw, 24px);
+}
+
+.cx-cxp-how-h2 {
+  font-weight: 400;
+  font-size: clamp(34px, 3.8vw, 52px);
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+  color: #1A1918;
+  margin: 0 0 8px;
+}
+
+.cx-cxp-how-h2 sup {
+  font-size: 0.5em;
+  top: -0.85em;
+}
+
+.cx-cxp-how-sub {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: #68635F;
+  margin: 0 0 clamp(36px, 5vw, 56px);
+}
+
+.cx-cxp-how-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+}
+
+.cx-cxp-how-card {
+  background: #FFFFFF;
+  border: 1px solid #E6DCE3;
+  padding: 18px 16px 24px;
+  min-height: 140px;
+}
+
+.cx-cxp-how-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 26px;
+}
+
+.cx-cxp-how-num {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: #68635F;
+}
+
+.cx-cxp-how-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.cx-cxp-how-title {
+  font-size: clamp(15px, 1.25vw, 17px);
+  font-weight: 500;
+  color: #1A1918;
+  margin: 0 0 12px;
+}
+
+.cx-cxp-how-text {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #68635F;
+  max-width: 200px;
+  margin: 0;
+}
+
+/* Caution banner */
+.cx-cxp-how-warning {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #FFFFFF;
+  border: 1px solid #E6DCE3;
+  padding: 16px 12px 16px 10px;
+}
+
+.cx-cxp-how-warning-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  background: #471D41;
+}
+
+.cx-cxp-how-warning-text {
+  flex: 1;
+  font-size: clamp(13px, 1.1vw, 14.5px);
+  font-weight: 500;
+  color: #1A1918;
+  margin: 0;
+}
+
+.cx-btn-discover.cx-cxp-how-btn {
+  width: auto;
+  height: 32px;
+  padding: 0 14px;
+  font-size: 8.5px;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.cx-cxp-how-btn .cx-btn-discover-arrow {
+  width: 10px;
+  height: 10px;
+}
+
+@media (max-width: 991.98px) {
+  .cx-cxp-how-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cx-cxp-how-text {
+    max-width: none;
+  }
+
+  .cx-cxp-how-warning {
+    flex-wrap: wrap;
+  }
+
+  .cx-btn-discover.cx-cxp-how-btn {
+    margin-left: 46px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .cx-cxp-how-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .cx-cxp-how-card {
+    min-height: 0;
+  }
+
+  .cx-btn-discover.cx-cxp-how-btn {
+    width: 100%;
+    margin-left: 0;
+    white-space: normal;
+  }
+}
+
+/* --- When should you take Canxiol®? (dose timing) --- */
+.cx-cxp-dose {
+  background: #F9F7F5;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  padding: clamp(48px, 7vw, 88px) 0 clamp(56px, 8vw, 104px);
+}
+
+.cx-cxp-dose-h2 {
+  font-weight: 400;
+  font-size: clamp(32px, 3.8vw, 52px);
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+  color: #1A1918;
+  margin: 0 0 8px;
+}
+
+.cx-cxp-dose-h2 sup {
+  font-size: 0.5em;
+  top: -0.85em;
+}
+
+.cx-cxp-dose-sub {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #7A7470;
+  margin: 0 0 clamp(24px, 3vw, 36px);
+}
+
+.cx-cxp-dose-row {
+  align-items: flex-start;
+}
+
+@media (min-width: 992px) {
+  .cx-cxp-dose-row {
+    --cx-gutter-x: 2.5rem;
+  }
+}
+
+.cx-cxp-dose-p {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: clamp(13px, 1vw, 14px);
+  line-height: 1.75;
+  color: #4A4542;
+  max-width: 440px;
+  margin: 0 0 16px;
+}
+
+.cx-cxp-dose-p:last-child {
+  margin-bottom: 0;
+}
+
+.cx-cxp-dose-figure {
+  margin: 0;
+}
+
+.cx-cxp-dose-img {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 2420 / 1092;
+  overflow: hidden;
+}
+
+.cx-cxp-dose-img img {
+  object-fit: cover;
+}
+
+/* Caption with a dark left rule */
+.cx-cxp-dose-note {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 11px;
+  line-height: 1.5;
+  color: #4A4542;
+  border-left: 2px solid #1A1918;
+  padding-left: 6px;
+  margin-top: 12px;
+}
+
+@media (max-width: 991.98px) {
+  .cx-cxp-dose-p {
+    max-width: none;
+  }
+
+  .cx-cxp-dose-figure {
+    margin-top: 1.75rem;
+  }
+}
+
+/* --- Looking after your Canxiol® --- */
+.cx-cxp-store {
+  background: #F9F7F5;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  padding: clamp(40px, 6vw, 72px) 0 clamp(40px, 6vw, 72px);
+}
+
+.cx-cxp-store-h2 {
+  font-weight: 400;
+  font-size: clamp(32px, 3.8vw, 52px);
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+  color: #1A1918;
+  margin: 0 0 clamp(32px, 6vw, 80px);
+}
+
+.cx-cxp-store-h2 sup {
+  font-size: 0.5em;
+  top: -0.85em;
+}
+
+/* Tips | bottle | tips */
+.cx-cxp-store-grid {
+  display: grid;
+  grid-template-columns: 1fr minmax(160px, 240px) 1fr;
+  align-items: stretch;
+  gap: clamp(24px, 4vw, 64px);
+  max-width: 1000px;
+  margin: 0 auto clamp(40px, 6vw, 64px);
+}
+
+.cx-cxp-store-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+  list-style: none;
+  padding: clamp(40px, 5vw, 64px) 0 clamp(8px, 2vw, 20px);
+  margin: 0;
+}
+
+/* Left column sits toward the bottle; right column starts at the bottle edge */
+.cx-cxp-store-col:first-child {
+  align-items: flex-end;
+}
+
+.cx-cxp-store-tip {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  width: 100%;
+  max-width: 220px;
+}
+
+.cx-cxp-store-num {
+  flex-shrink: 0;
+  min-width: 22px;
+  font-size: clamp(34px, 3.4vw, 44px);
+  font-weight: 300;
+  line-height: 0.9;
+  color: #1C8A8F;
+}
+
+.cx-cxp-store-title {
+  font-size: clamp(13px, 1.1vw, 14.5px);
+  font-weight: 600;
+  color: #1A1918;
+  margin: 0 0 10px;
+}
+
+.cx-cxp-store-text {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 11.5px;
+  line-height: 1.7;
+  color: #68635F;
+  margin: 0;
+}
+
+.cx-cxp-store-bottle {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1528 / 2292;
+  /* Keeps the shadow's z-index:-1 behind the bottle but above the section background */
+  isolation: isolate;
+}
+
+.cx-cxp-store-bottle img {
+  object-fit: contain;
+}
+
+/* Soft floor shadow under the bottle */
+.cx-cxp-store-bottle::after {
+  content: '';
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  bottom: -2%;
+  height: 6%;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.16) 0%, rgba(0, 0, 0, 0) 70%);
+  z-index: -1;
+}
+
+/* Teal shelf-life band */
+.cx-cxp-store-band {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 2rem;
+  background: #0F8789;
+  padding: clamp(24px, 3vw, 36px) clamp(20px, 2.6vw, 28px);
+}
+
+.cx-cxp-store-band-title {
+  font-size: clamp(12px, 1.05vw, 13.5px);
+  font-weight: 600;
+  letter-spacing: 3.2px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.cx-cxp-store-band-text {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: clamp(12.5px, 1vw, 13.5px);
+  line-height: 1.7;
+  color: #FFFFFF;
+  margin: 0 0 14px;
+}
+
+.cx-cxp-store-band-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+@media (max-width: 767.98px) {
+  /* Bottle on top, tips in a 2 × 2 grid beneath */
+  .cx-cxp-store-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 20px;
+  }
+
+  .cx-cxp-store-bottle {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    width: min(46%, 200px);
+    margin: 0 auto;
+  }
+
+  .cx-cxp-store-col {
+    padding: 0;
+    justify-content: flex-start;
+    gap: 28px;
+  }
+
+  .cx-cxp-store-col:first-child {
+    align-items: flex-start;
+  }
+
+  .cx-cxp-store-tip {
+    max-width: none;
+  }
+
+  .cx-cxp-store-band {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+/* --- Have questions about Canxiol®? --- */
+.cx-cxp-faq {
+  background: #F9F7F5;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  padding: clamp(40px, 6vw, 72px) 0 clamp(56px, 8vw, 96px);
+}
+
+.cx-cxp-faq-h2 {
+  font-weight: 400;
+  font-size: clamp(32px, 3.8vw, 52px);
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+  color: #1A1918;
+  margin: 0 0 clamp(16px, 2vw, 24px);
+}
+
+.cx-cxp-faq-h2 sup {
+  font-size: 0.5em;
+  top: -0.85em;
+}
+
+.cx-cxp-faq-sub {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 13px;
+  line-height: 1.75;
+  color: #68635F;
+  max-width: 380px;
+  margin: 0 0 clamp(36px, 5vw, 56px);
+}
+
+.cx-cxp-faq-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cx-cxp-faq-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #F4E8F1;
+  border: 1px solid #E6DCE3;
+  padding: clamp(20px, 2vw, 24px) clamp(18px, 2vw, 20px) clamp(18px, 2vw, 20px);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.cx-cxp-faq-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(71, 29, 65, 0.08);
+}
+
+.cx-cxp-faq-icon {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  margin-bottom: 26px;
+}
+
+.cx-cxp-faq-title {
+  font-size: clamp(15px, 1.3vw, 17px);
+  font-weight: 500;
+  color: #1A1918;
+  margin: 0 0 14px;
+}
+
+.cx-cxp-faq-text {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 11.5px;
+  line-height: 1.75;
+  color: #68635F;
+  max-width: 260px;
+  margin: 0 0 clamp(24px, 3vw, 32px);
+}
+
+/* Text link with an underline rule and a small arrow; pinned to the card bottom */
+.cx-cxp-faq-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #471D41;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: #1A1918;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.cx-cxp-faq-link svg {
+  transition: transform 0.2s ease;
+}
+
+.cx-cxp-faq-link:hover {
+  color: #471D41;
+}
+
+.cx-cxp-faq-link:hover svg {
+  transform: translateX(3px);
+}
+
+@media (max-width: 991.98px) {
+  .cx-cxp-faq-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cx-cxp-faq-text {
+    max-width: 520px;
   }
 }

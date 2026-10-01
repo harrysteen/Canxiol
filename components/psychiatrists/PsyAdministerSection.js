@@ -59,10 +59,6 @@ export default function PsyAdministerSection() {
           ))}
         </div>
 
-        <div className="cx-psy-video">
-          <span>Placeholder for Administration video</span>
-        </div>
-
         <div className="cx-psy-important">
           <h3 className="cx-psy-important-title">⚠ IMPORTANT</h3>
           <p>
