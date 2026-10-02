@@ -22,7 +22,7 @@ const cards = [
     text: 'If you think you have experienced a side effect, speak with your healthcare professional or use the appropriate reporting channel.',
     icon: '/images/Report a Side Effect.png',
     cta: 'Report a side effect',
-    href: '#pharmacovigilance',
+    href: '/pharmacovigilance',
   },
 ];
 

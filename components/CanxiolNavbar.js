@@ -72,7 +72,7 @@ export default function CanxiolNavbar() {
                   </div>
                 )}
               </li>
-              <li><Link href="#pharmacovigilance">Pharmacovigilance</Link></li>
+              <li><Link href="/pharmacovigilance">Pharmacovigilance</Link></li>
               <li><Link href="/about-leiutis">About Leiutis</Link></li>
             </ul>
 
@@ -148,7 +148,7 @@ export default function CanxiolNavbar() {
                 <Link href="#brochure" onClick={() => setMobileMenuOpen(false)}>Download Brochure</Link>
               </div>
             )}
-            <Link href="#pharmacovigilance" onClick={() => setMobileMenuOpen(false)}>Pharmacovigilance</Link>
+            <Link href="/pharmacovigilance" onClick={() => setMobileMenuOpen(false)}>Pharmacovigilance</Link>
             <Link href="/about-leiutis" onClick={() => setMobileMenuOpen(false)}>About Leiutis</Link>
             <div className="cx-drawer-ctas">
               <Link href="#psychiatrists" className="cx-btn-psychiatrists" style={{ width: '100%' }} onClick={(e) => { setMobileMenuOpen(false); openInquiry(e); }}>

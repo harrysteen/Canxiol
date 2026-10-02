@@ -142,7 +142,7 @@ export default function ContactChannelsSection() {
             </div>
 
             <div className="cx-contact-card-foot">
-              <Link href="#pharmacovigilance" className="cx-contact-btn cx-contact-btn-teal">
+              <Link href="/pharmacovigilance" className="cx-contact-btn cx-contact-btn-teal">
                 <span>Report adverse effects</span>
                 <ArrowRight />
               </Link>
