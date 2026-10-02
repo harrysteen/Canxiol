@@ -40,9 +40,7 @@ export default function CanxiolHero({
                 </h1>
 
                 <p className="cx-hero-p">
-                  Canxiol® is a prescription cannabidiol oral solution for the management of mild
-                  to moderate anxiety disorders, in conjunction with cognitive behavioural therapy
-                  to be prescribed by Psychiatrists only.
+                  Prescription Only medicine. Use only as directed by Psychiatrist
                 </p>
 
                 <div className="cx-hero-btns">
@@ -67,10 +65,6 @@ export default function CanxiolHero({
                     />
                   </Link>
                 </div>
-
-                <p className="cx-hero-disclaimer">
-                  Prescription Only medicine. Use only as directed by Psychiatrist
-                </p>
               </div>
 
               {/* Right Column: Product Bottle Visual */}

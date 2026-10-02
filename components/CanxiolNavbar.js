@@ -88,7 +88,7 @@ export default function CanxiolNavbar() {
                   className="cx-arrow-icon"
                 />
               </Link>
-              <Link href="#contact" className="cx-btn-contact">
+              <Link href="/contact" className="cx-btn-contact">
                 <span>CONTACT US</span>
                 <Image
                   src="/images/contact-us-arrow.png"
@@ -161,7 +161,7 @@ export default function CanxiolNavbar() {
                   className="cx-arrow-icon"
                 />
               </Link>
-              <Link href="#contact" className="cx-btn-contact" style={{ width: '100%' }} onClick={() => setMobileMenuOpen(false)}>
+              <Link href="/contact" className="cx-btn-contact" style={{ width: '100%' }} onClick={() => setMobileMenuOpen(false)}>
                 <span>CONTACT US</span>
                 <Image
                   src="/images/contact-us-arrow.png"

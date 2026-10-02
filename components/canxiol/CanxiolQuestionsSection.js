@@ -15,7 +15,7 @@ const cards = [
     text: 'Speak with your psychiatrist or healthcare professional if you have questions about your dose, treatment or anything you experience.',
     icon: '/images/Questions About Your Medicine.png',
     cta: 'Get support',
-    href: '#contact',
+    href: '/contact',
   },
   {
     title: 'Report a Side Effect',

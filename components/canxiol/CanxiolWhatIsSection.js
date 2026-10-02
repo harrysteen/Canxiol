@@ -32,7 +32,7 @@ export default function CanxiolWhatIsSection() {
               If your psychiatrist has prescribed Canxiol<sup>®</sup>, this page helps you
               understand your medicine, how to take it and where to find important information.
             </p>
-            <Link href="#contact" className="cx-btn-discover cx-cxp-whatis-btn">
+            <Link href="/contact" className="cx-btn-discover cx-cxp-whatis-btn">
               <span>CONNECT WITH US</span>
               <Image
                 src="/images/contact-us-arrow.png"

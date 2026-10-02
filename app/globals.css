@@ -1677,15 +1677,6 @@ button {
   }
 }
 
-.cx-hero-disclaimer {
-  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
-  font-size: 0.76rem;
-  color: var(--cx-text-muted);
-  line-height: 1.45;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
 .cx-btn-discover {
   width: 186.02px;
   height: 44px;
@@ -3442,8 +3433,18 @@ button {
   /* Navbar */
   .cx-nav-inner { height: 58px; }
 
-  /* Hero */
-  .cx-hero-wrapper { min-height: auto; }
+  /* Hero — fills the screen between the navbar (58px) and the pinned info bar,
+     teal banner included; the photo takes whatever height is left under the buttons */
+  .cx-hero-wrapper {
+    height: calc(100vh - 59px - var(--cx-infobar-h, 63px));
+    height: calc(100svh - 59px - var(--cx-infobar-h, 63px));
+    min-height: 480px;
+  }
+  .cx-hero-main { padding-top: 24px; }
+  .cx-hero-main .row { --cx-gutter-y: 0; flex-direction: column; flex-wrap: nowrap; }
+  .cx-hero-left { flex: 0 0 auto; padding-bottom: 0; }
+  .cx-hero-img-col { flex: 1 1 auto; min-height: 0; }
+  .cx-img-wrapper { height: 100%; min-height: 0; max-height: none; }
   .cx-hero-h1 { font-size: clamp(28px, 8vw, 44px); }
   .cx-hero-btns { flex-direction: column; align-items: stretch; align-self: stretch; gap: 10px; }
   .cx-btn-discover, .cx-btn-hero-psychiatrists { width: 100%; justify-content: center; }
@@ -7886,5 +7887,354 @@ button {
 
   .cx-cxp-faq-text {
     max-width: 520px;
+  }
+}
+
+/* ==========================================================================
+   Contact page
+   ========================================================================== */
+
+/* --- Hero: Contact & Stay Informed. --- */
+.cx-contact-hero {
+  position: relative;
+  overflow: hidden;
+  background: #F5EEF8;
+  padding: clamp(64px, 9vw, 120px) 0 clamp(40px, 5vw, 64px);
+}
+
+.cx-contact-hero-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.cx-contact-hero-h1 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-weight: 400;
+  font-size: clamp(30px, 3.4vw, 46px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #2A0D2F;
+  margin: 0 0 clamp(14px, 1.8vw, 20px);
+}
+
+.cx-contact-hero-p {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: clamp(13px, 1vw, 14px);
+  line-height: 1.7;
+  color: #4A4542;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+@media (max-width: 575.98px) {
+  .cx-contact-hero-h1 {
+    font-size: clamp(28px, 8.4vw, 34px);
+  }
+}
+
+/* --- Contact channels: 2 × 2 cards --- */
+.cx-contact-channels {
+  background: #F9F7F5;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  padding: clamp(32px, 4vw, 56px) 0 clamp(48px, 7vw, 88px);
+}
+
+.cx-contact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(20px, 2.6vw, 32px);
+}
+
+.cx-contact-card {
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  border: 1px solid #ECE8E4;
+  box-shadow: 0 2px 10px rgba(42, 13, 47, 0.04);
+  padding: clamp(24px, 2.6vw, 32px);
+  scroll-margin-top: 96px;
+}
+
+.cx-contact-card-safety {
+  background: #F7F4F6;
+  border: 2px solid #1C8A8F;
+}
+
+.cx-contact-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 16px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid #ECE8E4;
+}
+
+.cx-contact-card-safety .cx-contact-card-head {
+  border-bottom-color: #1C8A8F;
+}
+
+.cx-contact-card-title {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  color: #471D41;
+  margin: 0;
+}
+
+.cx-contact-card-safety .cx-contact-card-title {
+  color: #1C8A8F;
+}
+
+.cx-contact-card-tag {
+  flex-shrink: 0;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: #68635F;
+}
+
+.cx-contact-card-tag.is-safety {
+  background: #FFFFFF;
+  color: #1C8A8F;
+  font-weight: 600;
+  padding: 3px 8px;
+}
+
+.cx-contact-card-intro {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 13px;
+  line-height: 1.65;
+  color: #4A4542;
+  margin: 0 0 18px;
+}
+
+.cx-contact-card-intro-strong {
+  font-size: 14px;
+  color: #1A1918;
+}
+
+/* Form */
+.cx-contact-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 12px;
+}
+
+.cx-contact-field {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cx-contact-field.is-half {
+  grid-column: span 1;
+}
+
+.cx-contact-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: #2A0D2F;
+}
+
+.cx-contact-field input,
+.cx-contact-field textarea {
+  width: 100%;
+  padding: 9px 11px;
+  border: 1px solid #C9C3C8;
+  border-radius: 0;
+  background: #FFFFFF;
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 13px;
+  color: #1A1918;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.cx-contact-field textarea {
+  min-height: 88px;
+  resize: vertical;
+}
+
+.cx-contact-field input::placeholder,
+.cx-contact-field textarea::placeholder {
+  color: #8C8580;
+}
+
+.cx-contact-field input:focus,
+.cx-contact-field textarea:focus {
+  border-color: #471D41;
+}
+
+.cx-contact-form-foot {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  margin-top: 4px;
+}
+
+.cx-contact-sent {
+  font-size: 12px;
+  color: #1C8A8F;
+  margin: 0;
+}
+
+/* Buttons */
+.cx-contact-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 32px;
+  padding: 0 20px;
+  border: 1px solid transparent;
+  border-radius: 0;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.cx-contact-btn-solid {
+  background: #471D41;
+  border-color: #471D41;
+  color: #FFFFFF;
+}
+
+.cx-contact-btn-solid:hover {
+  background: #341430;
+  color: #FFFFFF;
+}
+
+.cx-contact-btn-teal {
+  height: 32px;
+  background: #1C8A8F;
+  border-color: #1C8A8F;
+  color: #FFFFFF;
+}
+
+.cx-contact-btn-teal:hover {
+  background: #16767A;
+  color: #FFFFFF;
+}
+
+.cx-contact-btn-outline {
+  background: transparent;
+  border-color: #471D41;
+  color: #471D41;
+}
+
+.cx-contact-btn-outline:hover {
+  background: #471D41;
+  color: #FFFFFF;
+}
+
+/* Safety notice */
+.cx-contact-notice {
+  border: 1px solid #1C8A8F;
+  background: #FFFFFF;
+  padding: 14px 14px 12px;
+  margin-bottom: 24px;
+}
+
+.cx-contact-notice-title {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  color: #1C8A8F;
+  margin-bottom: 6px;
+}
+
+.cx-contact-notice p {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 11px;
+  line-height: 1.55;
+  color: #4A4542;
+  margin: 0;
+}
+
+/* Clinical-trial checklist */
+.cx-contact-checks {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cx-contact-checks li {
+  position: relative;
+  padding-left: 18px;
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: #4A4542;
+}
+
+.cx-contact-checks li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: 700;
+  color: #1A1918;
+}
+
+/* Button + small print pinned to the card bottom */
+.cx-contact-card-foot {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.cx-contact-fineprint {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 10px;
+  color: #7A7470;
+  margin: 0;
+}
+
+@media (max-width: 991.98px) {
+  .cx-contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 479.98px) {
+  .cx-contact-form {
+    grid-template-columns: 1fr;
+  }
+
+  .cx-contact-field.is-half {
+    grid-column: 1 / -1;
+  }
+
+  .cx-contact-card-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .cx-contact-btn {
+    width: 100%;
+    white-space: normal;
   }
 }
