@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 // TODO: swap for the doctor-consultation photo once it is added to /public/images
-const CONSULT_IMAGE = '/images/psychiatrist-doctor.png';
+const CONSULT_IMAGE = '/images/when to seek help img3.png';
 
 export default function SeekProfessionalSection() {
   return (

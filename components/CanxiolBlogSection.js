@@ -1,77 +1,26 @@
 import React from 'react';
-import Image from 'next/image';
+import Link from 'next/link';
+import BlogCard from './blogs/BlogCard';
+import { blogPosts } from './blogs/blogPosts';
 
 export default function CanxiolBlogSection() {
-  const blogPosts = [
-    {
-      id: 1,
-      image: '/images/blog_img_1.png',
-      title: 'Student anxiety can hide behind a life that looks fine.',
-      author: 'Ms. Vrinda Singla',
-      date: '18 September 2026',
-      readTime: '4 min read',
-      avatar: '/images/blog_avatar.jpg'
-    },
-    {
-      id: 2,
-      image: '/images/blog_img_2.png',
-      title: 'The Anxiety remains unrecognised – Until It Gets Too Loud to Ignore',
-      author: 'Ms. Vrinda Singla',
-      date: '18 September 2026',
-      readTime: '4 min read',
-      avatar: '/images/blog_avatar.jpg'
-    },
-    {
-      id: 3,
-      image: '/images/blog_img_3.png',
-      title: "Anxiety Isn't a Personality Flaw. It's a Medical Condition, Like Any Other",
-      author: 'Ms. Vrinda Singla',
-      date: '18 September 2026',
-      readTime: '4 min read',
-      avatar: '/images/blog_avatar.jpg'
-    }
-  ];
-
   return (
     <section className="cx-blog-section">
       <div className="container">
         <div className="cx-blog-header-row">
-          <h2 className="cx-blog-section-title">Recent blog posts</h2>
-          <a href="#more-blogs" className="cx-blog-view-more">
+          <h2 className="cx-blog-section-title">Recent blog posts.</h2>
+          <Link href="/blogs" className="cx-blog-view-more">
             <span>View more blogs</span>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4.08337 9.91666L9.91671 4.08333M9.91671 4.08333H4.66671M9.91671 4.08333V9.33333" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-          </a>
+          </Link>
         </div>
-        
+
         <div className="row cx-blog-grid">
-          {blogPosts.map((post) => (
+          {blogPosts.slice(0, 3).map((post) => (
             <div className="col-12 col-md-4" key={post.id}>
-              <div className="cx-blog-card">
-                <div className="cx-blog-img-wrap">
-                  <Image 
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    sizes="(max-width: 767px) 100vw, 33vw"
-                    style={{ objectFit: 'cover' }}
-                  />
-                </div>
-                <h4 className="cx-blog-title">{post.title}</h4>
-                <div className="cx-blog-meta">
-                  <Image 
-                    src={post.avatar}
-                    alt={post.author}
-                    width={40}
-                    height={40}
-                    className="cx-blog-avatar"
-                  />
-                  <span className="cx-blog-meta-text">
-                    {post.author}, {post.date} · {post.readTime}
-                  </span>
-                </div>
-              </div>
+              <BlogCard post={post} />
             </div>
           ))}
         </div>

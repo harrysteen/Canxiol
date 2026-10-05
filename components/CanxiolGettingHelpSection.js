@@ -29,7 +29,7 @@ export default function CanxiolGettingHelpSection() {
           <div className="col-12 col-lg-6">
             <h2 className="cx-help-h2">
               Getting Help is Easier<br />
-              than you think
+              than you think.
             </h2>
           </div>
 

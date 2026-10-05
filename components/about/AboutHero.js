@@ -29,7 +29,7 @@ export default function AboutHero({
           <div className="col-12 col-lg-6 cx-about-hero-text">
             <h1 className="cx-about-hero-h1">
               Where science<br />
-              becomes care
+              becomes care.
             </h1>
 
             <p className="cx-about-hero-p">

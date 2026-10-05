@@ -14,7 +14,7 @@ export default function CanxiolKnowMoreSection() {
         <div className="cx-know-header">
           <h2 className="cx-know-h2">
             Know more<br />
-            about Canxiol
+            about Canxiol.
           </h2>
         </div>
 
@@ -57,7 +57,7 @@ export default function CanxiolKnowMoreSection() {
                   <span className="cx-portal-eyebrow">FOR PSYCHIATRISTS</span>
                   <h3 className="cx-portal-title">Go deeper into<br />the science of Canxiol</h3>
                   <p className="cx-portal-desc">
-                    Access detailed scientific, clinical and prescribing information.
+                    Access detailed scientific, clinical, and prescribing information.
                   </p>
                   <button
                     type="button"

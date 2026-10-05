@@ -36,7 +36,7 @@ export default function CanxiolHero({
               <div className="col-12 col-lg-6 col-xl-6 cx-hero-left">
                 <h1 className="cx-hero-h1">
                   <span className="cx-hl">Heal</span> The way<br />
-                  You <span className="cx-hl">Feel</span>
+                  You <span className="cx-hl">Feel</span>.
                 </h1>
 
                 <p className="cx-hero-p">

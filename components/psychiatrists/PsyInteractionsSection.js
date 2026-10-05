@@ -88,7 +88,7 @@ export default function PsyInteractionsSection() {
     <section className="cx-psy-ddi">
       <div className="container">
         <span className="cx-psy-teal-label">CLINICAL PHARMACOLOGY</span>
-        <h2 className="cx-psy-h2 cx-psy-h2-tight">Drug-drug Interactions</h2>
+        <h2 className="cx-psy-h2 cx-psy-h2-tight">Drug-drug Interactions.</h2>
         <p className="cx-psy-section-lead">
           Comprehensive metabolic and pharmacokinetic interaction guidance for prescribers.
         </p>

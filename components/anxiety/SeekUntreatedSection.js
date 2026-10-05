@@ -9,7 +9,7 @@ export default function SeekUntreatedSection() {
     <section className="cx-seek-untreated">
       <div className="container">
         <span className="cx-anx-eyebrow">The impact of delayed care</span>
-        <h2 className="cx-anx-h2 cx-seek-untreated-h2">What happens when anxiety goes untreated</h2>
+        <h2 className="cx-anx-h2 cx-seek-untreated-h2">What happens when anxiety goes untreated.</h2>
 
         <div className="row cx-seek-untreated-row">
           {/* Left Column: Photo */}

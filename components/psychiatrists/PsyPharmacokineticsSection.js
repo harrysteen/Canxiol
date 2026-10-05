@@ -40,7 +40,7 @@ export default function PsyPharmacokineticsSection() {
     <section className="cx-psy-pk">
       <div className="container">
         <span className="cx-psy-teal-label">ADME PARAMETERS</span>
-        <h2 className="cx-psy-h2 cx-psy-h2-tight">Pharmacokinetics</h2>
+        <h2 className="cx-psy-h2 cx-psy-h2-tight">Pharmacokinetics.</h2>
         <h3 className="cx-psy-pk-sub">Absorption</h3>
         <p className="cx-psy-section-lead">
           The single dose pharmacokinetics of Cannabidiol following oral administration of Canxiol®

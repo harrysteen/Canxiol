@@ -5,7 +5,7 @@ const SUPPORT_IMAGE = '/images/lifestyle-connections.png';
 
 const pillars = [
   { title: 'Foundational care', desc: 'Sleep, physical activity & balanced daily habits' },
-  { title: 'Professional priority', desc: 'Does not substitute clinical psychiatric evaluation' },
+  { title: 'Professional priority', desc: 'Take Psychiatrist guidance for diagnosis & treatment' },
 ];
 
 export default function TreatmentSupportSection() {
@@ -33,9 +33,8 @@ export default function TreatmentSupportSection() {
             <div className="cx-treat-support-card">
               <p>
                 Regular sleep, physical activity, reducing excessive stimulants, and
-                stress-management strategies can support treatment, but should not replace
-                Psychiatrist&rsquo;s assessment when symptoms are persistent or significantly
-                impairing.
+                stress-management strategies can support treatment, but you should take
+                Psychiatrist guidance when symptoms are persistent or significantly impairing.
               </p>
             </div>
             <div className="cx-treat-support-pillars">

@@ -15,7 +15,7 @@ export default function PsyAdministerSection() {
         <div className="row g-4 g-lg-5">
           {/* On desktop the copy spans exactly the photo's height (top and bottom aligned) */}
           <div className="col-12 col-lg-6 cx-psy-admin-copy">
-            <h2 className="cx-psy-h2">How to Administer Canxiol</h2>
+            <h2 className="cx-psy-h2">How to Administer Canxiol.</h2>
             <div className="cx-psy-admin-text">
               <p>Canxiol® should be administered at the dose prescribed by your psychiatrist.</p>
               <p>Administer the dose at consistent time with respect to meals preferably 30 minutes after food.</p>

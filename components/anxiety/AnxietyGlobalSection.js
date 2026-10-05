@@ -36,10 +36,10 @@ export default function AnxietyGlobalSection() {
         <span className="cx-anx-eyebrow">Global burden of anxiety</span>
 
         <div className="cx-anx-section-head">
-          <h2 className="cx-anx-h2">A global<br />perspective</h2>
+          <h2 className="cx-anx-h2">A global<br />perspective.</h2>
           <p className="cx-anx-section-lead">
-            Anxiety disorders are the most common mental health condition worldwide, affecting
-            359 million people in 2021. (WHO, 2025)
+            Anxiety is the most common mental health condition worldwide.<br />
+            Yet for most, it remains unrecognized and untreated.
           </p>
         </div>
 

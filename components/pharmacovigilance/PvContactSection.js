@@ -44,7 +44,7 @@ export default function PvContactSection() {
 
         {/* Reporting contacts */}
         <span className="cx-pv-eyebrow cx-pv-eyebrow-spaced">Pharmacovigilance &amp; Safety Monitoring</span>
-        <h2 className="cx-pv-report-h2">Reporting a adverse effect</h2>
+        <h2 className="cx-pv-report-h2">Reporting a adverse effect.</h2>
         <p className="cx-pv-report-lead">
           Healthcare professionals and patients are encouraged to report any suspected adverse reactions.
         </p>

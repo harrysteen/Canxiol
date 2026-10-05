@@ -25,7 +25,7 @@ export default function PsyClinicalTrialSection() {
       <div className="container">
         {/* Intro + key numbers */}
         <span className="cx-psy-teal-label">CLINICAL SCIENTIFIC STUDY</span>
-        <h2 className="cx-psy-h2">Clinical Trial Data</h2>
+        <h2 className="cx-psy-h2">Clinical Trial Data.</h2>
         <div className="cx-psy-trial-intro">
           <p className="cx-psy-trial-design">
             Phase III, prospective, double-blind, placebo-controlled, parallel-group, multicentre
@@ -49,7 +49,7 @@ export default function PsyClinicalTrialSection() {
         {/* Evidence summary card */}
         <div className="cx-psy-evidence">
           <div className="cx-psy-evidence-head">
-            <h2 className="cx-psy-h2">Clinical Trial Data</h2>
+            <h2 className="cx-psy-h2">Clinical Trial Data.</h2>
             <span className="cx-psy-evidence-badge">CANXIOL® EVIDENCE SUMMARY</span>
           </div>
           <p className="cx-psy-evidence-lead">

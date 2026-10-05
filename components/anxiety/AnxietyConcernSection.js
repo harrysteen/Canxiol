@@ -7,7 +7,7 @@ export default function AnxietyConcernSection() {
     <section className="cx-anx-concern">
       <div className="container">
         <span className="cx-anx-eyebrow cx-anx-concern-eyebrow">Understanding anxiety</span>
-        <h2 className="cx-anx-h2 cx-anx-concern-h2">More common than you<br />may think</h2>
+        <h2 className="cx-anx-h2 cx-anx-concern-h2">More common than you<br />may think.</h2>
 
         <div className="row cx-anx-concern-row">
           {/* Left Column: Photo */}
@@ -26,7 +26,7 @@ export default function AnxietyConcernSection() {
           <div className="col-12 col-lg-6 cx-anx-concern-text">
             <p className="cx-anx-concern-p">
               These conditions are among the most common mental health disorders across the
-              lifespan, affecting both children and adults. Women are ~1.7x more likely than men
+              lifespan, affecting children and adults. Women are ~1.7x more likely than men
               to have an anxiety disorder. (The Lancet Psychiatry 2020)
             </p>
             <blockquote className="cx-anx-concern-quote">

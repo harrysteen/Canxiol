@@ -34,7 +34,7 @@ export default function AboutSmileSection() {
       <div className="container">
         <div className="cx-about-smile-head">
           <div className="cx-about-smile-intro">
-            <h2 className="cx-about-smile-h2">The Culture Behind Every SMILE</h2>
+            <h2 className="cx-about-smile-h2">The Culture Behind Every SMILE.</h2>
             <p className="cx-about-smile-p">
               For us, SMILE represents the culture that shapes how we work and the purpose
               behind what we create.

@@ -27,7 +27,7 @@ export default function PvPathwaysSection() {
         <div className="cx-pv-grid">
           {/* Patients */}
           <div id="patients" className="cx-pv-col cx-pv-col-patient">
-            <h2 className="cx-pv-col-h2">Patients</h2>
+            <h2 className="cx-pv-col-h2">Patients.</h2>
             <p className="cx-pv-col-sub">Report an adverse effect</p>
             <p className="cx-pv-col-intro">
               If you are taking Canxiol and experiencing unexpected symptoms or side effects, you
@@ -66,7 +66,7 @@ export default function PvPathwaysSection() {
 
           {/* Psychiatrists */}
           <div id="psychiatrists-adr" className="cx-pv-col cx-pv-col-psy">
-            <h2 className="cx-pv-col-h2">Psychiatrist</h2>
+            <h2 className="cx-pv-col-h2">Psychiatrist.</h2>
             <p className="cx-pv-col-sub">Report an adverse effects</p>
             <p className="cx-pv-col-intro">
               For registered Psychiatrists, physicians, and clinical staff to access and submit the

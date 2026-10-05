@@ -11,7 +11,7 @@ import SeekProfessionalSection from '../../../components/anxiety/SeekProfessiona
 import SeekUntreatedSection from '../../../components/anxiety/SeekUntreatedSection';
 
 // TODO: swap for the therapy-session cut-out (transparent PNG) once it is added to /public/images
-const SEEK_HERO_IMAGE = '/images/psychiatrist-doctor.png';
+const SEEK_HERO_IMAGE = '/images/when to seek help.png';
 
 export const metadata = {
   title: 'When to Seek Help for Anxiety — Canxiol | Leiutis',
@@ -26,10 +26,11 @@ export default function WhenToSeekHelpPage() {
         <AnxietySubNav />
         <AnxietyHero
           id="when-to-seek-help"
-          title="When to seek help"
+          title="When to seek help."
           text="Anxiety disorders are common mental health conditions characterized by excessive fear and worry. Understanding when everyday stress transitions into a condition requiring professional support is a vital step toward long-term well-being and recovery."
           imageSrc={SEEK_HERO_IMAGE}
           imageAlt="A man talking with a counsellor who takes notes during a therapy session"
+          imageToEdge
         />
         <SeekIntroSection />
         <SeekSignsSection />

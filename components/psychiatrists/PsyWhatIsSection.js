@@ -4,6 +4,14 @@ import { PSY_IMAGES } from './psyImages';
 
 // Title and description are split into the same lines as the design;
 // on desktop each line is its own block, on smaller screens they flow as text.
+const leadLines = [
+  'Canxiol is a Cannabidiol oral solution',
+  'containing Cannabidiol 150mg/ml for the',
+  'management of mild to moderate anxiety in',
+  'conjunction with cognitive behavior therapy.',
+  'To be prescribed by Psychiatrists only.',
+];
+
 const highlights = [
   {
     title: ['CANNABIDIOL (SYNTHETIC)'],
@@ -75,11 +83,7 @@ export default function PsyWhatIsSection({
       <div className="container cx-psy-whatis-content">
         <div className="cx-psy-whatis-text">
           <h1 className="cx-psy-h1">What is Canxiol?</h1>
-          <p className="cx-psy-whatis-lead">
-            Canxiol is a Cannabidiol oral solution containing Cannabidiol 150mg/ml for the
-            management of mild to moderate anxiety in conjunction with cognitive behavior therapy.
-            To be prescribed by Psychiatrists only.
-          </p>
+          <p className="cx-psy-whatis-lead"><Lines lines={leadLines} /></p>
         </div>
 
         <div className="cx-psy-whatis-cards">

@@ -2604,64 +2604,6 @@ button {
   object-position: center;
 }
 
-.cx-meet-flow {
-  display: flex;
-  flex-direction: column;
-  padding-left: 24px;
-  border-left: 1px solid #D5C8D3;
-  gap: 16px;
-}
-
-.cx-meet-flow-item {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.cx-meet-flow-text {
-  font-family: var(--font-outfit), 'Outfit', sans-serif;
-  font-size: 14.5px;
-  font-weight: 500;
-  color: #383432;
-  line-height: 1.35;
-}
-
-.cx-meet-flow-arrow {
-  display: flex;
-  align-items: center;
-  padding-top: 2px;
-}
-
-.cx-meet-flow-brand {
-  font-family: var(--font-outfit), 'Outfit', sans-serif;
-  margin-top: 6px;
-  display: flex;
-  flex-direction: column;
-}
-
-.cx-meet-flow-brand .cx-brand-title {
-  font-weight: 700;
-  font-size: 22px;
-  letter-spacing: 1px;
-  color: #471D41;
-  display: inline-flex;
-  align-items: baseline;
-  gap: 2px;
-}
-
-.cx-meet-flow-brand .cx-brand-title sup {
-  font-size: 12px;
-  top: -0.6em;
-}
-
-.cx-meet-flow-brand .cx-brand-sub {
-  font-family: var(--font-outfit), 'Outfit', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  color: #4A4441;
-  margin-top: 2px;
-}
-
 .cx-meet-divider {
   border: 0;
   height: 1px;
@@ -2704,6 +2646,13 @@ button {
 }
 
 @media (min-width: 992px) {
+  /* Image column has a set width (the text column sizes to its lines);
+     the pair is centred by the row's justify-content-center */
+  .cx-meet-img-col {
+    width: clamp(380px, 34vw, 560px);
+    padding-left: clamp(24px, 4vw, 72px);
+  }
+
   /* Same five lines as the design: each line is its own block,
      with the size scaled so the longest line fits the column */
   .cx-meet-desc {
@@ -2713,12 +2662,6 @@ button {
   .cx-meet-desc-line {
     display: block;
   }
-
-  /* Flow list sits against the right edge, balancing the text column */
-  .cx-meet-flow-col {
-    display: flex;
-    justify-content: flex-end;
-  }
 }
 
 @media (min-width: 768px) {
@@ -2726,14 +2669,6 @@ button {
   .cx-meet-bottom-row > :nth-child(2) .cx-meet-feature-card {
     max-width: 300px;
     margin: 0 auto;
-  }
-}
-
-@media (max-width: 991.98px) {
-  .cx-meet-flow {
-    padding-left: 0;
-    border-left: none;
-    margin-top: 24px;
   }
 }
 
@@ -3404,7 +3339,6 @@ button {
   .cx-meet-h2   { font-size: clamp(34px, 5.5vw, 52px); letter-spacing: -1.2px; }
   .cx-meet-desc { font-size: 14px; }
   .cx-meet-img-wrap { max-width: 100%; }
-  .cx-meet-flow { padding-left: 0; border-left: none; margin-top: 20px; }
 
   /* Know More portals */
   .cx-know-h2  { font-size: clamp(30px, 5.5vw, 48px); letter-spacing: -1px; }
@@ -3933,15 +3867,35 @@ button {
   overflow: hidden;
   background: linear-gradient(135deg, #f7eef6 0%, #efe3ef 100%);
   padding: clamp(48px, 8vw, 96px) 0 clamp(40px, 5vw, 64px);
+  /* Tall enough for the full photo (see .cx-psy-whatis-img) plus headroom */
+  min-height: calc((50vw + var(--psy-cw) / 2 - var(--psy-card3-left)) * 1888 / 3100 + 48px);
+}
+
+/* Desktop: the photo's left edge lines up with the third highlight card's left
+   edge and runs to the right edge of the page; its rounded bottom-left corner
+   peeks out below that card, as in the design.
+   --psy-cw is the .container width at each breakpoint; the cards grid is
+   max 820px wide, 3 columns with 8px gaps, inside the container's 0.75rem padding. */
+.cx-psy-whatis {
+  --psy-cw: var(--container-max-lg);
+  --psy-card3-left: calc((min(820px, var(--psy-cw) - 1.5rem) - 16px) * 2 / 3 + 16px + 0.75rem);
+}
+
+@media (min-width: 1200px) {
+  .cx-psy-whatis { --psy-cw: var(--container-max-xl); }
+}
+
+@media (min-width: 1400px) {
+  .cx-psy-whatis { --psy-cw: var(--container-max-xxl); }
 }
 
 .cx-psy-whatis-img {
   position: absolute;
+  left: calc((100% - var(--psy-cw)) / 2 + var(--psy-card3-left));
   right: 0;
   bottom: 0;
   z-index: 1;
-  width: 58%;
-  height: 88%;
+  aspect-ratio: 3100 / 1888;
 }
 
 /* Transparent cut-out: sits on the gradient, anchored bottom-right */
@@ -3975,7 +3929,8 @@ button {
 
 /* Design line breaks inside the three cards (desktop only) */
 @media (min-width: 992px) {
-  .cx-psy-whatis-card .cx-psy-line {
+  .cx-psy-whatis-card .cx-psy-line,
+  .cx-psy-whatis-lead .cx-psy-line {
     display: block;
     white-space: nowrap;
   }
@@ -4290,7 +4245,9 @@ button {
 @media (max-width: 991.98px) {
   .cx-psy-whatis-img {
     position: relative;
+    left: auto;
     width: 100%;
+    aspect-ratio: auto;
     height: clamp(240px, 55vw, 420px);
     margin-top: 24px;
   }
@@ -4301,6 +4258,7 @@ button {
     flex-direction: column-reverse;
     padding-top: 0;
     padding-bottom: 0;
+    min-height: 0;
   }
 
   .cx-psy-whatis + .cx-psy-config {
@@ -5242,6 +5200,11 @@ button {
   margin-bottom: clamp(1rem, 2.2vh, 1.5rem);
 }
 
+.cx-anx-hero-qmark {
+  position: relative;
+  top: 0.05em;
+}
+
 .cx-anx-hero-sub {
   font-size: clamp(17px, 1.6vw, 20px);
   font-weight: 500;
@@ -5275,6 +5238,30 @@ button {
 .cx-anx-hero-img img {
   object-fit: contain;
   object-position: bottom right;
+}
+
+/* imageToEdge: the photo runs out to the screen's bottom-right corner.
+   The image box reaches past the container to the screen edge:
+   (100vw - container width) / 2 + the container's 0.75rem padding. */
+@media (min-width: 992px) {
+  .cx-anx-hero-img-edge {
+    --anx-cw: var(--container-max-lg);
+    --anx-edge: calc((100vw - var(--anx-cw)) / 2 + 0.75rem);
+  }
+
+  .cx-anx-hero-img-edge .cx-anx-hero-img {
+    margin-right: calc(-1 * var(--anx-edge));
+    width: calc(100% + var(--anx-edge));
+    max-width: calc(640px + var(--anx-edge));
+  }
+}
+
+@media (min-width: 1200px) {
+  .cx-anx-hero-img-edge { --anx-cw: var(--container-max-xl); }
+}
+
+@media (min-width: 1400px) {
+  .cx-anx-hero-img-edge { --anx-cw: var(--container-max-xxl); }
 }
 
 @media (max-width: 991.98px) {
@@ -5698,6 +5685,9 @@ button {
   font-weight: 600;
   line-height: 0.6;
   color: #FFFFFF;
+  /* Sits at the end of its column, just before the quote text */
+  justify-self: end;
+  margin-right: 16px;
 }
 
 .cx-anx-quote-text {
@@ -5844,6 +5834,11 @@ button {
 
   .cx-anx-quote-band-inner {
     grid-template-columns: 1fr;
+  }
+
+  .cx-anx-quote-mark {
+    justify-self: start;
+    margin-right: 0;
   }
 
   .cx-anx-when-h2 {
@@ -6077,7 +6072,7 @@ button {
 .cx-seek-pro-img {
   position: relative;
   width: 100%;
-  aspect-ratio: 346 / 186;
+  aspect-ratio: 604.45 / 377.78; /* design frame; matches the photo (1.6 : 1) */
   overflow: hidden;
   box-shadow: 0 6px 18px rgba(42, 26, 42, 0.12);
 }
@@ -7894,7 +7889,7 @@ button {
    Contact page
    ========================================================================== */
 
-/* --- Hero: Contact & Stay Informed. --- */
+/* --- Hero: Connect and Stay Informed. --- */
 .cx-contact-hero {
   position: relative;
   overflow: hidden;
@@ -8889,4 +8884,472 @@ button {
     grid-column: auto;
     justify-self: stretch;
   }
+}
+
+/* ==========================================================================
+   Blogs page
+   ========================================================================== */
+
+/* --- Hero: Blogs --- */
+.cx-blogs-hero {
+  position: relative;
+  overflow: hidden;
+  background: #F5EEF8;
+  padding: clamp(110px, 14vw, 190px) 0 clamp(90px, 11vw, 150px);
+}
+
+.cx-blogs-hero-inner {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.cx-blogs-hero-h1 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-weight: 400;
+  font-size: clamp(34px, 3.4vw, 46px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #2A0D2F;
+  margin: 0 0 clamp(16px, 2vw, 24px);
+}
+
+.cx-blogs-hero-p {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: clamp(13px, 1vw, 14px);
+  line-height: 1.7;
+  color: #4A4542;
+  margin: 0 auto;
+}
+
+/* --- Recent blog posts grid --- */
+.cx-blogs-list {
+  background: #FAF9F7;
+  padding: clamp(40px, 5vw, 56px) 0 clamp(48px, 6vw, 80px);
+}
+
+.cx-blogs-list-title {
+  font-size: clamp(22px, 1.6vw, 24px);
+  line-height: 1.4;
+  margin-bottom: clamp(24px, 3vw, 36px);
+}
+
+.cx-blogs-list .cx-blog-img-wrap {
+  aspect-ratio: 254 / 196;
+  margin-bottom: 20px;
+}
+
+.cx-blogs-list .cx-blog-title {
+  font-size: clamp(16px, 1.15vw, 18px);
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.cx-blogs-load-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: clamp(40px, 5vw, 64px);
+}
+
+.cx-blogs-load-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 0;
+  background-color: #3F173B;
+  color: #FAF9F7;
+  font-family: 'Plus Jakarta Sans', var(--font-body), sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  box-shadow: 0px 1.13px 2.27px 0px #0000000D;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.cx-blogs-load-more:hover {
+  background-color: #2e1029;
+}
+
+@media (max-width: 767.98px) {
+  .cx-blogs-list .cx-blog-grid .col-12 { margin-bottom: 32px; }
+  .cx-blogs-list .cx-blog-grid .col-12:last-child { margin-bottom: 0; }
+}
+
+/* --- Blog card as a link (posts with an article page) --- */
+.cx-blog-card-link {
+  display: block;
+  height: 100%;
+  color: inherit;
+  text-decoration: none;
+}
+
+.cx-blog-card-link .cx-blog-img-wrap img {
+  transition: transform 0.4s ease;
+}
+
+.cx-blog-card-link:hover .cx-blog-img-wrap img {
+  transform: scale(1.03);
+}
+
+/* ==========================================================================
+   Blog article page (/blogs/[slug])
+   ========================================================================== */
+
+.cx-article {
+  background: #FAF9F7;
+  padding: clamp(40px, 5vw, 64px) 0 clamp(48px, 6vw, 88px);
+}
+
+.cx-article-header {
+  text-align: center;
+}
+
+.cx-article-h1 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-weight: 400;
+  font-size: clamp(28px, 3.2vw, 44px);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: #2A0D2F;
+  max-width: 900px;
+  margin: 0 auto clamp(16px, 2vw, 24px);
+}
+
+.cx-article-excerpt {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: clamp(13px, 1vw, 14px);
+  line-height: 1.7;
+  color: #4A4542;
+  margin: 0 auto;
+  padding-bottom: clamp(16px, 2vw, 20px);
+  border-bottom: 1px solid #ECE8E4;
+}
+
+.cx-article-byline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: clamp(12px, 1.6vw, 16px) 0 clamp(16px, 2vw, 24px);
+  text-align: left;
+}
+
+.cx-article-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cx-article-avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  flex-shrink: 0;
+}
+
+.cx-article-written-by,
+.cx-article-author-name,
+.cx-article-author-cred {
+  display: block;
+}
+
+.cx-article-written-by {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 13px;
+  color: #03878B;
+  margin-bottom: 2px;
+}
+
+.cx-article-author-name {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: #2A0D2F;
+}
+
+.cx-article-author-cred {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 10px;
+  color: #4A4542;
+}
+
+.cx-article-date {
+  flex-shrink: 0;
+  background: #0B6B6E;
+  color: #FAF9F7;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 1.4;
+  padding: 7px 10px;
+}
+
+.cx-article-cover {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 600 / 275;
+  background-color: #EFEFEF;
+  overflow: hidden;
+}
+
+/* --- Article body --- */
+.cx-article-body {
+  max-width: 760px;
+  margin: clamp(32px, 4vw, 56px) auto 0;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: clamp(14px, 1.05vw, 15px);
+  line-height: 1.55;
+  color: #4A4542;
+}
+
+.cx-article-p {
+  margin: 0 0 4px;
+}
+
+.cx-article-p strong {
+  font-weight: 600;
+  color: #2A0D2F;
+}
+
+.cx-article-h2 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-weight: 500;
+  font-size: clamp(18px, 1.4vw, 21px);
+  line-height: 1.3;
+  color: #471D41;
+  margin: clamp(24px, 3vw, 32px) 0 clamp(14px, 1.6vw, 20px);
+}
+
+.cx-article-ul {
+  margin: 4px 0;
+  padding-left: 30px;
+}
+
+.cx-article-ul li {
+  margin-bottom: 4px;
+}
+
+.cx-article-callout {
+  margin-top: clamp(24px, 3vw, 32px);
+  font-weight: 600;
+  color: #2A0D2F;
+}
+
+.cx-article-callout p {
+  margin: 0 0 4px;
+}
+
+/* --- Recent blog posts strip under the article --- */
+.cx-related-blogs {
+  background: #F5EEF8;
+  padding: clamp(40px, 5vw, 64px) 0 clamp(48px, 6vw, 80px);
+}
+
+.cx-related-blogs .cx-blog-img-wrap {
+  aspect-ratio: 254 / 196;
+  margin-bottom: 20px;
+}
+
+.cx-related-blogs .cx-blog-title {
+  font-size: clamp(14px, 1vw, 16px);
+  font-weight: 400;
+  margin-bottom: 0;
+}
+
+@media (max-width: 767.98px) {
+  .cx-related-blogs .cx-blog-grid .col-12 { margin-bottom: 32px; }
+  .cx-related-blogs .cx-blog-grid .col-12:last-child { margin-bottom: 0; }
+  .cx-article-cover { aspect-ratio: 4 / 3; }
+}
+
+@media (max-width: 575.98px) {
+  .cx-article-byline {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Posts with `spacedParagraphs` — a gap between paragraphs */
+.cx-article-body-spaced .cx-article-p {
+  margin-bottom: clamp(12px, 1.4vw, 16px);
+}
+
+.cx-article-body-spaced .cx-article-callout {
+  margin-top: clamp(36px, 4vw, 48px);
+}
+
+/* Per-paragraph gap (block `gap: true`) */
+.cx-article-body .cx-article-p-gap {
+  margin-bottom: clamp(12px, 1.4vw, 16px);
+}
+
+.cx-article-ul li strong {
+  font-weight: 600;
+  color: #2A0D2F;
+}
+
+.cx-article-callout-group + .cx-article-callout-group {
+  margin-top: clamp(14px, 1.6vw, 20px);
+}
+
+/* ==========================================================================
+   Media page (/media)
+   ========================================================================== */
+
+.cx-media {
+  background: #FAF9F7;
+  padding: clamp(48px, 6vw, 80px) 0 clamp(56px, 7vw, 96px);
+}
+
+/* --- Intro: heading left, lead + CTA right --- */
+.cx-media-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 64px);
+  align-items: start;
+  margin-bottom: clamp(32px, 4vw, 48px);
+  padding: 0 clamp(0px, 0.6vw, 8px);
+}
+
+.cx-media-h1 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-weight: 400;
+  font-size: clamp(32px, 3.4vw, 44px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #1E1A1D;
+  margin: 0 0 clamp(14px, 2vw, 24px);
+}
+
+.cx-media-sub {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-weight: 400;
+  font-size: clamp(16px, 1.3vw, 18px);
+  color: #5A1F55;
+  margin: 0;
+}
+
+.cx-media-lead {
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: clamp(13px, 1vw, 14px);
+  line-height: 1.7;
+  color: #6B6560;
+  margin: 0 0 clamp(20px, 2.4vw, 28px);
+}
+
+.cx-media-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background-color: #3F173B;
+  color: #FAF9F7 !important;
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0px 1.13px 2.27px 0px #0000000D;
+  transition: background-color 0.2s ease;
+}
+
+.cx-media-cta:hover {
+  background-color: #2e1029;
+}
+
+/* --- Coverage grid --- */
+.cx-media-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(16px, 1.8vw, 20px);
+  scroll-margin-top: 96px;
+}
+
+.cx-media-card {
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  border: 1px solid #ECE8E4;
+}
+
+.cx-media-img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 258 / 160;
+  background-color: #EFEBE7;
+  overflow: hidden;
+}
+
+.cx-media-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: clamp(16px, 1.6vw, 20px) clamp(14px, 1.4vw, 18px) clamp(16px, 1.6vw, 20px);
+}
+
+.cx-media-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.cx-media-outlet {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  color: #5A1F55;
+}
+
+.cx-media-date {
+  flex-shrink: 0;
+  font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+  font-size: 10px;
+  color: #6B6560;
+}
+
+.cx-media-title {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: clamp(14px, 1.1vw, 15px);
+  line-height: 1.45;
+  color: #1E1A1D;
+  margin: 0 0 clamp(24px, 3vw, 36px);
+  flex-grow: 1; /* Keeps the link pinned to the card bottom */
+}
+
+.cx-media-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-weight: 600;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #5A1F55;
+  text-decoration: none;
+}
+
+a.cx-media-link:hover {
+  color: #3F173B;
+  text-decoration: underline;
+}
+
+@media (max-width: 991.98px) {
+  .cx-media-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 767.98px) {
+  .cx-media-intro { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 575.98px) {
+  .cx-media-grid { grid-template-columns: 1fr; }
 }

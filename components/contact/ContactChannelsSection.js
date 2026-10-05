@@ -96,7 +96,7 @@ export default function ContactChannelsSection() {
           {/* 1. General enquiries */}
           <FormCard
             id="contact-form"
-            title="Contact & Stay Informed"
+            title="Connect and Stay Informed"
             tag="Direct Channel"
             intro="Connect directly with our team for general queries, institutional partnerships, and product information."
             submitLabel="Send message"

@@ -20,6 +20,10 @@ const dmSans = DM_Sans({
 export const metadata = {
   title: 'Canxiol — Heal The Way You Feel | Leiutis',
   description: 'Canxiol is a prescription cannabidiol oral solution for management of mild to moderate anxiety disorders.',
+  icons: {
+    icon: '/images/tab%20logo.png',
+    apple: '/images/tab%20logo.png',
+  },
 };
 
 export const viewport = {

@@ -9,16 +9,9 @@ export default function CanxiolMeetSection({
   gradientDistortion = 0.15,
   gradientScale      = 1.5,
 }) {
-  const steps = [
-    'Cannabidiol (Synthetic)',
-    'Proprietary nanodispersion',
-    'Fine dispersed formulation in water',
-    'Milky white Oral solution',
-  ];
-
   // Description broken into the same lines as the design (one block per line on desktop)
   const descLines = [
-    'A prescription cannabidiol oral solution research for the',
+    'A prescription cannabidiol oral solution research product for the',
     'management of mild to moderate anxiety disorders.',
     'Canxiol brings together pharmaceutical grade cannabidiol',
     'formulated with proprietary nanodispersion technology in',
@@ -33,13 +26,13 @@ export default function CanxiolMeetSection({
     },
     {
       num: '02',
-      title: 'Formulation with proprietary nanodispersion technology',
+      title: 'Formulated with proprietary nanodispersion technology',
       desc: 'Easy to use and titrate with no pill burden',
     },
     {
       num: '03',
-      title: 'Manufactured in GMP certified plant',
-      desc: 'Certified by USFDA, EU, MHRA, Turkey, Russia & WHO – GMP certified',
+      title: 'Manufactured in GMP accredited plant',
+      desc: 'GMP plant accredited by - USFDA, EU, MHRA, Turkey, Russia & WHO-GMP',
     },
   ];
 
@@ -59,15 +52,15 @@ export default function CanxiolMeetSection({
       <div className="container cx-meet-content">
         
         {/* Top Showcase Row */}
-        <div className="row align-items-center g-4 g-lg-5 cx-meet-top-row">
+        <div className="row align-items-center justify-content-center g-4 g-lg-5 cx-meet-top-row">
           
           {/* Left Column: Heading, Description & CTA */}
-          {/* Three equal columns keep the image centred on the page */}
-          <div className="col-12 col-lg-4">
+          {/* Text and image size to their content and sit centred as one group */}
+          <div className="col-12 col-lg-auto">
             <div className="cx-meet-left">
               <h2 className="cx-meet-h2">
                 Meet<br />
-                Canxiol
+                Canxiol.
               </h2>
 
               <p className="cx-meet-desc">
@@ -86,7 +79,7 @@ export default function CanxiolMeetSection({
           </div>
 
           {/* Center Column: Product Showcase Image */}
-          <div className="col-12 col-lg-4 text-center">
+          <div className="col-12 col-lg-auto text-center cx-meet-img-col">
             <div className="cx-meet-img-wrap">
               <div className="cx-meet-img-box">
                 <Image
@@ -97,29 +90,6 @@ export default function CanxiolMeetSection({
                   className="cx-meet-img"
                   priority
                 />
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column: Process Flow Steps */}
-          <div className="col-12 col-lg-4 cx-meet-flow-col">
-            <div className="cx-meet-flow">
-              {steps.map((step, idx) => (
-                <div key={idx} className="cx-meet-flow-item">
-                  <span className="cx-meet-flow-text">{step}</span>
-                  <div className="cx-meet-flow-arrow">
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M7 2.91666V11.0833M7 11.0833L11.0833 7M7 11.0833L2.91666 7" stroke="#00A99D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </div>
-                </div>
-              ))}
-              <div className="cx-meet-flow-brand">
-                <div className="cx-brand-title">
-                  <span>CANXIOL</span>
-                  <sup>®</sup>
-                </div>
-                <span className="cx-brand-sub">Oral solution</span>
               </div>
             </div>
           </div>

@@ -9,7 +9,9 @@ export default function AnxietyHero({
   subtitle = null,
   text     = 'Anxiety disorders are common mental health conditions characterized by excessive fear and anxiety, along with related behavioral disturbances. While occasional anxiety is a normal part of life, anxiety disorders are more persistent, harder to control, and can affect relationships, work, and overall well-being.',
   imageSrc = '/images/what is anxity.png',
-  imageAlt = 'Calm, smiling woman holding a bouquet of flowers',
+  imageAlt = 'Calm young woman smiling with her eyes closed, breathing easy',
+  // Desktop: run the photo out to the screen's right edge instead of the container's
+  imageToEdge = false,
   // Shader controls (same defaults as the home hero)
   gradientSpeed      = 0.5,
   gradientDirection  = 0,
@@ -20,7 +22,7 @@ export default function AnxietyHero({
   const [imgRatio, setImgRatio] = useState(null);
 
   return (
-    <section id={id} className="cx-anx-hero">
+    <section id={id} className={`cx-anx-hero${imageToEdge ? ' cx-anx-hero-img-edge' : ''}`}>
       {/* Animated WebGL / WebGPU gradient background */}
       <AnimatedGradientBg
         speed={gradientSpeed}
@@ -36,7 +38,12 @@ export default function AnxietyHero({
         <div className="row cx-anx-hero-row">
           {/* Left Column: Headline and intro */}
           <div className="col-12 col-lg-6 cx-anx-hero-text">
-            <h1 className="cx-anx-hero-h1">{title}</h1>
+            <h1 className="cx-anx-hero-h1">
+              {/* A trailing "?" sits slightly lower so it reads with the word */}
+              {title.endsWith('?')
+                ? <>{title.slice(0, -1)}<span className="cx-anx-hero-qmark">?</span></>
+                : title}
+            </h1>
             {subtitle && <p className="cx-anx-hero-sub">{subtitle}</p>}
             <p className="cx-anx-hero-p">{text}</p>
           </div>

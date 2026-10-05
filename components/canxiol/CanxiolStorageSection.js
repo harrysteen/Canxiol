@@ -29,7 +29,7 @@ export default function CanxiolStorageSection() {
     <section id="storage" className="cx-cxp-store">
       <div className="container">
         <h2 className="cx-cxp-store-h2">
-          Looking after your Canxiol<sup>®</sup>
+          Looking after your Canxiol<sup>®</sup>.
         </h2>
 
         <div className="cx-cxp-store-grid">

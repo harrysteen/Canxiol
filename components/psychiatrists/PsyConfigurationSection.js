@@ -8,7 +8,7 @@ export default function PsyConfigurationSection() {
         <div className="row align-items-center g-4">
           <div className="col-12 col-lg-5">
             <span className="cx-psy-teal-label cx-psy-eyebrow">PACKAGING SPECIFICATIONS</span>
-            <h2 className="cx-psy-h2 cx-psy-config-h2">Pack Presentation</h2>
+            <h2 className="cx-psy-h2 cx-psy-config-h2">Pack Presentation.</h2>
             <p className="cx-psy-config-lead">Canxiol is available in two pack configurations:</p>
 
             <div className="cx-psy-config-options">
@@ -44,7 +44,7 @@ export default function PsyConfigurationSection() {
 
         <hr className="cx-psy-divider" />
 
-        <h2 className="cx-psy-h2 cx-psy-h2-sm">Storage Conditions</h2>
+        <h2 className="cx-psy-h2 cx-psy-h2-sm">Storage Conditions.</h2>
         <div className="row g-4">
           <div className="col-12 col-md-6">
             <span className="cx-psy-teal-label">IN-USE PACK:</span>

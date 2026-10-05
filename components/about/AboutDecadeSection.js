@@ -18,7 +18,7 @@ export default function AboutDecadeSection() {
           <div className="col-12 col-lg-6 cx-about-decade-text">
             <span className="cx-about-eyebrow">A decade of science</span>
             <h2 className="cx-about-decade-h2">
-              Translating cannabidiol research into Canxiol<sup>®</sup>
+              Translating cannabidiol research into Canxiol<sup>®</sup>.
             </h2>
             {paragraphs.map((text) => (
               <p key={text} className="cx-about-decade-p">{text}</p>

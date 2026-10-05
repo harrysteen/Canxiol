@@ -12,7 +12,7 @@ export default function AboutResearchSection() {
         <div className="cx-about-research-head">
           <h2 className="cx-about-h2">
             Our<br />
-            research areas
+            research areas.
           </h2>
           <p className="cx-about-research-intro">
             We are a specialty therapeutics company focused on translating scientific insight

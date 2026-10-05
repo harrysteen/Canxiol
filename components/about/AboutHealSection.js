@@ -10,7 +10,7 @@ export default function AboutHealSection() {
           <div className="col-12 col-lg-5 cx-about-heal-left">
             <h2 className="cx-about-heal-h2">
               <strong>Heal</strong> the way<br />
-              you <strong>Feel</strong>
+              you <strong>Feel</strong>.
             </h2>
             <p className="cx-about-heal-note">
               the result bringing Science &amp; Patient SMILE together is a significant

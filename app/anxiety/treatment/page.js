@@ -9,7 +9,7 @@ import TreatmentSupportSection from '../../../components/anxiety/TreatmentSuppor
 import TreatmentPsychiatristSection from '../../../components/anxiety/TreatmentPsychiatristSection';
 
 // TODO: swap for the man-with-Canxiol cut-out (transparent PNG) once it is added to /public/images
-const TREATMENT_HERO_IMAGE = '/images/canxiol_bottle_hand.png';
+const TREATMENT_HERO_IMAGE = '/images/Diagnosis and Treatment.png';
 
 export const metadata = {
   title: 'Diagnosis and Treatment of Anxiety — Canxiol | Leiutis',
@@ -24,7 +24,7 @@ export default function TreatmentPage() {
         <AnxietySubNav />
         <AnxietyHero
           id="treatment"
-          title="Diagnosis and Treatment"
+          title="Diagnosis and Treatment."
           subtitle="Anxiety disorders are treatable."
           text="If anxiety is persistent, difficult to manage, or interfering with daily life, professional assessment is recommended. A diagnosis of an anxiety disorder is made by a qualified healthcare professional (Psychiatrist) after considering the person’s symptoms, their duration, severity, impact on daily functioning, and other possible medical or psychological causes."
           imageSrc={TREATMENT_HERO_IMAGE}

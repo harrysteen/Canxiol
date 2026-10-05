@@ -43,7 +43,7 @@ export default function CanxiolInfoBar() {
             <div className="cx-feat-col cx-feat-col-2">
               <h4 className="cx-feat-title">Heal the way you feel</h4>
               <p className="cx-feat-desc">
-                Anxiety is treatable – Seek professional Psychiatric evaluation.
+                Anxiety is treatable – Seek Psychiatrist guidance.
               </p>
             </div>
 

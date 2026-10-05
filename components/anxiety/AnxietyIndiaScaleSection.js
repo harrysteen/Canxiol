@@ -49,10 +49,10 @@ export default function AnxietyIndiaScaleSection() {
         <span className="cx-anx-eyebrow">The scale of anxiety in India</span>
 
         <div className="cx-anx-section-head">
-          <h2 className="cx-anx-h2">The scale of anxiety<br />in India</h2>
+          <h2 className="cx-anx-h2">The scale of anxiety<br />in India.</h2>
           <p className="cx-anx-section-lead">
-            Selected figures from national and global health surveys place the scale in
-            perspective.
+            India&apos;s anxiety burden is vast, yet largely invisible.<br />
+            Millions live with it, few seek help, most suffer in silence.
           </p>
         </div>
 

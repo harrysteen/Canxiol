@@ -39,7 +39,7 @@ export default function PsyAdverseReactionsSection() {
     <section className="cx-psy-ae">
       <div className="container">
         <span className="cx-psy-teal-label">SAFETY PROFILE</span>
-        <h2 className="cx-psy-h2">Adverse Reactions reported in phase 3 clinical trial</h2>
+        <h2 className="cx-psy-h2">Adverse Reactions reported in phase 3 clinical trial.</h2>
         <p className="cx-psy-section-lead">
           In Phase III randomized clinical trial, the most common adverse reactions that occurred in
           Canxiol® treated patients with mild to moderate anxiety disorders were fatigue, abdominal

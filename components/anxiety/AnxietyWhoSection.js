@@ -28,7 +28,7 @@ export default function AnxietyWhoSection() {
         <span className="cx-anx-eyebrow">Anxiety can affect anyone</span>
 
         <div className="cx-anx-section-head cx-anx-who-head">
-          <h2 className="cx-anx-h2">Anxiety affects all<br />walks of life</h2>
+          <h2 className="cx-anx-h2">Anxiety affects all<br />walks of life.</h2>
           <p className="cx-anx-section-lead">
             Anxiety can affect anyone, at any age or stage of life. It can arise from different
             situations and may look different from person to person.

@@ -19,8 +19,8 @@ export default function CanxiolPerspectiveSection({ showButtons = false }) {
         {/* Heading */}
         <div className="cx-perspective-header text-center">
           <h2 className="cx-perspective-h2">
-            A new perspective<br />
-            on anxiety care.
+            Rethinking Anxiety Care:<br />
+            A New Perspective.
           </h2>
 
           {showButtons && (
