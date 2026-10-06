@@ -11,12 +11,12 @@ export default function CanxiolGettingHelpSection() {
     {
       image: '/images/lifestyle-connections.png',
       alt: 'Family walking together along a leafy neighbourhood street',
-      title: 'Stronger connections',
+      title: 'Build stronger connections',
     },
     {
       image: '/images/lifestyle-moments.png',
       alt: 'Family enjoying a board game together at home',
-      title: 'More moments that matter',
+      title: 'Happier moments that matter',
     },
   ];
 

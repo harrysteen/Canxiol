@@ -40,7 +40,7 @@ export default function CanxiolInfoBar() {
 
             {/* Item 2 */}
             <div className="cx-feat-col cx-feat-col-2">
-              <h4 className="cx-feat-title">Heal the way you feel</h4>
+              <h4 className="cx-feat-title">Heal <span className="cx-feat-title-light">the way you</span> Feel</h4>
               <p className="cx-feat-desc">
                 Anxiety is treatable – Seek Psychiatrist guidance.
               </p>

@@ -151,7 +151,7 @@ export default function PsyClinicalTrialSection() {
         </div>
 
         <div className="cx-psy-trial-download">
-          <a href={PSY_DOWNLOADS.clinicalPoster} className="cx-psy-btn-dark" target="_blank" rel="noopener noreferrer">
+          <a href={PSY_DOWNLOADS.clinicalPoster} className="cx-psy-btn-dark" target="_blank" rel="noopener noreferrer" download="Canxiol Clinical Trial Poster.pdf">
             <span>DOWNLOAD CLINICAL POSTER (PDF)</span>
             <DownloadIcon />
           </a>

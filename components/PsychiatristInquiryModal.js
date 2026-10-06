@@ -6,6 +6,7 @@ const EMPTY_FORM = { name: '', email: '', city: '', country: 'India', message: '
 
 export default function PsychiatristInquiryModal({ open, onClose }) {
   const [form, setForm] = useState(EMPTY_FORM);
+  const [sending, setSending] = useState(false);
   const router = useRouter();
   const firstFieldRef = useRef(null);
 
@@ -38,9 +39,24 @@ export default function PsychiatristInquiryModal({ open, onClose }) {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: send `form` to the backend / email service once available
+    if (sending) return;
+    setSending(true);
+    // Email the details to the site owner. A failed send is logged but never
+    // blocks the psychiatrist from reaching the page.
+    try {
+      const res = await fetch('/api/psychiatrist-inquiry', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) console.error('Psychiatrist inquiry was not sent', await res.text());
+    } catch (err) {
+      console.error('Psychiatrist inquiry was not sent', err);
+    } finally {
+      setSending(false);
+    }
     onClose();
     router.push('/psychiatrists');
   };
@@ -153,8 +169,8 @@ export default function PsychiatristInquiryModal({ open, onClose }) {
                   </label>
                 </div>
 
-                <button type="submit" className="cx-inq-submit">
-                  <span>REQUEST SCIENTIFIC INFORMATION</span>
+                <button type="submit" className="cx-inq-submit" disabled={sending} aria-busy={sending}>
+                  <span>{sending ? 'SENDING…' : 'REQUEST SCIENTIFIC INFORMATION'}</span>
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M4.08337 9.91666L9.91671 4.08333M9.91671 4.08333H4.66671M9.91671 4.08333V9.33333" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>

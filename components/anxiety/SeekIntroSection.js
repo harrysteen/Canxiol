@@ -1,19 +1,22 @@
 import Image from 'next/image';
 
-// TODO: swap for the woman-at-the-window photo once it is added to /public/images
 const INTRO_IMAGE = '/images/when-to-seek-intro.png';
 
 export default function SeekIntroSection() {
   return (
     <section className="cx-seek-intro">
       <div className="container">
+        <h2 className="cx-anx-h2 cx-seek-intro-h2">
+          When does anxiety become an anxiety disorder?
+        </h2>
+
         <div className="row cx-seek-intro-row">
           {/* Left Column: Photo */}
           <div className="col-12 col-lg-5">
             <div className="cx-seek-intro-img">
               <Image
                 src={INTRO_IMAGE}
-                alt="Woman looking thoughtfully out of a window, her reflection in the glass"
+                alt="Woman with eyes closed, smiling calmly in warm evening light"
                 fill
                 sizes="(max-width: 991px) 100vw, 42vw"
               />

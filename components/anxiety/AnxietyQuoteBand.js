@@ -1,9 +1,8 @@
 // Pass `lines` to fix the line breaks as in the design (one line per entry),
 // or `children` for a quote that wraps naturally.
 const DEFAULT_LINES = [
-  'A working professional may',
-  'also appear successful and',
-  'capable on the outside',
+  'A person may also appear',
+  'successful and capable on the outside',
   'while privately struggling with',
   'persistent worry, poor sleep,',
   'tension, or exhaustion.',

@@ -40,7 +40,7 @@ export default function CanxiolHero({
                 </h1>
 
                 <p className="cx-hero-p">
-                  Prescription Only medicine. Use only as directed by Psychiatrist
+                  Prescription Only medicine. Use only as directed by Psychiatrist.
                 </p>
 
                 <div className="cx-hero-btns">
