@@ -44,7 +44,7 @@ export default function CanxiolHero({
                 </p>
 
                 <div className="cx-hero-btns">
-                  <Link href="#discover" className="cx-btn-discover">
+                  <Link href="/canxiol" className="cx-btn-discover">
                     <span>DISCOVER CANXIOL</span>
                     <Image
                       src="/images/contact-us-arrow.png"

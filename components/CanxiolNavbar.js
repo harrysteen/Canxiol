@@ -65,10 +65,8 @@ export default function CanxiolNavbar() {
                 </button>
                 {resourcesOpen && (
                   <div className="cx-dropdown">
-                    <Link href="#patient-resources">Patient Resources</Link>
-                    <Link href="#clinical-guidelines">Clinical Guidelines</Link>
-                    <Link href="#faqs">FAQs</Link>
-                    <Link href="#brochure">Download Brochure</Link>
+                    <Link href="/blogs">Blogs</Link>
+                    <Link href="/media">Media</Link>
                   </div>
                 )}
               </li>
@@ -142,10 +140,8 @@ export default function CanxiolNavbar() {
             </button>
             {mobileResourcesOpen && (
               <div className="cx-drawer-sub">
-                <Link href="#patient-resources" onClick={() => setMobileMenuOpen(false)}>Patient Resources</Link>
-                <Link href="#clinical-guidelines" onClick={() => setMobileMenuOpen(false)}>Clinical Guidelines</Link>
-                <Link href="#faqs" onClick={() => setMobileMenuOpen(false)}>FAQs</Link>
-                <Link href="#brochure" onClick={() => setMobileMenuOpen(false)}>Download Brochure</Link>
+                <Link href="/blogs" onClick={() => setMobileMenuOpen(false)}>Blogs</Link>
+                <Link href="/media" onClick={() => setMobileMenuOpen(false)}>Media</Link>
               </div>
             )}
             <Link href="/pharmacovigilance" onClick={() => setMobileMenuOpen(false)}>Pharmacovigilance</Link>

@@ -25,7 +25,7 @@ export default function CanxiolAnxietySection() {
                   important need.
                 </p>
 
-                <Link href="#anxiety-effects" className="cx-btn-anxiety">
+                <Link href="/anxiety" className="cx-btn-anxiety">
                   <span>EXPLORE ANXIETY &amp; ITS EFFECTS</span>
                   <Image
                     src="/images/contact-us-arrow.png"

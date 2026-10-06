@@ -9,7 +9,7 @@ export default function CanxiolBlogSection() {
       <div className="container">
         <div className="cx-blog-header-row">
           <h2 className="cx-blog-section-title">Recent blog posts.</h2>
-          <Link href="/blogs" className="cx-blog-view-more">
+          <Link href="/blogs" className="cx-blog-view-more cx-blog-view-more-top">
             <span>View more blogs</span>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M4.08337 9.91666L9.91671 4.08333M9.91671 4.08333H4.66671M9.91671 4.08333V9.33333" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -24,6 +24,14 @@ export default function CanxiolBlogSection() {
             </div>
           ))}
         </div>
+
+        {/* Mobile: the button moves below the cards */}
+        <Link href="/blogs" className="cx-blog-view-more cx-blog-view-more-end">
+          <span>View more blogs</span>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.08337 9.91666L9.91671 4.08333M9.91671 4.08333H4.66671M9.91671 4.08333V9.33333" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+        </Link>
       </div>
     </section>
   );

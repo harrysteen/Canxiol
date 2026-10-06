@@ -2,7 +2,7 @@ import { PSY_DOWNLOADS } from './psyLinks';
 
 export default function PsyLeafletSection() {
   return (
-    <section className="cx-psy-pil">
+    <section id="prescribing-information" className="cx-psy-pil">
       <div className="container">
         <div className="cx-psy-pil-card">
           <div className="cx-psy-pil-info">

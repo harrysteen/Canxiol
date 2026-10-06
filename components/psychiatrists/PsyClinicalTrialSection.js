@@ -21,7 +21,7 @@ const DownloadIcon = () => (
 
 export default function PsyClinicalTrialSection() {
   return (
-    <section className="cx-psy-trial">
+    <section id="clinical-evidence" className="cx-psy-trial">
       <div className="container">
         {/* Intro + key numbers */}
         <span className="cx-psy-teal-label">CLINICAL SCIENTIFIC STUDY</span>

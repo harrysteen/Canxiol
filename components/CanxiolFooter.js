@@ -11,7 +11,7 @@ export default function CanxiolFooter() {
         <div className="row g-4 g-lg-5 cx-footer-top">
           
           {/* Column 1: Brand & Tagline */}
-          <div className="col-12 col-lg-4">
+          <div className="col-12 col-lg-3">
             <div className="cx-footer-brand">
               <Link href="/" aria-label="Canxiol Homepage">
                 <Image
@@ -23,39 +23,46 @@ export default function CanxiolFooter() {
                 />
               </Link>
               <p className="cx-footer-tagline">
-                Better science.<br />
-                Healthier tomorrows.
+                <strong>Heal</strong> The way<br />
+                You <strong>Feel</strong>
               </p>
             </div>
           </div>
 
           {/* Column 2: CANXIOL */}
-          <div className="col-6 col-md-4 col-lg-2">
+          <div className="col-6 col-md-3 col-lg-2">
             <h4 className="cx-footer-h4">CANXIOL</h4>
             <ul className="cx-footer-links">
-              <li><Link href="#what-is-canxiol">What is Canxiol</Link></li>
-              <li><Link href="#anxiety">Anxiety &amp; its effects</Link></li>
-              <li><Link href="#how-it-works">How Canxiol works</Link></li>
-              <li><Link href="#clinical-evidence">Clinical evidence</Link></li>
+              <li><Link href="/canxiol">What is Canxiol</Link></li>
+              <li><Link href="/anxiety">Anxiety &amp; its effects</Link></li>
+              <li><Link href="/pharmacovigilance">Pharmacovigilance</Link></li>
             </ul>
           </div>
 
-          {/* Column 3: FOR HEALTHCARE PSYCHIATRIST */}
-          <div className="col-6 col-md-4 col-lg-3">
-            <h4 className="cx-footer-h4">FOR HEALTHCARE PSYCHIATRIST</h4>
+          {/* Column 3: FOR HEALTHCARE PROFESSIONALS */}
+          <div className="col-6 col-md-3 col-lg-3">
+            <h4 className="cx-footer-h4">FOR HEALTHCARE PROFESSIONALS</h4>
             <ul className="cx-footer-links">
-              <li><Link href="#clinical-evidence">Clinical evidence</Link></li>
-              <li><Link href="#prescribing-information">Prescribing information</Link></li>
-              <li><Link href="#resources">Resources</Link></li>
+              <li><Link href="/psychiatrists#clinical-evidence">Clinical evidence</Link></li>
+              <li><Link href="/psychiatrists#prescribing-information">Prescribing information</Link></li>
             </ul>
           </div>
 
-          {/* Column 4: ABOUT LEIUTIS */}
-          <div className="col-6 col-md-4 col-lg-3">
+          {/* Column 4: RESOURCES */}
+          <div className="col-6 col-md-3 col-lg-2">
+            <h4 className="cx-footer-h4">RESOURCES</h4>
+            <ul className="cx-footer-links">
+              <li><Link href="/blogs">Blogs</Link></li>
+              <li><Link href="/media">Media</Link></li>
+            </ul>
+          </div>
+
+          {/* Column 5: ABOUT LEIUTIS */}
+          <div className="col-6 col-md-3 col-lg-2">
             <h4 className="cx-footer-h4">ABOUT LEIUTIS</h4>
             <ul className="cx-footer-links">
-              <li><Link href="#about-us">About us</Link></li>
-              <li><Link href="#science-innovation">Science &amp; innovation</Link></li>
+              <li><Link href="/about-leiutis">About us</Link></li>
+              <li><Link href="/about-leiutis#discover-smile">About SMILE</Link></li>
               <li><a href="https://leiutis.com" target="_blank" rel="noopener noreferrer">Visit Leiutis</a></li>
             </ul>
           </div>
@@ -74,9 +81,9 @@ export default function CanxiolFooter() {
           </div>
           <div className="col-12 col-lg-4 text-lg-end">
             <div className="cx-footer-legal-links">
-              <Link href="#patient-leaflet">Patient Information Leaflet</Link>
+              <Link href="/psychiatrists#prescribing-information">Patient Information Leaflet</Link>
               <span className="cx-footer-dot">·</span>
-              <Link href="#prescribing-info">Prescribing Information</Link>
+              <Link href="/psychiatrists#prescribing-information">Prescribing Information</Link>
             </div>
           </div>
         </div>

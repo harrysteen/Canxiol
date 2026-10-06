@@ -27,7 +27,7 @@ export default function CanxiolStatsSection() {
                 <span className="cx-stat-unit">%</span>
               </div>
               <p className="cx-stat-label">
-                of <strong>22.3M</strong> patients do not seek required treatment
+                of <strong>22.3M</strong> patients do not seek required treatment. They suffer silently (NMHS,2016)
               </p>
             </div>
           </div>

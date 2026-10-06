@@ -31,8 +31,8 @@ export default function CanxiolKnowMoreSection() {
                   <p className="cx-portal-desc">
                     Learn about Canxiol, who it is intended for, how it is taken.
                   </p>
-                  <Link href="#patient-info" className="cx-btn-portal-outline">
-                    <span>PATIENT INFORMATION</span>
+                  <Link href="/canxiol" className="cx-btn-portal-outline">
+                    <span>FOR PATIENTS</span>
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M4.08337 9.91666L9.91671 4.08333M9.91671 4.08333H4.66671M9.91671 4.08333V9.33333" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
@@ -72,7 +72,7 @@ export default function CanxiolKnowMoreSection() {
                 </div>
                 <div className="cx-portal-img-wrap">
                   <Image
-                    src="/images/home page go diper into scince of canxiol.png"
+                    src="/images/home-go-deeper-psychiatrist.png"
                     alt="Psychiatrist doctor holding Canxiol bottle"
                     fill
                     sizes="(max-width: 991px) 100vw, 50vw"
