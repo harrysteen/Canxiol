@@ -2,7 +2,7 @@ import Image from 'next/image';
 import AnxietyNotes from './AnxietyNotes';
 
 // TODO: swap for the psychiatrist-consultation photo once it is added to /public/images
-const VISIT_IMAGE = '/images/psychiatrist-doctor.png';
+const VISIT_IMAGE = '/images/treatment-psychiatrist-visit.png';
 
 export default function TreatmentPsychiatristSection() {
   return (

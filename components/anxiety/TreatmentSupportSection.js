@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 // TODO: swap for the family-on-the-sofa photo once it is added to /public/images
-const SUPPORT_IMAGE = '/images/lifestyle-connections.png';
+const SUPPORT_IMAGE = '/images/treatment-support.png';
 
 const pillars = [
   { title: 'Foundational care', desc: 'Sleep, physical activity & balanced daily habits' },

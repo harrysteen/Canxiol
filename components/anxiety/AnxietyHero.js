@@ -8,7 +8,7 @@ export default function AnxietyHero({
   title    = 'What is anxiety?',
   subtitle = null,
   text     = 'Anxiety disorders are common mental health conditions characterized by excessive fear and anxiety, along with related behavioral disturbances. While occasional anxiety is a normal part of life, anxiety disorders are more persistent, harder to control, and can affect relationships, work, and overall well-being.',
-  imageSrc = '/images/what is anxity.png',
+  imageSrc = '/images/what-is-anxiety-hero.png',
   imageAlt = 'Calm young woman smiling with her eyes closed, breathing easy',
   // Desktop: run the photo out to the screen's right edge instead of the container's
   imageToEdge = false,

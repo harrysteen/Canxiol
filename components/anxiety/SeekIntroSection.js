@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 // TODO: swap for the woman-at-the-window photo once it is added to /public/images
-const INTRO_IMAGE = '/images/when to seek second section img2.png';
+const INTRO_IMAGE = '/images/when-to-seek-intro.png';
 
 export default function SeekIntroSection() {
   return (

@@ -2,7 +2,7 @@ import Image from 'next/image';
 import AnxietyNotes from './AnxietyNotes';
 
 // TODO: swap for the man-on-a-park-bench photo once it is added to /public/images
-const UNTREATED_IMAGE = '/images/lifestyle-moments.png';
+const UNTREATED_IMAGE = '/images/when-to-seek-untreated.png';
 
 export default function SeekUntreatedSection() {
   return (
