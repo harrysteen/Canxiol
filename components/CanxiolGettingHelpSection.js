@@ -11,7 +11,7 @@ export default function CanxiolGettingHelpSection() {
     {
       image: '/images/lifestyle-connections.png',
       alt: 'Family walking together along a leafy neighbourhood street',
-      title: 'Build stronger connections',
+      title: 'Build stronger relationships',
     },
     {
       image: '/images/lifestyle-moments.png',

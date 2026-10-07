@@ -1984,8 +1984,8 @@ button {
 }
 
 /* Tablet & mobile: all four items stay, in a tighter layout so the pinned bar stays short.
-   Tablet (768–991px): one row of four. Phones (<768px): a 2 × 2 grid —
-   notice | logo on top, tagline | leaflet below. */
+   Tablet (768–991px): one row of four. Phones (<768px): tagline centred on top,
+   notice | leaflet | logo below. */
 @media (max-width: 991.98px) {
   .cx-sticky-infobar {
     height: auto;
@@ -2049,41 +2049,69 @@ button {
   }
 }
 
-/* Phones: one row — notice | leaflet | logo; the tagline is left to desktop & tablet */
+/* Phones: tagline centred across the top; notice | leaflet | logo below */
 @media (max-width: 767.98px) {
-  /* Fixed logo column: an auto column lets the max-width:100% image collapse */
   .cx-infobar-grid {
     grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      "tagline tagline tagline"
+      "notice  leaflet logo";
+  }
+
+  .cx-sticky-infobar .cx-feat-col-1 { grid-area: notice; }
+  .cx-sticky-infobar .cx-feat-col-2 { grid-area: tagline; }
+  .cx-sticky-infobar .cx-feat-col-3 { grid-area: leaflet; }
+  .cx-sticky-infobar .cx-feat-col-4 { grid-area: logo; }
+
+  /* Tagline: centred, with a hairline under it instead of a side divider */
+  .cx-sticky-infobar .cx-feat-col-2 {
+    align-items: center;
+    text-align: center;
+    padding: 5px 0 4px;
+    border-bottom: 1px solid #E4D6E8;
+  }
+
+  .cx-sticky-infobar .cx-feat-col-2::after {
+    display: none;
   }
 
   .cx-sticky-infobar .cx-feat-logo {
     max-width: none;
   }
 
-  /* "Download Document" — drops "Official" so the link and arrow fit one line */
-  .cx-dl-official {
-    display: none;
-  }
-
   .cx-sticky-infobar .cx-download-link {
     white-space: nowrap;
   }
 
-  .cx-sticky-infobar .cx-feat-col-2 {
-    display: none;
-  }
-
   .cx-sticky-infobar .cx-feat-col {
-    padding: 8px 2vw;
+    padding-top: 6px;
+    padding-bottom: 6px;
   }
 
   .cx-sticky-infobar .cx-feat-col-1 {
     padding-left: 0;
+    padding-right: 3vw;
+  }
+
+  .cx-sticky-infobar .cx-feat-col-3 {
+    padding-left: 3vw;
+    padding-right: 3vw;
   }
 
   .cx-sticky-infobar .cx-feat-col-4 {
     padding-left: 3vw;
     padding-right: 0;
+  }
+
+  .cx-sticky-infobar .cx-feat-desc {
+    font-size: clamp(8px, 2.5vw, 10px);
+  }
+
+  /* Small phones: "Download Document" so the bottom row fits on one line */
+  @media (max-width: 399.98px) {
+    .cx-dl-official {
+      display: none;
+    }
   }
 
   /* Text scales with the viewport so the one-line leaflet title always fits */

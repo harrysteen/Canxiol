@@ -39,9 +39,9 @@ export default function CanxiolFooter() {
             </ul>
           </div>
 
-          {/* Column 3: FOR HEALTHCARE PROFESSIONALS */}
+          {/* Column 3: FOR PSYCHIATRISTS */}
           <div className="col-6 col-md-3 col-lg-3">
-            <h4 className="cx-footer-h4">FOR HEALTHCARE PROFESSIONALS</h4>
+            <h4 className="cx-footer-h4">FOR PSYCHIATRISTS</h4>
             <ul className="cx-footer-links">
               <li><Link href="/psychiatrists#clinical-evidence">Clinical evidence</Link></li>
               <li><Link href="/psychiatrists#prescribing-information">Prescribing information</Link></li>

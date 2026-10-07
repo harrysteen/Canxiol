@@ -5,13 +5,13 @@ import { PSY_IMAGES } from './psyImages';
 const partners = [
   { name: 'Leiutis', logo: PSY_IMAGES.logoLeiutis, width: 412, height: 72, desc: 'Trademark and IP owner' },
   { name: 'Biophore', logo: PSY_IMAGES.logoBiophore, width: 411, height: 116, desc: 'Synthetic cannabidiol API manufacturing', tag: 'USDMF #35992' },
-  { name: 'Zenara', logo: PSY_IMAGES.logoZenara, width: 424, height: 91, desc: 'GMP certified Foundation manufacturing' },
+  { name: 'Zenara', logo: PSY_IMAGES.logoZenara, width: 424, height: 91, desc: 'GMP certified Formulation manufacturing' },
 ];
 
 const points = [
   'Canxiol contains fully synthetic Cannabidiol, not plant-derived and hence non-psychoactive, with no known potential for abuse, dependance. No withdrawal symptoms',
   'Canxiol is formulated with pharmaceutical grade synthetic cannabidiol using proprietary nanodispersion technology',
-  'Manufactured by Biophore in accordance to GMP requirements and has a USDMF No- 35992',
+  'API Manufactured by Biophore in accordance to GMP requirements and has a USDMF No- 35992',
   'Canxiol is manufactured by Zenara in their facilities with GMP certification from regulatory authorities including the USFDA, EU, MHRA, Turkey, Russia & WHO - GMP certified',
 ];
 
@@ -24,7 +24,7 @@ export default function PsyStandOutSection() {
 
         <div className="row align-items-center g-4 cx-psy-standout-row">
           <div className="col-12 col-md-6 col-lg-3">
-            <span className="cx-psy-teal-label cx-psy-partners-label">OUR COLLABORATIVE EFFECT OF</span>
+            <span className="cx-psy-teal-label cx-psy-partners-label">Product Innovation through collaboration</span>
             <div className="cx-psy-partners">
               {partners.map((p) => (
                 <div key={p.name} className="cx-psy-partner">
