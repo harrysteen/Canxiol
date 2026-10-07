@@ -10,6 +10,7 @@ import PsyClinicalTrialSection from '../../components/psychiatrists/PsyClinicalT
 import PsyAdverseReactionsSection from '../../components/psychiatrists/PsyAdverseReactionsSection';
 import PsyInteractionsSection from '../../components/psychiatrists/PsyInteractionsSection';
 import PsyPharmacokineticsSection from '../../components/psychiatrists/PsyPharmacokineticsSection';
+import PsyBannerSection from '../../components/psychiatrists/PsyBannerSection';
 import PsyLeafletSection from '../../components/psychiatrists/PsyLeafletSection';
 
 export const metadata = {
@@ -30,6 +31,7 @@ export default function PsychiatristsPage() {
         <PsyAdverseReactionsSection />
         <PsyInteractionsSection />
         <PsyPharmacokineticsSection />
+        <PsyBannerSection />
         <PsyLeafletSection />
         {/* Sticky to the viewport bottom; rests above the footer at the end of the page */}
         <CanxiolInfoBar />
