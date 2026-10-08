@@ -76,7 +76,7 @@ export default function CanxiolFooter() {
         <div className="row align-items-center g-3 cx-footer-compliance">
           <div className="col-12 col-lg-8">
             <p className="cx-footer-disclaimer">
-              Canxiol is a prescription medicine. Please read the prescribing information and use only as directed by a qualified healthcare professional.
+              Canxiol is a prescription medicine. Please read the prescribing information and use only as directed by a qualified Psychiatrists.
             </p>
           </div>
           <div className="col-12 col-lg-4 text-lg-end">
