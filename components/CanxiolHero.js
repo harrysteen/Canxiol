@@ -2,7 +2,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import AnimatedGradientBg from './AnimatedGradientBg';
-import { useOpenPsychiatristInquiry } from './PsychiatristInquiryProvider';
 
 export default function CanxiolHero({
   // Shader controls
@@ -11,8 +10,6 @@ export default function CanxiolHero({
   gradientDistortion = 0.15,
   gradientScale      = 1.5,
 }) {
-  const openInquiry = useOpenPsychiatristInquiry();
-
   return (
     <>
       <section id="hero" className="cx-hero-wrapper">
@@ -34,18 +31,18 @@ export default function CanxiolHero({
               
               {/* Left Column: Headline, Description, and CTAs */}
               <div className="col-12 col-lg-6 col-xl-6 cx-hero-left">
-                <h1 className="cx-hero-h1">
-                  <span className="cx-hl">Heal</span> The way<br />
-                  You <span className="cx-hl">Feel</span>.
+                <h1 className="cx-hero-h1 cx-hero-h1--home">
+                  <span className="cx-hl">Understanding</span> Anxiety.<br />
+                  Exploring <span className="cx-hl">Support</span>
                 </h1>
 
                 <p className="cx-hero-p">
-                  Prescription Only medicine. Use only as directed by Psychiatrist.
+                  Understanding anxiety can be a first step toward finding the right information and appropriate support.
                 </p>
 
                 <div className="cx-hero-btns">
-                  <Link href="/canxiol" className="cx-btn-discover">
-                    <span>DISCOVER CANXIOL</span>
+                  <Link href="/anxiety" className="cx-btn-discover">
+                    <span>UNDERSTAND ANXIETY</span>
                     <Image
                       src="/images/contact-us-arrow.png"
                       alt=""
@@ -54,8 +51,8 @@ export default function CanxiolHero({
                       className="cx-btn-discover-arrow"
                     />
                   </Link>
-                  <Link href="#psychiatrists" className="cx-btn-hero-psychiatrists" onClick={openInquiry}>
-                    <span>FOR PSYCHIATRISTS</span>
+                  <Link href="/anxiety/treatment" className="cx-btn-hero-psychiatrists">
+                    <span>EXPLORE SUPPORT</span>
                     <Image
                       src="/images/for-psychiatrists-arrow.png"
                       alt=""
@@ -67,15 +64,15 @@ export default function CanxiolHero({
                 </div>
               </div>
 
-              {/* Right Column: Product Bottle Visual */}
+              {/* Right Column: consultation scene */}
               <div className="col-12 col-lg-6 col-xl-6 cx-hero-img-col">
-                <div className="cx-img-wrapper">
+                <div className="cx-img-wrapper cx-img-wrapper--home">
                   <Image
-                    src="/images/canxiol_bottle_hand.png"
-                    alt="Canxiol Cannabidiol Oral Solution 150mg/mL held in hand"
+                    src="/images/when to seek help.png"
+                    alt="A man talking with a psychiatrist who takes notes, both seated in armchairs"
                     fill
                     priority
-                    sizes="(max-width: 576px) 100vw, (max-width: 992px) 500px, 680px"
+                    sizes="(max-width: 576px) 100vw, (max-width: 992px) 600px, 760px"
                   />
                 </div>
               </div>
@@ -84,14 +81,6 @@ export default function CanxiolHero({
           </div>
         </div>
 
-        {/* Teal Notification Banner - Bottom of Hero Section */}
-        <div className="cx-teal-banner">
-          <div className="container">
-            <p>
-              <span className="cx-teal-highlight">World’s first</span> Clinically Validated and Prescription CBD Product: Approved for Mild to Moderate Anxiety Disorders in Conjunction with CBT
-            </p>
-          </div>
-        </div>
       </section>
     </>
   );

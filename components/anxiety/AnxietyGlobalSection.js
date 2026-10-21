@@ -1,3 +1,5 @@
+import AnimatedGradientBg from '../AnimatedGradientBg';
+
 const stats = [
   {
     num: '359',
@@ -29,18 +31,26 @@ const stats = [
   },
 ];
 
-export default function AnxietyGlobalSection() {
+// Also used on the home page with its own heading and lead (see app/page.js)
+export default function AnxietyGlobalSection({
+  eyebrow = 'Global burden of anxiety',
+  heading = <>A global<br />perspective.</>,
+  lead = <>Anxiety is the most common mental health condition worldwide.<br />
+            Yet for most, it remains unrecognized and untreated.</>,
+  className = '',
+  animatedBg = false,
+}) {
   return (
-    <section className="cx-anx-global">
+    <section className={`cx-anx-global ${animatedBg ? 'cx-anx-global--animated' : ''} ${className}`.trim()}>
+      {/* Same moving lilac gradient as the hero */}
+      {animatedBg && <AnimatedGradientBg speed={0.5} direction={0} distortion={0.15} scale={1.5} />}
+
       <div className="container">
-        <span className="cx-anx-eyebrow">Global burden of anxiety</span>
+        {eyebrow && <span className="cx-anx-eyebrow">{eyebrow}</span>}
 
         <div className="cx-anx-section-head">
-          <h2 className="cx-anx-h2">A global<br />perspective.</h2>
-          <p className="cx-anx-section-lead">
-            Anxiety is the most common mental health condition worldwide.<br />
-            Yet for most, it remains unrecognized and untreated.
-          </p>
+          <h2 className="cx-anx-h2">{heading}</h2>
+          <p className="cx-anx-section-lead">{lead}</p>
         </div>
 
         <div className="cx-anx-global-grid">

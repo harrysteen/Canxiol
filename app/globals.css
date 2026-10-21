@@ -1187,7 +1187,7 @@ button {
    8. Canxiol Navbar Styles
    -------------------------------------------------------------------------- */
 .cx-nav {
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(250, 248, 247, 0.95);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   position: sticky;
@@ -1199,7 +1199,7 @@ button {
 
 .cx-nav.scrolled {
   box-shadow: 0 4px 20px rgba(59, 26, 74, 0.08);
-  background: rgba(255, 255, 255, 0.98);
+  background: rgba(250, 248, 247, 0.98);
 }
 
 .cx-nav-inner {
@@ -1231,10 +1231,48 @@ button {
   display: block;
 }
 
+/* Text lockup: "Heal The way You Feel" over the Leiutis mark */
+.cx-logo-lockup {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+}
+
+.cx-logo-tagline {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1;
+  color: #2a0d3a;
+  white-space: nowrap;
+}
+
+.cx-logo-tagline strong {
+  font-weight: 700;
+  color: #471D41;
+}
+
+.cx-logo-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.4px;
+  color: #5B1F5E;
+}
+
+.cx-logo-mark {
+  width: 15px;
+  height: auto;
+  display: block;
+}
+
 .cx-links {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 3.25rem;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -1546,7 +1584,7 @@ button {
   }
 
   .cx-links {
-    gap: 1.1rem;
+    gap: 2rem;
   }
 
   .cx-logo-img {
@@ -1814,6 +1852,73 @@ button {
 
   .cx-img-wrapper img {
     object-position: bottom center !important;
+  }
+}
+
+/* Home hero: two-line headline, tighter than the original so "Understanding Anxiety." fits one line */
+.cx-hero-h1.cx-hero-h1--home {
+  font-weight: 300;
+  font-size: clamp(34px, 4.2vw, 62px);
+  line-height: 1.22;
+  letter-spacing: -0.035em;
+}
+
+.cx-hero-h1--home .cx-hl {
+  font-weight: 600;
+  text-shadow: none;
+}
+
+/* Consultation photo is wide and sits on the hero floor */
+.cx-img-wrapper.cx-img-wrapper--home {
+  max-width: 760px;
+  margin-left: auto;
+  margin-right: 0;
+  transform: none;
+}
+
+.cx-img-wrapper--home img {
+  object-position: bottom right !important;
+}
+
+@media (max-width: 991.98px) {
+  .cx-img-wrapper.cx-img-wrapper--home {
+    margin: 0 auto;
+  }
+
+  .cx-img-wrapper--home img {
+    object-position: bottom center !important;
+  }
+}
+
+/* Teal one-line message pinned to the bottom of the viewport (home page) */
+.cx-notice-bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 1030;
+  width: 100%;
+  background-color: #03878B;
+  color: #FAF9F7;
+  padding: 14px 0;
+  text-align: center;
+}
+
+.cx-notice-bar p {
+  margin: 0;
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-weight: 400;
+  font-size: clamp(12px, 1.05vw, 15px);
+  line-height: 1.4;
+  color: #FAF9F7;
+}
+
+.cx-notice-bar strong {
+  font-weight: 700;
+  font-size: 1.07em;
+}
+
+@media (max-width: 767.98px) {
+  .cx-notice-bar {
+    padding: 10px 0;
   }
 }
 
@@ -3029,16 +3134,24 @@ button {
   display: block;
 }
 
+.cx-footer-tagline-link {
+  text-decoration: none;
+  display: inline-block;
+}
+
+/* Large two-line "Heal The way / You Feel" in place of the logo */
 .cx-footer-tagline {
   font-family: var(--font-outfit), 'Outfit', sans-serif;
-  font-size: 15px;
-  line-height: 1.5;
-  color: #C8B9C6;
+  font-size: clamp(28px, 2.8vw, 40px);
+  font-weight: 300;
+  line-height: 1.45;
+  letter-spacing: -0.02em;
+  color: #A891A5;
   margin: 0;
 }
 
 .cx-footer-tagline strong {
-  font-weight: 700;
+  font-weight: 600;
   color: #FFFFFF;
 }
 
@@ -3094,6 +3207,7 @@ button {
 
 .cx-footer-legal-links {
   display: inline-flex;
+  justify-content: flex-end;
   align-items: center;
   gap: 12px;
   flex-wrap: wrap;
@@ -3146,6 +3260,107 @@ button {
 .cx-dezu-link:hover {
   color: #D8CAD6;
   text-decoration: underline;
+}
+
+/* --- Choose your path (home) --- */
+.cx-path-section {
+  background: #FAF8F7;
+  padding: clamp(48px, 6vw, 88px) 0;
+}
+
+.cx-path-h2 {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-weight: 400;
+  font-size: clamp(34px, 3.8vw, 52px);
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+  color: #1A1918;
+  margin: 0 0 clamp(28px, 3.5vw, 44px);
+}
+
+.cx-path-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.cx-path-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #D8C2D5;
+  padding: clamp(24px, 2.6vw, 36px) clamp(18px, 2vw, 28px) clamp(28px, 3vw, 40px);
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+}
+
+.cx-path-eyebrow {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: #2A1A2A;
+  margin-bottom: 18px;
+}
+
+.cx-path-title {
+  font-size: clamp(19px, 1.6vw, 23px);
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  color: #1A1918;
+  margin: 0 0 12px;
+}
+
+.cx-path-desc {
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: #5E5260;
+  max-width: 300px;
+  margin: 0 0 22px;
+}
+
+.cx-path-btn {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 140px;
+  height: 34px;
+  padding: 0 18px;
+  border: 1px solid #471D41;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  color: #471D41;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.cx-path-btn:hover {
+  background: #471D41;
+  color: #FFFFFF;
+}
+
+.cx-path-btn-arrow {
+  width: 12px;
+  height: 12px;
+  object-fit: contain;
+  transition: filter 0.2s ease;
+}
+
+.cx-path-btn:hover .cx-path-btn-arrow {
+  filter: brightness(0) invert(1);
+}
+
+@media (max-width: 991.98px) {
+  .cx-path-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cx-path-desc {
+    max-width: 100%;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -3482,7 +3697,7 @@ button {
   .cx-footer-top .col-12.col-lg-4 { margin-bottom: 0; }
   .cx-footer-brand { gap: 10px; }
   .cx-footer-logo-img { width: 150px; }
-  .cx-footer-tagline { font-size: 13px; }
+  .cx-footer-tagline { font-size: 26px; }
   .cx-footer-h4 { margin-bottom: 12px; line-height: 1.4; }
   .cx-footer-links { gap: 9px; }
   .cx-footer-divider { margin: 28px 0 18px; }
@@ -5705,6 +5920,40 @@ button {
   }
 }
 
+/* Animated gradient sits behind the content */
+.cx-anx-global--animated {
+  position: relative;
+  overflow: hidden;
+}
+
+.cx-anx-global--animated > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Home page version: soft lilac band, heading sits on the section's top edge */
+.cx-anx-global.cx-anx-global--home {
+  background: linear-gradient(180deg, #F7EEF5 0%, #F4EAF2 100%);
+  padding: clamp(48px, 6vw, 88px) 0 clamp(40px, 5vw, 64px);
+}
+
+.cx-anx-global--home .cx-anx-h2 {
+  font-size: clamp(34px, 3.6vw, 50px);
+  line-height: 1.3;
+}
+
+.cx-anx-global--home .cx-anx-global-card {
+  border-left-color: #E2D5DF;
+}
+
+.cx-anx-global--home .cx-anx-global-card:last-child {
+  border-right-color: #E2D5DF;
+}
+
+.cx-anx-global--home .cx-anx-global-note {
+  border-top-color: #E2D5DF;
+}
+
 /* --- Anxiety affects all walks of life --- */
 .cx-anx-who {
   background: #FAF8F7;
@@ -5784,9 +6033,8 @@ button {
   font-weight: 600;
   line-height: 0.6;
   color: #FFFFFF;
-  /* Sits at the end of its column, just before the quote text */
-  justify-self: end;
-  margin-right: 16px;
+  /* Sits at the left edge of the container, the quote text indented beside it */
+  justify-self: start;
 }
 
 .cx-anx-quote-text {
@@ -5799,11 +6047,15 @@ button {
   margin: 24px 0 0;
 }
 
-/* Fixed line breaks from the design (desktop); lines flow as normal text on phones */
-@media (min-width: 768px) {
+/* Narrower screens: lines flow as normal text, balanced so no single word is left on its own line */
+.cx-anx-quote-text {
+  text-wrap: balance;
+}
+
+/* Fixed line breaks from the design once there is room for the longest line */
+@media (min-width: 992px) {
   .cx-anx-quote-line {
     display: block;
-    /* Each design line stays on one line */
     white-space: nowrap;
   }
 }
@@ -6269,8 +6521,257 @@ button {
   color: #1A1918;
 }
 
+/* Notes block on its own, closing a page */
+.cx-anx-notes-section {
+  background: #FAF8F7;
+  padding: clamp(40px, 5vw, 56px) 0 clamp(40px, 5vw, 64px);
+}
+
 .cx-seek-untreated .cx-anx-when-notes {
   margin-top: clamp(40px, 6vw, 64px);
+}
+
+/* Home page version: bigger two-line heading, lilac card the same height as the photo */
+.cx-seek-untreated--home {
+  padding: clamp(48px, 6vw, 88px) 0;
+}
+
+.cx-seek-untreated--home .cx-seek-untreated-h2 {
+  font-size: clamp(30px, 3.2vw, 44px);
+  line-height: 1.3;
+  margin-bottom: clamp(28px, 3.5vw, 44px);
+}
+
+.cx-seek-untreated--home .cx-seek-untreated-row {
+  align-items: stretch;
+}
+
+.cx-seek-untreated--home .cx-seek-untreated-img {
+  aspect-ratio: auto;
+  height: 100%;
+  min-height: 280px;
+}
+
+.cx-seek-untreated--home .cx-seek-untreated-card {
+  height: 100%;
+  background: #F5EAF1;
+  border-color: #EADBE6;
+}
+
+.cx-seek-untreated--home .cx-seek-untreated-card li {
+  font-size: 14px;
+}
+
+@media (max-width: 991.98px) {
+  .cx-seek-untreated--home .cx-seek-untreated-img {
+    aspect-ratio: 296 / 262;
+    height: auto;
+    min-height: 0;
+  }
+
+  .cx-seek-untreated--home .cx-seek-untreated-card {
+    height: auto;
+  }
+}
+
+/* --- A small step towards understanding yourself (home) --- */
+.cx-step-section {
+  background: #FAF8F7;
+  padding: clamp(48px, 6vw, 88px) 0;
+}
+
+.cx-step-head {
+  align-items: flex-start;
+  margin-bottom: clamp(32px, 4vw, 48px);
+}
+
+.cx-step-h2 {
+  font-size: clamp(30px, 3.2vw, 44px);
+  line-height: 1.3;
+  color: #2A1A2A;
+}
+
+.cx-step-lead {
+  max-width: 420px;
+  line-height: 1.9;
+  padding-top: 10px;
+}
+
+.cx-step-panel {
+  max-width: 980px;
+  margin: 0 auto;
+  background: #F5EAF1;
+  padding: clamp(24px, 4vw, 40px) clamp(16px, 5vw, 64px) clamp(32px, 5vw, 56px);
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+}
+
+.cx-step-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding-bottom: clamp(20px, 3vw, 28px);
+  border-bottom: 1px solid #E2D2DE;
+}
+
+.cx-step-tab {
+  height: 44px;
+  padding: 0 12px;
+  background: #FFFFFF;
+  border: 1px solid #E2D2DE;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: #2A1A2A;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.cx-step-tab:hover {
+  border-color: #471D41;
+}
+
+.cx-step-tab.is-active {
+  background: #471D41;
+  border-color: #471D41;
+  color: #FFFFFF;
+}
+
+.cx-step-pane {
+  padding-top: clamp(24px, 3vw, 32px);
+}
+
+.cx-step-pane-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2A1A2A;
+  margin: 0 0 6px;
+}
+
+.cx-step-pane-intro {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #68635F;
+  max-width: 520px;
+  margin: 0 0 18px;
+}
+
+.cx-step-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.cx-step-chip {
+  min-width: 86px;
+  height: 36px;
+  padding: 0 16px;
+  background: #FFFFFF;
+  border: 1px solid #E2D2DE;
+  font-family: inherit;
+  font-size: 12px;
+  color: #2A1A2A;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.cx-step-chip:hover {
+  border-color: #471D41;
+}
+
+.cx-step-chip.is-active {
+  background: #471D41;
+  border-color: #471D41;
+  color: #FFFFFF;
+}
+
+.cx-step-result {
+  background: #FFFFFF;
+  border: 1px solid #E2D2DE;
+  padding: 14px 16px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: #68635F;
+}
+
+.cx-step-result.has-idea {
+  color: #2A1A2A;
+  border-left: 3px solid #03878B;
+}
+
+.cx-step-checklist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cx-step-checklist label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: #FFFFFF;
+  border: 1px solid #E2D2DE;
+  padding: 12px 16px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #2A1A2A;
+  cursor: pointer;
+}
+
+.cx-step-checklist input {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+  accent-color: #471D41;
+}
+
+.cx-step-checklist label.is-done span {
+  color: #68635F;
+  text-decoration: line-through;
+}
+
+.cx-step-foot {
+  margin-top: clamp(24px, 3vw, 32px);
+  padding-top: 14px;
+  border-top: 1px solid #E2D2DE;
+}
+
+.cx-step-disclaimer {
+  font-size: 12px;
+  color: #2A1A2A;
+  margin: 0 0 8px;
+}
+
+.cx-step-cite {
+  font-size: 11px;
+  line-height: 1.8;
+  color: #68635F;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.cx-step-cite a {
+  color: #471D41;
+  text-decoration: none;
+}
+
+.cx-step-cite a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 575.98px) {
+  .cx-step-tabs {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .cx-step-chip {
+    flex: 1 1 calc(50% - 4px);
+  }
 }
 
 @media (max-width: 991.98px) {
@@ -8064,6 +8565,13 @@ button {
   gap: clamp(20px, 2.6vw, 32px);
 }
 
+/* Contact page: one centred form card */
+.cx-contact-grid.is-single {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 620px;
+  margin: 0 auto;
+}
+
 .cx-contact-card {
   display: flex;
   flex-direction: column;
@@ -8412,6 +8920,19 @@ button {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(16px, 2vw, 24px);
   align-items: start;
+}
+
+/* Patients only: one full-width column */
+.cx-pv-grid.is-single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.cx-pv-grid.is-single .cx-pv-col-intro {
+  max-width: 520px;
+}
+
+.cx-pv-grid.is-single .cx-pv-panel-text {
+  max-width: 420px;
 }
 
 .cx-pv-col {
@@ -9475,4 +9996,245 @@ a.cx-media-link:hover {
 
 @media (max-width: 575.98px) {
   .cx-media-grid { grid-template-columns: 1fr; }
+}
+
+/* --------------------------------------------------------------------------
+   Welcome audience popup ("Welcome to Leiutis")
+   -------------------------------------------------------------------------- */
+.cx-welcome-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(42, 13, 47, 0.35);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  animation: cxWelcomeFade 0.3s ease;
+}
+
+@keyframes cxWelcomeFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes cxWelcomeRise {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cx-welcome {
+  width: 100%;
+  max-width: 900px;
+  max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+  background: #FFFFFF;
+  border: 1px solid #ECE8EC;
+  border-radius: 8px;
+  box-shadow: 0 24px 60px rgba(42, 13, 47, 0.18);
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  animation: cxWelcomeRise 0.35s ease;
+  outline: none;
+}
+
+.cx-welcome-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 22px clamp(20px, 4vw, 36px);
+  border-bottom: 1px solid #EFECEF;
+}
+
+.cx-welcome-logo {
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #471D41;
+}
+
+.cx-welcome-logo-dot {
+  color: #1C8A8F;
+}
+
+.cx-welcome-tagline {
+  margin-left: auto;
+  font-size: 10px;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  color: #68635F;
+}
+
+.cx-welcome-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  margin-right: -6px;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  color: #68635F;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.cx-welcome-close:hover {
+  background: #F4EEF3;
+  color: #471D41;
+}
+
+.cx-welcome-body {
+  padding: clamp(32px, 5vw, 56px) clamp(20px, 4.6vw, 42px) clamp(36px, 6vw, 64px);
+}
+
+.cx-welcome-eyebrow {
+  display: block;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: #1C8A8F;
+  margin-bottom: 10px;
+}
+
+.cx-welcome-h2 {
+  font-size: clamp(28px, 3.6vw, 36px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  color: #471D41;
+  margin: 0 0 10px;
+}
+
+.cx-welcome-lead {
+  font-size: 14px;
+  color: #68635F;
+  margin: 0 0 clamp(28px, 4vw, 44px);
+}
+
+.cx-welcome-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 2.2vw, 24px);
+}
+
+.cx-welcome-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 234px;
+  padding: 24px;
+  background: #FFFFFF;
+  border: 1px solid #ECE8EC;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.cx-welcome-card:hover,
+.cx-welcome-card:focus-visible {
+  border-color: #CDB4C8;
+  box-shadow: 0 10px 28px rgba(42, 13, 47, 0.08);
+  transform: translateY(-2px);
+}
+
+.cx-welcome-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #E3F2F1;
+  color: #1C8A8F;
+  margin-bottom: 24px;
+}
+
+.cx-welcome-card-title {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: #471D41;
+  margin: 0 0 8px;
+}
+
+.cx-welcome-card-desc {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #68635F;
+  margin: 0 0 20px;
+}
+
+.cx-welcome-card-foot {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  color: #1A1918;
+}
+
+.cx-welcome-card:hover .cx-welcome-card-foot svg {
+  transform: translate(2px, -2px);
+}
+
+.cx-welcome-card-foot svg {
+  transition: transform 0.2s ease;
+}
+
+.cx-welcome-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding: 16px clamp(20px, 4vw, 36px);
+  border-top: 1px solid #EFECEF;
+}
+
+.cx-welcome-foot-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+  color: #3D2F47;
+}
+
+.cx-welcome-foot-item svg {
+  color: #1C8A8F;
+}
+
+@media (max-width: 767.98px) {
+  .cx-welcome-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cx-welcome-card {
+    min-height: 0;
+  }
+
+  .cx-welcome-icon {
+    margin-bottom: 16px;
+  }
+
+  .cx-welcome-tagline {
+    display: none;
+  }
+
+  .cx-welcome-close {
+    margin-left: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cx-welcome-overlay,
+  .cx-welcome {
+    animation: none;
+  }
 }

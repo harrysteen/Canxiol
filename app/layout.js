@@ -1,5 +1,6 @@
 import { DM_Sans, Outfit } from 'next/font/google';
 import './globals.css';
+import WelcomeAudienceModal from '../components/WelcomeAudienceModal';
 
 // Outfit variable font — full weight axis 100..900
 const outfit = Outfit({
@@ -35,7 +36,11 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${outfit.variable} ${dmSans.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        {/* "Welcome to Leiutis" audience picker — opens 7s after each page load */}
+        <WelcomeAudienceModal />
+      </body>
     </html>
   );
 }

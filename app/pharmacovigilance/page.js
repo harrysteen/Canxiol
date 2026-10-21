@@ -1,5 +1,4 @@
 import CanxiolNavbar from '../../components/CanxiolNavbar';
-import CanxiolInfoBar from '../../components/CanxiolInfoBar';
 import CanxiolFooter from '../../components/CanxiolFooter';
 import PsychiatristInquiryProvider from '../../components/PsychiatristInquiryProvider';
 import PvHero from '../../components/pharmacovigilance/PvHero';
@@ -8,19 +7,18 @@ import PvContactSection from '../../components/pharmacovigilance/PvContactSectio
 
 export const metadata = {
   title: 'Pharmacovigilance — Canxiol | Leiutis',
-  description: 'Report a suspected adverse reaction to Canxiol and access the reporting documents for psychiatrists and patients.',
+  description: 'Report a suspected adverse reaction to Canxiol and access the patient reporting documents.',
 };
 
 export default function PharmacovigilancePage() {
   return (
     <PsychiatristInquiryProvider>
-      <main style={{ minHeight: '100vh', backgroundColor: '#FFFFFF' }}>
+      {/* No bottom info bar on this page, so the hero takes the full screen height */}
+      <main style={{ minHeight: '100vh', backgroundColor: '#FFFFFF', '--cx-infobar-h': '0px' }}>
         <CanxiolNavbar />
         <PvHero />
         <PvPathwaysSection />
         <PvContactSection />
-        {/* Sticky to the viewport bottom; rests above the footer at the end of the page */}
-        <CanxiolInfoBar />
         <CanxiolFooter />
       </main>
     </PsychiatristInquiryProvider>

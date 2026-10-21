@@ -1,27 +1,27 @@
 import CanxiolNavbar from '../../../components/CanxiolNavbar';
-import CanxiolInfoBar from '../../../components/CanxiolInfoBar';
 import CanxiolFooter from '../../../components/CanxiolFooter';
 import PsychiatristInquiryProvider from '../../../components/PsychiatristInquiryProvider';
 import AnxietySubNav from '../../../components/anxiety/AnxietySubNav';
 import AnxietyHero from '../../../components/anxiety/AnxietyHero';
 import AnxietyQuoteBand from '../../../components/anxiety/AnxietyQuoteBand';
+import AnxietyNotes from '../../../components/anxiety/AnxietyNotes';
 import SeekIntroSection from '../../../components/anxiety/SeekIntroSection';
 import SeekSignsSection from '../../../components/anxiety/SeekSignsSection';
 import SeekProfessionalSection from '../../../components/anxiety/SeekProfessionalSection';
-import SeekUntreatedSection from '../../../components/anxiety/SeekUntreatedSection';
 
 // TODO: swap for the therapy-session cut-out (transparent PNG) once it is added to /public/images
 const SEEK_HERO_IMAGE = '/images/when to seek help.png';
 
 export const metadata = {
   title: 'When to Seek Help for Anxiety — Canxiol | Leiutis',
-  description: 'Recognize the common signs of an anxiety disorder, when to seek professional help, and what happens when anxiety goes untreated.',
+  description: 'Recognize the common signs of an anxiety disorder and when to seek professional help.',
 };
 
 export default function WhenToSeekHelpPage() {
   return (
     <PsychiatristInquiryProvider>
-      <main style={{ minHeight: '100vh', backgroundColor: '#FFFFFF' }}>
+      {/* No bottom info bar on this page, so the hero takes the full screen height */}
+      <main style={{ minHeight: '100vh', backgroundColor: '#FFFFFF', '--cx-infobar-h': '0px' }}>
         <CanxiolNavbar />
         <AnxietySubNav />
         <AnxietyHero
@@ -36,9 +36,12 @@ export default function WhenToSeekHelpPage() {
         <SeekSignsSection />
         <SeekProfessionalSection />
         <AnxietyQuoteBand>Manage anxiety without worrying about side-effects.</AnxietyQuoteBand>
-        <SeekUntreatedSection />
-        {/* Sticky to the viewport bottom; rests above the footer at the end of the page */}
-        <CanxiolInfoBar />
+        {/* Medical disclaimer, sources and the link on to Treatment */}
+        <section className="cx-anx-notes-section">
+          <div className="container">
+            <AnxietyNotes nextHref="/anxiety/treatment" nextLabel="Next: Treatment" />
+          </div>
+        </section>
         <CanxiolFooter />
       </main>
     </PsychiatristInquiryProvider>

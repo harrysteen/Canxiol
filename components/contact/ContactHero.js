@@ -22,7 +22,7 @@ export default function ContactHero({
       <div className="cx-hero-vignette" />
 
       <div className="container cx-contact-hero-inner">
-        <h1 className="cx-contact-hero-h1">Connect and Stay Informed.</h1>
+        <h1 className="cx-contact-hero-h1">Contact &amp; Stay Informed.</h1>
         <p className="cx-contact-hero-p">
           Reach out to our team for general enquiries, healthcare partner communications, or
           product support. We are dedicated to providing clear, clinically grounded information.

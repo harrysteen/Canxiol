@@ -22,7 +22,7 @@ export default function PvHero({
       <div className="cx-hero-vignette" />
 
       <div className="container cx-pv-hero-inner">
-        <h1 className="cx-pv-hero-h1">Are you a Psychiatrist or Patient?</h1>
+        <h1 className="cx-pv-hero-h1">Are you a Patient?</h1>
         <p className="cx-pv-hero-p">
           Canxiol is committed to the ongoing safety surveillance of our prescription medicines.
           If you or someone in your care has experienced a suspected adverse reaction, please

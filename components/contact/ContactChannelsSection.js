@@ -92,11 +92,10 @@ export default function ContactChannelsSection() {
   return (
     <section id="contact-channels" className="cx-contact-channels">
       <div className="container">
-        <div className="cx-contact-grid">
-          {/* 1. General enquiries */}
+        <div className="cx-contact-grid is-single">
           <FormCard
             id="contact-form"
-            title="Connect and Stay Informed"
+            title="Contact & Stay Informed"
             tag="Direct Channel"
             intro="Connect directly with our team for general queries, institutional partnerships, and product information."
             submitLabel="Send message"
@@ -109,7 +108,19 @@ export default function ContactChannelsSection() {
               { name: 'message', label: 'Message', placeholder: 'How can our clinical and support team assist you?', required: true, textarea: true },
             ]}
           />
+        </div>
+      </div>
+    </section>
+  );
+}
 
+// Former Contact page cards (product feedback, adverse effects, clinical trials).
+// Not shown on the page any more; kept so they can be placed again later.
+export function ContactMoreChannels() {
+  return (
+    <section className="cx-contact-channels">
+      <div className="container">
+        <div className="cx-contact-grid">
           {/* 2. Product feedback */}
           <FormCard
             id="product-feedback"

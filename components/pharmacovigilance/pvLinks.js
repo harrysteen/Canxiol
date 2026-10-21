@@ -23,6 +23,6 @@ export const PV_LINKS = {
 };
 
 // Leiutis safety inbox and phone, and the national PvPI toll-free line
-export const PV_RECIPIENT_EMAIL = 'write@canxiol.com';
+export const PV_RECIPIENT_EMAIL = 'write@leiutis.com';
 export const PV_PHONE = '+91 40 23077365';
 export const PVPI_TOLL_FREE = '1800-180-3024';

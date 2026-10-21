@@ -1,5 +1,4 @@
 import CanxiolNavbar from '../../components/CanxiolNavbar';
-import CanxiolInfoBar from '../../components/CanxiolInfoBar';
 import CanxiolFooter from '../../components/CanxiolFooter';
 import PsychiatristInquiryProvider from '../../components/PsychiatristInquiryProvider';
 import ContactHero from '../../components/contact/ContactHero';
@@ -13,12 +12,11 @@ export const metadata = {
 export default function ContactPage() {
   return (
     <PsychiatristInquiryProvider>
-      <main style={{ minHeight: '100vh', backgroundColor: '#FFFFFF' }}>
+      {/* No bottom info bar on this page, so the hero takes the full screen height */}
+      <main style={{ minHeight: '100vh', backgroundColor: '#FFFFFF', '--cx-infobar-h': '0px' }}>
         <CanxiolNavbar />
         <ContactHero />
         <ContactChannelsSection />
-        {/* Sticky to the viewport bottom; rests above the footer at the end of the page */}
-        <CanxiolInfoBar />
         <CanxiolFooter />
       </main>
     </PsychiatristInquiryProvider>

@@ -4,12 +4,19 @@ import AnxietyNotes from './AnxietyNotes';
 // TODO: swap for the man-on-a-park-bench photo once it is added to /public/images
 const UNTREATED_IMAGE = '/images/when-to-seek-untreated.png';
 
-export default function SeekUntreatedSection() {
+// Also used on the home page: no eyebrow, no "Next" link, two-line heading (see app/page.js)
+export default function SeekUntreatedSection({ variant }) {
+  const isHome = variant === 'home';
+
   return (
-    <section className="cx-seek-untreated">
+    <section className={`cx-seek-untreated ${isHome ? 'cx-seek-untreated--home' : ''}`.trim()}>
       <div className="container">
-        <span className="cx-anx-eyebrow">The impact of delayed care</span>
-        <h2 className="cx-anx-h2 cx-seek-untreated-h2">What happens when anxiety goes untreated.</h2>
+        {!isHome && <span className="cx-anx-eyebrow">The impact of delayed care</span>}
+        <h2 className="cx-anx-h2 cx-seek-untreated-h2">
+          {isHome
+            ? <>What happens when<br />anxiety goes untreated</>
+            : 'What happens when anxiety goes untreated.'}
+        </h2>
 
         <div className="row cx-seek-untreated-row">
           {/* Left Column: Photo */}
@@ -51,7 +58,7 @@ export default function SeekUntreatedSection() {
           </div>
         </div>
 
-        <AnxietyNotes nextHref="/anxiety/treatment" nextLabel="Next: Treatment" />
+        {!isHome && <AnxietyNotes nextHref="/anxiety/treatment" nextLabel="Next: Treatment" />}
       </div>
     </section>
   );

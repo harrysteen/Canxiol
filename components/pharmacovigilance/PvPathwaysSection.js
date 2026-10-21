@@ -18,16 +18,17 @@ function ArrowUpRight() {
   );
 }
 
-export default function PvPathwaysSection() {
+// The Psychiatrist column is hidden for now; pass showPsychiatrist to bring it back
+export default function PvPathwaysSection({ showPsychiatrist = false }) {
   const languages = Object.entries(PV_LINKS.patientFormsByLanguage);
 
   return (
     <section id="pv-pathways" className="cx-pv-pathways">
       <div className="container">
-        <div className="cx-pv-grid">
+        <div className={`cx-pv-grid ${showPsychiatrist ? '' : 'is-single'}`.trim()}>
           {/* Patients */}
           <div id="patients" className="cx-pv-col cx-pv-col-patient">
-            <h2 className="cx-pv-col-h2">Patients.</h2>
+            <h2 className="cx-pv-col-h2">Patients</h2>
             <p className="cx-pv-col-sub">Report an adverse effect</p>
             <p className="cx-pv-col-intro">
               If you are taking Canxiol and experiencing unexpected symptoms or side effects, you
@@ -65,6 +66,7 @@ export default function PvPathwaysSection() {
           </div>
 
           {/* Psychiatrists */}
+          {showPsychiatrist && (
           <div id="psychiatrists-adr" className="cx-pv-col cx-pv-col-psy">
             <h2 className="cx-pv-col-h2">Psychiatrist.</h2>
             <p className="cx-pv-col-sub">Report an adverse effects</p>
@@ -101,6 +103,7 @@ export default function PvPathwaysSection() {
               emailPlaceholder="clinician@hospital.org"
             />
           </div>
+          )}
         </div>
       </div>
     </section>

@@ -2,11 +2,9 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useOpenPsychiatristInquiry } from './PsychiatristInquiryProvider';
 
 export default function CanxiolNavbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const openInquiry = useOpenPsychiatristInquiry();
   const [resourcesOpen, setResourcesOpen] = useState(false);
   const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -24,22 +22,27 @@ export default function CanxiolNavbar() {
       <header className={`cx-nav ${scrolled ? 'scrolled' : ''}`}>
         <div className="container">
           <div className="cx-nav-inner">
-            {/* Brand Logo PNG */}
-            <Link href="/" className="cx-logo" aria-label="Canxiol Homepage">
-              <Image
-                src="/images/logo.png"
-                alt="Canxiol By Leiutis"
-                width={200}
-                height={58}
-                priority
-                className="cx-logo-img"
-              />
+            {/* Brand: "Heal The way You Feel" over the Leiutis mark */}
+            <Link href="/" className="cx-logo cx-logo-lockup" aria-label="Canxiol Homepage">
+              <span className="cx-logo-tagline">
+                <strong>Heal</strong> The way You <strong>Feel</strong>
+              </span>
+              <span className="cx-logo-brand">
+                <Image
+                  src="/images/leiutis logo for about leiuties page.png"
+                  alt=""
+                  width={36}
+                  height={27}
+                  priority
+                  className="cx-logo-mark"
+                />
+                Leiutis
+              </span>
             </Link>
 
             {/* Desktop Navigation Links */}
             <ul className="cx-links">
               <li><Link href="/anxiety">Anxiety and its effects</Link></li>
-              <li><Link href="/canxiol">Canxiol</Link></li>
               <li>
                 <button
                   className="cx-link-btn"
@@ -71,21 +74,10 @@ export default function CanxiolNavbar() {
                 )}
               </li>
               <li><Link href="/pharmacovigilance">Pharmacovigilance</Link></li>
-              <li><Link href="/about-leiutis">About Leiutis</Link></li>
             </ul>
 
             {/* Desktop CTA Buttons */}
             <div className="cx-ctas">
-              <Link href="#psychiatrists" className="cx-btn-psychiatrists" onClick={openInquiry}>
-                <span>FOR PSYCHIATRISTS</span>
-                <Image
-                  src="/images/for-psychiatrists-arrow.png"
-                  alt=""
-                  width={15}
-                  height={15}
-                  className="cx-arrow-icon"
-                />
-              </Link>
               <Link href="/contact" className="cx-btn-contact">
                 <span>CONTACT US</span>
                 <Image
@@ -113,7 +105,6 @@ export default function CanxiolNavbar() {
         <div className={`cx-drawer ${mobileMenuOpen ? 'open' : ''}`}>
           <div className="container">
             <Link href="/anxiety" onClick={() => setMobileMenuOpen(false)}>Anxiety and its effects</Link>
-            <Link href="/canxiol" onClick={() => setMobileMenuOpen(false)}>Canxiol</Link>
             {/* Resources expands in place to show its sub-links */}
             <button
               type="button"
@@ -145,18 +136,7 @@ export default function CanxiolNavbar() {
               </div>
             )}
             <Link href="/pharmacovigilance" onClick={() => setMobileMenuOpen(false)}>Pharmacovigilance</Link>
-            <Link href="/about-leiutis" onClick={() => setMobileMenuOpen(false)}>About Leiutis</Link>
             <div className="cx-drawer-ctas">
-              <Link href="#psychiatrists" className="cx-btn-psychiatrists" style={{ width: '100%' }} onClick={(e) => { setMobileMenuOpen(false); openInquiry(e); }}>
-                <span>FOR PSYCHIATRISTS</span>
-                <Image
-                  src="/images/for-psychiatrists-arrow.png"
-                  alt=""
-                  width={15}
-                  height={15}
-                  className="cx-arrow-icon"
-                />
-              </Link>
               <Link href="/contact" className="cx-btn-contact" style={{ width: '100%' }} onClick={() => setMobileMenuOpen(false)}>
                 <span>CONTACT US</span>
                 <Image

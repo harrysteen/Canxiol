@@ -1,5 +1,4 @@
 import CanxiolNavbar from '../../../components/CanxiolNavbar';
-import CanxiolInfoBar from '../../../components/CanxiolInfoBar';
 import CanxiolFooter from '../../../components/CanxiolFooter';
 import PsychiatristInquiryProvider from '../../../components/PsychiatristInquiryProvider';
 import AnxietySubNav from '../../../components/anxiety/AnxietySubNav';
@@ -8,8 +7,9 @@ import TreatmentApproachSection from '../../../components/anxiety/TreatmentAppro
 import TreatmentSupportSection from '../../../components/anxiety/TreatmentSupportSection';
 import TreatmentPsychiatristSection from '../../../components/anxiety/TreatmentPsychiatristSection';
 
-// TODO: swap for the man-with-Canxiol cut-out (transparent PNG) once it is added to /public/images
-const TREATMENT_HERO_IMAGE = '/images/Diagnosis and Treatment.png';
+// Same photo as the When to seek help intro. Swap for a background-removed (transparent PNG)
+// version once it is added to /public/images, so it blends into the hero like the design.
+const TREATMENT_HERO_IMAGE = '/images/when-to-seek-intro.png';
 
 export const metadata = {
   title: 'Diagnosis and Treatment of Anxiety — Canxiol | Leiutis',
@@ -19,7 +19,8 @@ export const metadata = {
 export default function TreatmentPage() {
   return (
     <PsychiatristInquiryProvider>
-      <main style={{ minHeight: '100vh', backgroundColor: '#FFFFFF' }}>
+      {/* No bottom info bar on this page, so the hero takes the full screen height */}
+      <main style={{ minHeight: '100vh', backgroundColor: '#FFFFFF', '--cx-infobar-h': '0px' }}>
         <CanxiolNavbar />
         <AnxietySubNav />
         <AnxietyHero
@@ -28,13 +29,11 @@ export default function TreatmentPage() {
           subtitle="Anxiety disorders are treatable."
           text="If anxiety is persistent, difficult to manage, or interfering with daily life, professional assessment is recommended. A diagnosis of an anxiety disorder is made by a qualified healthcare professional (Psychiatrist) after considering the person’s symptoms, their duration, severity, impact on daily functioning, and other possible medical or psychological causes."
           imageSrc={TREATMENT_HERO_IMAGE}
-          imageAlt="Young man measuring Canxiol oral solution with a dropper into a glass of water"
+          imageAlt="Young woman with curly hair smiling with her eyes closed in the open air"
         />
         <TreatmentApproachSection />
         <TreatmentSupportSection />
         <TreatmentPsychiatristSection />
-        {/* Sticky to the viewport bottom; rests above the footer at the end of the page */}
-        <CanxiolInfoBar />
         <CanxiolFooter />
       </main>
     </PsychiatristInquiryProvider>
