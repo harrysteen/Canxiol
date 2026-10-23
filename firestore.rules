@@ -1,0 +1,64 @@
+rules_version = '2';
+
+// Canxiol professional portals (psychiatrist / pharmacist).
+// Paste into Firebase console → Firestore → Rules → Publish.
+//
+//   users/{uid}   one profile per account: role, status (pending | approved | rejected) and
+//                 registration details. Created by the user at sign-up, always as "pending".
+//   admins/{uid}  Leiutis staff who may approve accounts. Add these by hand in the console:
+//                 collection "admins", document ID = the staff member's User UID (from Authentication → Users).
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return signedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    function shortString(v, max) {
+      return v is string && v.size() > 0 && v.size() <= max;
+    }
+
+    match /users/{uid} {
+      // A user sees only their own profile; admins see everyone's
+      allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
+
+      // Sign-up: own document only, a valid role, and status must start as "pending"
+      allow create: if signedIn()
+        && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(
+             ['role', 'status', 'name', 'email', 'phone', 'registrationNumber', 'council', 'city', 'consentAt', 'createdAt'])
+        && request.resource.data.role in ['psychiatrist', 'pharmacist']
+        && request.resource.data.status == 'pending'
+        && shortString(request.resource.data.name, 120)
+        && shortString(request.resource.data.email, 200)
+        && shortString(request.resource.data.phone, 40)
+        && shortString(request.resource.data.registrationNumber, 80)
+        && shortString(request.resource.data.council, 160)
+        && shortString(request.resource.data.city, 80)
+        && request.resource.data.consentAt == request.time
+        && request.resource.data.createdAt == request.time;
+
+      // Only admins can change a profile (approve / reject). Users can't promote themselves.
+      allow update: if isAdmin()
+        && request.resource.data.status in ['pending', 'approved', 'rejected']
+        && request.resource.data.role == resource.data.role;
+
+      allow delete: if false;
+    }
+
+    match /admins/{uid} {
+      // Lets the site check "am I an admin?"; nobody can add admins from the site
+      allow read: if signedIn() && request.auth.uid == uid;
+      allow write: if false;
+    }
+
+    // Everything else is closed
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

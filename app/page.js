@@ -11,11 +11,14 @@ import CanxiolBlogSection from '../components/CanxiolBlogSection';
 import CanxiolChoosePathSection from '../components/CanxiolChoosePathSection';
 import CanxiolFooter from '../components/CanxiolFooter';
 import PsychiatristInquiryProvider from '../components/PsychiatristInquiryProvider';
+import PortalHomeRedirect from '../components/auth/PortalHomeRedirect';
 
 export default function Home() {
   return (
     <PsychiatristInquiryProvider>
       <main style={{ minHeight: '100vh', backgroundColor: '#FFFFFF' }}>
+        {/* Logged-in pharmacists / psychiatrists go to their own home */}
+        <PortalHomeRedirect />
         <CanxiolNavbar />
         <CanxiolHero />
         <CanxiolAnxietySection />

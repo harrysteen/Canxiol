@@ -1,7 +1,14 @@
 'use client';
 import Link from 'next/link';
+import { usePortalRole } from './auth/portalMode';
+import { ROLES } from './auth/roles';
+import ProFooter from './pro/ProFooter';
 
 export default function CanxiolFooter() {
+  // A logged-in pharmacist or psychiatrist keeps the classic footer on every page
+  const portalRole = usePortalRole();
+  if (ROLES[portalRole]) return <ProFooter homeHref={ROLES[portalRole].base} />;
+
   return (
     <footer className="cx-footer">
       <div className="container">

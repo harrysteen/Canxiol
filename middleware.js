@@ -1,17 +1,24 @@
 import { NextResponse } from 'next/server';
 
-// Coming-soon gate — ON by default in production.
-// Visitors: every page shows /coming-soon (the URL stays the same).
-// Team: open /comingsoon/home once → that browser sees the full site for 30 days.
-//       Open /comingsoon/exit to see the coming-soon page again.
-// Going live: set SITE_LIVE=true on the host and redeploy (or delete this file).
+// Coming-soon gate — OFF: the site is live.
+// To bring the gate back, set COMING_SOON=true on the host (Vercel) and redeploy. Then:
+//   Visitors: every page shows /coming-soon (the URL stays the same).
+//   Team: open /comingsoon/home once → that browser sees the full site for 30 days.
+//         Open /comingsoon/exit to see the coming-soon page again.
 // `npm run dev` always shows the full site.
 const ACCESS_PATH = '/comingsoon/home';
 const EXIT_PATH = '/comingsoon/exit';
 const ACCESS_COOKIE = 'cx_site_access';
 
 export function middleware(request) {
-  if (process.env.SITE_LIVE === 'true' || process.env.NODE_ENV === 'development') {
+  const gated = process.env.COMING_SOON === 'true' && process.env.NODE_ENV !== 'development';
+
+  // Site is live: old coming-soon links go to the home page
+  if (!gated) {
+    const { pathname } = request.nextUrl;
+    if (pathname === '/coming-soon' || pathname.startsWith('/comingsoon/')) {
+      return NextResponse.redirect(new URL('/', request.url));
+    }
     return NextResponse.next();
   }
 

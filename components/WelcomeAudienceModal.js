@@ -2,13 +2,17 @@
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { usePortalRole } from './auth/portalMode';
 
 // "Welcome to Leiutis" audience picker. Opens 7 seconds after every page load
 // (including a refresh). Moving between pages inside the site doesn't reopen it,
 // because the root layout — and this timer — stay mounted.
 const DELAY_MS = 7000;
-// Pages where the popup never opens
-const SKIP_PATHS = ['/coming-soon'];
+// Pages where the popup never opens: coming-soon and the professional portals
+// (/psychiatrist…, /pharmacist… — note the public /psychiatrists page still shows it)
+const shouldSkip = (path) =>
+  path === '/coming-soon' ||
+  /^\/(psychiatrist|pharmacist)(\/|$)/.test(path);
 
 const AUDIENCES = [
   {
@@ -24,8 +28,8 @@ const AUDIENCES = [
     title: 'Pharmacist',
     desc: 'Access your professional portal.',
     cta: 'Enter Portal',
-    // No pharmacist page yet — the Canxiol product page is the closest fit
-    href: '/canxiol',
+    // Portal home — sends visitors who aren't logged in to the pharmacist login
+    href: '/pharmacist',
     icon: (
       <>
         <rect x="4.5" y="9" width="15" height="6" rx="3" transform="rotate(-45 12 12)" />
@@ -37,7 +41,7 @@ const AUDIENCES = [
     title: 'Psychiatrist',
     desc: 'Access your professional portal.',
     cta: 'Enter Portal',
-    href: '/psychiatrists',
+    href: '/psychiatrist',
     icon: (
       <>
         <path d="M6 4v5a4 4 0 0 0 8 0V4" />
@@ -52,7 +56,9 @@ export default function WelcomeAudienceModal() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const dialogRef = useRef(null);
-  const skip = SKIP_PATHS.includes(pathname);
+  const portalRole = usePortalRole();
+  // Logged-in professionals have already chosen — no popup for them
+  const skip = shouldSkip(pathname) || Boolean(portalRole);
 
   // Start the 7-second timer once per page load
   useEffect(() => {

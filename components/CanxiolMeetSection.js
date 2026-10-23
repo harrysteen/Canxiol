@@ -26,14 +26,22 @@ export default function CanxiolMeetSection({
     },
     {
       num: '02',
-      title: 'Formulated with proprietary nanodispersion technology',
+      title: 'Formulation with proprietary nanodispersion technology',
       desc: 'Easy to use and titrate with no pill burden',
     },
     {
       num: '03',
-      title: 'Manufactured in GMP accredited plant',
-      desc: 'GMP plant accredited by - USFDA, EU, MHRA, Turkey, Russia & WHO-GMP',
+      title: 'Manufactured in GMP certified plant',
+      desc: 'Certified by USFDA, EU, MHRA, Turkey, Russia & WHO - GMP certified',
     },
+  ];
+
+  // How the oral solution is made, top to bottom
+  const processSteps = [
+    'Cannabidiol (Synthetic)',
+    'Proprietary nanodispersion',
+    'Fine dispersed formulation in water',
+    'Milky white Oral solution',
   ];
 
   return (
@@ -60,7 +68,7 @@ export default function CanxiolMeetSection({
             <div className="cx-meet-left">
               <h2 className="cx-meet-h2">
                 Meet<br />
-                Canxiol.
+                Canxiol
               </h2>
 
               <p className="cx-meet-desc">
@@ -92,6 +100,19 @@ export default function CanxiolMeetSection({
                 />
               </div>
             </div>
+          </div>
+
+          {/* Right Column: how the formulation is made */}
+          <div className="col-12 col-lg-auto">
+            <ol className="cx-meet-process" aria-label="How Canxiol is formulated">
+              {processSteps.map((step) => (
+                <li key={step} className="cx-meet-process-step">{step}</li>
+              ))}
+              <li className="cx-meet-process-result">
+                <span className="cx-meet-process-brand">CANXIOL<sup>®</sup></span>
+                <span className="cx-meet-process-sub">Oral solution</span>
+              </li>
+            </ol>
           </div>
 
         </div>
