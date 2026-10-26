@@ -3,8 +3,9 @@ rules_version = '2';
 // Canxiol professional portals (psychiatrist / pharmacist).
 // Paste into Firebase console → Firestore → Rules → Publish.
 //
-//   users/{uid}   one profile per account: role, status (pending | approved | rejected) and
-//                 registration details. Created by the user at sign-up, always as "pending".
+//   users/{uid}   one profile per account: role, status (approved | rejected) and registration
+//                 details. Created by the user at sign-up as "approved" (instant access);
+//                 an admin can block an account by setting status to "rejected".
 //   admins/{uid}  Leiutis staff who may approve accounts. Add these by hand in the console:
 //                 collection "admins", document ID = the staff member's User UID (from Authentication → Users).
 service cloud.firestore {
@@ -22,23 +23,26 @@ service cloud.firestore {
       return v is string && v.size() > 0 && v.size() <= max;
     }
 
+    // Optional text field: may be empty
+    function optionalString(v, max) {
+      return v is string && v.size() <= max;
+    }
+
     match /users/{uid} {
       // A user sees only their own profile; admins see everyone's
       allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
 
-      // Sign-up: own document only, a valid role, and status must start as "pending"
+      // Sign-up: own document only, a valid role, and status starts as "approved"
       allow create: if signedIn()
         && request.auth.uid == uid
         && request.resource.data.keys().hasOnly(
-             ['role', 'status', 'name', 'email', 'phone', 'registrationNumber', 'council', 'city', 'consentAt', 'createdAt'])
+             ['role', 'status', 'name', 'email', 'workplace', 'registrationNumber', 'consentAt', 'createdAt'])
         && request.resource.data.role in ['psychiatrist', 'pharmacist']
-        && request.resource.data.status == 'pending'
+        && request.resource.data.status == 'approved'
         && shortString(request.resource.data.name, 120)
         && shortString(request.resource.data.email, 200)
-        && shortString(request.resource.data.phone, 40)
-        && shortString(request.resource.data.registrationNumber, 80)
-        && shortString(request.resource.data.council, 160)
-        && shortString(request.resource.data.city, 80)
+        && optionalString(request.resource.data.workplace, 160)
+        && optionalString(request.resource.data.registrationNumber, 80)
         && request.resource.data.consentAt == request.time
         && request.resource.data.createdAt == request.time;
 

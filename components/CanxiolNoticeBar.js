@@ -1,8 +1,9 @@
 'use client';
 import { useEffect, useRef } from 'react';
 
-// Teal one-line message pinned to the bottom of the viewport (home page).
-// Publishes its height as --cx-infobar-h, like CanxiolInfoBar, so the hero leaves room for it.
+// Teal one-line message band directly under the home hero (a normal section, not pinned).
+// Publishes its height as --cx-infobar-h so the hero leaves room for it: on first load the
+// band sits at the bottom of the screen, then scrolls away with the page.
 export default function CanxiolNoticeBar() {
   const barRef = useRef(null);
 
@@ -10,10 +11,7 @@ export default function CanxiolNoticeBar() {
     const bar = barRef.current;
     if (!bar) return;
     const root = document.documentElement;
-    const update = () => {
-      const pinned = getComputedStyle(bar).position === 'sticky';
-      root.style.setProperty('--cx-infobar-h', pinned ? `${bar.offsetHeight}px` : '0px');
-    };
+    const update = () => root.style.setProperty('--cx-infobar-h', `${bar.offsetHeight}px`);
     update();
     const observer = new ResizeObserver(update);
     observer.observe(bar);

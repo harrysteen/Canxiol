@@ -4,10 +4,28 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { usePortalRole } from './auth/portalMode';
 
-// "Welcome to Leiutis" audience picker. Opens 7 seconds after every page load
-// (including a refresh). Moving between pages inside the site doesn't reopen it,
-// because the root layout — and this timer — stay mounted.
+// "Welcome to Leiutis" audience picker. Opens 7 seconds after a page load and can't be
+// dismissed — the visitor must pick Patient, Pharmacist or Psychiatrist. Picking "Patient"
+// is remembered for the rest of the browser session so it isn't asked on every page.
+// (Logged-in pharmacists / psychiatrists never see it.)
 const DELAY_MS = 7000;
+const CHOSEN_KEY = 'cx-audience-chosen';
+
+function alreadyChosen() {
+  try {
+    return sessionStorage.getItem(CHOSEN_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
+function rememberChoice() {
+  try {
+    sessionStorage.setItem(CHOSEN_KEY, '1');
+  } catch {
+    // Storage blocked — the popup may be asked again, which is fine
+  }
+}
 // Pages where the popup never opens: coming-soon and the professional portals
 // (/psychiatrist…, /pharmacist… — note the public /psychiatrists page still shows it)
 const shouldSkip = (path) =>
@@ -18,8 +36,10 @@ const AUDIENCES = [
   {
     title: 'Patient / General Public',
     desc: 'Information for you and your loved ones.',
+    remember: true,
     cta: 'Explore Anxiety',
-    href: '/anxiety',
+    // Patients continue on the public home page
+    href: '/',
     icon: (
       <path d="M12 20s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 10c0 5.65-7 10-7 10Z" />
     ),
@@ -56,39 +76,39 @@ export default function WelcomeAudienceModal() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const dialogRef = useRef(null);
+
   const portalRole = usePortalRole();
   // Logged-in professionals have already chosen — no popup for them
   const skip = shouldSkip(pathname) || Boolean(portalRole);
 
   // Start the 7-second timer once per page load
   useEffect(() => {
-    if (skip) return;
+    if (skip || alreadyChosen()) return;
     const timer = setTimeout(() => setOpen(true), DELAY_MS);
     return () => clearTimeout(timer);
   }, [skip]);
 
-  const close = () => setOpen(false);
+  const choose = (audience) => {
+    if (audience.remember) rememberChoice();
+    setOpen(false);
+  };
 
-  // While open: Esc closes, page behind doesn't scroll, focus moves into the dialog
+  // While open: the page behind doesn't scroll and focus moves into the dialog.
+  // No close button, Esc or outside click — a choice is required.
   useEffect(() => {
     if (!open) return;
-    const onKey = (e) => {
-      if (e.key === 'Escape') close();
-    };
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
-    document.addEventListener('keydown', onKey);
     dialogRef.current?.focus();
     return () => {
       document.body.style.overflow = prevOverflow;
-      document.removeEventListener('keydown', onKey);
     };
   }, [open]);
 
   if (!open) return null;
 
   return (
-    <div className="cx-welcome-overlay" onClick={close}>
+    <div className="cx-welcome-overlay">
       <div
         ref={dialogRef}
         className="cx-welcome"
@@ -96,18 +116,12 @@ export default function WelcomeAudienceModal() {
         aria-modal="true"
         aria-labelledby="cx-welcome-title"
         tabIndex={-1}
-        onClick={(e) => e.stopPropagation()}
       >
         <header className="cx-welcome-head">
           <span className="cx-welcome-logo">
             Leiutis<span className="cx-welcome-logo-dot">.</span>
           </span>
           <span className="cx-welcome-tagline">Care. Knowledge. Connection.</span>
-          <button type="button" className="cx-welcome-close" aria-label="Close" onClick={close}>
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-              <path d="M2 2l10 10M12 2 2 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
-          </button>
         </header>
 
         <div className="cx-welcome-body">
@@ -117,7 +131,7 @@ export default function WelcomeAudienceModal() {
 
           <div className="cx-welcome-grid">
             {AUDIENCES.map((a) => (
-              <Link key={a.title} href={a.href} className="cx-welcome-card" onClick={close}>
+              <Link key={a.title} href={a.href} className="cx-welcome-card" onClick={() => choose(a)}>
                 <span className="cx-welcome-icon" aria-hidden="true">
                   <svg
                     width="18"

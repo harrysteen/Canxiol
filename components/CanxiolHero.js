@@ -30,7 +30,7 @@ export default function CanxiolHero({
             <div className="row align-items-end g-4">
               
               {/* Left Column: Headline, Description, and CTAs */}
-              <div className="col-12 col-lg-6 col-xl-6 cx-hero-left">
+              <div className="col-12 col-lg-6 col-xl-6 cx-hero-left cx-hero-left--home">
                 <h1 className="cx-hero-h1 cx-hero-h1--home">
                   <span className="cx-hl">Understanding</span> Anxiety.<br />
                   Exploring <span className="cx-hl">Support</span>

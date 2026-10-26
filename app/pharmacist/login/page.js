@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function PharmacistLoginPage() {
   return (
-    <AuthPageShell>
+    <AuthPageShell bare>
       <AuthForm mode="login" role="pharmacist" />
     </AuthPageShell>
   );

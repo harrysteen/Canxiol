@@ -1868,6 +1868,13 @@ button {
   text-shadow: none;
 }
 
+/* Home hero text sits a little higher than the shared hero (desktop only) */
+@media (min-width: 992px) {
+  .cx-hero-left.cx-hero-left--home {
+    transform: translateY(-64px);
+  }
+}
+
 /* Consultation photo is wide and sits on the hero floor */
 .cx-img-wrapper.cx-img-wrapper--home {
   max-width: 760px;
@@ -1890,11 +1897,9 @@ button {
   }
 }
 
-/* Teal one-line message pinned to the bottom of the viewport (home page) */
+/* Teal one-line message band under the home hero */
 .cx-notice-bar {
-  position: sticky;
-  bottom: 0;
-  z-index: 1030;
+  position: relative;
   width: 100%;
   background-color: #03878B;
   color: #FAF9F7;
@@ -6696,42 +6701,161 @@ button {
 
 .cx-step-result.has-idea {
   color: #2A1A2A;
-  border-left: 3px solid #03878B;
+  padding: 20px 18px 22px;
 }
 
-.cx-step-checklist {
-  list-style: none;
+.cx-step-result-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #3D2F47;
+  margin: 0 0 8px;
+}
+
+.cx-step-result-list {
   margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+  padding-left: 22px;
+  list-style: disc;
+  color: #68635F;
 }
 
-.cx-step-checklist label {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  background: #FFFFFF;
-  border: 1px solid #E2D2DE;
-  padding: 12px 16px;
+.cx-step-result-list li {
   font-size: 13px;
   line-height: 1.6;
-  color: #2A1A2A;
-  cursor: pointer;
+  padding-left: 4px;
 }
 
-.cx-step-checklist input {
-  flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-  margin-top: 2px;
-  accent-color: #471D41;
+.cx-step-result-list li + li {
+  margin-top: 6px;
 }
 
-.cx-step-checklist label.is-done span {
+.cx-step-result-list li::marker {
   color: #68635F;
-  text-decoration: line-through;
+  font-size: 0.8em;
+}
+
+/* Appointment tab: chips on the left, the note to take along on the right */
+.cx-step-appt {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 52px);
+  align-items: start;
+}
+
+.cx-step-appt-title {
+  font-size: clamp(19px, 1.8vw, 22px);
+}
+
+.cx-step-appt .cx-step-pane-intro {
+  font-size: 14px;
+  line-height: 1.75;
+  max-width: 340px;
+}
+
+.cx-step-chips--symptoms .cx-step-chip {
+  min-width: 0;
+  height: 34px;
+  padding: 0 12px;
+  font-size: 13px;
+}
+
+.cx-step-appt-actions {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid #E2D2DE;
+}
+
+.cx-step-appt-sub {
+  font-size: 16px;
+  font-weight: 500;
+  color: #2A1A2A;
+  margin: 0 0 12px;
+}
+
+.cx-step-appt-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.cx-step-print,
+.cx-step-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 12px;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.cx-step-print {
+  background: #471D41;
+  border: 1px solid #471D41;
+  color: #FFFFFF;
+}
+
+.cx-step-print:hover:not(:disabled) {
+  background: #391734;
+}
+
+.cx-step-print:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cx-step-clear {
+  background: #FBEAF5;
+  border: 1px solid #EECFE3;
+  color: #471D41;
+}
+
+.cx-step-clear:hover {
+  border-color: #471D41;
+}
+
+.cx-step-note {
+  background: #FFFFFF;
+  border: 1px solid #E2D2DE;
+  padding: 18px 20px 22px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #3D2F47;
+}
+
+.cx-step-note-head {
+  font-weight: 600;
+  margin: 0;
+}
+
+.cx-step-note ul {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+}
+
+.cx-step-note li::before {
+  content: '- ';
+}
+
+.cx-step-note li.is-empty {
+  color: #9A8F98;
+  font-style: italic;
+}
+
+.cx-step-note-tip {
+  margin: 0;
+}
+
+@media (max-width: 767.98px) {
+  .cx-step-appt {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .cx-step-appt .cx-step-pane-intro {
+    max-width: 100%;
+  }
 }
 
 .cx-step-foot {
@@ -10067,26 +10191,6 @@ a.cx-media-link:hover {
   color: #68635F;
 }
 
-.cx-welcome-close {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  margin-right: -6px;
-  background: none;
-  border: none;
-  border-radius: 50%;
-  color: #68635F;
-  cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-
-.cx-welcome-close:hover {
-  background: #F4EEF3;
-  color: #471D41;
-}
-
 .cx-welcome-body {
   padding: clamp(32px, 5vw, 56px) clamp(20px, 4.6vw, 42px) clamp(36px, 6vw, 64px);
 }
@@ -10226,10 +10330,6 @@ a.cx-media-link:hover {
   .cx-welcome-tagline {
     display: none;
   }
-
-  .cx-welcome-close {
-    margin-left: auto;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -10292,24 +10392,9 @@ a.cx-media-link:hover {
   margin: 0 0 24px;
 }
 
-.cx-auth-lead a,
-.cx-auth-switch a {
+.cx-auth-lead a {
   color: #471D41;
   font-weight: 500;
-}
-
-.cx-auth-form {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 14px 16px;
-}
-
-.cx-auth-card:not(.is-wide) .cx-auth-form {
-  grid-template-columns: minmax(0, 1fr);
-}
-
-.cx-auth-form .is-full {
-  grid-column: 1 / -1;
 }
 
 .cx-auth-field {
@@ -10344,24 +10429,6 @@ a.cx-media-link:hover {
   box-shadow: 0 0 0 3px rgba(71, 29, 65, 0.12);
 }
 
-.cx-auth-consent {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  font-size: 12.5px;
-  line-height: 1.6;
-  color: #4A3F49;
-  cursor: pointer;
-}
-
-.cx-auth-consent input {
-  flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-  margin-top: 2px;
-  accent-color: #471D41;
-}
-
 .cx-auth-error,
 .cx-auth-notice {
   margin: 0;
@@ -10380,10 +10447,6 @@ a.cx-media-link:hover {
   background: #E8F4F3;
   color: #12585B;
   margin-bottom: 16px;
-}
-
-.cx-auth-form .cx-auth-notice {
-  margin-bottom: 0;
 }
 
 .cx-auth-actions {
@@ -10443,22 +10506,6 @@ a.cx-media-link:hover {
   margin-top: 20px;
 }
 
-.cx-auth-switch {
-  margin-top: 24px;
-  padding-top: 18px;
-  border-top: 1px solid #EFECEF;
-  font-size: 13px;
-  color: #68635F;
-}
-
-.cx-auth-switch p {
-  margin: 0 0 6px;
-}
-
-.cx-auth-switch-other {
-  font-size: 12px;
-}
-
 /* Approved: portal home */
 .cx-portal-bar {
   display: flex;
@@ -10471,12 +10518,6 @@ a.cx-media-link:hover {
   background: #F4E8F1;
   font-size: 13px;
   color: #3D2F47;
-}
-
-@media (max-width: 767.98px) {
-  .cx-auth-form {
-    grid-template-columns: minmax(0, 1fr);
-  }
 }
 
 /* --------------------------------------------------------------------------
@@ -10628,5 +10669,210 @@ a.cx-media-link:hover {
   .cx-nav-account-who,
   .cx-nav-account-logout {
     font-size: 12px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Portal sign-up / log-in page: gradient header + tabbed form card
+   -------------------------------------------------------------------------- */
+.cx-authp {
+  position: relative;
+  overflow: hidden;
+  background: #F5EEF8;
+}
+
+.cx-authp-hero {
+  position: relative;
+  z-index: 1;
+  padding: clamp(36px, 5vw, 56px) 0 clamp(72px, 9vw, 104px);
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+}
+
+.cx-authp-hero-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.cx-authp-eyebrow {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+  color: #1C8A8F;
+  margin-bottom: 10px;
+}
+
+.cx-authp-h1 {
+  font-size: clamp(36px, 4.6vw, 56px);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: #2A0D2F;
+  margin: 0 0 12px;
+}
+
+.cx-authp-lead {
+  font-size: clamp(16px, 1.5vw, 19px);
+  color: #4A4542;
+  margin: 0;
+}
+
+.cx-authp-body {
+  position: relative;
+  z-index: 1;
+  padding: 0 0 clamp(48px, 7vw, 88px);
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+}
+
+/* Card overlaps the bottom of the gradient header */
+.cx-authp-card {
+  position: relative;
+  z-index: 2;
+  margin-top: calc(-1 * clamp(52px, 7vw, 80px));
+  background: #FFFFFF;
+  padding: clamp(20px, 3vw, 28px) clamp(16px, 8vw, 70px) clamp(28px, 4vw, 44px);
+}
+
+.cx-authp-tabs {
+  display: flex;
+  gap: 20px;
+  border-bottom: 1px solid #ECE8EC;
+  margin-bottom: 26px;
+}
+
+.cx-authp-tab {
+  padding: 8px 6px 10px;
+  margin-bottom: -1px;
+  border-bottom: 2px solid transparent;
+  font-size: 14px;
+  color: #3D2F47;
+  text-decoration: none;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.cx-authp-tab:hover {
+  color: #471D41;
+}
+
+.cx-authp-tab.is-active {
+  border-bottom-color: #471D41;
+  color: #1A1918;
+}
+
+.cx-authp-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 18px;
+}
+
+.cx-authp-form .is-full {
+  grid-column: 1 / -1;
+}
+
+.cx-authp-form .cx-auth-field > span {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #1A1918;
+}
+
+.cx-authp-form .cx-auth-field input {
+  height: 42px;
+  background: #F9F7F8;
+  border: 1px solid #ECE6EA;
+  border-radius: 2px;
+  font-size: 13.5px;
+}
+
+.cx-authp-form .cx-auth-field input::placeholder {
+  color: #A59EA3;
+}
+
+.cx-authp-form .cx-auth-field input:focus {
+  background: #FFFFFF;
+}
+
+.cx-auth-pw {
+  position: relative;
+}
+
+.cx-auth-pw input {
+  width: 100%;
+  padding-right: 42px !important;
+}
+
+.cx-auth-pw-toggle {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: none;
+  border-radius: 50%;
+  color: #6E6670;
+  cursor: pointer;
+}
+
+.cx-auth-pw-toggle:hover {
+  color: #471D41;
+  background: #F1E9EF;
+}
+
+.cx-authp-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 46px;
+  margin-top: 6px;
+  background: #471D41;
+  border: 1px solid #471D41;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.cx-authp-submit:hover:not(:disabled) {
+  background: #391734;
+}
+
+.cx-authp-submit:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.cx-authp-meta {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: #68635F;
+}
+
+.cx-authp-meta p {
+  margin: 0 0 6px;
+}
+
+.cx-authp-meta a {
+  color: #471D41;
+  font-weight: 500;
+}
+
+.cx-authp-meta-other {
+  font-size: 12px;
+}
+
+@media (max-width: 767.98px) {
+  .cx-authp-form {
+    grid-template-columns: minmax(0, 1fr);
   }
 }

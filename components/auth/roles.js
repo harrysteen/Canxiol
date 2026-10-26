@@ -6,19 +6,21 @@ export const ROLES = {
     id: 'psychiatrist',
     label: 'Psychiatrist',
     base: '/psychiatrist',
-    registrationLabel: 'Medical council registration number',
-    registrationPlaceholder: 'NMC / State Medical Council reg. no.',
-    councilPlaceholder: 'e.g. Telangana State Medical Council',
-    namePlaceholder: 'Dr. Rajesh Mehra',
+    // Sign-up: both optional
+    workplaceLabel: 'Hospital / Clinic',
+    workplacePlaceholder: 'Hospital or clinic name (not mandatory)',
+    registrationLabel: 'Medical Council Registration Number',
+    registrationPlaceholder: 'Your registration number (not mandatory)',
   },
   pharmacist: {
     id: 'pharmacist',
     label: 'Pharmacist',
     base: '/pharmacist',
-    registrationLabel: 'Pharmacy council registration number',
-    registrationPlaceholder: 'State Pharmacy Council reg. no.',
-    councilPlaceholder: 'e.g. Telangana State Pharmacy Council',
-    namePlaceholder: 'Priya Sharma',
+    // Sign-up: both optional
+    workplaceLabel: 'Pharmacy / Workplace',
+    workplacePlaceholder: 'Pharmacy or workplace name (not mandatory)',
+    registrationLabel: 'State Pharmacy Council Registration Number',
+    registrationPlaceholder: 'Your registration number (not mandatory)',
   },
 };
 
@@ -36,7 +38,7 @@ export function authErrorMessage(err) {
     'auth/weak-password': 'Please choose a stronger password (at least 8 characters).',
     'auth/too-many-requests': 'Too many attempts. Please wait a few minutes and try again.',
     'auth/network-request-failed': 'Network error. Please check your connection and try again.',
-    'permission-denied': 'Your details could not be saved. Please contact us so we can complete your registration.',
+    'permission-denied': 'Your registration could not be completed. Please try again in a moment, or contact us if it keeps happening.',
   };
   return messages[code] || 'Something went wrong. Please try again.';
 }

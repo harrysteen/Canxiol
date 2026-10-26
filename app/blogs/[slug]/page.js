@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import CanxiolNavbar from '../../../components/CanxiolNavbar';
-import CanxiolInfoBar from '../../../components/CanxiolInfoBar';
+import ProOnlyInfoBar from '../../../components/auth/ProOnlyInfoBar';
 import CanxiolFooter from '../../../components/CanxiolFooter';
 import PsychiatristInquiryProvider from '../../../components/PsychiatristInquiryProvider';
 import BlogArticle from '../../../components/blogs/BlogArticle';
@@ -32,8 +32,8 @@ export default function BlogPostPage({ params }) {
         <CanxiolNavbar />
         <BlogArticle post={post} />
         <RelatedBlogsSection />
-        {/* Sticky to the viewport bottom; rests above the footer at the end of the page */}
-        <CanxiolInfoBar />
+        {/* Prescription notice bar — logged-in pharmacists / psychiatrists only */}
+        <ProOnlyInfoBar />
         <CanxiolFooter />
       </main>
     </PsychiatristInquiryProvider>

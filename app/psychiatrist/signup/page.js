@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function PsychiatristSignupPage() {
   return (
-    <AuthPageShell>
+    <AuthPageShell bare>
       <AuthForm mode="signup" role="psychiatrist" />
     </AuthPageShell>
   );

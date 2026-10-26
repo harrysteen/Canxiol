@@ -17,7 +17,7 @@ export default function CanxiolFooter() {
         <div className="row g-4 g-lg-5 cx-footer-top">
 
           {/* Column 1: Tagline */}
-          <div className="col-12 col-lg-6">
+          <div className="col-12 col-lg-8">
             <Link href="/" className="cx-footer-tagline-link" aria-label="Canxiol Homepage">
               <p className="cx-footer-tagline">
                 <strong>Heal</strong> The way<br />
@@ -27,7 +27,7 @@ export default function CanxiolFooter() {
           </div>
 
           {/* Column 2: FOR PATIENTS */}
-          <div className="col-6 col-md-4 col-lg-2">
+          <div className="col-6 col-md-6 col-lg-2">
             <h4 className="cx-footer-h4">FOR PATIENTS</h4>
             <ul className="cx-footer-links">
               <li><Link href="/anxiety">Anxiety and its effects</Link></li>
@@ -37,21 +37,11 @@ export default function CanxiolFooter() {
           </div>
 
           {/* Column 3: RESOURCES */}
-          <div className="col-6 col-md-4 col-lg-2">
+          <div className="col-6 col-md-6 col-lg-2">
             <h4 className="cx-footer-h4">RESOURCES</h4>
             <ul className="cx-footer-links">
               <li><Link href="/blogs">Blogs</Link></li>
               <li><Link href="/media">Media</Link></li>
-            </ul>
-          </div>
-
-          {/* Column 4: ABOUT LEIUTIS */}
-          <div className="col-6 col-md-4 col-lg-2">
-            <h4 className="cx-footer-h4">ABOUT LEIUTIS</h4>
-            <ul className="cx-footer-links">
-              <li><Link href="/about-leiutis">About us</Link></li>
-              <li><Link href="/about-leiutis#discover-smile">About SMILE</Link></li>
-              <li><a href="https://leiutis.com" target="_blank" rel="noopener noreferrer">Visit Leiutis</a></li>
             </ul>
           </div>
 

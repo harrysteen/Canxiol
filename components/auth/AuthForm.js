@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import {
   createUserWithEmailAndPassword,
-  sendEmailVerification,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
@@ -12,6 +11,7 @@ import {
 } from 'firebase/auth';
 import { doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
 import { firebaseAuth, firestore } from '../../lib/firebase';
+import AnimatedGradientBg from '../AnimatedGradientBg';
 import { ROLES, otherRole, authErrorMessage } from './roles';
 import { useAuthProfile } from './useAuthProfile';
 import { setPortalRole } from './portalMode';
@@ -19,15 +19,52 @@ import { setPortalRole } from './portalMode';
 const EMPTY = {
   name: '',
   email: '',
-  phone: '',
-  registrationNumber: '',
-  council: '',
-  city: '',
   password: '',
   confirm: '',
+  workplace: '',
+  registrationNumber: '',
 };
 
-// Login or sign-up card for one professional role.
+function EyeIcon({ open }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" />
+      <circle cx="12" cy="12" r="3" />
+      {!open && <path d="M4 4l16 16" />}
+    </svg>
+  );
+}
+
+// Password input with a show / hide toggle
+function PasswordField({ label, name, value, onChange, placeholder, autoComplete, required = true }) {
+  const [visible, setVisible] = useState(false);
+  return (
+    <label className="cx-auth-field">
+      <span>{label}{required && ' *'}</span>
+      <div className="cx-auth-pw">
+        <input
+          name={name}
+          type={visible ? 'text' : 'password'}
+          required={required}
+          autoComplete={autoComplete}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+        />
+        <button
+          type="button"
+          className="cx-auth-pw-toggle"
+          aria-label={visible ? 'Hide password' : 'Show password'}
+          onClick={() => setVisible((v) => !v)}
+        >
+          <EyeIcon open={!visible} />
+        </button>
+      </div>
+    </label>
+  );
+}
+
+// Sign-up / log-in page for one professional role: gradient header + tabbed form card.
 // mode: 'login' | 'signup'   role: 'psychiatrist' | 'pharmacist'
 export default function AuthForm({ mode, role }) {
   const r = ROLES[role];
@@ -37,7 +74,6 @@ export default function AuthForm({ mode, role }) {
   const { user, profile, loading } = useAuthProfile();
 
   const [values, setValues] = useState(EMPTY);
-  const [consent, setConsent] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
@@ -58,7 +94,6 @@ export default function AuthForm({ mode, role }) {
     if (isSignup) {
       if (values.password.length < 8) return setError('Password must be at least 8 characters.');
       if (values.password !== values.confirm) return setError('Passwords do not match.');
-      if (!consent) return setError('Please accept the privacy notice to create an account.');
     }
 
     setBusy(true);
@@ -67,23 +102,27 @@ export default function AuthForm({ mode, role }) {
       if (isSignup) {
         const cred = await createUserWithEmailAndPassword(auth, values.email.trim(), values.password);
         await updateProfile(cred.user, { displayName: values.name.trim() });
-        // New accounts always start as "pending" — Leiutis approves them (see firestore.rules)
-        await setDoc(doc(firestore(), 'users', cred.user.uid), {
-          role,
-          status: 'pending',
-          name: values.name.trim(),
-          email: values.email.trim().toLowerCase(),
-          phone: values.phone.trim(),
-          registrationNumber: values.registrationNumber.trim(),
-          council: values.council.trim(),
-          city: values.city.trim(),
-          consentAt: serverTimestamp(),
-          createdAt: serverTimestamp(),
-        });
+        // Access is instant: new accounts are created as "approved" (Leiutis can block one later
+        // by setting status to "rejected" in Firestore)
         try {
-          await sendEmailVerification(cred.user);
-        } catch {
-          // Not critical — the portal page offers to resend it
+          await setDoc(doc(firestore(), 'users', cred.user.uid), {
+            role,
+            status: 'approved',
+            name: values.name.trim(),
+            email: values.email.trim().toLowerCase(),
+            workplace: values.workplace.trim(),
+            registrationNumber: values.registrationNumber.trim(),
+            consentAt: serverTimestamp(),
+            createdAt: serverTimestamp(),
+          });
+        } catch (profileErr) {
+          // Don't leave a login without a profile behind — remove it so the person can try again
+          try {
+            await cred.user.delete();
+          } catch {
+            await signOut(auth);
+          }
+          throw profileErr;
         }
       } else {
         const cred = await signInWithEmailAndPassword(auth, values.email.trim(), values.password);
@@ -124,114 +163,114 @@ export default function AuthForm({ mode, role }) {
   };
 
   return (
-    <div className={`cx-auth-card ${isSignup ? 'is-wide' : ''}`}>
-      <span className="cx-auth-eyebrow">{r.label} portal</span>
-      <h1 className="cx-auth-h1">{isSignup ? 'Create your account' : 'Log in'}</h1>
-      <p className="cx-auth-lead">
-        {isSignup
-          ? `For registered ${r.label.toLowerCase()}s. New accounts are reviewed by Leiutis before access is granted.`
-          : `Log in to the Canxiol ${r.label.toLowerCase()} portal.`}
-      </p>
+    <div className="cx-authp">
+      {/* One animated gradient behind the whole area: header and form card */}
+      <AnimatedGradientBg speed={0.5} direction={0} distortion={0.15} scale={1.5} />
 
-      {!loading && user && profile && profile.role !== role && (
-        <p className="cx-auth-notice">
-          You’re currently logged in to the {other.label.toLowerCase()} portal. Logging in or creating an
-          account here will log you out of it.
-        </p>
-      )}
-
-      <form className="cx-auth-form" onSubmit={handleSubmit}>
-        {isSignup && (
-          <label className="cx-auth-field is-full">
-            <span>Full name</span>
-            <input name="name" required autoComplete="name" placeholder={r.namePlaceholder} value={values.name} onChange={set} />
-          </label>
-        )}
-
-        <label className={`cx-auth-field ${isSignup ? '' : 'is-full'}`}>
-          <span>Email</span>
-          <input name="email" type="email" required autoComplete="email" placeholder="name@hospital.com" value={values.email} onChange={set} />
-        </label>
-
-        {isSignup && (
-          <>
-            <label className="cx-auth-field">
-              <span>Phone</span>
-              <input name="phone" type="tel" required autoComplete="tel" placeholder="+91 98000 00000" value={values.phone} onChange={set} />
-            </label>
-            <label className="cx-auth-field">
-              <span>{r.registrationLabel}</span>
-              <input name="registrationNumber" required placeholder={r.registrationPlaceholder} value={values.registrationNumber} onChange={set} />
-            </label>
-            <label className="cx-auth-field">
-              <span>Registering council</span>
-              <input name="council" required placeholder={r.councilPlaceholder} value={values.council} onChange={set} />
-            </label>
-            <label className="cx-auth-field is-full">
-              <span>City</span>
-              <input name="city" required autoComplete="address-level2" placeholder="e.g. Hyderabad" value={values.city} onChange={set} />
-            </label>
-          </>
-        )}
-
-        <label className={`cx-auth-field ${isSignup ? '' : 'is-full'}`}>
-          <span>Password</span>
-          <input
-            name="password"
-            type="password"
-            required
-            minLength={isSignup ? 8 : undefined}
-            autoComplete={isSignup ? 'new-password' : 'current-password'}
-            placeholder={isSignup ? 'At least 8 characters' : ''}
-            value={values.password}
-            onChange={set}
-          />
-        </label>
-
-        {isSignup && (
-          <label className="cx-auth-field">
-            <span>Confirm password</span>
-            <input name="confirm" type="password" required autoComplete="new-password" value={values.confirm} onChange={set} />
-          </label>
-        )}
-
-        {isSignup && (
-          <label className="cx-auth-consent is-full">
-            <input type="checkbox" checked={consent} onChange={(e) => setConsent(e.target.checked)} />
-            <span>
-              I agree that Leiutis may store and use these details to verify my registration and give me
-              access to professional information about Canxiol.
-            </span>
-          </label>
-        )}
-
-        {error && <p className="cx-auth-error is-full" role="alert">{error}</p>}
-        {notice && <p className="cx-auth-notice is-full" role="status">{notice}</p>}
-
-        <div className="cx-auth-actions is-full">
-          <button type="submit" className="cx-auth-btn" disabled={busy}>
-            {busy ? 'Please wait…' : isSignup ? 'Create account' : 'Log in'}
-          </button>
-          {!isSignup && (
-            <button type="button" className="cx-auth-link-btn" onClick={handleReset}>
-              Forgot password?
-            </button>
-          )}
+      <section className="cx-authp-hero">
+        <div className="container cx-authp-hero-inner">
+          <span className="cx-authp-eyebrow">Professional access</span>
+          <h1 className="cx-authp-h1">{r.label} Portal</h1>
+          <p className="cx-authp-lead">
+            {isSignup ? 'Create your professional account.' : 'Log in to your professional account.'}
+          </p>
         </div>
-      </form>
+      </section>
 
-      <div className="cx-auth-switch">
-        {isSignup ? (
-          <p>Already have an account? <Link href={`${r.base}/login`}>Log in</Link></p>
-        ) : (
-          <p>New here? <Link href={`${r.base}/signup`}>Create a {r.label.toLowerCase()} account</Link></p>
-        )}
-        <p className="cx-auth-switch-other">
-          Not a {r.label.toLowerCase()}? <Link href={`${other.base}/login`}>{other.label} login</Link>
-          {' · '}
-          <Link href="/anxiety">Patient information (no login)</Link>
-        </p>
-      </div>
+      <section className="cx-authp-body">
+        <div className="container">
+          <div className="cx-authp-card">
+            <div className="cx-authp-tabs">
+              <Link href={`${r.base}/signup`} className={`cx-authp-tab ${isSignup ? 'is-active' : ''}`} aria-current={isSignup ? 'page' : undefined}>
+                Sign Up
+              </Link>
+              <Link href={`${r.base}/login`} className={`cx-authp-tab ${!isSignup ? 'is-active' : ''}`} aria-current={!isSignup ? 'page' : undefined}>
+                Log In
+              </Link>
+            </div>
+
+            {!loading && user && profile && profile.role !== role && (
+              <p className="cx-auth-notice">
+                You’re currently logged in to the {other.label.toLowerCase()} portal. Logging in or creating an
+                account here will log you out of it.
+              </p>
+            )}
+
+            <form className="cx-authp-form" onSubmit={handleSubmit}>
+              {isSignup && (
+                <label className="cx-auth-field">
+                  <span>Full name *</span>
+                  <input name="name" required autoComplete="name" placeholder="Your full name" value={values.name} onChange={set} />
+                </label>
+              )}
+
+              <label className="cx-auth-field">
+                <span>Email *</span>
+                <input name="email" type="email" required autoComplete="email" placeholder="you@example.com" value={values.email} onChange={set} />
+              </label>
+
+              <PasswordField
+                label="Password"
+                name="password"
+                value={values.password}
+                onChange={set}
+                placeholder="Enter your password"
+                autoComplete={isSignup ? 'new-password' : 'current-password'}
+              />
+
+              {isSignup && (
+                <>
+                  <PasswordField
+                    label="Confirm password"
+                    name="confirm"
+                    value={values.confirm}
+                    onChange={set}
+                    placeholder="Re-enter your password"
+                    autoComplete="new-password"
+                  />
+                  <label className="cx-auth-field">
+                    <span>{r.workplaceLabel}</span>
+                    <input name="workplace" autoComplete="organization" placeholder={r.workplacePlaceholder} value={values.workplace} onChange={set} />
+                  </label>
+                  <label className="cx-auth-field">
+                    <span>{r.registrationLabel}</span>
+                    <input name="registrationNumber" placeholder={r.registrationPlaceholder} value={values.registrationNumber} onChange={set} />
+                  </label>
+                </>
+              )}
+
+              {error && <p className="cx-auth-error is-full" role="alert">{error}</p>}
+              {notice && <p className="cx-auth-notice is-full" role="status">{notice}</p>}
+
+              <button type="submit" className="cx-authp-submit is-full" disabled={busy}>
+                <span>{busy ? 'Please wait…' : isSignup ? 'Sign Up' : 'Log In'}</span>
+                {!busy && (
+                  <svg width="11" height="11" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                    <path d="M3 11 11 3M11 3H4.5M11 3v6.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                )}
+              </button>
+
+              <div className="cx-authp-meta is-full">
+                {isSignup ? (
+                  <p>
+                    By signing up, you agree that Leiutis may store these details for your professional account.
+                  </p>
+                ) : (
+                  <button type="button" className="cx-auth-link-btn" onClick={handleReset}>
+                    Forgot password?
+                  </button>
+                )}
+                <p className="cx-authp-meta-other">
+                  Not a {r.label.toLowerCase()}? <Link href={`${other.base}/login`}>{other.label} portal</Link>
+                  {' · '}
+                  <Link href="/anxiety">Patient information (no login)</Link>
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

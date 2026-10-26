@@ -1,8 +1,8 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { sendEmailVerification, signOut } from 'firebase/auth';
+import { signOut } from 'firebase/auth';
 import { firebaseAuth } from '../../lib/firebase';
 import { ROLES, otherRole } from './roles';
 import { useAuthProfile } from './useAuthProfile';
@@ -26,24 +26,23 @@ function StatusCard({ title, children, onSignOut }) {
   );
 }
 
-// Shows the portal only to a signed-in, approved user of this role.
-// Everyone else gets the right message: log in, wrong portal, pending review or not approved.
+// Shows the portal to a signed-in user of this role (access is instant after sign-up).
+// Everyone else gets the right message: log in, wrong portal, or blocked (status "rejected").
 // fullPage: the children are a complete page (own navbar/footer) rather than content for the card shell.
 export default function PortalGate({ role, fullPage = false, children }) {
   const r = ROLES[role];
   const router = useRouter();
   const { user, profile, loading } = useAuthProfile();
-  const [resent, setResent] = useState(false);
 
   useEffect(() => {
     if (!loading && !user) router.replace(`${r.base}/login`);
   }, [loading, user, router, r.base]);
 
-  // Keep the site-wide portal look in step with the account: on for an approved
-  // professional (in their own role), off for everyone else
+  // Keep the site-wide portal look in step with the account: on for a signed-in
+  // professional (unless blocked), off for everyone else
   useEffect(() => {
     if (loading) return;
-    if (user && profile?.status === 'approved') {
+    if (user && profile && profile.status !== 'rejected') {
       setPortalRole(profile.role, profile.name || user.displayName || user.email);
     } else {
       setPortalRole(null);
@@ -95,45 +94,11 @@ export default function PortalGate({ role, fullPage = false, children }) {
 
   if (profile.status === 'rejected') {
     return (
-      <StatusCard title="Account not approved" onSignOut={logOut}>
+      <StatusCard title="Access not available" onSignOut={logOut}>
         <p className="cx-auth-lead">
-          We weren’t able to verify your registration. If you think this is a mistake, please{' '}
-          <Link href="/contact">contact us</Link>.
+          This account doesn’t have access to the {r.label.toLowerCase()} portal. If you think this is a
+          mistake, please <Link href="/contact">contact us</Link>.
         </p>
-      </StatusCard>
-    );
-  }
-
-  if (profile.status !== 'approved') {
-    return (
-      <StatusCard title="Your account is under review" onSignOut={logOut}>
-        <p className="cx-auth-lead">
-          Thank you for registering, {profile.name || user.displayName}. Leiutis is verifying your{' '}
-          {r.registrationLabel.toLowerCase()}. You’ll get access to the {r.label.toLowerCase()} portal
-          as soon as it’s approved — this page updates automatically.
-        </p>
-        {!user.emailVerified && (
-          <div className="cx-auth-notice">
-            Please also confirm your email address using the link we sent to <strong>{user.email}</strong>.{' '}
-            {resent ? (
-              'A new link has been sent.'
-            ) : (
-              <button
-                type="button"
-                className="cx-auth-link-btn"
-                onClick={async () => {
-                  try {
-                    await sendEmailVerification(user);
-                  } finally {
-                    setResent(true);
-                  }
-                }}
-              >
-                Resend link
-              </button>
-            )}
-          </div>
-        )}
       </StatusCard>
     );
   }

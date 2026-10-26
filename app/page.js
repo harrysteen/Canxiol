@@ -21,6 +21,7 @@ export default function Home() {
         <PortalHomeRedirect />
         <CanxiolNavbar />
         <CanxiolHero />
+        <CanxiolNoticeBar />
         <CanxiolAnxietySection />
         <CanxiolStatsSection />
         <CanxiolGettingHelpSection />
@@ -35,8 +36,6 @@ export default function Home() {
         <CanxiolSmallStepSection />
         <CanxiolBlogSection />
         <CanxiolChoosePathSection />
-        {/* Sticky to the viewport bottom; rests above the footer at the end of the page */}
-        <CanxiolNoticeBar />
         <CanxiolFooter />
       </main>
     </PsychiatristInquiryProvider>

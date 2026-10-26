@@ -12,14 +12,14 @@ const PATHS = [
     audience: 'For Pharmacists',
     title: <>Explore Anxiety and<br />Treatment Perspectives</>,
     desc: 'Access information about anxiety and relevant treatment perspectives.',
-    // No pharmacist page yet — the Canxiol product page is the closest fit
-    href: '/canxiol',
+    // Portal login (links on to sign-up); a logged-in pharmacist goes straight to their portal
+    href: '/pharmacist/login',
   },
   {
     audience: 'For Psychiatrists',
     title: <>Explore the Science and<br />Treatment Information</>,
     desc: 'Explore professional insights on anxiety and prescription cannabidiol treatment.',
-    href: '/psychiatrists',
+    href: '/psychiatrist/login',
   },
 ];
 
