@@ -1,8 +1,9 @@
 const areas = [
   { num: '01', name: 'Neuropsychiatry' },
-  { num: '02', name: 'Rare & complex conditions' },
+  { num: '02', name: 'Rare diseases' },
   { num: '03', name: 'Oncology' },
   { num: '04', name: 'Supportive care' },
+  { num: '05', name: 'Pain management' },
 ];
 
 export default function AboutResearchSection() {
@@ -12,7 +13,7 @@ export default function AboutResearchSection() {
         <div className="cx-about-research-head">
           <h2 className="cx-about-h2">
             Our<br />
-            research areas.
+            research areas
           </h2>
           <p className="cx-about-research-intro">
             We are a specialty therapeutics company focused on translating scientific insight

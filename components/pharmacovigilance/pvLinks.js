@@ -1,8 +1,10 @@
 // Reporting documents on the /pharmacovigilance page.
 // Replace the '#' placeholders with the real PDF paths (e.g. '/docs/adr-form-hindi.pdf').
 export const PV_LINKS = {
-  // Patient (consumer) ADR reporting forms — shown in this order, two per row
+  // Patient (consumer) ADR reporting forms — shown in this order; English gets its own
+  // full-width row, the rest sit two per row
   patientFormsByLanguage: {
+    English: '#',
     Assamese: '#',
     Bengali: '#',
     Gujarati: '#',

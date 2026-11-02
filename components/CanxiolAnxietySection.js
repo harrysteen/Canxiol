@@ -2,6 +2,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+const img = {
+  src: '/images/patent page second section img.jpg',
+  alt: 'Woman stretching her arms overhead in a leafy park, looking calmly into the distance',
+  position: 'center 35%',
+};
+
 export default function CanxiolAnxietySection() {
   return (
     <>
@@ -43,11 +49,11 @@ export default function CanxiolAnxietySection() {
               <div className="cx-anxiety-right">
                 <div className="cx-anxiety-img-box">
                   <Image
-                    src="/images/anxiety-lifestyle.png"
-                    alt="Woman smiling calmly while stretching her arm on a leafy city walkway"
+                    src={img.src}
+                    alt={img.alt}
                     fill
                     sizes="(max-width: 991px) 100vw, 50vw"
-                    style={{ objectFit: 'cover', objectPosition: 'center 30%' }}
+                    style={{ objectFit: 'cover', objectPosition: img.position }}
                   />
                 </div>
                 <p className="cx-anxiety-caption">

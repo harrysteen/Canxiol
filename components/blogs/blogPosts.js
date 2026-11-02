@@ -15,7 +15,7 @@ export const blogPosts = [
   {
     id: 1,
     slug: 'student-anxiety-can-hide-behind-a-life-that-looks-fine',
-    image: '/images/blog_img_1.png',
+    image: '/images/Student anxiety can hide behind a life that looks fine..jpg',
     title: 'Student anxiety can hide behind a life that looks fine.',
     articleTitle: 'When Student Life Looks Fine, But Doesn’t Feel Fine',
     excerpt: 'Student anxiety can hide behind a life that looks fine, making it important to recognise when everyday pressure becomes something more.',
@@ -52,7 +52,7 @@ export const blogPosts = [
   {
     id: 2,
     slug: 'anxiety-remains-unrecognised-until-it-gets-too-loud-to-ignore',
-    image: '/images/blog_img_2.png',
+    image: '/images/The Anxiety remains unrecognised –  Until It Gets Too Loud to Ignore.jpg',
     title: 'The Anxiety remains unrecognised – Until It Gets Too Loud to Ignore',
     excerpt: 'Anxiety often goes unrecognised, but recognising it early and seeking help can make a difference.',
     author: 'Ms. Vrinda Singla',
@@ -99,7 +99,7 @@ export const blogPosts = [
   {
     id: 3,
     slug: 'anxiety-isnt-a-personality-flaw-its-a-medical-condition',
-    image: '/images/blog_img_3.png',
+    image: "/images/Anxiety Isn't a Personality Flaw. It's a Medical Condition, Like Any Other.jpg",
     title: "Anxiety Isn't a Personality Flaw. It's a Medical Condition, Like Any Other",
     excerpt: 'Anxiety is a medical condition, not a personality flaw.',
     author: 'Ms. Vrinda Singla',

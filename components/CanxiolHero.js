@@ -68,8 +68,8 @@ export default function CanxiolHero({
               <div className="col-12 col-lg-6 col-xl-6 cx-hero-img-col">
                 <div className="cx-img-wrapper cx-img-wrapper--home">
                   <Image
-                    src="/images/when to seek help.png"
-                    alt="A man talking with a psychiatrist who takes notes, both seated in armchairs"
+                    src="/images/patent page hero img.png"
+                    alt="A young woman on a sofa talking with a psychiatrist who takes notes on a clipboard"
                     fill
                     priority
                     sizes="(max-width: 576px) 100vw, (max-width: 992px) 600px, 760px"

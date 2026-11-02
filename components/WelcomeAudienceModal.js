@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { usePortalRole } from './auth/portalMode';
 
@@ -119,7 +120,15 @@ export default function WelcomeAudienceModal() {
       >
         <header className="cx-welcome-head">
           <span className="cx-welcome-logo">
-            Leiutis<span className="cx-welcome-logo-dot">.</span>
+            <Image
+              src="/images/leiutis logo for about leiuties page.png"
+              alt=""
+              width={28}
+              height={21}
+              priority
+              className="cx-welcome-logo-mark"
+            />
+            <span>Leiutis</span>
           </span>
           <span className="cx-welcome-tagline">Care. Knowledge. Connection.</span>
         </header>
@@ -167,6 +176,7 @@ export default function WelcomeAudienceModal() {
             </svg>
             Your privacy matters.
           </span>
+          <span className="cx-welcome-foot-rx">To be prescribed by Psychiatrists only</span>
           <span className="cx-welcome-foot-item">
             <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="m3 8.5 3 3 7-7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />

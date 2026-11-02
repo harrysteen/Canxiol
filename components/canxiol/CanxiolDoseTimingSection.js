@@ -32,8 +32,8 @@ export default function CanxiolDoseTimingSection() {
             <figure className="cx-cxp-dose-figure">
               <div className="cx-cxp-dose-img">
                 <Image
-                  src="/images/When should you take Canxiol.png"
-                  alt="Two friends chatting and smiling outdoors"
+                  src="/images/When should you take Canxiol.jpg"
+                  alt="Three friends laughing together as they look at a phone on a leafy campus path"
                   fill
                   sizes="(max-width: 991px) 100vw, 50vw"
                 />

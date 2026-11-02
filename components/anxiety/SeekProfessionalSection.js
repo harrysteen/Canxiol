@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 // TODO: swap for the doctor-consultation photo once it is added to /public/images
-const CONSULT_IMAGE = '/images/when to seek help img3.png';
+const CONSULT_IMAGE = '/images/when to you seek profisinel.jpg';
 
 export default function SeekProfessionalSection() {
   return (
@@ -45,7 +45,7 @@ export default function SeekProfessionalSection() {
             <div className="cx-seek-pro-img">
               <Image
                 src={CONSULT_IMAGE}
-                alt="Young woman listening as a doctor explains notes during a consultation"
+                alt="Three generations of a family playing with a child and a ball on the living-room floor"
                 fill
                 sizes="(max-width: 991px) 100vw, 50vw"
               />

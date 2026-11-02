@@ -8,6 +8,7 @@ import CanxiolWhenSection from '../../components/canxiol/CanxiolWhenSection';
 import CanxiolHowToTakeSection from '../../components/canxiol/CanxiolHowToTakeSection';
 import CanxiolDoseTimingSection from '../../components/canxiol/CanxiolDoseTimingSection';
 import CanxiolStorageSection from '../../components/canxiol/CanxiolStorageSection';
+import CanxiolBannerSection from '../../components/canxiol/CanxiolBannerSection';
 import CanxiolQuestionsSection from '../../components/canxiol/CanxiolQuestionsSection';
 
 export const metadata = {
@@ -26,6 +27,7 @@ export default function CanxiolPage() {
         <CanxiolHowToTakeSection />
         <CanxiolDoseTimingSection />
         <CanxiolStorageSection />
+        <CanxiolBannerSection />
         <CanxiolQuestionsSection />
         {/* Sticky to the viewport bottom; rests above the footer at the end of the page */}
         <CanxiolInfoBar />

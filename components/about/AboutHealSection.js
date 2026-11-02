@@ -45,8 +45,8 @@ export default function AboutHealSection() {
         {/* Full-width banner photo */}
         <div className="cx-about-heal-img">
           <Image
-            src="/images/Heal the way.png"
-            alt="Woman sitting calmly on a park bench with her eyes closed"
+            src="/images/the result bringing Science & Patient SMILE together is a significant milestone in cannabinoid therapeutics.jpg"
+            alt="A smiling family playing a board game together on the floor in front of a brick wall"
             fill
             sizes="(max-width: 1400px) 100vw, 1320px"
           />

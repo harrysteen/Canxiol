@@ -1,12 +1,20 @@
 import Image from 'next/image';
 import AnxietyNotes from './AnxietyNotes';
 
-// TODO: swap for the man-on-a-park-bench photo once it is added to /public/images
-const UNTREATED_IMAGE = '/images/when-to-seek-untreated.png';
+// Home page photo, and the one used on the When to seek help page (pharmacist / psychiatrist portals)
+const HOME_IMAGE = {
+  src: '/images/What happens when anxiety goes untreated.jpg',
+  alt: 'A man talking with a therapist who holds an open notebook, in a calm consulting room',
+};
+const PAGE_IMAGE = {
+  src: '/images/What happens when anxiety goes untreated (2).jpg',
+  alt: 'A smiling young woman tossing her hair and dancing joyfully against a lilac background',
+};
 
 // Also used on the home page: no eyebrow, no "Next" link, two-line heading (see app/page.js)
 export default function SeekUntreatedSection({ variant }) {
   const isHome = variant === 'home';
+  const img = isHome ? HOME_IMAGE : PAGE_IMAGE;
 
   return (
     <section className={`cx-seek-untreated ${isHome ? 'cx-seek-untreated--home' : ''}`.trim()}>
@@ -23,8 +31,8 @@ export default function SeekUntreatedSection({ variant }) {
           <div className="col-12 col-lg-5">
             <div className="cx-seek-untreated-img">
               <Image
-                src={UNTREATED_IMAGE}
-                alt="Man sitting alone on a park bench, looking into the distance"
+                src={img.src}
+                alt={img.alt}
                 fill
                 sizes="(max-width: 991px) 100vw, 42vw"
               />

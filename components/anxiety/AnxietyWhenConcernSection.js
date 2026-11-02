@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import AnxietyNotes from './AnxietyNotes';
 
-const CONCERN_IMAGE = '/images/image 2 in what anxity page.png';
+const CONCERN_IMAGE = '/images/WHEN ANXIETY BECOMES A CONCERN.jpg';
 
 export default function AnxietyWhenConcernSection() {
   return (
@@ -22,7 +22,7 @@ export default function AnxietyWhenConcernSection() {
             <div className="cx-anx-when-img">
               <Image
                 src={CONCERN_IMAGE}
-                alt="Smiling student carrying books on a university campus"
+                alt="Three students laughing together as they walk through a leafy campus"
                 fill
                 sizes="(max-width: 991px) 100vw, 50vw"
               />

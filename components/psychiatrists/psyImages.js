@@ -1,12 +1,12 @@
 // Images used on the /psychiatrists page — swap the paths here.
 export const PSY_IMAGES = {
-  consultation: '/images/psychiatrist-doctor.png',
+  consultation: '/images/What is Canxiol.png',
   packs: '/images/14mland28ml-bottle.png',
   standOutBottle: '/images/How Canxiol stands out.png',
   logoLeiutis: '/images/leiutis logo.png',
   logoBiophore: '/images/biophore logo.png',
   logoZenara: '/images/zenara logo.png',
-  administer: '/images/patient-info-woman.png',
+  administer: '/images/MAKING A SENSIBLE HEALTH DECISION.jpg',
   // Web-sized copy of 'banner image for psy page.png' (the original is a print file)
   banner: '/images/psy-canxiol-banner.jpg',
 };

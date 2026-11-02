@@ -37,7 +37,7 @@ export default function PsyAdministerSection() {
               <div className="cx-psy-admin-img">
                 <Image
                   src={PSY_IMAGES.administer}
-                  alt="Woman measuring a dose of Canxiol with the dropper into a glass of water"
+                  alt="A young woman talking with a psychiatrist who takes notes on a clipboard"
                   fill
                   sizes="(max-width: 991px) 100vw, 50vw"
                 />

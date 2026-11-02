@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import AnxietyNotes from './AnxietyNotes';
+import PharmacistCanxiolBanner from './PharmacistCanxiolBanner';
 
-// TODO: swap for the psychiatrist-consultation photo once it is added to /public/images
-const VISIT_IMAGE = '/images/treatment-psychiatrist-visit.png';
+const VISIT_IMAGE = '/images/MAKING A SENSIBLE HEALTH DECISION.jpg';
 
 export default function TreatmentPsychiatristSection() {
   return (
@@ -29,7 +29,7 @@ export default function TreatmentPsychiatristSection() {
             <div className="cx-treat-visit-img">
               <Image
                 src={VISIT_IMAGE}
-                alt="A woman talking with her psychiatrist in a calm, homely consultation room"
+                alt="A young woman talking with a psychiatrist who takes notes on a clipboard"
                 fill
                 sizes="(max-width: 991px) 100vw, 50vw"
               />
@@ -38,6 +38,8 @@ export default function TreatmentPsychiatristSection() {
         </div>
 
         {/* Last tab: disclaimer and sources, no "Next" link */}
+        {/* Pharmacist and psychiatrist portals only */}
+        <PharmacistCanxiolBanner />
         <AnxietyNotes />
       </div>
     </section>

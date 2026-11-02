@@ -19,7 +19,11 @@ function MediaCard({ item }) {
             alt={`${item.outlet}: ${item.title}`}
             fill
             sizes="(max-width: 767px) 100vw, (max-width: 991px) 50vw, 33vw"
-            style={{ objectFit: 'cover' }}
+            style={
+              item.fit === 'contain'
+                ? { objectFit: 'contain', padding: '8% 14%' }
+                : { objectFit: 'cover' }
+            }
           />
         )}
       </div>

@@ -1216,12 +1216,6 @@ button {
   align-items: center;
   flex-shrink: 0;
   line-height: 1;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-.cx-logo:hover {
-  opacity: 0.9;
-  transform: scale(1.02);
 }
 
 .cx-logo-img {
@@ -1878,13 +1872,36 @@ button {
 /* Consultation photo is wide and sits on the hero floor */
 .cx-img-wrapper.cx-img-wrapper--home {
   max-width: 760px;
-  margin-left: auto;
-  margin-right: 0;
+  margin-left: 0;
+  margin-right: auto;
   transform: none;
 }
 
 .cx-img-wrapper--home img {
   object-position: bottom right !important;
+}
+
+/* Desktop: the image runs past the container to the screen's right edge, so the sofa
+   touches the edge with no gap. --cx-hero-bleed = space between the column and the
+   viewport edge ((viewport - container) / 2 + column padding). The hero clips overflow. */
+@media (min-width: 992px) {
+  .cx-hero-img-col { --cx-hero-bleed: calc((100vw - var(--container-max-lg)) / 2 + 0.75rem); }
+}
+
+@media (min-width: 1200px) {
+  .cx-hero-img-col { --cx-hero-bleed: calc((100vw - var(--container-max-xl)) / 2 + 0.75rem); }
+}
+
+@media (min-width: 1400px) {
+  .cx-hero-img-col { --cx-hero-bleed: calc((100vw - var(--container-max-xxl)) / 2 + 0.75rem); }
+}
+
+@media (min-width: 992px) {
+  .cx-img-wrapper.cx-img-wrapper--home {
+    width: calc(100% + var(--cx-hero-bleed));
+    max-width: none;
+    margin-right: calc(-1 * var(--cx-hero-bleed));
+  }
 }
 
 @media (max-width: 991.98px) {
@@ -4403,8 +4420,8 @@ button {
 .cx-psy-admin-img {
   position: relative;
   width: 100%;
-  /* Matches the photo (2320 x 1548) */
-  aspect-ratio: 2320 / 1548;
+  /* Matches the photo (4096 x 2731) */
+  aspect-ratio: 4096 / 2731;
   overflow: hidden;
 }
 
@@ -6564,7 +6581,7 @@ button {
 }
 
 .cx-seek-untreated--home .cx-seek-untreated-card li {
-  font-size: 14px;
+  font-size: 15.5px;
 }
 
 @media (max-width: 991.98px) {
@@ -6646,14 +6663,14 @@ button {
 }
 
 .cx-step-pane-title {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 600;
   color: #2A1A2A;
   margin: 0 0 6px;
 }
 
 .cx-step-pane-intro {
-  font-size: 13px;
+  font-size: 14.5px;
   line-height: 1.7;
   color: #68635F;
   max-width: 520px;
@@ -6674,7 +6691,7 @@ button {
   background: #FFFFFF;
   border: 1px solid #E2D2DE;
   font-family: inherit;
-  font-size: 12px;
+  font-size: 13.5px;
   color: #2A1A2A;
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
@@ -6694,7 +6711,7 @@ button {
   background: #FFFFFF;
   border: 1px solid #E2D2DE;
   padding: 14px 16px;
-  font-size: 13px;
+  font-size: 14.5px;
   line-height: 1.7;
   color: #68635F;
 }
@@ -6705,7 +6722,7 @@ button {
 }
 
 .cx-step-result-title {
-  font-size: 14px;
+  font-size: 15.5px;
   font-weight: 600;
   color: #3D2F47;
   margin: 0 0 8px;
@@ -6719,7 +6736,7 @@ button {
 }
 
 .cx-step-result-list li {
-  font-size: 13px;
+  font-size: 14.5px;
   line-height: 1.6;
   padding-left: 4px;
 }
@@ -6865,13 +6882,13 @@ button {
 }
 
 .cx-step-disclaimer {
-  font-size: 12px;
+  font-size: 13px;
   color: #2A1A2A;
   margin: 0 0 8px;
 }
 
 .cx-step-cite {
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.8;
   color: #68635F;
   margin: 0;
@@ -7333,7 +7350,7 @@ button {
 
 .cx-about-research-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 12px;
   list-style: none;
   padding: 0;
@@ -7383,6 +7400,12 @@ button {
     max-width: 560px;
   }
 
+  .cx-about-research-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 575.98px) {
   .cx-about-research-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -8704,11 +8727,19 @@ button {
   box-shadow: 0 2px 10px rgba(42, 13, 47, 0.04);
   padding: clamp(24px, 2.6vw, 32px);
   scroll-margin-top: 96px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Teal outline only while the card is hovered or a field inside it is focused
+   (inset ring makes it 2px without shifting the layout) */
+.cx-contact-card:hover,
+.cx-contact-card:focus-within {
+  border-color: #1C8A8F;
+  box-shadow: inset 0 0 0 1px #1C8A8F, 0 6px 20px rgba(42, 13, 47, 0.06);
 }
 
 .cx-contact-card-safety {
   background: #F7F4F6;
-  border: 2px solid #1C8A8F;
 }
 
 .cx-contact-card-head {
@@ -8721,8 +8752,18 @@ button {
   border-bottom: 1px solid #ECE8E4;
 }
 
-.cx-contact-card-safety .cx-contact-card-head {
+.cx-contact-card-head {
+  transition: border-color 0.2s ease;
+}
+
+.cx-contact-card:hover .cx-contact-card-head,
+.cx-contact-card:focus-within .cx-contact-card-head {
   border-bottom-color: #1C8A8F;
+}
+
+.cx-contact-card:hover .cx-contact-card-title,
+.cx-contact-card:focus-within .cx-contact-card-title {
+  color: #1C8A8F;
 }
 
 .cx-contact-card-title {
@@ -8732,11 +8773,9 @@ button {
   text-transform: uppercase;
   color: #471D41;
   margin: 0;
+  transition: color 0.2s ease;
 }
 
-.cx-contact-card-safety .cx-contact-card-title {
-  color: #1C8A8F;
-}
 
 .cx-contact-card-tag {
   flex-shrink: 0;
@@ -8747,11 +8786,13 @@ button {
   color: #68635F;
 }
 
-.cx-contact-card-tag.is-safety {
-  background: #FFFFFF;
+.cx-contact-card-tag {
+  transition: color 0.2s ease;
+}
+
+.cx-contact-card:hover .cx-contact-card-tag.is-safety,
+.cx-contact-card:focus-within .cx-contact-card-tag.is-safety {
   color: #1C8A8F;
-  font-weight: 600;
-  padding: 3px 8px;
 }
 
 .cx-contact-card-intro {
@@ -8894,10 +8935,11 @@ button {
 
 /* Safety notice */
 .cx-contact-notice {
-  border: 1px solid #1C8A8F;
+  border: 1px solid #ECE8E4;
   background: #FFFFFF;
   padding: 14px 14px 12px;
   margin-bottom: 24px;
+  transition: border-color 0.2s ease;
 }
 
 .cx-contact-notice-title {
@@ -8906,8 +8948,20 @@ button {
   font-weight: 600;
   letter-spacing: 0.3px;
   text-transform: uppercase;
-  color: #1C8A8F;
+  color: #471D41;
   margin-bottom: 6px;
+  transition: color 0.2s ease;
+}
+
+/* Notice turns teal with the rest of the card on hover */
+.cx-contact-card:hover .cx-contact-notice,
+.cx-contact-card:focus-within .cx-contact-notice {
+  border-color: #1C8A8F;
+}
+
+.cx-contact-card:hover .cx-contact-notice-title,
+.cx-contact-card:focus-within .cx-contact-notice-title {
+  color: #1C8A8F;
 }
 
 .cx-contact-notice p {
@@ -9165,6 +9219,12 @@ button {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+/* English: full-width row above the regional languages */
+.cx-pv-langs > li:first-child {
+  grid-column: 1 / -1;
+  margin-bottom: 12px;
 }
 
 .cx-pv-lang {
@@ -10173,14 +10233,25 @@ a.cx-media-link:hover {
 }
 
 .cx-welcome-logo {
-  font-size: 21px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 22px;
   font-weight: 700;
   letter-spacing: -0.02em;
   color: #471D41;
+  line-height: 1;
+}
+
+.cx-welcome-logo-mark {
+  width: auto;
+  height: 22px;
+  display: block;
+  flex-shrink: 0;
 }
 
 .cx-welcome-logo-dot {
-  color: #1C8A8F;
+  display: none;
 }
 
 .cx-welcome-tagline {
@@ -10312,6 +10383,22 @@ a.cx-media-link:hover {
 
 .cx-welcome-foot-item svg {
   color: #1C8A8F;
+}
+
+.cx-welcome-foot-rx {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #471D41;
+  text-align: center;
+}
+
+@media (max-width: 767.98px) {
+  .cx-welcome-foot-rx {
+    order: -1;
+    flex-basis: 100%;
+  }
 }
 
 @media (max-width: 767.98px) {
@@ -10548,8 +10635,7 @@ a.cx-media-link:hover {
 .cx-meet-process {
   list-style: none;
   margin: 0;
-  padding: 6px 0 6px 22px;
-  border-left: 1px solid #8C6A86;
+  padding: 6px 0;
   font-family: var(--font-outfit), 'Outfit', sans-serif;
 }
 
@@ -10560,7 +10646,7 @@ a.cx-media-link:hover {
 }
 
 .cx-meet-process-step::after {
-  content: '93';
+  content: "\2193";
   display: block;
   margin: 8px 0;
   font-size: 14px;
@@ -10575,15 +10661,19 @@ a.cx-media-link:hover {
 }
 
 .cx-meet-process-brand {
-  font-family: Georgia, 'Times New Roman', serif;
   font-size: 24px;
-  letter-spacing: 2px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: 0.12em;
   color: #471D41;
 }
 
 .cx-meet-process-brand sup {
-  font-size: 0.45em;
-  top: -1.1em;
+  font-size: 0.6em;
+  font-weight: 400;
+  letter-spacing: 0;
+  top: -0.6em;
+  margin-left: 2px;
 }
 
 .cx-meet-process-sub {
@@ -10875,4 +10965,26 @@ a.cx-media-link:hover {
   .cx-authp-form {
     grid-template-columns: minmax(0, 1fr);
   }
+}
+
+/* Canxiol product banner above the Treatment page disclaimer (pharmacist / psychiatrist portals only) */
+.cx-pharm-banner {
+  margin-top: clamp(40px, 5vw, 64px);
+}
+
+.cx-pharm-banner img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Canxiol page: product banner between Storage and Questions */
+.cx-cxp-banner {
+  padding: clamp(24px, 3vw, 40px) 0 0;
+}
+
+.cx-cxp-banner-img {
+  display: block;
+  width: 100%;
+  height: auto;
 }

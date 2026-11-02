@@ -1,25 +1,26 @@
 'use client';
 import Image from 'next/image';
 
-export default function CanxiolGettingHelpSection() {
-  const cards = [
-    {
-      image: '/images/lifestyle-goals.png',
-      alt: 'Young woman studying calmly at her desk with a laptop and notebook',
-      title: 'Focus on your goals',
-    },
-    {
-      image: '/images/lifestyle-connections.png',
-      alt: 'Family walking together along a leafy neighbourhood street',
-      title: 'Build stronger relationships',
-    },
-    {
-      image: '/images/lifestyle-moments.png',
-      alt: 'Family enjoying a board game together at home',
-      title: 'Happier moments that matter',
-    },
-  ];
+// Same photos on the patient, pharmacist and psychiatrist home pages
+const CARDS = [
+  {
+    image: '/images/Focus on your goals.jpg',
+    alt: 'Young man sitting at a library desk with a laptop, thinking calmly',
+    title: 'Focus on your goals',
+  },
+  {
+    image: '/images/Build stronger connections.jpg',
+    alt: 'Group of friends laughing as they walk together along a tree-lined path',
+    title: 'Build stronger connections',
+  },
+  {
+    image: '/images/Happier moments that matter.jpg',
+    alt: 'Parents playing with their two young children on the living-room floor',
+    title: 'Happier moments that matter',
+  },
+];
 
+export default function CanxiolGettingHelpSection() {
   return (
     <section id="getting-help" className="cx-getting-help-section">
       <div className="container cx-help-content">
@@ -44,7 +45,7 @@ export default function CanxiolGettingHelpSection() {
 
         {/* 3-Column Lifestyle Grid */}
         <div className="row g-4 g-lg-5 cx-help-cards-row">
-          {cards.map((card, idx) => (
+          {CARDS.map((card, idx) => (
             <div key={idx} className="col-12 col-md-4">
               <div className="cx-help-card">
                 <div className="cx-help-img-box">

@@ -43,7 +43,7 @@ const MOODS = [
 // they can take along (adapted from NIMH, "Tips for Talking With a Health Care Provider
 // About Your Mental Health"). Nothing is saved.
 const SYMPTOMS = [
-  'Sleep changes',
+  'Trouble sleeping',
   'Feeling restless',
   'Low energy',
   'Trouble concentrating',

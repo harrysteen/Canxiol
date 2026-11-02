@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-const INTRO_IMAGE = '/images/when-to-seek-intro.png';
+const INTRO_IMAGE = '/images/When does anxiety become an anxiety disorde.jpg';
 
 export default function SeekIntroSection() {
   return (
@@ -16,7 +16,7 @@ export default function SeekIntroSection() {
             <div className="cx-seek-intro-img">
               <Image
                 src={INTRO_IMAGE}
-                alt="Woman with eyes closed, smiling calmly in warm evening light"
+                alt="A smiling couple walking together along a tree-lined street"
                 fill
                 sizes="(max-width: 991px) 100vw, 42vw"
               />

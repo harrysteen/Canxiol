@@ -51,8 +51,8 @@ export default function AnxietyIndiaScaleSection() {
         <div className="cx-anx-section-head">
           <h2 className="cx-anx-h2">The scale of anxiety<br />in India.</h2>
           <p className="cx-anx-section-lead">
-            India&apos;s anxiety burden is vast, yet largely invisible.<br />
-            Millions live with it, few seek help, most suffer in silence.
+            Selected figures from national and global health surveys place the scale in
+            perspective.
           </p>
         </div>
 

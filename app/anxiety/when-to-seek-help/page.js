@@ -4,10 +4,10 @@ import PsychiatristInquiryProvider from '../../../components/PsychiatristInquiry
 import AnxietySubNav from '../../../components/anxiety/AnxietySubNav';
 import AnxietyHero from '../../../components/anxiety/AnxietyHero';
 import AnxietyQuoteBand from '../../../components/anxiety/AnxietyQuoteBand';
-import AnxietyNotes from '../../../components/anxiety/AnxietyNotes';
 import SeekIntroSection from '../../../components/anxiety/SeekIntroSection';
 import SeekSignsSection from '../../../components/anxiety/SeekSignsSection';
 import SeekProfessionalSection from '../../../components/anxiety/SeekProfessionalSection';
+import SeekPageClosing from '../../../components/anxiety/SeekPageClosing';
 
 // TODO: swap for the therapy-session cut-out (transparent PNG) once it is added to /public/images
 const SEEK_HERO_IMAGE = '/images/when to seek help.png';
@@ -36,12 +36,9 @@ export default function WhenToSeekHelpPage() {
         <SeekSignsSection />
         <SeekProfessionalSection />
         <AnxietyQuoteBand>Manage anxiety without worrying about side-effects.</AnxietyQuoteBand>
-        {/* Medical disclaimer, sources and the link on to Treatment */}
-        <section className="cx-anx-notes-section">
-          <div className="container">
-            <AnxietyNotes nextHref="/anxiety/treatment" nextLabel="Next: Treatment" />
-          </div>
-        </section>
+        {/* Medical disclaimer, sources and the link on to Treatment
+            (pharmacists and psychiatrists also get the "What happens when anxiety goes untreated" section) */}
+        <SeekPageClosing />
         <CanxiolFooter />
       </main>
     </PsychiatristInquiryProvider>

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-const CONCERN_IMAGE = '/images/image 1 in what is anxity page.png';
+const CONCERN_IMAGE = '/images/more comman then you.jpg';
 
 export default function AnxietyConcernSection() {
   return (
@@ -15,7 +15,7 @@ export default function AnxietyConcernSection() {
             <div className="cx-anx-concern-img">
               <Image
                 src={CONCERN_IMAGE}
-                alt="Man smiling while walking along a tree-lined park path"
+                alt="Man smiling as he jogs along a tree-lined park path"
                 fill
                 sizes="(max-width: 991px) 100vw, 50vw"
               />

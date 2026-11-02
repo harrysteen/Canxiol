@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 // TODO: swap for the family-on-the-sofa photo once it is added to /public/images
-const SUPPORT_IMAGE = '/images/treatment-support.png';
+const SUPPORT_IMAGE = '/images/Supportive strategies ineverydayroutine.jpg';
 
 const pillars = [
   { title: 'Foundational care', desc: 'Sleep, physical activity & balanced daily habits' },
@@ -20,7 +20,7 @@ export default function TreatmentSupportSection() {
             <div className="cx-treat-support-img">
               <Image
                 src={SUPPORT_IMAGE}
-                alt="A young woman chatting and smiling with her brother and mother on the sofa at home"
+                alt="A smiling family of four relaxing together on the sofa at home"
                 fill
                 sizes="(max-width: 991px) 100vw, 50vw"
               />

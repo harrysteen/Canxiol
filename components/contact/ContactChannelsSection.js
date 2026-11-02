@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import Link from 'next/link';
+import { usePortalRole } from '../auth/portalMode';
 
 function ArrowUpRight() {
   return (
@@ -88,104 +89,125 @@ function FormCard({ id, title, tag, intro, fields, submitLabel, thanks }) {
   );
 }
 
-export default function ContactChannelsSection() {
+// 1. General contact form (the only card the public sees)
+function ContactFormCard() {
   return (
-    <section id="contact-channels" className="cx-contact-channels">
-      <div className="container">
-        <div className="cx-contact-grid is-single">
-          <FormCard
-            id="contact-form"
-            title="Contact & Stay Informed"
-            tag="Direct Channel"
-            intro="Connect directly with our team for general queries, institutional partnerships, and product information."
-            submitLabel="Send message"
-            thanks="Thank you — our team will be in touch shortly."
-            fields={[
-              { name: 'name', label: 'Name', placeholder: 'Dr. / Mr. / Ms.', required: true, half: true },
-              { name: 'email', label: 'Email', type: 'email', placeholder: 'name@institution.com', required: true, half: true },
-              { name: 'city', label: 'City', placeholder: 'e.g. Mumbai, Bengaluru', half: true },
-              { name: 'country', label: 'Country', defaultValue: 'India', half: true },
-              { name: 'message', label: 'Message', placeholder: 'How can our clinical and support team assist you?', required: true, textarea: true },
-            ]}
-          />
-        </div>
-      </div>
-    </section>
+    <FormCard
+      id="contact-form"
+      title="Contact & Stay Informed"
+      tag="Direct Channel"
+      intro="Connect directly with our team for general queries, institutional partnerships, and product information."
+      submitLabel="Send message"
+      thanks="Thank you — our team will be in touch shortly."
+      fields={[
+        { name: 'name', label: 'Name', placeholder: 'Dr. / Mr. / Ms.', required: true, half: true },
+        { name: 'email', label: 'Email', type: 'email', placeholder: 'name@institution.com', required: true, half: true },
+        { name: 'city', label: 'City', placeholder: 'e.g. Mumbai, Bengaluru', half: true },
+        { name: 'country', label: 'Country', defaultValue: 'India', half: true },
+        { name: 'message', label: 'Message', placeholder: 'How can our clinical and support team assist you?', required: true, textarea: true },
+      ]}
+    />
   );
 }
 
-// Former Contact page cards (product feedback, adverse effects, clinical trials).
-// Not shown on the page any more; kept so they can be placed again later.
-export function ContactMoreChannels() {
+// 2. Product feedback
+function ProductFeedbackCard() {
   return (
-    <section className="cx-contact-channels">
+    <FormCard
+      id="product-feedback"
+      title="Product Feedback"
+      tag="Clinical & User Experience"
+      intro="Share your experience and clinical or patient feedback on Canxiol® formulations."
+      submitLabel="Submit feedback"
+      thanks="Thank you — your feedback has been received."
+      fields={[
+        { name: 'name', label: 'Name', placeholder: 'Your full name', required: true },
+        { name: 'email', label: 'Email', type: 'email', placeholder: 'your.email@domain.com', required: true },
+        { name: 'feedback', label: 'Product Feedback', placeholder: 'Observations regarding dosing ease, titration, or general experience...', required: true, textarea: true },
+      ]}
+    />
+  );
+}
+
+// 3. Pharmacovigilance
+function AdverseEffectsCard() {
+  return (
+    <div id="report-adverse-effects" className="cx-contact-card cx-contact-card-safety">
+      <CardHead title="Report Adverse Effects" tag="Safety Protocol" tagClass="is-safety" />
+      <p className="cx-contact-card-intro cx-contact-card-intro-strong">
+        Dedicated monitoring and pharmacovigilance channel for healthcare professionals and
+        patients to report unexpected reactions or adverse events.
+      </p>
+
+      <div className="cx-contact-notice">
+        <span className="cx-contact-notice-title">Direct Gateway Notice:</span>
+        <p>
+          In adherence to strict drug safety standards, all adverse event reports are
+          forwarded immediately to our certified medical safety officers.
+        </p>
+      </div>
+
+      <div className="cx-contact-card-foot">
+        <Link href="/pharmacovigilance" className="cx-contact-btn cx-contact-btn-teal">
+          <span>Report adverse effects</span>
+          <ArrowRight />
+        </Link>
+        <p className="cx-contact-fineprint">
+          Strictly dedicated pharmacovigilance pathway. No marketing inquiries processed here.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// 4. Clinical trials
+function ClinicalTrialsCard() {
+  return (
+    <div id="clinical-trials" className="cx-contact-card">
+      <CardHead title="Enrol in Ongoing Clinical Trials" tag="Research & Trials" />
+      <p className="cx-contact-card-intro cx-contact-card-intro-strong">
+        Register your interest or enquire about clinical evaluation protocols and ongoing
+        study updates conducted under strict regulatory oversight.
+      </p>
+
+      <ul className="cx-contact-checks">
+        <li>Evaluated in RCT-PHASE III study in adults with mild to moderate anxiety.</li>
+        <li>Synthetic Cannabidiol (API) manufactured at a USFDA approved facility.</li>
+        <li>Prescription Cannabidiol in conjunction with cognitive behavioural therapy.</li>
+      </ul>
+
+      <div className="cx-contact-card-foot">
+        <Link href="#contact-form" className="cx-contact-btn cx-contact-btn-outline">
+          <span>Enquire about clinical trials</span>
+          <ArrowRight />
+        </Link>
+        <p className="cx-contact-fineprint">Institutional and clinician investigator access only.</p>
+      </div>
+    </div>
+  );
+}
+
+// Public visitors get the single centred contact form. A logged-in pharmacist or psychiatrist
+// gets all four channels in a 2 x 2 grid (contact, product feedback, adverse effects, clinical trials).
+export default function ContactChannelsSection() {
+  // Any portal role ('pharmacist' or 'psychiatrist'); public visitors get null
+  const isProfessional = Boolean(usePortalRole());
+
+  return (
+    <section id="contact-channels" className="cx-contact-channels">
       <div className="container">
-        <div className="cx-contact-grid">
-          {/* 2. Product feedback */}
-          <FormCard
-            id="product-feedback"
-            title="Product Feedback"
-            tag="Clinical & User Experience"
-            intro="Share your experience and clinical or patient feedback on Canxiol® formulations."
-            submitLabel="Submit feedback"
-            thanks="Thank you — your feedback has been received."
-            fields={[
-              { name: 'name', label: 'Name', placeholder: 'Your full name', required: true },
-              { name: 'email', label: 'Email', type: 'email', placeholder: 'your.email@domain.com', required: true },
-              { name: 'feedback', label: 'Product Feedback', placeholder: 'Observations regarding dosing ease, titration, or general experience...', required: true, textarea: true },
-            ]}
-          />
-
-          {/* 3. Pharmacovigilance */}
-          <div id="report-adverse-effects" className="cx-contact-card cx-contact-card-safety">
-            <CardHead title="Report Adverse Effects" tag="Safety Protocol" tagClass="is-safety" />
-            <p className="cx-contact-card-intro cx-contact-card-intro-strong">
-              Dedicated monitoring and pharmacovigilance channel for healthcare professionals and
-              patients to report unexpected reactions or adverse events.
-            </p>
-
-            <div className="cx-contact-notice">
-              <span className="cx-contact-notice-title">Direct Gateway Notice:</span>
-              <p>
-                In adherence to strict drug safety standards, all adverse event reports are
-                forwarded immediately to our certified medical safety officers.
-              </p>
-            </div>
-
-            <div className="cx-contact-card-foot">
-              <Link href="/pharmacovigilance" className="cx-contact-btn cx-contact-btn-teal">
-                <span>Report adverse effects</span>
-                <ArrowRight />
-              </Link>
-              <p className="cx-contact-fineprint">
-                Strictly dedicated pharmacovigilance pathway. No marketing inquiries processed here.
-              </p>
-            </div>
+        {isProfessional ? (
+          <div className="cx-contact-grid">
+            <ContactFormCard />
+            <ProductFeedbackCard />
+            <AdverseEffectsCard />
+            <ClinicalTrialsCard />
           </div>
-
-          {/* 4. Clinical trials */}
-          <div id="clinical-trials" className="cx-contact-card">
-            <CardHead title="Enrol in Ongoing Clinical Trials" tag="Research & Trials" />
-            <p className="cx-contact-card-intro cx-contact-card-intro-strong">
-              Register your interest or enquire about clinical evaluation protocols and ongoing
-              study updates conducted under strict regulatory oversight.
-            </p>
-
-            <ul className="cx-contact-checks">
-              <li>Evaluated in RCT-PHASE III study in adults with mild to moderate anxiety.</li>
-              <li>Synthetic Cannabidiol (API) manufactured at a USFDA approved facility.</li>
-              <li>Prescription Cannabidiol in conjunction with cognitive behavioural therapy.</li>
-            </ul>
-
-            <div className="cx-contact-card-foot">
-              <Link href="#contact-form" className="cx-contact-btn cx-contact-btn-outline">
-                <span>Enquire about clinical trials</span>
-                <ArrowRight />
-              </Link>
-              <p className="cx-contact-fineprint">Institutional and clinician investigator access only.</p>
-            </div>
+        ) : (
+          <div className="cx-contact-grid is-single">
+            <ContactFormCard />
           </div>
-        </div>
+        )}
       </div>
     </section>
   );

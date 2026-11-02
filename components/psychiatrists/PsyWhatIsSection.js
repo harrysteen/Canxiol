@@ -73,7 +73,7 @@ export default function PsyWhatIsSection({
       <div className="cx-psy-whatis-img">
         <Image
           src={PSY_IMAGES.consultation}
-          alt="Psychiatrist explaining Canxiol to a patient across his desk"
+          alt="A smiling family of four gathered together behind a sofa"
           fill
           priority
           sizes="(max-width: 991px) 100vw, 60vw"
