@@ -73,7 +73,7 @@ export default function PsyWhatIsSection({
       <div className="cx-psy-whatis-img">
         <Image
           src={PSY_IMAGES.consultation}
-          alt="A smiling family of four gathered together behind a sofa"
+          alt="Bottle of Canxiol Cannabidiol Oral Solution 150 mg/mL, 28 mL, with a dropper cap"
           fill
           priority
           sizes="(max-width: 991px) 100vw, 60vw"

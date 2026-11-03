@@ -18,7 +18,7 @@ function ArrowUpRight() {
   );
 }
 
-// The Psychiatrist column is hidden for now; pass showPsychiatrist to bring it back
+// The Psychiatrist column shows only with showPsychiatrist (logged-in pharmacists / psychiatrists — see PvPathwaysForRole)
 export default function PvPathwaysSection({ showPsychiatrist = false }) {
   const languages = Object.entries(PV_LINKS.patientFormsByLanguage);
 
@@ -48,7 +48,15 @@ export default function PvPathwaysSection({ showPsychiatrist = false }) {
               <ul className="cx-pv-langs">
                 {languages.map(([lang, href]) => (
                   <li key={lang}>
-                    <a href={href} className="cx-pv-lang" download>
+                    {/* External PDFs (ipc.gov.in) open in a new tab — browsers ignore
+                        `download` for other sites; local files still download */}
+                    <a
+                      href={href}
+                      className="cx-pv-lang"
+                      {...(href.startsWith('http')
+                        ? { target: '_blank', rel: 'noopener noreferrer' }
+                        : { download: true })}
+                    >
                       <span>{lang}</span>
                       <DownloadIcon />
                     </a>
@@ -68,7 +76,7 @@ export default function PvPathwaysSection({ showPsychiatrist = false }) {
           {/* Psychiatrists */}
           {showPsychiatrist && (
           <div id="psychiatrists-adr" className="cx-pv-col cx-pv-col-psy">
-            <h2 className="cx-pv-col-h2">Psychiatrist.</h2>
+            <h2 className="cx-pv-col-h2">Psychiatrist</h2>
             <p className="cx-pv-col-sub">Report an adverse effects</p>
             <p className="cx-pv-col-intro">
               For registered Psychiatrists, physicians, and clinical staff to access and submit the

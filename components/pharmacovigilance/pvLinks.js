@@ -1,20 +1,19 @@
 // Reporting documents on the /pharmacovigilance page.
-// Replace the '#' placeholders with the real PDF paths (e.g. '/docs/adr-form-hindi.pdf').
+// Replace the '#' placeholders with the real PDF paths. Patient forms are the official
+// IPC/PvPI consumer ADR forms hosted on ipc.gov.in (they open in a new tab).
 export const PV_LINKS = {
-  // Patient (consumer) ADR reporting forms — shown in this order; English gets its own
-  // full-width row, the rest sit two per row
+  // Patient (consumer) ADR reporting forms — shown in this order, two per row
   patientFormsByLanguage: {
-    English: '#',
-    Assamese: '#',
-    Bengali: '#',
-    Gujarati: '#',
-    Hindi: '#',
-    Kannada: '#',
-    Malayalam: '#',
-    Marathi: '#',
-    Odia: '#',
-    Tamil: '#',
-    Telugu: '#',
+    Assamese: 'https://www.ipc.gov.in/images/pdf/File491.pdf',
+    Bengali: 'https://www.ipc.gov.in/images/pdf/File341.pdf',
+    Gujarati: 'https://www.ipc.gov.in/images/pdf/File336.pdf',
+    Hindi: 'https://www.ipc.gov.in/images/pdf/File335.pdf',
+    Kannada: 'https://www.ipc.gov.in/images/pdf/File337.pdf',
+    Malayalam: 'https://www.ipc.gov.in/images/pdf/File338.pdf',
+    Marathi: 'https://www.ipc.gov.in/images/pdf/File492.pdf',
+    Odia: 'https://www.ipc.gov.in/images/pdf/File339.pdf',
+    Tamil: 'https://www.ipc.gov.in/images/pdf/File340.pdf',
+    Telugu: 'https://www.ipc.gov.in/images/pdf/File493.pdf',
   },
   // Psychiatrist ADR form (IPC Version 1.4) and its guidance page
   adrForm: '#',

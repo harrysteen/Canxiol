@@ -4,8 +4,8 @@ import Image from 'next/image';
 // Same photos on the patient, pharmacist and psychiatrist home pages
 const CARDS = [
   {
-    image: '/images/Focus on your goals.jpg',
-    alt: 'Young man sitting at a library desk with a laptop, thinking calmly',
+    image: '/images/Focus on your goals (2).jpg',
+    alt: 'Confident young woman in a blazer standing with arms folded by an office window, smiling',
     title: 'Focus on your goals',
   },
   {

@@ -9,6 +9,7 @@ const cards = [
     icon: '/images/Patient Information Leaflet.png',
     cta: 'Download leaflet',
     href: PSY_DOWNLOADS.pil,
+    newTab: true, // PDF: open in a new tab
   },
   {
     title: 'Questions About Your Medicine',
@@ -44,7 +45,11 @@ export default function CanxiolQuestionsSection() {
               <Image src={card.icon} alt="" width={20} height={20} className="cx-cxp-faq-icon" />
               <h3 className="cx-cxp-faq-title">{card.title}</h3>
               <p className="cx-cxp-faq-text">{card.text}</p>
-              <Link href={card.href} className="cx-cxp-faq-link">
+              <Link
+                href={card.href}
+                className="cx-cxp-faq-link"
+                {...(card.newTab ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              >
                 <span>{card.cta}</span>
                 <svg width="10" height="9" viewBox="0 0 10 9" fill="none" aria-hidden="true">
                   <path

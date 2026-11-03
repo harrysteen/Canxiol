@@ -1,6 +1,6 @@
 // Images used on the /psychiatrists page — swap the paths here.
 export const PSY_IMAGES = {
-  consultation: '/images/What is Canxiol.png',
+  consultation: '/images/for psyartist hero image.png',
   packs: '/images/14mland28ml-bottle.png',
   standOutBottle: '/images/How Canxiol stands out.png',
   logoLeiutis: '/images/leiutis logo.png',

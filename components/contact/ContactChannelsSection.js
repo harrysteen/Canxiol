@@ -148,7 +148,7 @@ function AdverseEffectsCard() {
       </div>
 
       <div className="cx-contact-card-foot">
-        <Link href="/pharmacovigilance" className="cx-contact-btn cx-contact-btn-teal">
+        <Link href="/pharmacovigilance" className="cx-contact-btn cx-contact-btn-solid">
           <span>Report adverse effects</span>
           <ArrowRight />
         </Link>

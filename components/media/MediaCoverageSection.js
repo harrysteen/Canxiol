@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { mediaCoverage } from './mediaCoverage';
+import ClippingViewer from './ClippingViewer';
 
 const ArrowIcon = () => (
   <svg width="10" height="10" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -37,6 +38,15 @@ function MediaCard({ item }) {
           <a href={item.url} target="_blank" rel="noopener noreferrer" className="cx-media-link">
             {label} <ArrowIcon />
           </a>
+        ) : item.clipping ? (
+          <ClippingViewer
+            src={item.clipping}
+            outlet={item.outlet}
+            title={item.title}
+            className="cx-media-link cx-media-link-btn"
+          >
+            {label} <ArrowIcon />
+          </ClippingViewer>
         ) : (
           <span className="cx-media-link">{label} <ArrowIcon /></span>
         )}

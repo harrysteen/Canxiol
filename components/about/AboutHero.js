@@ -63,12 +63,12 @@ export default function AboutHero({
             </div>
           </div>
 
-          {/* Right Column: Leiutis brand mark */}
+          {/* Right Column: molecular-structure illustration */}
           <div className="col-12 col-lg-6 cx-about-hero-img-col">
             <div className="cx-about-hero-img">
               <Image
-                src="/images/leiutis logo for about leiuties page.png"
-                alt="Leiutis brand mark"
+                src="/images/lutelpage hero image.png"
+                alt="Plum-coloured 3D molecular structure with orbiting rings and spheres"
                 fill
                 priority
                 sizes="(max-width: 991px) 80vw, 45vw"

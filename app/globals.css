@@ -3235,6 +3235,15 @@ button {
   flex-wrap: wrap;
 }
 
+/* Desktop: push the links to the right edge of their column (lines up with the end of
+   the divider). The markup's text-md-end / text-lg-end helpers aren't defined here. */
+@media (min-width: 768px) {
+  .cx-footer-legal-links {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
 .cx-footer-legal-links a {
   font-family: var(--font-outfit), 'Outfit', sans-serif;
   font-size: 13px;
@@ -4183,7 +4192,8 @@ button {
 /* Transparent cut-out: sits on the gradient, anchored bottom-right */
 .cx-psy-whatis-img img {
   object-fit: contain;
-  object-position: right bottom;
+  /* Bottom-right, nudged in from the right edge */
+  object-position: right clamp(8px, 1.6vw, 32px) bottom;
 }
 
 .cx-psy-whatis-content {
@@ -4388,14 +4398,14 @@ button {
 .cx-psy-point-num {
   flex-shrink: 0;
   font-family: var(--font-outfit), 'Outfit', sans-serif;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 500;
   line-height: 1.5;
   color: #1c8a8f;
 }
 
 .cx-psy-points p {
-  font-size: 15px;
+  font-size: 16.5px;
   line-height: 1.65;
   color: #3d2f47;
 }
@@ -4977,7 +4987,7 @@ button {
   margin-top: 28px;
   padding-top: 14px;
   border-top: 1px solid #e6e0e8;
-  font-size: 11.5px;
+  font-size: 13.5px;
   color: #5a4a66;
 }
 
@@ -5138,9 +5148,9 @@ button {
 .cx-psy-ae .cx-psy-table th            { font-size: 13px; }
 .cx-psy-ae .cx-psy-table-sub td:first-child,
 .cx-psy-ae .cx-psy-table-sub td:not(:first-child) { font-size: 14px; }
-.cx-psy-ae .cx-psy-table-note          { font-size: 13px; }
-.cx-psy-ae .cx-psy-table-note-strong   { font-size: 14px; }
-.cx-psy-ae .cx-psy-note-box            { font-size: 16px; }
+.cx-psy-ae .cx-psy-table-note          { font-size: 15px; }
+.cx-psy-ae .cx-psy-table-note-strong   { font-size: 16px; }
+.cx-psy-ae .cx-psy-note-box            { font-size: 18px; }
 
 /* --- Drug-drug Interactions --- */
 .cx-psy-ddi .cx-psy-section-lead {
@@ -5701,12 +5711,20 @@ button {
 
 /* Scale of anxiety in India: larger lead and card text */
 .cx-anx-india .cx-anx-section-lead {
-  font-size: 16px;
-  max-width: 520px;
+  font-size: 17.5px;
+  max-width: 560px;
+}
+
+.cx-anx-india .cx-anx-eyebrow {
+  font-size: 11px;
+}
+
+.cx-anx-india .cx-anx-stat-title {
+  font-size: 15px;
 }
 
 .cx-anx-india .cx-anx-stat-desc {
-  font-size: 14px;
+  font-size: 15.5px;
 }
 
 /* --- Anxiety becomes a health concern --- */
@@ -5790,7 +5808,7 @@ button {
 .cx-anx-india-value {
   font-family: var(--font-outfit), 'Outfit', sans-serif;
   font-weight: 400;
-  font-size: clamp(30px, 2.8vw, 36px);
+  font-size: clamp(32px, 3vw, 40px);
   line-height: 1.2;
   letter-spacing: -0.02em;
   color: #1A1918;
@@ -5798,7 +5816,7 @@ button {
 }
 
 .cx-anx-india-value.is-small {
-  font-size: clamp(22px, 2vw, 26px);
+  font-size: clamp(24px, 2.2vw, 29px);
   line-height: 1.66;
 }
 
@@ -5913,7 +5931,7 @@ button {
 
   /* Wider cards here, so the long "~2591 → ~5792" figure matches the other values */
   .cx-anx-india-value.is-small {
-    font-size: clamp(30px, 2.8vw, 36px);
+    font-size: clamp(32px, 3vw, 40px);
     line-height: 1.2;
     white-space: nowrap;
   }
@@ -5986,12 +6004,16 @@ button {
   color: #2A1A2A;
 }
 
+.cx-anx-who .cx-anx-eyebrow {
+  font-size: 11px;
+}
+
 .cx-anx-who-head {
   align-items: center;
 }
 
 .cx-anx-who .cx-anx-section-lead {
-  font-size: 16px;
+  font-size: 17.5px;
   max-width: 450px;
   flex: 0 0 47%;
 }
@@ -6014,7 +6036,7 @@ button {
 
 .cx-anx-who-num {
   font-family: var(--font-outfit), 'Outfit', sans-serif;
-  font-size: 12px;
+  font-size: 13.5px;
   font-weight: 700;
   letter-spacing: 0.6px;
   color: #1c8a8f;
@@ -6022,7 +6044,7 @@ button {
 
 .cx-anx-who-title {
   font-family: var(--font-outfit), 'Outfit', sans-serif;
-  font-size: clamp(18px, 1.7vw, 21px);
+  font-size: clamp(19.5px, 1.85vw, 23px);
   font-weight: 400;
   line-height: 1.3;
   color: #2A1A2A;
@@ -6031,7 +6053,7 @@ button {
 
 .cx-anx-who-desc {
   font-family: var(--font-outfit), 'Outfit', sans-serif;
-  font-size: 16px;
+  font-size: 17.5px;
   line-height: 1.65;
   color: #68635F;
   max-width: 440px;
@@ -6143,12 +6165,13 @@ button {
 }
 
 .cx-anx-when-note .cx-anx-eyebrow {
+  font-size: 12px;
   margin-bottom: 20px;
 }
 
 .cx-anx-when-note p {
   font-family: var(--font-outfit), 'Outfit', sans-serif;
-  font-size: 14px;
+  font-size: 17px;
   line-height: 1.6;
   color: #68635F;
   margin: 0;
@@ -8910,18 +8933,6 @@ button {
   color: #FFFFFF;
 }
 
-.cx-contact-btn-teal {
-  height: 32px;
-  background: #1C8A8F;
-  border-color: #1C8A8F;
-  color: #FFFFFF;
-}
-
-.cx-contact-btn-teal:hover {
-  background: #16767A;
-  color: #FFFFFF;
-}
-
 .cx-contact-btn-outline {
   background: transparent;
   border-color: #471D41;
@@ -9219,12 +9230,6 @@ button {
   list-style: none;
   padding: 0;
   margin: 0;
-}
-
-/* English: full-width row above the regional languages */
-.cx-pv-langs > li:first-child {
-  grid-column: 1 / -1;
-  margin-bottom: 12px;
 }
 
 .cx-pv-lang {
@@ -10631,62 +10636,6 @@ a.cx-media-link:hover {
   margin-bottom: 0;
 }
 
-/* Meet Canxiol: formulation process chart */
-.cx-meet-process {
-  list-style: none;
-  margin: 0;
-  padding: 6px 0;
-  font-family: var(--font-outfit), 'Outfit', sans-serif;
-}
-
-.cx-meet-process-step {
-  font-size: 14px;
-  line-height: 1.4;
-  color: #2A1A2A;
-}
-
-.cx-meet-process-step::after {
-  content: "\2193";
-  display: block;
-  margin: 8px 0;
-  font-size: 14px;
-  line-height: 1;
-  color: #1C8A8F;
-}
-
-.cx-meet-process-result {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.cx-meet-process-brand {
-  font-size: 24px;
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: 0.12em;
-  color: #471D41;
-}
-
-.cx-meet-process-brand sup {
-  font-size: 0.6em;
-  font-weight: 400;
-  letter-spacing: 0;
-  top: -0.6em;
-  margin-left: 2px;
-}
-
-.cx-meet-process-sub {
-  font-size: 14px;
-  color: #3D2F47;
-}
-
-@media (max-width: 991.98px) {
-  .cx-meet-process {
-    margin-top: 8px;
-  }
-}
-
 /* Classic footer: logo with the small two-line tagline under it */
 .cx-footer--classic .cx-footer-tagline {
   font-size: 15px;
@@ -10987,4 +10936,73 @@ a.cx-media-link:hover {
   display: block;
   width: 100%;
   height: auto;
+}
+
+/* Media page: "View coverage" button for print clippings (looks like the link) */
+.cx-media-link-btn {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.cx-media-link-btn:hover {
+  color: #3F173B;
+  text-decoration: underline;
+}
+
+/* Clipping pop-up */
+.cx-clip-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background: rgba(26, 10, 28, 0.75);
+}
+
+.cx-clip-box {
+  position: relative;
+  max-width: min(720px, 100%);
+  max-height: 100%;
+  background: #FFFFFF;
+  padding: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+.cx-clip-img {
+  display: block;
+  max-width: 100%;
+  max-height: calc(100vh - 72px);
+  width: auto;
+  height: auto;
+}
+
+.cx-clip-close {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: #471D41;
+  color: #FFFFFF;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.cx-clip-close:hover,
+.cx-clip-close:focus-visible {
+  background: #1C8A8F;
+}
+
+@media (max-width: 575.98px) {
+  .cx-clip-close {
+    top: 6px;
+    right: 6px;
+  }
 }

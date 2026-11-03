@@ -3,20 +3,8 @@
 export const PSY_DOWNLOADS = {
   clinicalPoster: '/pdfs/canxiol-clinical-trial-poster.pdf',
   pil: '/pdfs/canxiol-prescribing-information-leaflet.pdf',
-  // Shown in this order on the page (alphabetical, as in the design)
+  // Languages the leaflet is available in (English only for now — the same PDF as `pil`)
   pilByLanguage: {
-    Assamese: '#',
-    Bengali: '#',
-    English: '#',
-    Gujarati: '#',
-    Hindi: '#',
-    Kannada: '#',
-    Malayalam: '#',
-    Marathi: '#',
-    Odia: '#',
-    Punjabi: '#',
-    Tamil: '#',
-    Telugu: '#',
-    Urdu: '#',
+    English: '/pdfs/canxiol-prescribing-information-leaflet.pdf',
   },
 };

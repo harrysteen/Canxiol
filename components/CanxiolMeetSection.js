@@ -36,14 +36,6 @@ export default function CanxiolMeetSection({
     },
   ];
 
-  // How the oral solution is made, top to bottom
-  const processSteps = [
-    'Cannabidiol (Synthetic)',
-    'Proprietary nanodispersion',
-    'Fine dispersed formulation in water',
-    'Milky white Oral solution',
-  ];
-
   return (
     <section id="meet" className="cx-meet-section">
       {/* Animated WebGL / WebGPU gradient background */}
@@ -100,19 +92,6 @@ export default function CanxiolMeetSection({
                 />
               </div>
             </div>
-          </div>
-
-          {/* Right Column: how the formulation is made */}
-          <div className="col-12 col-lg-auto">
-            <ol className="cx-meet-process" aria-label="How Canxiol is formulated">
-              {processSteps.map((step) => (
-                <li key={step} className="cx-meet-process-step">{step}</li>
-              ))}
-              <li className="cx-meet-process-result">
-                <span className="cx-meet-process-brand">CANXIOL<sup>®</sup></span>
-                <span className="cx-meet-process-sub">Oral solution</span>
-              </li>
-            </ol>
           </div>
 
         </div>

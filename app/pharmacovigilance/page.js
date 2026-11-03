@@ -2,7 +2,7 @@ import CanxiolNavbar from '../../components/CanxiolNavbar';
 import CanxiolFooter from '../../components/CanxiolFooter';
 import PsychiatristInquiryProvider from '../../components/PsychiatristInquiryProvider';
 import PvHero from '../../components/pharmacovigilance/PvHero';
-import PvPathwaysSection from '../../components/pharmacovigilance/PvPathwaysSection';
+import PvPathwaysForRole from '../../components/pharmacovigilance/PvPathwaysForRole';
 import PvContactSection from '../../components/pharmacovigilance/PvContactSection';
 
 export const metadata = {
@@ -17,7 +17,8 @@ export default function PharmacovigilancePage() {
       <main style={{ minHeight: '100vh', backgroundColor: '#FFFFFF', '--cx-infobar-h': '0px' }}>
         <CanxiolNavbar />
         <PvHero />
-        <PvPathwaysSection />
+        {/* Patients only; logged-in pharmacists and psychiatrists also get the Psychiatrist column */}
+        <PvPathwaysForRole />
         <PvContactSection />
         <CanxiolFooter />
       </main>

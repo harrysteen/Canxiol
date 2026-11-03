@@ -69,7 +69,13 @@ export default function CanxiolHowToTakeSection() {
           <p className="cx-cxp-how-warning-text">
             Do not use a household teaspoon or tablespoon to measure your dose.
           </p>
-          <Link href={PSY_DOWNLOADS.pil} className="cx-btn-discover cx-cxp-how-btn">
+          {/* PDF opens in a new tab so the visitor keeps their place on this page */}
+          <Link
+            href={PSY_DOWNLOADS.pil}
+            className="cx-btn-discover cx-cxp-how-btn"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <span>VIEW FULL ADMINISTRATION INSTRUCTIONS</span>
             <Image
               src="/images/contact-us-arrow.png"
