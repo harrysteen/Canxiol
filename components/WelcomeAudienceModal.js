@@ -5,28 +5,12 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { usePortalRole } from './auth/portalMode';
 
-// "Welcome to Leiutis" audience picker. Opens 7 seconds after a page load and can't be
-// dismissed — the visitor must pick Patient, Pharmacist or Psychiatrist. Picking "Patient"
-// is remembered for the rest of the browser session so it isn't asked on every page.
+// "Welcome to Leiutis" audience picker. Opens 7 seconds after every full page load
+// (including a refresh) and can't be dismissed — the visitor must pick Patient, Pharmacist
+// or Psychiatrist. Moving between pages inside the site doesn't reopen it.
 // (Logged-in pharmacists / psychiatrists never see it.)
 const DELAY_MS = 7000;
-const CHOSEN_KEY = 'cx-audience-chosen';
 
-function alreadyChosen() {
-  try {
-    return sessionStorage.getItem(CHOSEN_KEY) === '1';
-  } catch {
-    return false;
-  }
-}
-
-function rememberChoice() {
-  try {
-    sessionStorage.setItem(CHOSEN_KEY, '1');
-  } catch {
-    // Storage blocked — the popup may be asked again, which is fine
-  }
-}
 // Pages where the popup never opens: coming-soon and the professional portals
 // (/psychiatrist…, /pharmacist… — note the public /psychiatrists page still shows it)
 const shouldSkip = (path) =>
@@ -37,7 +21,6 @@ const AUDIENCES = [
   {
     title: 'Patient / General Public',
     desc: 'Information for you and your loved ones.',
-    remember: true,
     cta: 'Explore Anxiety',
     // Patients continue on the public home page
     href: '/',
@@ -84,13 +67,12 @@ export default function WelcomeAudienceModal() {
 
   // Start the 7-second timer once per page load
   useEffect(() => {
-    if (skip || alreadyChosen()) return;
+    if (skip) return;
     const timer = setTimeout(() => setOpen(true), DELAY_MS);
     return () => clearTimeout(timer);
   }, [skip]);
 
-  const choose = (audience) => {
-    if (audience.remember) rememberChoice();
+  const choose = () => {
     setOpen(false);
   };
 
@@ -120,15 +102,15 @@ export default function WelcomeAudienceModal() {
       >
         <header className="cx-welcome-head">
           <span className="cx-welcome-logo">
+            {/* Trimmed web copy of "pop up logo.png" */}
             <Image
-              src="/images/leiutis logo for about leiuties page.png"
-              alt=""
-              width={28}
-              height={21}
+              src="/images/pop-up-logo-web.png"
+              alt="Leiutis"
+              width={640}
+              height={132}
               priority
-              className="cx-welcome-logo-mark"
+              className="cx-welcome-logo-img"
             />
-            <span>Leiutis</span>
           </span>
           <span className="cx-welcome-tagline">Care. Knowledge. Connection.</span>
         </header>
@@ -140,7 +122,7 @@ export default function WelcomeAudienceModal() {
 
           <div className="cx-welcome-grid">
             {AUDIENCES.map((a) => (
-              <Link key={a.title} href={a.href} className="cx-welcome-card" onClick={() => choose(a)}>
+              <Link key={a.title} href={a.href} className="cx-welcome-card" onClick={choose}>
                 <span className="cx-welcome-icon" aria-hidden="true">
                   <svg
                     width="18"

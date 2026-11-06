@@ -66,10 +66,10 @@ export default function CanxiolInfoBar() {
             {/* Item 4 */}
             <div className="cx-feat-col cx-feat-col-4 cx-feat-logo-wrap">
               <Image
-                src="/images/logo.png"
+                src="/images/logo for pharmasist.png"
                 alt="Canxiol By Leiutis"
-                width={180}
-                height={90}
+                width={608}
+                height={304}
                 className="cx-feat-logo"
               />
             </div>

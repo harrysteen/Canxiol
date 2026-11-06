@@ -12,7 +12,7 @@ export default function ProFooter({ homeHref = '/' }) {
           <div className="col-12 col-lg-3">
             <div className="cx-footer-brand">
               <Link href={homeHref} aria-label="Canxiol home">
-                <Image src="/images/logo.png" alt="Canxiol By Leiutis" width={228} height={109} className="cx-footer-logo-img" />
+                <Image src="/images/footer logo in pharmisist.png" alt="Canxiol By Leiutis" width={608} height={304} className="cx-footer-logo-img" />
               </Link>
               <p className="cx-footer-tagline">
                 <strong>Heal</strong> The way<br />

@@ -1225,44 +1225,6 @@ button {
   display: block;
 }
 
-/* Text lockup: "Heal The way You Feel" over the Leiutis mark */
-.cx-logo-lockup {
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 4px;
-  font-family: var(--font-outfit), 'Outfit', sans-serif;
-}
-
-.cx-logo-tagline {
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 1;
-  color: #2a0d3a;
-  white-space: nowrap;
-}
-
-.cx-logo-tagline strong {
-  font-weight: 700;
-  color: #471D41;
-}
-
-.cx-logo-brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: 0.4px;
-  color: #5B1F5E;
-}
-
-.cx-logo-mark {
-  width: 15px;
-  height: auto;
-  display: block;
-}
-
 .cx-links {
   display: flex;
   align-items: center;
@@ -3152,7 +3114,7 @@ button {
   width: 227.55px;
   max-width: 100%;
   height: auto;
-  filter: brightness(0) invert(1);
+  /* The footer logo file is already white, so no colour filter */
   display: block;
 }
 
@@ -10240,23 +10202,13 @@ a.cx-media-link:hover {
 .cx-welcome-logo {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-size: 22px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  color: #471D41;
   line-height: 1;
 }
 
-.cx-welcome-logo-mark {
-  width: auto;
-  height: 22px;
+.cx-welcome-logo-img {
   display: block;
-  flex-shrink: 0;
-}
-
-.cx-welcome-logo-dot {
-  display: none;
+  width: auto;
+  height: 26px;
 }
 
 .cx-welcome-tagline {
@@ -11004,5 +10956,18 @@ a.cx-media-link:hover {
   .cx-clip-close {
     top: 6px;
     right: 6px;
+  }
+}
+
+/* Public navbar logo: "Heal The way You Feel / Leiutis" image (616 x 163) */
+.cx-logo-patient-img {
+  display: block;
+  height: 40px;
+  width: auto;
+}
+
+@media (max-width: 991.98px) {
+  .cx-logo-patient-img {
+    height: 34px;
   }
 }
