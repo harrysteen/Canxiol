@@ -11,6 +11,13 @@ const EXIT_PATH = '/comingsoon/exit';
 const ACCESS_COOKIE = 'cx_site_access';
 
 export function middleware(request) {
+  // Local preview (`npm run dev`): /coming-soon and /comingsoon show the coming-soon page
+  if (process.env.NODE_ENV === 'development') {
+    const { pathname } = request.nextUrl;
+    if (pathname === '/coming-soon') return NextResponse.next();
+    if (pathname === '/comingsoon') return NextResponse.rewrite(new URL('/coming-soon', request.url));
+  }
+
   const gated = process.env.SITE_OPEN !== 'true' && process.env.NODE_ENV !== 'development';
 
   // Site is live: old coming-soon links go to the home page
@@ -40,6 +47,11 @@ export function middleware(request) {
 
   if (pathname === '/coming-soon') return NextResponse.next();
 
+  // Documents (leaflet, poster) stay hidden too: visitors get the coming-soon page
+  if (pathname.startsWith('/pdfs/')) {
+    return NextResponse.rewrite(new URL('/coming-soon', request.url));
+  }
+
   // Keep the inquiry form API closed to the public
   if (pathname.startsWith('/api/')) {
     return new NextResponse('Not available', { status: 503 });
@@ -48,7 +60,7 @@ export function middleware(request) {
   return NextResponse.rewrite(new URL('/coming-soon', request.url));
 }
 
-// Skip Next.js internals and static files (images, PDFs, fonts, favicon)
+// Pages, plus the PDFs; skip Next.js internals and other static files (images, fonts, favicon)
 export const config = {
-  matcher: ['/((?!_next/|.*\\.[a-zA-Z0-9]+$).*)'],
+  matcher: ['/((?!_next/|.*\\.[a-zA-Z0-9]+$).*)', '/pdfs/:path*'],
 };
