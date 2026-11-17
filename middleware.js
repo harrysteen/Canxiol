@@ -5,20 +5,14 @@ import { NextResponse } from 'next/server';
 //   Team: open /comingsoon/home once → that browser sees the full site for 30 days.
 //         Open /comingsoon/exit to see the coming-soon page again.
 // Going live again: set SITE_OPEN=true on the host (Vercel) and redeploy, or change the
-// `gated` line below. `npm run dev` always shows the full site.
+// `gated` line below. The gate applies on localhost (`npm run dev`) too — open
+// localhost:3000/comingsoon/home there to work on the full site.
 const ACCESS_PATH = '/comingsoon/home';
 const EXIT_PATH = '/comingsoon/exit';
 const ACCESS_COOKIE = 'cx_site_access';
 
 export function middleware(request) {
-  // Local preview (`npm run dev`): /coming-soon and /comingsoon show the coming-soon page
-  if (process.env.NODE_ENV === 'development') {
-    const { pathname } = request.nextUrl;
-    if (pathname === '/coming-soon') return NextResponse.next();
-    if (pathname === '/comingsoon') return NextResponse.rewrite(new URL('/coming-soon', request.url));
-  }
-
-  const gated = process.env.SITE_OPEN !== 'true' && process.env.NODE_ENV !== 'development';
+  const gated = process.env.SITE_OPEN !== 'true';
 
   // Site is live: old coming-soon links go to the home page
   if (!gated) {
