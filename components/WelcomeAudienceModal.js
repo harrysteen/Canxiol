@@ -67,7 +67,8 @@ export default function WelcomeAudienceModal() {
 
   // Start the 7-second timer once per page load
   useEffect(() => {
-    if (skip) return;
+    // The coming-soon gate shows that page under any URL — never cover it with the popup
+    if (skip || document.getElementById('cx-coming-soon')) return;
     const timer = setTimeout(() => setOpen(true), DELAY_MS);
     return () => clearTimeout(timer);
   }, [skip]);

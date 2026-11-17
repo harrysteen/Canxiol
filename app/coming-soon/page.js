@@ -9,7 +9,9 @@ export const metadata = {
 
 export default function ComingSoonPage() {
   return (
-    <main className={styles.page}>
+    // id: the Welcome popup checks for this and stays closed (the gate keeps the visitor's
+    // original URL, so the popup can't tell from the address alone)
+    <main id="cx-coming-soon" className={styles.page}>
       <div className={styles.card}>
         <Image
           src="/images/logo.png"
