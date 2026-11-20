@@ -60,30 +60,17 @@ export default function CanxiolNavbar({ variant = 'default', homeHref: homeHrefP
         )}
         <div className="container">
           <div className="cx-nav-inner">
-            {classic ? (
-              <Link href={homeHref} className="cx-logo" aria-label="Canxiol Homepage">
-                <Image
-                  src="/images/logo for pharmasist.png"
-                  alt="Canxiol By Leiutis"
-                  width={608}
-                  height={304}
-                  priority
-                  className="cx-logo-img"
-                />
-              </Link>
-            ) : (
-            /* Brand: "Heal The way You Feel" over the Leiutis mark (one image) */
-            <Link href={homeHref} className="cx-logo" aria-label="Leiutis Homepage">
+            {/* Same Canxiol wordmark on every page and portal (trimmed copy of canxiol-logo.png) */}
+            <Link href={homeHref} className="cx-logo" aria-label="Canxiol Homepage">
               <Image
-                src="/images/patentes portol logo.png"
-                alt="Heal The way You Feel — Leiutis"
-                width={616}
-                height={163}
+                src="/images/canxiol-logo-trim.png"
+                alt="Canxiol"
+                width={587}
+                height={130}
                 priority
-                className="cx-logo-patient-img"
+                className="cx-logo-canxiol"
               />
             </Link>
-            )}
 
             {/* Desktop Navigation Links */}
             <ul className="cx-links">

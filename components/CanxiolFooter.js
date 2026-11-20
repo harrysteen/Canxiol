@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePortalRole } from './auth/portalMode';
 import { ROLES } from './auth/roles';
 import ProFooter from './pro/ProFooter';
@@ -16,10 +17,17 @@ export default function CanxiolFooter() {
         {/* Top Grid: Tagline & Navigation Columns */}
         <div className="row g-4 g-lg-5 cx-footer-top">
 
-          {/* Column 1: Tagline */}
+          {/* Column 1: Canxiol wordmark (shown white) with the tagline under it */}
           <div className="col-12 col-lg-8">
             <Link href="/" className="cx-footer-tagline-link" aria-label="Canxiol Homepage">
-              <p className="cx-footer-tagline">
+              <Image
+                src="/images/canxiol-logo-trim.png"
+                alt="Canxiol"
+                width={587}
+                height={130}
+                className="cx-footer-wordmark"
+              />
+              <p className="cx-footer-tagline cx-footer-tagline--small">
                 <strong>Heal</strong> The way<br />
                 You <strong>Feel</strong>
               </p>

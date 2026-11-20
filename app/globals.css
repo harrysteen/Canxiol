@@ -1218,8 +1218,9 @@ button {
   line-height: 1;
 }
 
-.cx-logo-img {
-  height: 56px;
+/* Navbar logo: Canxiol wordmark (trimmed, 587 x 130), same on every page and portal */
+.cx-logo-canxiol {
+  height: 30px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -1533,8 +1534,8 @@ button {
     display: block;
   }
 
-  .cx-logo-img {
-    height: 46px;
+  .cx-logo-canxiol {
+    height: 26px;
   }
 }
 
@@ -1548,8 +1549,8 @@ button {
     gap: 2rem;
   }
 
-  .cx-logo-img {
-    height: 48px;
+  .cx-logo-canxiol {
+    height: 28px;
   }
 
   .cx-ctas {
@@ -3114,15 +3115,6 @@ button {
   gap: 24px;
 }
 
-/* Design box: 227.55 x 109.01px (height follows the logo's own ratio) */
-.cx-footer-logo-img {
-  width: 227.55px;
-  max-width: 100%;
-  height: auto;
-  /* The footer logo file is already white, so no colour filter */
-  display: block;
-}
-
 .cx-footer-tagline-link {
   text-decoration: none;
   display: inline-block;
@@ -3399,33 +3391,12 @@ button {
 .cx-perspective-img-wrap {
   position: relative;
   width: 100%;
-  aspect-ratio: 4684 / 2032;
+  aspect-ratio: 3392 / 1998;
 }
 
 .cx-perspective-img {
   object-fit: contain;
 }
-
-.cx-perspective-labels {
-  position: relative;
-  height: clamp(28px, 3.4vw, 40px);
-  margin-top: clamp(4px, 1vw, 12px);
-}
-
-.cx-bottle-label {
-  position: absolute;
-  top: 0;
-  transform: translateX(-50%);
-  white-space: nowrap;
-  font-family: 'Outfit', var(--font-heading), sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  font-size: clamp(17px, calc(1.9vw + 2px), 28px);
-  line-height: 1.33;
-  letter-spacing: 0px;
-  margin: 0;
-}
-
 
 .cx-config-title {
   font-family: 'Outfit', var(--font-heading), sans-serif;
@@ -3614,7 +3585,6 @@ button {
   .cx-footer-top .col-12.col-lg-4 { margin-bottom: 16px; }
   .cx-footer-brand { gap: 16px; }
   .cx-footer { padding: 48px 0 24px; }
-  .cx-footer-logo-img { width: 180px; }
   .cx-footer-h4 { margin-bottom: 14px; }
   .cx-footer-links { gap: 10px; }
   .cx-footer-divider { margin: 32px 0 20px; }
@@ -3694,7 +3664,6 @@ button {
   .cx-footer-top { --cx-gutter-y: 1.75rem; }
   .cx-footer-top .col-12.col-lg-4 { margin-bottom: 0; }
   .cx-footer-brand { gap: 10px; }
-  .cx-footer-logo-img { width: 150px; }
   .cx-footer-tagline { font-size: 28px; }
   .cx-footer-h4 { margin-bottom: 12px; line-height: 1.4; }
   .cx-footer-links { gap: 9px; }
@@ -10964,15 +10933,35 @@ a.cx-media-link:hover {
   }
 }
 
-/* Public navbar logo: "Heal The way You Feel / Leiutis" image (616 x 163) */
-.cx-logo-patient-img {
+/* Public footer: white Canxiol wordmark with the small two-line tagline under it */
+.cx-footer-wordmark {
   display: block;
-  height: 40px;
-  width: auto;
+  width: clamp(170px, 16vw, 210px);
+  height: auto;
+  margin-bottom: 24px;
+  /* The wordmark file is plum; show it white on the dark footer */
+  filter: brightness(0) invert(1);
 }
 
-@media (max-width: 991.98px) {
-  .cx-logo-patient-img {
-    height: 34px;
+.cx-footer-tagline.cx-footer-tagline--small {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+  color: #C8B9C6;
+}
+
+.cx-footer-tagline.cx-footer-tagline--small strong {
+  font-weight: 700;
+}
+
+@media (max-width: 767.98px) {
+  .cx-footer-wordmark {
+    width: 160px;
+    margin-bottom: 18px;
+  }
+
+  .cx-footer-tagline.cx-footer-tagline--small {
+    font-size: 16px;
   }
 }
