@@ -2,30 +2,36 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { PSY_DOWNLOADS } from '../psychiatrists/psyLinks';
 
+// Administration steps (text as supplied by Leiutis). `wide`: the long step gets a double column.
 const steps = [
   {
     num: '01',
-    title: 'Measure',
-    text: 'Use the calibrated dropper supplied with the pack.',
-    icon: '/images/Measure.png',
+    text: 'Remove the child-resistant cap on the bottle by pushing the cap down whilst turning the cap anticlockwise.',
   },
   {
     num: '02',
-    title: 'Add to Water',
-    text: 'Add the measured dose to approximately 150 mL of water.',
-    icon: '/images/Add to Water.png',
+    text: 'Insert the tip of the dropper fully into the bottle. With the dropper in place, withdraw the required dose of CANXIOL®. Use a dry dropper each time you take CANXIOL®.',
   },
   {
     num: '03',
-    title: 'Stir',
-    text: 'Stir rapidly for at least 10 seconds.',
-    icon: '/images/Stir.png',
+    text: 'When you have measured the appropriate dose of CANXIOL®, carefully remove the dropper from the bottle.',
   },
   {
     num: '04',
-    title: 'Take Immediately',
-    text: 'Administer the prepared dose orally immediately after stirring.',
-    icon: '/images/Take Immediately.png',
+    text: 'Take about 150 mL of drinking water into a glass.',
+  },
+  {
+    num: '05',
+    wide: true,
+    text: 'Place the tip of the dropper into water and add CANXIOL® into the water. Mix well. Do not touch the tip of the dropper into water. In instance, if the tip of the dropper touches the water, squeeze the dropper & wipe the dropper with a clean absorbent tissue paper/ cloth and place the dropper back into the bottle. Screw dropper back on the bottle tightly by turning the dropper to the right (clockwise) and store at labelled storage conditions. Store at a temperature not exceeding 30ºC.',
+  },
+  {
+    num: '06',
+    text: 'Stir rapidly for at least 10 seconds using a spoon or stirrer. Upon stirring it forms a nano-dispersible solution of Cannabidiol for oral administration.',
+  },
+  {
+    num: '07',
+    text: 'Take the medication immediately after addition of CANXIOL® to water.',
   },
 ];
 
@@ -41,12 +47,8 @@ export default function CanxiolHowToTakeSection() {
 
         <ol className="cx-cxp-how-steps">
           {steps.map((step) => (
-            <li key={step.num} className="cx-cxp-how-card">
-              <div className="cx-cxp-how-card-top">
-                <span className="cx-cxp-how-num">Step {step.num}</span>
-                <Image src={step.icon} alt="" width={20} height={20} className="cx-cxp-how-icon" />
-              </div>
-              <h3 className="cx-cxp-how-title">{step.title}</h3>
+            <li key={step.num} className={`cx-cxp-how-card ${step.wide ? 'is-wide' : ''}`.trim()}>
+              <span className="cx-cxp-how-num">Step {step.num}</span>
               <p className="cx-cxp-how-text">{step.text}</p>
             </li>
           ))}

@@ -1,0 +1,110 @@
+'use client';
+import { useEffect, useRef } from 'react';
+import Image from 'next/image';
+import { PSY_DOWNLOADS } from './psychiatrists/psyLinks';
+
+// "Download Official Document" pop-up: scan a QR code to open the Prescribing Information
+// Leaflet on a phone, or download it directly. Closes with ×, Esc or a click outside.
+// The QR (public/images/pil-qr.svg) points to
+// https://canxiol.com/pdfs/canxiol-prescribing-information-leaflet.pdf
+export default function PilDownloadModal({ open, onClose }) {
+  const closeRef = useRef(null);
+
+  useEffect(() => {
+    if (!open) return undefined;
+    const onKey = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', onKey);
+    closeRef.current?.focus();
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  const languages = Object.keys(PSY_DOWNLOADS.pilByLanguage);
+
+  return (
+    <div className="cx-pil-overlay" onClick={onClose}>
+      <div
+        className="cx-pil-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="cx-pil-title"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button ref={closeRef} type="button" className="cx-pil-close" onClick={onClose} aria-label="Close">
+          ×
+        </button>
+
+        <header className="cx-pil-head">
+          <Image src="/images/canxiol-logo-trim.png" alt="Canxiol" width={587} height={130} className="cx-pil-logo" />
+          <span className="cx-pil-tagline">Care. Knowledge. Connection.</span>
+        </header>
+
+        <div className="cx-pil-body">
+          {/* Left: QR code */}
+          <div className="cx-pil-col">
+            <p className="cx-pil-lead">
+              Scan the QR code with your mobile phone to access the{' '}
+              <strong>Prescribing Information Leaflet PDF</strong>
+            </p>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/pil-qr.svg"
+              alt="QR code linking to the Canxiol Prescribing Information Leaflet PDF"
+              className="cx-pil-qr"
+            />
+          </div>
+
+          {/* Right: languages + download */}
+          <div className="cx-pil-col">
+            <h2 id="cx-pil-title" className="cx-pil-lead">
+              <strong>Available languages:</strong>
+              <br />
+              Prescribing Information Leaflet (PIL)
+            </h2>
+            <ul className="cx-pil-langs">
+              {languages.map((lang) => (
+                <li key={lang} className="cx-pil-lang">{lang}</li>
+              ))}
+            </ul>
+            <a
+              href={PSY_DOWNLOADS.pil}
+              className="cx-pil-download"
+              target="_blank"
+              rel="noopener noreferrer"
+              download="Canxiol Prescribing Information Leaflet.pdf"
+            >
+              <span>Download PDF (PIL)</span>
+              <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M7 1.75V9.75M7 9.75L3.75 6.5M7 9.75L10.25 6.5M2 12.25H12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <footer className="cx-pil-foot">
+          <span className="cx-pil-foot-item">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <rect x="3" y="7" width="10" height="7" rx="1" stroke="currentColor" strokeWidth="1.4" />
+              <path d="M5.5 7V5a2.5 2.5 0 0 1 5 0v2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+            </svg>
+            Your privacy matters.
+          </span>
+          <span className="cx-pil-foot-item">
+            <svg width="12" height="12" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="m3 8.5 3 3 7-7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            Patient access requires no login.
+          </span>
+        </footer>
+      </div>
+    </div>
+  );
+}

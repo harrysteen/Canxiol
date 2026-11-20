@@ -14,7 +14,7 @@ export default function CanxiolWhatIsSection() {
           <div className="col-12 col-lg-6">
             <div className="cx-cxp-whatis-img">
               <Image
-                src="/images/canxiol page img1.png"
+                src="/images/what  is canxiol new.png"
                 alt="Canxiol 28 mL bottle with its packaging"
                 fill
                 sizes="(max-width: 991px) 100vw, 50vw"

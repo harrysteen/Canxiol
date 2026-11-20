@@ -4311,7 +4311,7 @@ button {
   width: 100%;
   max-width: 340px;
   margin: 0 auto;
-  /* Matches the bottle cut-out (1528 x 2292) */
+  /* Frame kept at the original 1528 x 2292 box; the slimmer bottle shows whole, centred */
   aspect-ratio: 1528 / 2292;
 }
 
@@ -7753,6 +7753,8 @@ button {
   bottom: 4%;
   right: 0;
   width: 52%;
+  /* The hand photo has a white background: multiply lets the pink hero show through it */
+  mix-blend-mode: multiply;
 }
 
 .cx-cxp-hero-img img {
@@ -8124,32 +8126,12 @@ button {
   min-height: 140px;
 }
 
-.cx-cxp-how-card-top {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 26px;
-}
-
 .cx-cxp-how-num {
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 1.4px;
   text-transform: uppercase;
   color: #68635F;
-}
-
-.cx-cxp-how-icon {
-  width: 20px;
-  height: 20px;
-  object-fit: contain;
-}
-
-.cx-cxp-how-title {
-  font-size: clamp(17px, calc(1.25vw + 2px), 19px);
-  font-weight: 500;
-  color: #1A1918;
-  margin: 0 0 12px;
 }
 
 .cx-cxp-how-text {
@@ -10963,5 +10945,222 @@ a.cx-media-link:hover {
 
   .cx-footer-tagline.cx-footer-tagline--small {
     font-size: 16px;
+  }
+}
+
+/* Sticky info bar: "Download Official Document" is a button that opens the PIL pop-up */
+.cx-download-link-btn {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
+/* --- Prescribing Information Leaflet pop-up (QR + download) --- */
+.cx-pil-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background: rgba(26, 10, 28, 0.55);
+  overflow-y: auto;
+}
+
+.cx-pil-modal {
+  position: relative;
+  width: min(820px, 100%);
+  max-height: 100%;
+  overflow-y: auto;
+  background: #FFFFFF;
+  box-shadow: 0 24px 64px rgba(26, 10, 28, 0.25);
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+}
+
+.cx-pil-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #471D41;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.cx-pil-close:hover,
+.cx-pil-close:focus-visible {
+  background: #F4E8F1;
+}
+
+.cx-pil-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 22px clamp(20px, 4vw, 34px);
+  padding-right: 60px;
+  border-bottom: 1px solid #EFECEF;
+}
+
+.cx-pil-logo {
+  display: block;
+  width: auto;
+  height: 22px;
+}
+
+.cx-pil-tagline {
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #68635F;
+}
+
+.cx-pil-body {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: clamp(28px, 4vw, 48px) clamp(20px, 4vw, 34px);
+}
+
+.cx-pil-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 24px;
+  padding: 0 clamp(12px, 3vw, 32px);
+}
+
+.cx-pil-col + .cx-pil-col {
+  border-left: 1px solid #E4E0E2;
+}
+
+.cx-pil-lead {
+  font-size: 19px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: #471D41;
+  margin: 0;
+}
+
+.cx-pil-lead strong {
+  font-weight: 600;
+}
+
+.cx-pil-qr {
+  display: block;
+  width: clamp(150px, 22vw, 190px);
+  height: auto;
+}
+
+.cx-pil-langs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cx-pil-lang {
+  padding: 4px 10px;
+  font-size: 15px;
+  color: #471D41;
+  background: #F7EEF4;
+  border: 1px solid #EADBE6;
+}
+
+.cx-pil-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  background: #471D41;
+  color: #FFFFFF;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+.cx-pil-download:hover {
+  background: #341430;
+  color: #FFFFFF;
+}
+
+.cx-pil-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding: 16px clamp(20px, 4vw, 34px);
+  border-top: 1px solid #EFECEF;
+}
+
+.cx-pil-foot-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #3D2F47;
+}
+
+.cx-pil-foot-item svg {
+  color: #1C8A8F;
+}
+
+@media (max-width: 767.98px) {
+  .cx-pil-body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 32px;
+  }
+
+  .cx-pil-col + .cx-pil-col {
+    border-left: 0;
+    border-top: 1px solid #E4E0E2;
+    padding-top: 32px;
+  }
+
+  .cx-pil-tagline {
+    display: none;
+  }
+
+  .cx-pil-lead {
+    font-size: 17px;
+  }
+}
+
+/* How to take Canxiol: seven text steps (step 5 is long, so it gets a double column) */
+.cx-cxp-how-card .cx-cxp-how-num {
+  display: block;
+  margin-bottom: 14px;
+}
+
+@media (min-width: 1200px) {
+  .cx-cxp-how-steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) minmax(0, 2fr) repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+  .cx-cxp-how-card.is-wide {
+    grid-column: span 2;
+  }
+}
+
+@media (min-width: 576px) and (max-width: 991.98px) {
+  .cx-cxp-how-card.is-wide {
+    grid-column: 1 / -1;
   }
 }

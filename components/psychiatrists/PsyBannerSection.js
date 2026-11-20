@@ -10,7 +10,7 @@ export default function PsyBannerSection() {
           src={PSY_IMAGES.banner}
           alt="Canxiol cannabidiol oral solution 150 mg/mL — Heal the way you feel. World's first prescription CBD product approved for mild to moderate anxiety disorders in conjunction with CBT."
           width={2400}
-          height={1329}
+          height={1343}
           sizes="(max-width: 1400px) 100vw, 1300px"
           className="cx-psy-banner-img"
         />

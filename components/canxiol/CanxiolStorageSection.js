@@ -39,8 +39,8 @@ export default function CanxiolStorageSection() {
 
           <div className="cx-cxp-store-bottle">
             <Image
-              src="/images/How Canxiol stands out.png"
-              alt="Canxiol 28 mL bottle"
+              src="/images/Looking after your Canxiol®.png"
+              alt="Canxiol 28 mL bottle with its dropper cap"
               fill
               sizes="(max-width: 767px) 50vw, 240px"
             />

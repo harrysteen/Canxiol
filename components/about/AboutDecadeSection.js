@@ -29,8 +29,8 @@ export default function AboutDecadeSection() {
           <div className="col-12 col-lg-6 cx-about-decade-img-col">
             <div className="cx-about-decade-img">
               <Image
-                src="/images/A DECADE OF SCIENCE.png"
-                alt="Hands holding a Canxiol bottle and dropper"
+                src="/images/Background+Border.png"
+                alt="Canxiol Cannabidiol Oral Solution 150 mg/mL bottle with its dropper cap"
                 fill
                 sizes="(max-width: 991px) 100vw, 50vw"
               />
