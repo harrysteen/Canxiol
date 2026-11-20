@@ -41,7 +41,12 @@ export function middleware(request) {
 
   if (pathname === '/coming-soon') return NextResponse.next();
 
-  // Documents (leaflet, poster) stay hidden too: visitors get the coming-soon page
+  // The Prescribing Information Leaflet stays open so its QR code (pil-qr.svg) always
+  // opens the PDF on a phone. Other documents (e.g. the poster) stay hidden.
+  if (pathname === '/pdfs/canxiol-prescribing-information-leaflet.pdf') {
+    return NextResponse.next();
+  }
+
   if (pathname.startsWith('/pdfs/')) {
     return NextResponse.rewrite(new URL('/coming-soon', request.url));
   }
