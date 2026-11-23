@@ -58,7 +58,7 @@ export default function CanxiolFooter() {
         {/* Horizontal Divider Line */}
         <hr className="cx-footer-divider" />
 
-        {/* Bottom: Copyright & credit on the left, legal links on the right */}
+        {/* Bottom: copyright & credit */}
         <div className="row align-items-center g-2 cx-footer-bottom">
           <div className="col-12 col-md-6">
             <p className="cx-footer-copy">
@@ -74,13 +74,6 @@ export default function CanxiolFooter() {
                 Studio Dezu
               </a>
             </p>
-          </div>
-          <div className="col-12 col-md-6 text-md-end">
-            <div className="cx-footer-legal-links">
-              <Link href="/psychiatrists#prescribing-information">Patient Information Leaflet</Link>
-              <span className="cx-footer-dot">·</span>
-              <Link href="/psychiatrists#prescribing-information">Prescribing Information</Link>
-            </div>
           </div>
         </div>
 
