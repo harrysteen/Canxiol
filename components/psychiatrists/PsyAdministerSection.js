@@ -37,7 +37,7 @@ export default function PsyAdministerSection() {
               <div className="cx-psy-admin-img">
                 <Image
                   src={PSY_IMAGES.administer}
-                  alt="A young woman talking with a psychiatrist who takes notes on a clipboard"
+                  alt="Canxiol 14 mL and 28 mL packs with their bottles"
                   fill
                   sizes="(max-width: 991px) 100vw, 50vw"
                 />

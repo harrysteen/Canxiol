@@ -1,5 +1,5 @@
 import CanxiolNavbar from '../../components/CanxiolNavbar';
-import CanxiolInfoBar from '../../components/CanxiolInfoBar';
+import ProOnlyInfoBar from '../../components/auth/ProOnlyInfoBar';
 import CanxiolFooter from '../../components/CanxiolFooter';
 import PsychiatristInquiryProvider from '../../components/PsychiatristInquiryProvider';
 import MediaCoverageSection from '../../components/media/MediaCoverageSection';
@@ -15,8 +15,8 @@ export default function MediaPage() {
       <main style={{ minHeight: '100vh', backgroundColor: '#FAF9F7' }}>
         <CanxiolNavbar />
         <MediaCoverageSection />
-        {/* Sticky to the viewport bottom; rests above the footer at the end of the page */}
-        <CanxiolInfoBar />
+        {/* Sticky info bar: logged-in pharmacists / psychiatrists only, not patients */}
+        <ProOnlyInfoBar />
         <CanxiolFooter />
       </main>
     </PsychiatristInquiryProvider>

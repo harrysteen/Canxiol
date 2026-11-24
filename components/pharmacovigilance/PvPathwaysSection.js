@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import PvSubmitReport from './PvSubmitReport';
 import { PV_LINKS } from './pvLinks';
 
@@ -97,10 +96,6 @@ export default function PvPathwaysSection({ showPsychiatrist = false }) {
                   <span>Download ADR reporting form</span>
                   <ArrowUpRight />
                 </a>
-                <Link href={PV_LINKS.adrInfo} className="cx-pv-btn cx-pv-btn-link">
-                  <span>View ADR reporting information</span>
-                  <ArrowUpRight />
-                </Link>
               </div>
             </div>
 

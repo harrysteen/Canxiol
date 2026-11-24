@@ -4366,13 +4366,13 @@ button {
 .cx-psy-admin-img {
   position: relative;
   width: 100%;
-  /* Matches the photo (4096 x 2731) */
-  aspect-ratio: 4096 / 2731;
+  /* Matches the packs image (2058 x 1177) */
+  aspect-ratio: 2058 / 1177;
   overflow: hidden;
 }
 
 .cx-psy-admin-img img {
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .cx-psy-admin-figure figcaption {
@@ -7010,7 +7010,7 @@ button {
   background: #FFFFFF;
   border: 1px solid #EDE3EA;
   padding: clamp(20px, 2.6vw, 26px) clamp(20px, 2.6vw, 24px);
-  margin-bottom: clamp(24px, 3vw, 26px);
+  margin-bottom: 14px;
 }
 
 .cx-treat-support-card p {
@@ -7024,7 +7024,7 @@ button {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
-  margin-top: 28px;
+  margin-top: 0;
 }
 
 .cx-treat-support-pillar {
@@ -7753,8 +7753,6 @@ button {
   bottom: 4%;
   right: 0;
   width: 52%;
-  /* The hand photo has a white background: multiply lets the pink hero show through it */
-  mix-blend-mode: multiply;
 }
 
 .cx-cxp-hero-img img {
@@ -8139,7 +8137,6 @@ button {
   font-size: 14px;
   line-height: 1.7;
   color: #68635F;
-  max-width: 200px;
   margin: 0;
 }
 
@@ -8263,7 +8260,6 @@ button {
   font-size: clamp(15px, calc(1vw + 2px), 16px);
   line-height: 1.75;
   color: #4A4542;
-  max-width: 440px;
   margin: 0 0 16px;
 }
 
@@ -11162,5 +11158,29 @@ a.cx-media-link:hover {
 @media (min-width: 576px) and (max-width: 991.98px) {
   .cx-cxp-how-card.is-wide {
     grid-column: 1 / -1;
+  }
+}
+
+/* Sticky bar logo: plain Canxiol wordmark (trimmed, 587 x 130, no "By Leiutis").
+   Overrides the older padded-logo sizes above. */
+.cx-sticky-infobar .cx-feat-logo.cx-feat-logo--wordmark,
+.cx-feat-logo.cx-feat-logo--wordmark {
+  width: auto;
+  max-width: 100%;
+  height: 30px;
+  aspect-ratio: auto;
+  margin: 0;
+  transform: none;
+}
+
+@media (max-width: 991.98px) {
+  .cx-sticky-infobar .cx-feat-logo.cx-feat-logo--wordmark {
+    height: 24px;
+  }
+}
+
+@media (max-width: 399.98px) {
+  .cx-sticky-infobar .cx-feat-logo.cx-feat-logo--wordmark {
+    height: 22px;
   }
 }

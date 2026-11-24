@@ -26,7 +26,7 @@ export default function CanxiolPageHero({
       {/* Bottle on an open palm — the hand runs off the right edge of the viewport */}
       <div className="cx-cxp-hero-img">
         <Image
-          src="/images/hand image.jpeg"
+          src="/images/hand-image-cutout.png"
           alt="Canxiol 28 mL bottle resting on an open palm"
           fill
           priority

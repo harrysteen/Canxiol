@@ -7,7 +7,7 @@ export const PSY_IMAGES = {
   logoLeiutis: '/images/leiutis logo.png',
   logoBiophore: '/images/biophore logo.png',
   logoZenara: '/images/zenara logo.png',
-  administer: '/images/MAKING A SENSIBLE HEALTH DECISION.jpg',
+  administer: '/images/for psyrtist section2.png',
   // Web-sized copy of 'banner3.png' (the original is an 8 MB print file)
   banner: '/images/psy-canxiol-banner3.jpg',
 };

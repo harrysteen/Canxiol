@@ -15,9 +15,8 @@ export const PV_LINKS = {
     Tamil: 'https://www.ipc.gov.in/images/pdf/File340.pdf',
     Telugu: 'https://www.ipc.gov.in/images/pdf/File493.pdf',
   },
-  // Psychiatrist ADR form (IPC Version 1.4) and its guidance page
+  // Psychiatrist ADR form (IPC Version 1.4)
   adrForm: '#',
-  adrInfo: '#',
   // Indian Pharmacopoeia Commission — PvPI portal and its ADR reporting forms
   ipcPortal: 'https://www.ipc.gov.in/',
   ipcAdrForms: 'https://www.ipc.gov.in/',

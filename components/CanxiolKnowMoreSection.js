@@ -1,11 +1,8 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useOpenPsychiatristInquiry } from './PsychiatristInquiryProvider';
 
 export default function CanxiolKnowMoreSection() {
-  const openInquiry = useOpenPsychiatristInquiry();
-
   return (
     <section id="know-more" className="cx-know-section">
       <div className="container">
@@ -59,16 +56,12 @@ export default function CanxiolKnowMoreSection() {
                   <p className="cx-portal-desc">
                     Access detailed scientific, clinical, and prescribing information.
                   </p>
-                  <button
-                    type="button"
-                    className="cx-btn-portal-solid"
-                    onClick={openInquiry}
-                  >
+                  <Link href="/psychiatrists" className="cx-btn-portal-solid">
                     <span>FOR PSYCHIATRISTS</span>
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M4.08337 9.91666L9.91671 4.08333M9.91671 4.08333H4.66671M9.91671 4.08333V9.33333" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
-                  </button>
+                  </Link>
                 </div>
                 <div className="cx-portal-img-wrap">
                   <Image

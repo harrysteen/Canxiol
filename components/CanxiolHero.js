@@ -32,8 +32,8 @@ export default function CanxiolHero({
               {/* Left Column: Headline, Description, and CTAs */}
               <div className="col-12 col-lg-6 col-xl-6 cx-hero-left cx-hero-left--home">
                 <h1 className="cx-hero-h1 cx-hero-h1--home">
-                  <span className="cx-hl">Understanding</span> Anxiety.<br />
-                  Exploring <span className="cx-hl">Support</span>
+                  <span className="cx-hl">Heal</span> The way<br />
+                  You <span className="cx-hl">Feel</span>
                 </h1>
 
                 <p className="cx-hero-p">
