@@ -1333,7 +1333,10 @@ button {
 }
 
 .cx-btn-psychiatrists {
-  width: 155px;
+  /* Sizes to its text (at least the original 155px) so the label stays centred */
+  width: auto;
+  min-width: 155px;
+  padding: 0 16px;
   height: 41px;
   opacity: 1;
   border: 1px solid #471D41;
@@ -2968,6 +2971,8 @@ button {
 .cx-btn-portal-solid:hover {
   background: #341430;
   border-color: #341430;
+  /* Now a link: keep the text white (the global a:hover would turn it purple) */
+  color: #FFFFFF;
 }
 
 .cx-portal-img-wrap {
@@ -11183,4 +11188,84 @@ a.cx-media-link:hover {
   .cx-sticky-infobar .cx-feat-logo.cx-feat-logo--wordmark {
     height: 22px;
   }
+}
+
+/* Leaflet card: "Download PDF (PIL)" is now a <button> (opens the PIL pop-up) */
+.cx-psy-btn-reset {
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  line-height: inherit;
+}
+
+/* PIL pop-up: language chips are links to each language's leaflet */
+a.cx-pil-lang {
+  display: inline-block;
+  text-decoration: none;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+a.cx-pil-lang:hover,
+a.cx-pil-lang:focus-visible {
+  background: #471D41;
+  border-color: #471D41;
+  color: #FFFFFF;
+}
+
+/* "View PIL" outline button: phones only (the QR column is hidden there) */
+.cx-pil-view {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border: 1px solid #471D41;
+  color: #471D41;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.cx-pil-view:hover {
+  background: #471D41;
+  color: #FFFFFF;
+}
+
+@media (max-width: 767.98px) {
+  .cx-pil-col-qr {
+    display: none;
+  }
+
+  /* Only the languages column is left, so no divider above it */
+  .cx-pil-col + .cx-pil-col {
+    border-top: 0;
+    padding-top: 0;
+  }
+
+  .cx-pil-view {
+    display: inline-flex;
+    width: 100%;
+    max-width: 260px;
+    margin-bottom: -12px;
+  }
+
+  .cx-pil-download {
+    width: 100%;
+    max-width: 260px;
+    justify-content: center;
+  }
+}
+
+/* Leaflet card chips on the For Psychiatrists page: hover like the pop-up */
+.cx-psy-pil-lang {
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.cx-psy-pil-lang:hover {
+  background: #471D41;
+  color: #FFFFFF;
 }

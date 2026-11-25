@@ -27,7 +27,7 @@ export default function PilDownloadModal({ open, onClose }) {
 
   if (!open) return null;
 
-  const languages = Object.keys(PSY_DOWNLOADS.pilByLanguage);
+  const languages = Object.entries(PSY_DOWNLOADS.pilByLanguage);
 
   return (
     <div className="cx-pil-overlay" onClick={onClose}>
@@ -48,8 +48,8 @@ export default function PilDownloadModal({ open, onClose }) {
         </header>
 
         <div className="cx-pil-body">
-          {/* Left: QR code */}
-          <div className="cx-pil-col">
+          {/* Left: QR code (hidden on phones) */}
+          <div className="cx-pil-col cx-pil-col-qr">
             <p className="cx-pil-lead">
               Scan the QR code with your mobile phone to access the{' '}
               <strong>Prescribing Information Leaflet PDF</strong>
@@ -70,10 +70,32 @@ export default function PilDownloadModal({ open, onClose }) {
               Prescribing Information Leaflet (PIL)
             </h2>
             <ul className="cx-pil-langs">
-              {languages.map((lang) => (
-                <li key={lang} className="cx-pil-lang">{lang}</li>
+              {languages.map(([lang, href]) => (
+                <li key={lang}>
+                  <a
+                    href={encodeURI(href)}
+                    className="cx-pil-lang"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={`Open the ${lang} leaflet (PDF)`}
+                  >
+                    {lang}
+                  </a>
+                </li>
               ))}
             </ul>
+            {/* Phones only (the QR column is hidden there): open the leaflet to read it */}
+            <a
+              href={PSY_DOWNLOADS.pil}
+              className="cx-pil-view"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>View PIL</span>
+              <svg width="12" height="10" viewBox="0 0 12 10" fill="none" aria-hidden="true">
+                <path d="M1 5h10M7 1l4 4-4 4" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </a>
             <a
               href={PSY_DOWNLOADS.pil}
               className="cx-pil-download"
