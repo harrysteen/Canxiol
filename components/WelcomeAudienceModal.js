@@ -11,10 +11,12 @@ import { usePortalRole } from './auth/portalMode';
 // (Logged-in pharmacists / psychiatrists never see it.)
 const DELAY_MS = 7000;
 
-// Pages where the popup never opens: coming-soon and the professional portals
+// Pages where the popup never opens: coming-soon,
+// the QR leaflet page (/leaflet) and the professional portals
 // (/psychiatrist…, /pharmacist… — note the public /psychiatrists page still shows it)
 const shouldSkip = (path) =>
   path === '/coming-soon' ||
+  path === '/leaflet' ||
   /^\/(psychiatrist|pharmacist)(\/|$)/.test(path);
 
 const AUDIENCES = [

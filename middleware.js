@@ -51,9 +51,18 @@ export function middleware(request) {
 
   if (pathname === '/coming-soon') return NextResponse.next();
 
-  // The Prescribing Information Leaflet stays open so its QR code (pil-qr.svg) always
-  // opens the PDF on a phone. Other documents (e.g. the poster) stay hidden.
-  if (pathname === '/pdfs/canxiol-prescribing-information-leaflet.pdf') {
+  // The Prescribing Information Leaflet stays open so its QR code (pil-qr.svg → /leaflet,
+  // the language chooser) always works on a phone: the chooser page, every language PDF
+  // and the original English PDF. Other documents (e.g. the poster) stay hidden.
+  let decodedPath = pathname;
+  try {
+    decodedPath = decodeURIComponent(pathname);
+  } catch {}
+  if (
+    pathname === '/leaflet' ||
+    pathname === '/pdfs/canxiol-prescribing-information-leaflet.pdf' ||
+    decodedPath.startsWith('/pdfs/Prescribing information leaflet - ')
+  ) {
     return NextResponse.next();
   }
 

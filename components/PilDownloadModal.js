@@ -5,8 +5,8 @@ import { PSY_DOWNLOADS } from './psychiatrists/psyLinks';
 
 // "Download Official Document" pop-up: scan a QR code to open the Prescribing Information
 // Leaflet on a phone, or download it directly. Closes with ×, Esc or a click outside.
-// The QR (public/images/pil-qr.svg) points to
-// https://canxiol.com/pdfs/canxiol-prescribing-information-leaflet.pdf
+// The QR (public/images/pil-qr.svg) points to https://canxiol.com/leaflet — a page
+// where the visitor picks one of the leaflet languages (app/leaflet/page.js).
 export default function PilDownloadModal({ open, onClose }) {
   const closeRef = useRef(null);
 
@@ -51,8 +51,8 @@ export default function PilDownloadModal({ open, onClose }) {
           {/* Left: QR code (hidden on phones) */}
           <div className="cx-pil-col cx-pil-col-qr">
             <p className="cx-pil-lead">
-              Scan the QR code with your mobile phone to access the{' '}
-              <strong>Prescribing Information Leaflet PDF</strong>
+              Scan the QR code with your mobile phone to open the{' '}
+              <strong>Prescribing Information Leaflet</strong> in your language
             </p>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
