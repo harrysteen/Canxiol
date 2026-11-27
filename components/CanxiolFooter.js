@@ -58,6 +58,9 @@ export default function CanxiolFooter() {
         {/* Horizontal Divider Line */}
         <hr className="cx-footer-divider" />
 
+        {/* Prescription notice — shown in every footer */}
+        <p className="cx-footer-rx">Canxiol is a psychiatrist-prescribed product only</p>
+
         {/* Bottom: copyright & credit */}
         <div className="row align-items-center g-2 cx-footer-bottom">
           <div className="col-12 col-md-6">

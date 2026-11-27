@@ -1885,6 +1885,71 @@ button {
   }
 }
 
+/* Home hero — sized to its content on every screen, so there's no empty band above the
+   text or between the buttons and the photo. The photo (home-hero-therapist-trim.png,
+   3352×1610, transparent top removed) keeps its shape via aspect-ratio and sits right
+   on the teal banner. */
+.cx-hero-wrapper.cx-hero-wrapper--home {
+  height: auto;
+  min-height: 0;
+}
+
+.cx-hero-wrapper--home .cx-hero-main {
+  flex: 0 0 auto;
+  padding-top: clamp(40px, 7vh, 96px);
+}
+
+.cx-img-wrapper.cx-img-wrapper--home {
+  height: auto;
+  min-height: 0;
+  max-height: none;
+  aspect-ratio: 3352 / 1610;
+}
+
+@media (min-width: 992px) {
+  /* Text bottom lines up near the photo's floor */
+  .cx-hero-left.cx-hero-left--home {
+    transform: none;
+    padding-bottom: clamp(24px, 5vh, 64px);
+  }
+}
+
+@media (max-width: 991.98px) {
+  .cx-hero-wrapper--home .cx-hero-main {
+    padding-top: 32px;
+  }
+
+  .cx-hero-wrapper--home .cx-hero-main .row {
+    --cx-gutter-y: 0;
+  }
+
+  /* Photo runs edge to edge under the buttons */
+  .cx-hero-wrapper--home .cx-hero-img-col {
+    flex: 0 0 auto;
+    justify-content: flex-start !important;
+    margin-top: 28px !important;
+  }
+
+  .cx-img-wrapper.cx-img-wrapper--home {
+    width: 100vw;
+    max-width: none;
+    flex-shrink: 0;
+    margin: 0 0 0 calc(50% - 50vw);
+    transform: none;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .cx-hero-wrapper.cx-hero-wrapper--home {
+    height: auto;
+    min-height: 0;
+  }
+
+  .cx-hero-wrapper--home .cx-hero-main {
+    padding-top: 24px;
+  }
+}
+
 /* Teal one-line message band under the home hero */
 .cx-notice-bar {
   position: relative;
@@ -3189,6 +3254,21 @@ button {
   color: #A493A2;
   margin: 0;
   max-width: 680px;
+}
+
+/* "Canxiol is a psychiatrist-prescribed product only" — in both footers */
+.cx-footer-rx {
+  font-family: var(--font-outfit), 'Outfit', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.2px;
+  color: #FFFFFF;
+  margin: 0 0 8px;
+}
+
+@media (max-width: 767.98px) {
+  .cx-footer-rx { font-size: 15px; }
 }
 
 .cx-footer-legal-links {

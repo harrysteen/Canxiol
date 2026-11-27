@@ -12,7 +12,7 @@ export default function CanxiolHero({
 }) {
   return (
     <>
-      <section id="hero" className="cx-hero-wrapper">
+      <section id="hero" className="cx-hero-wrapper cx-hero-wrapper--home">
         {/* Animated WebGL / WebGPU gradient background */}
         <AnimatedGradientBg
           speed={gradientSpeed}
@@ -64,15 +64,15 @@ export default function CanxiolHero({
                 </div>
               </div>
 
-              {/* Right Column: consultation scene */}
+              {/* Right Column: consultation scene (transparent top trimmed off, 3352×1610) */}
               <div className="col-12 col-lg-6 col-xl-6 cx-hero-img-col">
                 <div className="cx-img-wrapper cx-img-wrapper--home">
                   <Image
-                    src="/images/therapist-providing-counseling-teenage-girl-sofa 3.png"
+                    src="/images/home-hero-therapist-trim.png"
                     alt="A young woman on a sofa talking with a therapist who takes notes in a notebook"
                     fill
                     priority
-                    sizes="(max-width: 576px) 100vw, (max-width: 992px) 600px, 760px"
+                    sizes="(max-width: 991px) 100vw, 60vw"
                   />
                 </div>
               </div>
