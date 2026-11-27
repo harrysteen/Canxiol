@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server';
+import { PHARMACIST_PORTAL_ENABLED } from './components/auth/portalFlags';
 
 // Coming-soon gate — by domain.
 //   canxiol.com / www.canxiol.com → coming-soon page (until the client signs off).
@@ -17,6 +18,12 @@ const ACCESS_COOKIE = 'cx_site_access';
 export function middleware(request) {
   const host = (request.headers.get('host') || '').split(':')[0].toLowerCase();
   const isMainDomain = host === 'canxiol.com' || host.endsWith('.canxiol.com');
+  // Pharmacist portal switched off (components/auth/portalFlags.js): its pages go home
+  const { pathname: path } = request.nextUrl;
+  if (!PHARMACIST_PORTAL_ENABLED && (path === '/pharmacist' || path.startsWith('/pharmacist/'))) {
+    return NextResponse.redirect(new URL('/', request.url));
+  }
+
   const gated =
     process.env.COMING_SOON === 'true' ||
     (isMainDomain && process.env.SITE_OPEN !== 'true');

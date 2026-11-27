@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { PHARMACIST_PORTAL_ENABLED } from './auth/portalFlags';
 
-const PATHS = [
+const ALL_PATHS = [
   {
     audience: 'For Patients',
     title: <>Understand Anxiety<br />&amp; its effects</>,
@@ -23,13 +24,16 @@ const PATHS = [
   },
 ];
 
+// The pharmacist card is hidden while the pharmacist portal is switched off (portalFlags.js)
+const PATHS = ALL_PATHS.filter((p) => PHARMACIST_PORTAL_ENABLED || p.audience !== 'For Pharmacists');
+
 export default function CanxiolChoosePathSection() {
   return (
     <section className="cx-path-section">
       <div className="container">
         <h2 className="cx-path-h2">Choose Your Path</h2>
 
-        <div className="cx-path-grid">
+        <div className={`cx-path-grid${PATHS.length === 2 ? ' cx-path-grid--2' : ''}`}>
           {PATHS.map((p) => (
             <div key={p.audience} className="cx-path-card">
               <span className="cx-path-eyebrow">{p.audience}</span>

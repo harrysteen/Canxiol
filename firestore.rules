@@ -3,11 +3,15 @@ rules_version = '2';
 // Canxiol professional portals (psychiatrist / pharmacist).
 // Paste into Firebase console → Firestore → Rules → Publish.
 //
+//   registrationRequests/{id}  a psychiatrist's "Register" form. Anyone can submit one; only
+//                 the team can see and update them (on /team/registrations).
 //   users/{uid}   one profile per account: role, status (approved | rejected) and registration
-//                 details. Created by the user at sign-up as "approved" (instant access);
-//                 an admin can block an account by setting status to "rejected".
-//   admins/{uid}  Leiutis staff who may approve accounts. Add these by hand in the console:
-//                 collection "admins", document ID = the staff member's User UID (from Authentication → Users).
+//                 details. Psychiatrist profiles are created by the team when they create the
+//                 login after cross-verifying. (Pharmacists, when that portal is on, still sign up
+//                 themselves with instant access.) The team can block an account: status "rejected".
+//   admins/{uid}  Leiutis team members who can use /team/registrations. Add these by hand in the
+//                 console: collection "admins", document ID = the team member's User UID
+//                 (from Authentication → Users).
 service cloud.firestore {
   match /databases/{database}/documents {
 
@@ -28,23 +32,63 @@ service cloud.firestore {
       return v is string && v.size() <= max;
     }
 
+    // Profile fields shared by both ways a profile is created
+    function validProfile(d) {
+      return d.keys().hasOnly(
+               ['role', 'status', 'name', 'email', 'workplace', 'registrationNumber',
+                'phone', 'city', 'privatePractice', 'selfDeclared', 'requestId',
+                'consentAt', 'createdAt'])
+        && d.role in ['psychiatrist', 'pharmacist']
+        && d.status == 'approved'
+        && shortString(d.name, 120)
+        && shortString(d.email, 200)
+        && optionalString(d.get('workplace', ''), 160)
+        && optionalString(d.get('registrationNumber', ''), 80)
+        && optionalString(d.get('phone', ''), 20)
+        && optionalString(d.get('city', ''), 80)
+        && d.get('privatePractice', '') in ['', 'yes', 'no']
+        && d.get('selfDeclared', true) == true
+        && optionalString(d.get('requestId', ''), 60)
+        && d.createdAt == request.time;
+    }
+
+    match /registrationRequests/{id} {
+      // Public "Register" form: new requests only, with checked fields
+      allow create: if request.resource.data.keys().hasOnly(
+             ['role', 'status', 'name', 'email', 'workplace', 'phone', 'city',
+              'privatePractice', 'selfDeclared', 'createdAt'])
+        && request.resource.data.role == 'psychiatrist'
+        && request.resource.data.status == 'new'
+        && shortString(request.resource.data.name, 120)
+        && shortString(request.resource.data.email, 200)
+        && shortString(request.resource.data.workplace, 160)
+        && optionalString(request.resource.data.phone, 20)
+        && shortString(request.resource.data.city, 80)
+        && request.resource.data.privatePractice in ['', 'yes', 'no']
+        && request.resource.data.selfDeclared == true
+        && request.resource.data.createdAt == request.time;
+
+      // Team only: list, approve (login created) or reject
+      allow read: if isAdmin();
+      allow update: if isAdmin()
+        && request.resource.data.status in ['new', 'approved', 'rejected']
+        && request.resource.data.email == resource.data.email;
+      allow delete: if isAdmin();
+    }
+
     match /users/{uid} {
       // A user sees only their own profile; admins see everyone's
       allow read: if signedIn() && (request.auth.uid == uid || isAdmin());
 
-      // Sign-up: own document only, a valid role, and status starts as "approved"
+      // Team creates a psychiatrist's profile together with their login
+      allow create: if isAdmin() && validProfile(request.resource.data);
+
+      // Pharmacist self sign-up: own document only (psychiatrists can't self-register)
       allow create: if signedIn()
         && request.auth.uid == uid
-        && request.resource.data.keys().hasOnly(
-             ['role', 'status', 'name', 'email', 'workplace', 'registrationNumber', 'consentAt', 'createdAt'])
-        && request.resource.data.role in ['psychiatrist', 'pharmacist']
-        && request.resource.data.status == 'approved'
-        && shortString(request.resource.data.name, 120)
-        && shortString(request.resource.data.email, 200)
-        && optionalString(request.resource.data.workplace, 160)
-        && optionalString(request.resource.data.registrationNumber, 80)
-        && request.resource.data.consentAt == request.time
-        && request.resource.data.createdAt == request.time;
+        && request.resource.data.role == 'pharmacist'
+        && validProfile(request.resource.data)
+        && request.resource.data.consentAt == request.time;
 
       // Only admins can change a profile (approve / reject). Users can't promote themselves.
       allow update: if isAdmin()

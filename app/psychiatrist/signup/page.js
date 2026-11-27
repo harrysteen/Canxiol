@@ -2,7 +2,7 @@ import AuthPageShell from '../../../components/auth/AuthPageShell';
 import AuthForm from '../../../components/auth/AuthForm';
 
 export const metadata = {
-  title: 'Psychiatrist Sign Up — Canxiol | Leiutis',
+  title: 'Psychiatrist Registration — Canxiol | Leiutis',
   robots: { index: false, follow: false },
 };
 

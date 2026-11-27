@@ -9,10 +9,11 @@ import {
   signOut,
   updateProfile,
 } from 'firebase/auth';
-import { doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
 import { firebaseAuth, firestore } from '../../lib/firebase';
 import AnimatedGradientBg from '../AnimatedGradientBg';
 import { ROLES, otherRole, authErrorMessage } from './roles';
+import { PHARMACIST_PORTAL_ENABLED } from './portalFlags';
 import { useAuthProfile } from './useAuthProfile';
 import { setPortalRole } from './portalMode';
 
@@ -23,7 +24,18 @@ const EMPTY = {
   confirm: '',
   workplace: '',
   registrationNumber: '',
+  website: '', // hidden anti-bot field
+  phone: '',
+  city: '',
+  privatePractice: '',
+  declared: false,
 };
+
+// "Dr. Asha Rao" from "asha rao" / "Dr Asha Rao" / "dr. Asha Rao" (prefix added once)
+function withPrefix(prefix, name) {
+  const clean = name.trim().replace(/^dr\.?\s+/i, '');
+  return prefix ? `${prefix} ${clean}` : clean;
+}
 
 function EyeIcon({ open }) {
   return (
@@ -77,6 +89,9 @@ export default function AuthForm({ mode, role }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
+  const [requestSent, setRequestSent] = useState(false);
+  // Registration by request (psychiatrists): no password on this form
+  const isRequest = isSignup && Boolean(r.requestAccess);
 
   // Already signed in with an account of THIS role → straight to the portal.
   // An account of the other role stays on this form: each portal has its own accounts.
@@ -84,7 +99,10 @@ export default function AuthForm({ mode, role }) {
     if (!loading && !busy && user && profile?.role === role) router.replace(r.base);
   }, [loading, busy, user, profile, role, router, r.base]);
 
-  const set = (e) => setValues((v) => ({ ...v, [e.target.name]: e.target.value }));
+  const set = (e) => {
+    const { name, type, checked, value } = e.target;
+    setValues((v) => ({ ...v, [name]: type === 'checkbox' ? checked : value }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -92,26 +110,82 @@ export default function AuthForm({ mode, role }) {
     setNotice('');
 
     if (isSignup) {
-      if (values.password.length < 8) return setError('Password must be at least 8 characters.');
-      if (values.password !== values.confirm) return setError('Passwords do not match.');
+      if (!isRequest && values.password.length < 8) return setError('Password must be at least 8 characters.');
+      if (!isRequest && values.password !== values.confirm) return setError('Passwords do not match.');
+      if (r.askPhone && values.phone.trim() && !/^\+?[0-9\s-]{7,16}$/.test(values.phone.trim())) {
+        return setError('Please enter a valid phone number, or leave it empty.');
+      }
+      if (r.declaration && !values.declared) return setError('Please tick the declaration to continue.');
     }
 
     setBusy(true);
+
+    if (isRequest) {
+      const request = {
+        role,
+        status: 'new',
+        name: withPrefix(r.namePrefix, values.name),
+        email: values.email.trim().toLowerCase(),
+        workplace: values.workplace.trim(),
+        phone: values.phone.trim(),
+        city: values.city.trim(),
+        privatePractice: values.privatePractice,
+        selfDeclared: true,
+      };
+      // 1. Save it for the team page (if this fails, the team email still carries everything)
+      let requestId = '';
+      if (!values.website) {
+        try {
+          const ref = await addDoc(collection(firestore(), 'registrationRequests'), {
+            ...request,
+            createdAt: serverTimestamp(),
+          });
+          requestId = ref.id;
+        } catch (err) {
+          console.error('Could not save the registration request', err);
+        }
+      }
+      // 2. Email the team + the thank-you to the psychiatrist
+      try {
+        const res = await fetch('/api/psychiatrist-registration', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ...request, requestId, website: values.website }),
+        });
+        if (!res.ok) throw new Error(String(res.status));
+        setRequestSent(true);
+      } catch {
+        setError(
+          requestId
+            ? 'Your details were received, but we couldn’t send the confirmation email. Our team will still contact you.'
+            : 'Something went wrong and your details could not be sent. Please try again in a moment.'
+        );
+        if (requestId) setRequestSent(true);
+      }
+      setBusy(false);
+      return;
+    }
+
     try {
       const auth = firebaseAuth();
       if (isSignup) {
         const cred = await createUserWithEmailAndPassword(auth, values.email.trim(), values.password);
-        await updateProfile(cred.user, { displayName: values.name.trim() });
+        const fullName = withPrefix(r.namePrefix, values.name);
+        await updateProfile(cred.user, { displayName: fullName });
         // Access is instant: new accounts are created as "approved" (Leiutis can block one later
         // by setting status to "rejected" in Firestore)
         try {
           await setDoc(doc(firestore(), 'users', cred.user.uid), {
             role,
             status: 'approved',
-            name: values.name.trim(),
+            name: fullName,
             email: values.email.trim().toLowerCase(),
             workplace: values.workplace.trim(),
             registrationNumber: values.registrationNumber.trim(),
+            ...(r.askPhone && { phone: values.phone.trim() }),
+            ...(r.askCity && { city: values.city.trim() }),
+            ...(r.askPrivatePractice && { privatePractice: values.privatePractice }),
+            ...(r.declaration && { selfDeclared: true }),
             consentAt: serverTimestamp(),
             createdAt: serverTimestamp(),
           });
@@ -172,7 +246,7 @@ export default function AuthForm({ mode, role }) {
           <span className="cx-authp-eyebrow">Professional access</span>
           <h1 className="cx-authp-h1">{r.label} Portal</h1>
           <p className="cx-authp-lead">
-            {isSignup ? 'Create your professional account.' : 'Log in to your professional account.'}
+            {isRequest ? 'Register for professional access.' : isSignup ? 'Create your professional account.' : 'Log in to your professional account.'}
           </p>
         </div>
       </section>
@@ -182,7 +256,7 @@ export default function AuthForm({ mode, role }) {
           <div className="cx-authp-card">
             <div className="cx-authp-tabs">
               <Link href={`${r.base}/signup`} className={`cx-authp-tab ${isSignup ? 'is-active' : ''}`} aria-current={isSignup ? 'page' : undefined}>
-                Sign Up
+                {r.requestAccess ? 'Register' : 'Sign Up'}
               </Link>
               <Link href={`${r.base}/login`} className={`cx-authp-tab ${!isSignup ? 'is-active' : ''}`} aria-current={!isSignup ? 'page' : undefined}>
                 Log In
@@ -196,11 +270,46 @@ export default function AuthForm({ mode, role }) {
               </p>
             )}
 
+            {requestSent ? (
+              // Shown after a registration request is sent
+              <div className="cx-authp-thanks" role="status">
+                <span className="cx-authp-thanks-icon" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>
+                </span>
+                <h2 className="cx-authp-thanks-h2">Thank you</h2>
+                <p>
+                  Thank you for sharing your details with us. Our team will reach out to you with
+                  registration details soon.
+                </p>
+                {error && <p className="cx-auth-error" role="alert">{error}</p>}
+                <p className="cx-authp-thanks-meta">
+                  A confirmation has been sent to <strong>{values.email.trim()}</strong>.{' '}
+                  <Link href="/">Back to the home page</Link>
+                </p>
+              </div>
+            ) : (
             <form className="cx-authp-form" onSubmit={handleSubmit}>
               {isSignup && (
                 <label className="cx-auth-field">
                   <span>Full name *</span>
-                  <input name="name" required autoComplete="name" placeholder="Your full name" value={values.name} onChange={set} />
+                  {r.namePrefix ? (
+                    // Fixed "Dr." in front of the name
+                    <div className="cx-auth-prefixed">
+                      <span className="cx-auth-prefix" aria-hidden="true">{r.namePrefix}</span>
+                      <input
+                        name="name"
+                        required
+                        autoComplete="name"
+                        placeholder="Your full name"
+                        value={values.name}
+                        onChange={set}
+                        // "Dr" typed by hand is dropped — the fixed prefix already shows it
+                        onBlur={() => setValues((v) => ({ ...v, name: v.name.replace(/^\s*dr\.?\s+/i, '') }))}
+                      />
+                    </div>
+                  ) : (
+                    <input name="name" required autoComplete="name" placeholder="Your full name" value={values.name} onChange={set} />
+                  )}
                 </label>
               )}
 
@@ -209,33 +318,83 @@ export default function AuthForm({ mode, role }) {
                 <input name="email" type="email" required autoComplete="email" placeholder="you@example.com" value={values.email} onChange={set} />
               </label>
 
-              <PasswordField
-                label="Password"
-                name="password"
-                value={values.password}
-                onChange={set}
-                placeholder="Enter your password"
-                autoComplete={isSignup ? 'new-password' : 'current-password'}
-              />
+              {!isRequest && (
+                <PasswordField
+                  label="Password"
+                  name="password"
+                  value={values.password}
+                  onChange={set}
+                  placeholder="Enter your password"
+                  autoComplete={isSignup ? 'new-password' : 'current-password'}
+                />
+              )}
 
               {isSignup && (
                 <>
-                  <PasswordField
-                    label="Confirm password"
-                    name="confirm"
-                    value={values.confirm}
-                    onChange={set}
-                    placeholder="Re-enter your password"
-                    autoComplete="new-password"
-                  />
+                  {!isRequest && (
+                    <PasswordField
+                      label="Confirm password"
+                      name="confirm"
+                      value={values.confirm}
+                      onChange={set}
+                      placeholder="Re-enter your password"
+                      autoComplete="new-password"
+                    />
+                  )}
+                  {isRequest && (
+                    // Anti-bot field: hidden from people, often filled in by bots
+                    <input
+                      type="text"
+                      name="website"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      aria-hidden="true"
+                      className="cx-auth-hp"
+                      value={values.website}
+                      onChange={set}
+                    />
+                  )}
                   <label className="cx-auth-field">
-                    <span>{r.workplaceLabel}</span>
-                    <input name="workplace" autoComplete="organization" placeholder={r.workplacePlaceholder} value={values.workplace} onChange={set} />
+                    <span>{r.workplaceLabel}{r.workplaceRequired && ' *'}</span>
+                    <input name="workplace" required={Boolean(r.workplaceRequired)} autoComplete="organization" placeholder={r.workplacePlaceholder} value={values.workplace} onChange={set} />
                   </label>
-                  <label className="cx-auth-field">
-                    <span>{r.registrationLabel}</span>
-                    <input name="registrationNumber" placeholder={r.registrationPlaceholder} value={values.registrationNumber} onChange={set} />
-                  </label>
+                  {r.showRegistration && (
+                    <label className="cx-auth-field">
+                      <span>{r.registrationLabel}</span>
+                      <input name="registrationNumber" placeholder={r.registrationPlaceholder} value={values.registrationNumber} onChange={set} />
+                    </label>
+                  )}
+                  {r.askPhone && (
+                    <label className="cx-auth-field">
+                      <span>Phone number</span>
+                      <input name="phone" type="tel" autoComplete="tel" inputMode="tel" placeholder="Your phone number (not mandatory)" value={values.phone} onChange={set} />
+                    </label>
+                  )}
+                  {r.askCity && (
+                    <label className="cx-auth-field">
+                      <span>City *</span>
+                      <input name="city" required autoComplete="address-level2" placeholder="Your city" value={values.city} onChange={set} />
+                    </label>
+                  )}
+                  {r.askPrivatePractice && (
+                    <div className="cx-auth-field cx-auth-choice" role="radiogroup" aria-labelledby="cx-pp-label">
+                      <span id="cx-pp-label">Do you have a private practice?</span>
+                      <div className="cx-auth-choice-opts">
+                        {['yes', 'no'].map((opt) => (
+                          <label key={opt} className="cx-auth-radio">
+                            <input type="radio" name="privatePractice" value={opt} checked={values.privatePractice === opt} onChange={set} />
+                            <span>{opt === 'yes' ? 'Yes' : 'No'}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  {r.declaration && (
+                    <label className="cx-auth-check is-full">
+                      <input type="checkbox" name="declared" required checked={values.declared} onChange={set} />
+                      <span>{r.declaration} *</span>
+                    </label>
+                  )}
                 </>
               )}
 
@@ -243,7 +402,7 @@ export default function AuthForm({ mode, role }) {
               {notice && <p className="cx-auth-notice is-full" role="status">{notice}</p>}
 
               <button type="submit" className="cx-authp-submit is-full" disabled={busy}>
-                <span>{busy ? 'Please wait…' : isSignup ? 'Sign Up' : 'Log In'}</span>
+                <span>{busy ? 'Please wait…' : isRequest ? 'Submit Registration' : isSignup ? 'Sign Up' : 'Log In'}</span>
                 {!busy && (
                   <svg width="11" height="11" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                     <path d="M3 11 11 3M11 3H4.5M11 3v6.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -254,7 +413,9 @@ export default function AuthForm({ mode, role }) {
               <div className="cx-authp-meta is-full">
                 {isSignup ? (
                   <p>
-                    By signing up, you agree that Leiutis may store these details for your professional account.
+                    {isRequest
+                      ? 'By registering, you agree that Leiutis may store these details to verify your registration. Our team will email your login details once verified.'
+                      : 'By signing up, you agree that Leiutis may store these details for your professional account.'}
                   </p>
                 ) : (
                   <button type="button" className="cx-auth-link-btn" onClick={handleReset}>
@@ -262,12 +423,18 @@ export default function AuthForm({ mode, role }) {
                   </button>
                 )}
                 <p className="cx-authp-meta-other">
-                  Not a {r.label.toLowerCase()}? <Link href={`${other.base}/login`}>{other.label} portal</Link>
-                  {' · '}
+                  {/* Link to the other portal — hidden while the pharmacist portal is off */}
+                  {(PHARMACIST_PORTAL_ENABLED || other.id !== 'pharmacist') && (
+                    <>
+                      Not a {r.label.toLowerCase()}? <Link href={`${other.base}/login`}>{other.label} portal</Link>
+                      {' · '}
+                    </>
+                  )}
                   <Link href="/anxiety">Patient information (no login)</Link>
                 </p>
               </div>
             </form>
+            )}
           </div>
         </div>
       </section>

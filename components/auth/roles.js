@@ -6,17 +6,27 @@ export const ROLES = {
     id: 'psychiatrist',
     label: 'Psychiatrist',
     base: '/psychiatrist',
-    // Sign-up: both optional
-    workplaceLabel: 'Hospital / Clinic',
-    workplacePlaceholder: 'Hospital or clinic name (not mandatory)',
-    registrationLabel: 'Medical Council Registration Number',
-    registrationPlaceholder: 'Your registration number (not mandatory)',
+    // Sign-up: "Dr." before the name; hospital and city mandatory; phone and private
+    // practice optional; self-declaration tick required. No registration number.
+    // Register = a request: no password; the team creates the login after cross-verifying
+    // (/team/registrations) and emails it. See app/api/psychiatrist-registration.
+    requestAccess: true,
+    namePrefix: 'Dr.',
+    workplaceLabel: 'Hospital / Institution',
+    workplacePlaceholder: 'Hospital or institution name',
+    workplaceRequired: true,
+    askPhone: true,
+    askCity: true,
+    askPrivatePractice: true,
+    showRegistration: false,
+    declaration: 'I confirm that I am a certified practising psychiatrist',
   },
   pharmacist: {
     id: 'pharmacist',
     label: 'Pharmacist',
     base: '/pharmacist',
     // Sign-up: both optional
+    showRegistration: true,
     workplaceLabel: 'Pharmacy / Workplace',
     workplacePlaceholder: 'Pharmacy or workplace name (not mandatory)',
     registrationLabel: 'State Pharmacy Council Registration Number',

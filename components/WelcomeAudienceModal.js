@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { usePortalRole } from './auth/portalMode';
+import { PHARMACIST_PORTAL_ENABLED } from './auth/portalFlags';
 
 // "Welcome to Leiutis" audience picker. Opens 7 seconds after every full page load
 // (including a refresh) and can't be dismissed — the visitor must pick Patient, Pharmacist
@@ -17,11 +18,12 @@ const DELAY_MS = 7000;
 const shouldSkip = (path) =>
   path === '/coming-soon' ||
   path === '/leaflet' ||
+  path.startsWith('/team/') ||
   /^\/(psychiatrist|pharmacist)(\/|$)/.test(path);
 
-const AUDIENCES = [
+const ALL_AUDIENCES = [
   {
-    title: 'Patient / General Public',
+    title: 'Patient / Caregivers',
     desc: 'Information for you and your loved ones.',
     cta: 'Explore Anxiety',
     // Patients continue on the public home page
@@ -57,6 +59,9 @@ const AUDIENCES = [
     ),
   },
 ];
+
+// The Pharmacist card is hidden while the pharmacist portal is switched off (portalFlags.js)
+const AUDIENCES = ALL_AUDIENCES.filter((a) => PHARMACIST_PORTAL_ENABLED || a.title !== 'Pharmacist');
 
 export default function WelcomeAudienceModal() {
   const pathname = usePathname();
@@ -123,7 +128,7 @@ export default function WelcomeAudienceModal() {
           <h2 id="cx-welcome-title" className="cx-welcome-h2">Welcome to Leiutis</h2>
           <p className="cx-welcome-lead">Please select who you are to continue.</p>
 
-          <div className="cx-welcome-grid">
+          <div className={`cx-welcome-grid${AUDIENCES.length === 2 ? ' cx-welcome-grid--2' : ''}`}>
             {AUDIENCES.map((a) => (
               <Link key={a.title} href={a.href} className="cx-welcome-card" onClick={choose}>
                 <span className="cx-welcome-icon" aria-hidden="true">
